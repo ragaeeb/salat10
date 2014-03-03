@@ -1,0 +1,4 @@
+arm/Makefile.Debug
+arm/Makefile.Release
+config.pri
+.assets.index
