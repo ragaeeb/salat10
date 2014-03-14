@@ -69,6 +69,7 @@ NavigationPane
                         persist.saveValueFor("altitude", place.altitude);
                         persist.saveValueFor("latitude", place.latitude);
                         persist.saveValueFor("longitude", place.longitude);
+                        persist.saveValueFor("country", place.country);
                         locationAction.title = place.name;
 
                         persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/ic_map.png" );
