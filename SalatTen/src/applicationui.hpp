@@ -19,9 +19,14 @@ namespace bb {
 	}
 }
 
+namespace QtMobilitySubset {
+    class QGeoAddress;
+}
+
 namespace salat {
 
 using namespace canadainc;
+using namespace QtMobilitySubset;
 
 class CleanupEvents;
 class ScheduleEvents;
@@ -58,7 +63,7 @@ private slots:
     void onFullScreen();
     void readyToCheckin(QVariantMap const& current, QVariantMap const& next);
     void requestComplete(QVariant const& cookie, QByteArray const& data);
-    void reverseLookupFinished(QString const& location, QString const& city, QPointF const& point, bool error);
+    void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);
     void terminateThreads();
 
 public:

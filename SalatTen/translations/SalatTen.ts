@@ -471,7 +471,7 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="74"/>
+        <location filename="../assets/LocationPane.qml" line="75"/>
         <source>Location successfully set to %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -824,33 +824,33 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>salat::ApplicationUI</name>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="89"/>
+        <location filename="../src/ApplicationUI.cpp" line="90"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that accurate calculations can be made. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Salat10 and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="118"/>
+        <location filename="../src/ApplicationUI.cpp" line="119"/>
         <source>Warning: It seems like the location services is not enabled on your BB10 device so the app will not be able to fetch real-time data and map information.
 
 Press OK to launch the Location Services screen and enable the Location Services permission there.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="96"/>
-        <location filename="../src/ApplicationUI.cpp" line="118"/>
-        <location filename="../src/ApplicationUI.cpp" line="172"/>
+        <location filename="../src/ApplicationUI.cpp" line="97"/>
+        <location filename="../src/ApplicationUI.cpp" line="119"/>
+        <location filename="../src/ApplicationUI.cpp" line="174"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="93"/>
+        <location filename="../src/ApplicationUI.cpp" line="94"/>
         <source>Warning: It seems like the app does not have access to access your shared folder. This permission is needed to allow you to set custom athan sounds. Without this permission some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="96"/>
+        <location filename="../src/ApplicationUI.cpp" line="97"/>
         <source>As&apos;salaamu alaykum wa rahmatullahi wabarakathu,
 
 JazakAllahu khair for using Salat10. While our Islamic apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal.
@@ -859,32 +859,32 @@ May Allah reward you, and bless you and your family.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="143"/>
+        <location filename="../src/ApplicationUI.cpp" line="145"/>
         <source>Location successfully set to %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="145"/>
+        <location filename="../src/ApplicationUI.cpp" line="147"/>
         <source>Location could not be detected %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="172"/>
+        <location filename="../src/ApplicationUI.cpp" line="174"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="241"/>
+        <location filename="../src/ApplicationUI.cpp" line="243"/>
         <source>Scheduled events cleared!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="250"/>
+        <location filename="../src/ApplicationUI.cpp" line="252"/>
         <source>Export complete!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="301"/>
+        <location filename="../src/ApplicationUI.cpp" line="303"/>
         <source>Almost %1</source>
         <translation type="unfinished"></translation>
     </message>

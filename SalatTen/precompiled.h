@@ -25,3 +25,5 @@
 #include <bb/cascades/maps/MapView>
 #include <bb/platform/geo/GeoLocation>
 #include <bb/cascades/maps/MapData>
+
+#include <QtLocationSubset/QGeoAddress>
