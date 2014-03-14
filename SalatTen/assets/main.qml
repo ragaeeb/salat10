@@ -1,4 +1,5 @@
 import bb.cascades 1.2
+import bb.system 1.0
 
 TabbedPane
 {
@@ -117,8 +118,44 @@ TabbedPane
     }
 
     onCreationCompleted: {
+        if ( !persist.contains("athanPrompted") ) {
+            athaanDialog.show();
+        }
+        
         if ( !persist.contains("angles") ) {
             menuDef.settings.triggered();
         }
     }
+    
+    attachedObjects: [
+        SystemDialog {
+            id: athaanDialog
+            title: qsTr("Enable Athan?") + Retranslate.onLanguageChanged
+            body: qsTr("Do you want to enable athans to automatically play when it is time for salah?") + Retranslate.onLanguageChanged
+            rememberMeText: qsTr("Display notifications in the BlackBerry Hub") + Retranslate.onLanguageChanged
+            cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
+            confirmButton.label: qsTr("Yes") + Retranslate.onLanguageChanged
+            rememberMeChecked: true
+            includeRememberMe: true
+            
+            onFinished: {
+                var enableAthaan = result == SystemUiResult.ConfirmButtonSelection;
+                var enableNotifications = rememberMeSelection();
+                
+                var notifications = persist.getValueFor("notifications");
+                var athaans = persist.getValueFor("athaans");
+                var keys = translator.eventKeys();
+                
+                for (var i = keys.length-1; i >= 0; i--)
+                {
+                    notifications[ keys[i] ] = enableNotifications;
+                    athaans[ keys[i] ] = enableAthaan;
+                }
+                
+                persist.saveValueFor("notifications", notifications);
+                persist.saveValueFor("athaans", athaans);
+                persist.saveValueFor("athanPrompted", 1);
+            }
+        }
+    ]
 }

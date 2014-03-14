@@ -7,6 +7,19 @@ StandardListItem
     property variant data: ListItem.data
     title: ListItemData ? ListItem.view.localization.renderStandardTime(ListItemData.value) : undefined;
     description: ListItemData ? ListItem.view.translation.render(ListItemData.key) : undefined;
+    imageSource: {
+        if (ListItemData) {
+            if (ListItemData.athaan == true && ListItemData.isSalat) {
+                return "images/ic_athaan_enable.png";
+            } else if (ListItemData.notification == true) {
+                return "images/ic_notification_enable.png";
+            } else {
+                return "images/ic_athaan_mute.png";
+            }
+        } else {
+            return undefined;
+        }
+    }
     
     onDataChanged: {
         if (!ListItemData) {
@@ -43,67 +56,11 @@ StandardListItem
             subtitle: sli.description
             
             ActionItem {
-                title: qsTr("Copy") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_copy.png"
-                
-                onTriggered: {
-                    sli.ListItem.view.util.copyEvent(ListItemData);
-                }
-            }
-            
-            InvokeActionItem {
-                title: qsTr("Share") + Retranslate.onLanguageChanged
-                
-                query {
-                    mimeType: "text/plain"
-                    invokeActionId: "bb.action.SHARE"
-                }
-                
-                onTriggered: {
-                    data = sli.ListItem.view.util.toUtf8(sli.ListItem);
-                }
-            }
-            
-            ActionItem {
-                title: {
-                    if (ListItemData && ListItemData.athaan == true) {
-                        return ListItemData.isSalat ? qsTr("Mute Athaan") : qsTr("Mute Alarm");
-                    } else {
-                        return ListItemData.isSalat ? qsTr("Enable Athaan") : qsTr("Enable Alarm");
-                    }
-                }
-                
-                imageSource: ListItemData && ListItemData.athaan == true ? "images/ic_athaan_mute.png" : "images/ic_athaan_enable.png"
-                
-                onTriggered: {
-                    sli.ListItem.view.util.toggleAthaan(sli.ListItem);
-                }
-            }
-            
-            ActionItem {
-                title: qsTr("Set Custom Sound") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_athaan_custom.png"
-                
-                onTriggered: {
-                    sli.ListItem.view.util.setCustomAthaans([ListItemData.key]);
-                }
-            }
-            
-            ActionItem {
                 title: qsTr("Edit") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_edit.png"
                 
                 onTriggered: {
                     sli.ListItem.view.edit(sli.ListItem.indexPath);
-                }
-            }
-            
-            DeleteActionItem {
-                title: qsTr("Reset Sound") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_reset_athaan.png"
-                
-                onTriggered: {
-                    sli.ListItem.view.util.resetSound([ListItemData.key]);
                 }
             }
         }

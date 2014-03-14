@@ -1,5 +1,6 @@
 import bb.cascades 1.0
 import bb.cascades.pickers 1.0
+import bb.system 1.2
 import com.canadainc.data 1.0
 
 QtObject
@@ -17,20 +18,20 @@ QtObject
             var uri = selectedFiles[0];
             app.setCustomAthaans(keys, selectedFiles[0]);
             
-            persist.showToast( qsTr("Successfully set athaans to %1").arg(uri), "", "asset:///images/ic_athaan_custom.png" );
+            persist.showToast( qsTr("Successfully set athans to %1").arg(uri), "", "asset:///images/ic_athaan_custom.png" );
         }
     }
     
     function resetSound(keys)
     {
         app.setCustomAthaans(keys,"");
-        persist.showToast( qsTr("Successfully reset athaans to default sound"), "", "asset:///images/ic_reset_athaan.png" );
+        persist.showToast( qsTr("Successfully reset athans to default sound"), "", "asset:///images/ic_reset_athaan.png" );
     }
     
     function setCustomAthaans(keys)
     {
         picker.keys = keys;
-        picker.title = qsTr("Select Athaan");
+        picker.title = qsTr("Select Athan");
         picker.open();
     }
     
@@ -52,69 +53,44 @@ QtObject
         return persist.convertToUtf8( textualize(data) );
     }
     
-    function toggleAthaan(ListItem)
-    {
-        var data = ListItem.data;
-        var key = data.key;
-        data.athaan = !data.athaan;
-        
-        var athaans = persist.getValueFor("athaans");
-        athaans[key] = data.athaan;
-        persist.saveValueFor("athaans", athaans);
-        
-        parent.dataModel.updateItem(ListItem.indexPath, data);
-        
-        var toastMessage = qsTr("Successfully enabled athaan.");
-        var icon = "asset:///images/ic_athaan_enable.png";
-        
-        if (data.isSalat)
-        {
-            if (data.athaan) {
-                toastMessage = qsTr("Successfully enabled athaan.");
-            } else {
-                icon = "asset:///images/ic_athaan_mute.png";
-                toastMessage = qsTr("Successfully muted athaan.");
-            }
-        } else {
-            if (data.athaan) {
-                toastMessage = qsTr("Successfully enabled alarm.");
-            } else {
-                icon = "asset:///images/ic_athaan_mute.png";
-                toastMessage = qsTr("Successfully muted alarm.");
-            }
-        }
-
-        persist.showToast(toastMessage, "", icon);
-    }
-    
     function toggleAthaans(turnOn)
     {
+        var keepNotifications = true;
+
+        if (!turnOn) {
+            keepNotifications = persist.showBlockingDialog( qsTr("Mute Athan"), qsTr("Do you want notifications to show up in BlackBerry Hub?"), qsTr("Yes"), qsTr("No") );
+        }
+
         var selected = parent.selectionList();
         var athaans = persist.getValueFor("athaans");
+        var notifications = persist.getValueFor("notifications");
         var dm = parent.dataModel;
-        
+
         for (var i = 0; i < selected.length; i++)
         {
             var indexPath = selected[i];
             var current = dm.data(indexPath);
             var key = current.key;
-            
+
             current.athaan = turnOn;
+            current.notification = keepNotifications;
             athaans[key] = turnOn;
+            notifications[key] = keepNotifications;
             dm.updateItem(indexPath, current);
         }
         
         persist.saveValueFor("athaans", athaans);
+        persist.saveValueFor("notifications", notifications);
         
         var toastMessage;
         var icon;
         
         if (turnOn) {
             icon = "asset:///images/ic_athaan_enable.png";
-            toastMessage = qsTr("Successfully enabled alarms/athaans.");
+            toastMessage = qsTr("Successfully enabled alarms/athans.");
         } else {
             icon = "asset:///images/ic_athaan_mute.png";
-            toastMessage = qsTr("Successfully muted alarms/athaans.");
+            toastMessage = qsTr("Successfully muted alarms/athans.");
         }
 
         persist.showToast(toastMessage, "", icon);

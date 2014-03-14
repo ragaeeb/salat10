@@ -302,62 +302,22 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>EventListItem</name>
     <message>
-        <location filename="../assets/EventListItem.qml" line="46"/>
-        <source>Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="55"/>
-        <source>Share</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="70"/>
-        <source>Mute Athaan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="70"/>
-        <source>Mute Alarm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="72"/>
-        <source>Enable Athaan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="72"/>
-        <source>Enable Alarm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="84"/>
-        <source>Set Custom Sound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="93"/>
+        <location filename="../assets/EventListItem.qml" line="59"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="102"/>
-        <source>Reset Sound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="139"/>
+        <location filename="../assets/EventListItem.qml" line="96"/>
         <source>%1 minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="142"/>
+        <location filename="../assets/EventListItem.qml" line="99"/>
         <source>%1 minutes %2 seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="145"/>
+        <location filename="../assets/EventListItem.qml" line="102"/>
         <source>%1 seconds</source>
         <translation type="unfinished"></translation>
     </message>
@@ -519,49 +479,48 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>ResultListUtil</name>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="20"/>
-        <source>Successfully set athaans to %1</source>
+        <location filename="../assets/ResultListUtil.qml" line="61"/>
+        <source>Mute Athan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="27"/>
-        <source>Successfully reset athaans to default sound</source>
+        <location filename="../assets/ResultListUtil.qml" line="61"/>
+        <source>Do you want notifications to show up in BlackBerry Hub?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="33"/>
-        <source>Select Athaan</source>
+        <location filename="../assets/ResultListUtil.qml" line="61"/>
+        <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="67"/>
-        <location filename="../assets/ResultListUtil.qml" line="73"/>
-        <source>Successfully enabled athaan.</source>
+        <location filename="../assets/ResultListUtil.qml" line="61"/>
+        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="76"/>
-        <source>Successfully muted athaan.</source>
+        <location filename="../assets/ResultListUtil.qml" line="21"/>
+        <source>Successfully set athans to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="80"/>
-        <source>Successfully enabled alarm.</source>
+        <location filename="../assets/ResultListUtil.qml" line="28"/>
+        <source>Successfully reset athans to default sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="83"/>
-        <source>Successfully muted alarm.</source>
+        <location filename="../assets/ResultListUtil.qml" line="34"/>
+        <source>Select Athan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="114"/>
-        <source>Successfully enabled alarms/athaans.</source>
+        <location filename="../assets/ResultListUtil.qml" line="90"/>
+        <source>Successfully enabled alarms/athans.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="117"/>
-        <source>Successfully muted alarms/athaans.</source>
+        <location filename="../assets/ResultListUtil.qml" line="93"/>
+        <source>Successfully muted alarms/athans.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -569,12 +528,12 @@ If you see a spinning icon at the top it means the compass readings are still be
     <name>ResultListView</name>
     <message>
         <location filename="../assets/ResultListView.qml" line="46"/>
-        <source>Enable Alarms/Athaans</source>
+        <source>Enable Alarms/Athans</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="57"/>
-        <source>Mute Alarms/Athaans</source>
+        <source>Mute Alarms/Athans</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -677,7 +636,32 @@ If you see a spinning icon at the top it means the compass readings are still be
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="131"/>
-        <source>Athaan will always play regardless of the device profile.</source>
+        <source>Athan will always play regardless of the device profile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="138"/>
+        <source>Athan will play if the device is not in vibrate/silent profile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="145"/>
+        <source>Athan will play if the device is not in silent profile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="153"/>
+        <source>Dhuhr Athan on Friday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="160"/>
+        <source>Athan during Ju&apos;muah will be played.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="162"/>
+        <source>Athan during Ju&apos;muah will be muted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -686,33 +670,8 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="138"/>
-        <source>Athaan will play if the device is not in vibrate/silent profile.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/SettingsPage.qml" line="144"/>
         <source>Respect Silence</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="145"/>
-        <source>Athaan will play if the device is not in silent profile.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="153"/>
-        <source>Dhuhr Athaan on Friday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="160"/>
-        <source>Athaan during Ju&apos;muah will be played.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="162"/>
-        <source>Athaan during Ju&apos;muah will be muted.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -785,55 +744,80 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="23"/>
+        <location filename="../assets/main.qml" line="24"/>
         <source>Timings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="24"/>
+        <location filename="../assets/main.qml" line="25"/>
         <source>Salah Times</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="47"/>
+        <location filename="../assets/main.qml" line="48"/>
         <source>Qibla</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="48"/>
+        <location filename="../assets/main.qml" line="49"/>
         <source>Compass</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="59"/>
         <location filename="../assets/main.qml" line="60"/>
+        <location filename="../assets/main.qml" line="61"/>
         <source>Articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="71"/>
+        <location filename="../assets/main.qml" line="72"/>
         <source>Sujud As-Sahw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="72"/>
+        <location filename="../assets/main.qml" line="73"/>
         <source>Prostration of Forgetfulness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="83"/>
-        <location filename="../assets/main.qml" line="91"/>
+        <location filename="../assets/main.qml" line="84"/>
+        <location filename="../assets/main.qml" line="92"/>
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="109"/>
+        <location filename="../assets/main.qml" line="110"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="110"/>
+        <location filename="../assets/main.qml" line="111"/>
         <source>Step by Step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="133"/>
+        <source>Enable Athan?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="134"/>
+        <source>Do you want to enable athans to automatically play when it is time for salah?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="135"/>
+        <source>Display notifications in the BlackBerry Hub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="136"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="137"/>
+        <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -844,11 +828,6 @@ If you see a spinning icon at the top it means the compass readings are still be
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that accurate calculations can be made. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Salat10 and please enable the Location permission.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ApplicationUI.cpp" line="93"/>
-        <source>Warning: It seems like the app does not have access to access your shared folder. This permission is needed to allow you to set custom athaan sounds. Without this permission some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -863,6 +842,11 @@ Press OK to launch the Location Services screen and enable the Location Services
         <location filename="../src/ApplicationUI.cpp" line="118"/>
         <location filename="../src/ApplicationUI.cpp" line="172"/>
         <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ApplicationUI.cpp" line="93"/>
+        <source>Warning: It seems like the app does not have access to access your shared folder. This permission is needed to allow you to set custom athan sounds. Without this permission some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -14,7 +14,7 @@ using namespace bb::cascades;
 DataModelWrapper::DataModelWrapper(QObject* parent) :
         QObject(parent), m_model( QStringList() << "dateValue", this ), m_empty(true)
 {
-    INIT_FRESH("v3.0");
+    INIT_FRESH("v3.2");
 	INIT_SETTING("strategy", "isna");
 	INIT_SETTING("skipJumahAthaan", 1);
 	INIT_SETTING("asrRatio", 1);
@@ -33,6 +33,7 @@ DataModelWrapper::DataModelWrapper(QObject* parent) :
 		}
 
 		m_persistance.saveValueFor("athaans", notifications);
+		m_persistance.saveValueFor("notifications", notifications);
 	}
 
 	if ( !m_persistance.contains("adjustments") )
@@ -70,6 +71,7 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 
 	QVariantMap adjustments = m_persistance.getValueFor("adjustments").toMap();
 	QVariantMap athaans = m_persistance.getValueFor("athaans").toMap();
+	QVariantMap notifications = m_persistance.getValueFor("notifications").toMap();
 
 	for (int i = 0; i < numDays; i++)
 	{
@@ -92,6 +94,10 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 			if ( athaans.contains(key) ) {
 				map["athaan"] = athaans.value(key);
 			}
+
+            if ( notifications.contains(key) ) {
+                map["notification"] = notifications.value(key);
+            }
 
 			wrapped << map;
 		}

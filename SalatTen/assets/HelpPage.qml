@@ -115,7 +115,7 @@ Salat10 is a prayer time calculator for Muslims and offers a lot of additional f
 
 The usage of the app is very simple and the app tries to take care of most of the manual work for you. It will automatically determine your location and pick the calculation angles that are most relevant to your area to give you accurate timings. However you still have control over these settings if you want to adjust them yourself.
 
-The app must remain open for the athaan to function properly (until headless apps are officially supported on BlackBerry 10). 30 minutes before an event happens you will notice it display a message on the event itself, and 5 minutes before the event the countdown will get even more verbose. Once the new event comes in you will hear and see the notification if you have enabled the settings.
+The app must remain open for the athan to function properly (until headless apps are officially supported on BlackBerry 10). 30 minutes before an event happens you will notice it display a message on the event itself, and 5 minutes before the event the countdown will get even more verbose. Once the new event comes in you will hear and see the notification if you have enabled the settings.
 
 
 The codebase for this class is based on the code of:
