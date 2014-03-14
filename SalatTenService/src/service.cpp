@@ -97,7 +97,10 @@ void Service::timeout(bool init)
 	if (!init)
 	{
 		QVariantMap athaans = settings.value("athaans").toMap();
+		QVariantMap notifications = settings.value("notifications").toMap();
 		bool playAthaan = athaans.value(currentEventKey).toBool();
+		bool playNotification = notifications.value(currentEventKey).toBool();
+        Translator t;
 
 		LOGGER("Athaans" << athaans << playAthaan << currentEventKey);
 
@@ -113,7 +116,6 @@ void Service::timeout(bool init)
                 NotificationMode::Type mode = g.mode();
                 int profile = settings.value("respectProfile").toInt();
                 bool okToPlay = profile == 0 || (profile == 1 && mode > NotificationMode::Vibrate) || (profile == 2 && mode > NotificationMode::Silent);
-                Translator t;
                 QMap<QString, bool> salatMap = t.salatMap();
 
                 LOGGER("okToPlay" << okToPlay << "map" << salatMap << currentEventKey);
@@ -141,17 +143,18 @@ void Service::timeout(bool init)
                 } else {
                     LOGGER("Skipping athaan" << profile << "mode" << mode);
                 }
-
-                Notification n;
-                n.setTitle("Salat10");
-                n.setBody( t.render(currentEventKey) );
-                n.setTimestamp(currentEventTime);
-                n.setIconUrl( QUrl( QString("file:///usr/share/icons/clock_alarm.png") ) );
-                n.notify();
             }
-		} else {
-			LOGGER("Don't play athaan for this key");
 		}
+
+        if (playNotification)
+        {
+            Notification n;
+            n.setTitle("Salat10");
+            n.setBody( t.render(currentEventKey) );
+            n.setTimestamp(currentEventTime);
+            n.setIconUrl( QUrl( QString("file:///usr/share/icons/clock_alarm.png") ) );
+            n.notify();
+        }
 	}
 }
 
@@ -160,9 +163,11 @@ void Service::onShortPress(bb::multimedia::MediaKey::Type key)
 {
 	LOGGER("========== SHORT PRESSED!!!!" << key << m_player.playing());
 
-	if ( m_player.playing() && key == MediaKey::PlayPause ) {
+	if ( m_player.playing() && ( key == MediaKey::PlayPause || key == MediaKey::VolumeDown ) ) {
 		LOGGER("===== STOPPING");
 		m_player.stop();
+		Notification::clearEffectsForAll();
+		Notification::deleteAllFromInbox();
 	}
 }
 
