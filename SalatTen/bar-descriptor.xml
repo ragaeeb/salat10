@@ -156,6 +156,7 @@
     <asset path="../../canadainc/assets/BugReportPage.qml">assets/BugReportPage.qml</asset>
     <asset path="../../canadainc/assets/CanadaIncMenu.qml">assets/CanadaIncMenu.qml</asset>
     <asset path="../../canadainc/assets/EmptyDelegate.qml">assets/EmptyDelegate.qml</asset>
+    <asset path="../../canadainc/assets/PersistCheckBox.qml">assets/PersistCheckBox.qml</asset>
 	<asset path="../../canadainc/assets/PersistDropDown.qml">assets/PersistDropDown.qml</asset>
 
 	<!-- Request permission to run a backend headless process and post notification. -->

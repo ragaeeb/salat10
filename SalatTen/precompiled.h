@@ -19,6 +19,7 @@
 #include <bb/device/DisplayInfo>
 
 #include <bb/platform/Notification>
+#include <bb/platform/NotificationMode>
 
 #include <bb/system/InvokeManager>
 

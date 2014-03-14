@@ -10,50 +10,68 @@
 namespace salat {
 
 using namespace bb::cascades;
+using namespace bb::platform;
 
 DataModelWrapper::DataModelWrapper(QObject* parent) :
         QObject(parent), m_model( QStringList() << "dateValue", this ), m_empty(true)
 {
-    INIT_FRESH("v3.2");
-	INIT_SETTING("strategy", "isna");
-	INIT_SETTING("skipJumahAthaan", 1);
-	INIT_SETTING("asrRatio", 1);
-	INIT_SETTING("respectProfile", 1);
-	INIT_SETTING("hijri", 0);
-
-	if ( !m_persistance.contains("athaans") )
-	{
-		QVariantMap notifications;
-
-		QStringList eventKeys = Translator::eventKeys();
-		QMap<QString, bool> salatMap = Translator().salatMap();
-
-		for (int i = eventKeys.size()-1; i >= 0; i--) {
-			notifications[ eventKeys[i] ] = salatMap.contains( eventKeys[i] );
-		}
-
-		m_persistance.saveValueFor("athaans", notifications);
-		m_persistance.saveValueFor("notifications", notifications);
-	}
-
-	if ( !m_persistance.contains("adjustments") )
-	{
-		QVariantMap adjustments;
-
-		QStringList salatKeys = Translator::salatKeys();
-
-		for (int i = salatKeys.size()-1; i >= 0; i--) {
-			adjustments[ salatKeys[i] ] = 0;
-		}
-
-		m_persistance.saveValueFor("adjustments", adjustments);
-	}
+    init();
 
 	m_model.setSortingKeys( QStringList() << "dateValue" << "value" );
 	m_model.setGrouping(ItemGrouping::ByFullValue);
 
 	connect( &m_model, SIGNAL( itemAdded(QVariantList) ), this, SLOT( itemAdded(QVariantList) ) );
 	connect( &m_model, SIGNAL( itemsChanged(bb::cascades::DataModelChangeType::Type, QSharedPointer<bb::cascades::DataModel::IndexMapper>) ), this, SLOT( itemsChanged(bb::cascades::DataModelChangeType::Type, QSharedPointer<bb::cascades::DataModel::IndexMapper>) ) );
+}
+
+
+void DataModelWrapper::init()
+{
+    INIT_FRESH("v3.2");
+    INIT_SETTING("strategy", "isna");
+    INIT_SETTING("skipJumahAthaan", 1);
+    INIT_SETTING("asrRatio", 1);
+    INIT_SETTING("hijri", 0);
+
+    if ( !m_persistance.contains("athaans") )
+    {
+        QVariantMap notifications;
+
+        QStringList eventKeys = Translator::eventKeys();
+        QMap<QString, bool> salatMap = Translator().salatMap();
+
+        for (int i = eventKeys.size()-1; i >= 0; i--) {
+            notifications[ eventKeys[i] ] = salatMap.contains( eventKeys[i] );
+        }
+
+        m_persistance.saveValueFor("athaans", notifications);
+        m_persistance.saveValueFor("notifications", notifications);
+    }
+
+    if ( !m_persistance.contains("adjustments") )
+    {
+        QVariantMap adjustments;
+
+        QStringList salatKeys = Translator::salatKeys();
+
+        for (int i = salatKeys.size()-1; i >= 0; i--) {
+            adjustments[ salatKeys[i] ] = 0;
+        }
+
+        m_persistance.saveValueFor("adjustments", adjustments);
+    }
+
+    if ( !m_persistance.contains("profiles") )
+    {
+        QVariantMap profiles;
+        profiles[ QString::number(NotificationMode::Silent) ] = false;
+        profiles[ QString::number(NotificationMode::Vibrate) ] = true;
+        profiles[ QString::number(NotificationMode::Normal) ] = true;
+        profiles[ QString::number(NotificationMode::PhoneOnly) ] = true;
+        profiles[ QString::number(NotificationMode::AlertsOff) ] = false;
+
+        m_persistance.saveValueFor("profiles", profiles);
+    }
 }
 
 
