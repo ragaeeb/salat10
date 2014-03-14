@@ -43,7 +43,7 @@ ListView
         actions: [
             ActionItem {
                 id: enableAthaan
-                title: qsTr("Enable Alarms/Athaans") + Retranslate.onLanguageChanged
+                title: qsTr("Enable Alarms/Athans") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_athaan_enable.png"
                 
                 onTriggered: {
@@ -54,7 +54,7 @@ ListView
             ActionItem {
                 id: muteAthaans
                 objectName: "endMultiChats"
-                title: qsTr("Mute Alarms/Athaans") + Retranslate.onLanguageChanged
+                title: qsTr("Mute Alarms/Athans") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_athaan_mute.png"
                 
                 onTriggered: {

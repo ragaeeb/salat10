@@ -87,26 +87,34 @@ NavigationPane
             verticalAlignment: VerticalAlignment.Fill
             layout: DockLayout {}
             
-            MapView {
-                id: mapView
-                altitude: 100000000
-                tilt: 2
-                verticalAlignment: VerticalAlignment.Center
-                horizontalAlignment: HorizontalAlignment.Center
+            ControlDelegate
+            {
+                delegateActive: !boundary.empty
                 
-                function onMapDataLoaded(data)
+                sourceComponent: ComponentDefinition
                 {
-                    for (var i = data.length-1; i >= 0; i--)
-                    {
-                        var current = data[i];
-                        var name = data[i].city+": "+data[i].comment;
-                        app.renderMap(mapView, data[i].latitude, data[i].longitude, name);
+                    MapView {
+                        id: mapView
+                        altitude: 100000000
+                        tilt: 2
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Center
+                        
+                        function onMapDataLoaded(data)
+                        {
+                            for (var i = data.length-1; i >= 0; i--)
+                            {
+                                var current = data[i];
+                                var name = data[i].city+": "+data[i].comment;
+                                app.renderMap(mapView, data[i].latitude, data[i].longitude, name);
+                            }
+                        }
+                        
+                        onCreationCompleted: {
+                            app.mapDataLoaded.connect(onMapDataLoaded);
+                            app.fetchCheckins();
+                        }
                     }
-                }
-                
-                onCreationCompleted: {
-                    app.mapDataLoaded.connect(onMapDataLoaded);
-                    app.fetchCheckins();
                 }
             }
             

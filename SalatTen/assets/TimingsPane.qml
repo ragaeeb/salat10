@@ -148,7 +148,7 @@ NavigationPane
 	                SystemDialog {
 	                    id: prompt
                         title: qsTr("Confirmation") + Retranslate.onLanguageChanged
-                        body: qsTr("Are you sure you want to clear all the scheduled calendar reminders?")
+                        body: qsTr("Are you sure you want to clear all the scheduled calendar reminders?") + Retranslate.onLanguageChanged
                         confirmButton.label: qsTr("Yes") + Retranslate.onLanguageChanged
                         cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
                         

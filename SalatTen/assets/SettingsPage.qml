@@ -128,21 +128,21 @@ Page
                 
                 Option {
                     text: qsTr("Ignore Profile") + Retranslate.onLanguageChanged
-                    description: qsTr("Athaan will always play regardless of the device profile.") + Retranslate.onLanguageChanged
+                    description: qsTr("Athan will always play regardless of the device profile.") + Retranslate.onLanguageChanged
                     imageSource: "images/dropdown/ic_ignore_profile.png"
                     value: 0
                 }
                 
                 Option {
                     text: qsTr("Respect Vibrate/Silent") + Retranslate.onLanguageChanged
-                    description: qsTr("Athaan will play if the device is not in vibrate/silent profile.") + Retranslate.onLanguageChanged
+                    description: qsTr("Athan will play if the device is not in vibrate/silent profile.") + Retranslate.onLanguageChanged
                     imageSource: "images/dropdown/ic_vibrate.png"
                     value: 1
                 }
                 
                 Option {
                     text: qsTr("Respect Silence") + Retranslate.onLanguageChanged
-                    description: qsTr("Athaan will play if the device is not in silent profile.") + Retranslate.onLanguageChanged
+                    description: qsTr("Athan will play if the device is not in silent profile.") + Retranslate.onLanguageChanged
                     imageSource: "images/dropdown/ic_silent.png"
                     value: 2
                 }
@@ -150,16 +150,16 @@ Page
 
             CheckBox {
 		        topMargin: 20
-		        text: qsTr("Dhuhr Athaan on Friday") + Retranslate.onLanguageChanged
+		        text: qsTr("Dhuhr Athan on Friday") + Retranslate.onLanguageChanged
                 checked: persist.getValueFor("skipJumahAthaan") != 1;
                 
                 onCheckedChanged: {
                     persist.saveValueFor("skipJumahAthaan", checked ? 0 : 1);
                     
                     if (checked) {
-                        infoText.text = qsTr("Athaan during Ju'muah will be played.").arg(text);
+                        infoText.text = qsTr("Athan during Ju'muah will be played.").arg(text);
                     } else {
-                        infoText.text = qsTr("Athaan during Ju'muah will be muted.").arg(text);
+                        infoText.text = qsTr("Athan during Ju'muah will be muted.").arg(text);
                     }
                 }
           	}
