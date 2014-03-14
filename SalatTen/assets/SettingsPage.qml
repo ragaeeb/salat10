@@ -1,4 +1,6 @@
 import bb.cascades 1.0
+import bb.platform 1.0
+import bb.system 1.0
 import com.canadainc.data 1.0
 
 Page
@@ -14,8 +16,20 @@ Page
         
 	    Container
 	    {
-	        id: contentContainer
-	    	topPadding: 20; leftPadding: 20; rightPadding: 20; bottomPadding: 20
+            Header {
+                title: qsTr("Play the athan in the following modes") + Retranslate.onLanguageChanged
+            }
+	    	
+	    	Header {
+	    	    title: qsTr("General Settings") + Retranslate.onLanguageChanged
+          	}
+	    	
+            PersistCheckBox
+            {
+                topMargin: 20
+                key: "skipJumahAthaan"
+                text: qsTr("Dhuhr Athan on Friday") + Retranslate.onLanguageChanged
+            }
 
 		    DropDown
 		    {
@@ -92,7 +106,6 @@ Page
 		            
 		            if (strategySaved && anglesSaved) {
                         persist.showToast( qsTr("Salat10 will use %1 angles to calculate the prayer times.").arg(selectedOption.text), "", "asset:///images/ic_angles.png" );
-                        infoText.text = qsTr("%1 calculation angles set.").arg(selectedOption.text);
 		            }
 		        }
 		    }
@@ -119,60 +132,50 @@ Page
                 }
             }
             
-            PersistDropDown
-            {
-                id: profile
-                title: qsTr("Respect Profile") + Retranslate.onLanguageChanged
-                key: "respectProfile"
-                topMargin: 20
+            onCreationCompleted: {
+                var profiles = persist.getValueFor("profiles");
                 
-                Option {
-                    text: qsTr("Ignore Profile") + Retranslate.onLanguageChanged
-                    description: qsTr("Athan will always play regardless of the device profile.") + Retranslate.onLanguageChanged
-                    imageSource: "images/dropdown/ic_ignore_profile.png"
-                    value: 0
-                }
+                checkBox = checkerDef.createObject();
+                insert(1, checkBox);
+                checkBox.value = ""+NotificationMode.AlertsOff;
+                checkBox.checked = profiles[checkBox.value];
+                checkBox.text = qsTr("All Alerts Off");
                 
-                Option {
-                    text: qsTr("Respect Vibrate/Silent") + Retranslate.onLanguageChanged
-                    description: qsTr("Athan will play if the device is not in vibrate/silent profile.") + Retranslate.onLanguageChanged
-                    imageSource: "images/dropdown/ic_vibrate.png"
-                    value: 1
-                }
+                checkBox = checkerDef.createObject();
+                insert(1, checkBox);
+                checkBox.value = ""+NotificationMode.PhoneOnly;
+                checkBox.checked = profiles[checkBox.value];
+                checkBox.text = qsTr("Phone Only");
                 
-                Option {
-                    text: qsTr("Respect Silence") + Retranslate.onLanguageChanged
-                    description: qsTr("Athan will play if the device is not in silent profile.") + Retranslate.onLanguageChanged
-                    imageSource: "images/dropdown/ic_silent.png"
-                    value: 2
-                }
+                checkBox = checkerDef.createObject();
+                insert(1, checkBox);
+                checkBox.value = ""+NotificationMode.Vibrate;
+                checkBox.checked = profiles[checkBox.value];
+                checkBox.text = qsTr("Vibrate");
+                
+                var checkBox = checkerDef.createObject();
+                insert(1, checkBox);
+                checkBox.value = ""+NotificationMode.Silent;
+                checkBox.checked = profiles[checkBox.value];
+                checkBox.text = qsTr("Silent");
             }
-
-            CheckBox {
-		        topMargin: 20
-		        text: qsTr("Dhuhr Athan on Friday") + Retranslate.onLanguageChanged
-                checked: persist.getValueFor("skipJumahAthaan") != 1;
-                
-                onCheckedChanged: {
-                    persist.saveValueFor("skipJumahAthaan", checked ? 0 : 1);
+            
+            attachedObjects: [
+                ComponentDefinition {
+                    id: checkerDef
                     
-                    if (checked) {
-                        infoText.text = qsTr("Athan during Ju'muah will be played.").arg(text);
-                    } else {
-                        infoText.text = qsTr("Athan during Ju'muah will be muted.").arg(text);
+                    CheckBox
+                    {
+                        property string value
+                        
+                        onCheckedChanged: {
+                            var profiles = persist.getValueFor("profiles");
+                            profiles[value] = checked;
+                            persist.saveValueFor("profiles", profiles);
+                        }
                     }
                 }
-          	}
-		    
-		    Label {
-		        id: infoText
-		        multiline: true
-		        topMargin: 50
-		        textStyle.fontSize: FontSize.XXSmall
-		        textStyle.textAlign: TextAlign.Center
-		        verticalAlignment: VerticalAlignment.Bottom
-		        horizontalAlignment: HorizontalAlignment.Center
-		    }
+            ]
 	    }
     }
 }

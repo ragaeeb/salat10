@@ -580,98 +580,78 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="7"/>
+        <location filename="../assets/SettingsPage.qml" line="9"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="23"/>
+        <location filename="../assets/SettingsPage.qml" line="20"/>
+        <source>Play the athan in the following modes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="24"/>
+        <source>General Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="37"/>
         <source>Calculation Angles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="94"/>
+        <location filename="../assets/SettingsPage.qml" line="108"/>
         <source>Salat10 will use %1 angles to calculate the prayer times.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="95"/>
-        <source>%1 calculation angles set.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="103"/>
+        <location filename="../assets/SettingsPage.qml" line="116"/>
         <source>Asr Ratio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="108"/>
+        <location filename="../assets/SettingsPage.qml" line="121"/>
         <source>Shafii, Maliki, Hanbali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="109"/>
+        <location filename="../assets/SettingsPage.qml" line="122"/>
         <source>Asr begins when the height of an object is equal to the height of its shadow.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="115"/>
+        <location filename="../assets/SettingsPage.qml" line="128"/>
         <source>Hanafi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="116"/>
+        <location filename="../assets/SettingsPage.qml" line="129"/>
         <source>Asr begins when the height of the shadow of an object is twice the height of the object.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="125"/>
-        <source>Respect Profile</source>
+        <location filename="../assets/SettingsPage.qml" line="142"/>
+        <source>All Alerts Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="130"/>
-        <source>Ignore Profile</source>
+        <location filename="../assets/SettingsPage.qml" line="148"/>
+        <source>Phone Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="131"/>
-        <source>Athan will always play regardless of the device profile.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="138"/>
-        <source>Athan will play if the device is not in vibrate/silent profile.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="145"/>
-        <source>Athan will play if the device is not in silent profile.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="153"/>
-        <source>Dhuhr Athan on Friday</source>
+        <location filename="../assets/SettingsPage.qml" line="154"/>
+        <source>Vibrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="160"/>
-        <source>Athan during Ju&apos;muah will be played.</source>
+        <source>Silent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="162"/>
-        <source>Athan during Ju&apos;muah will be muted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="137"/>
-        <source>Respect Vibrate/Silent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="144"/>
-        <source>Respect Silence</source>
+        <location filename="../assets/SettingsPage.qml" line="31"/>
+        <source>Dhuhr Athan on Friday</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -824,33 +804,33 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>salat::ApplicationUI</name>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="90"/>
+        <location filename="../src/ApplicationUI.cpp" line="91"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that accurate calculations can be made. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Salat10 and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="119"/>
+        <location filename="../src/ApplicationUI.cpp" line="120"/>
         <source>Warning: It seems like the location services is not enabled on your BB10 device so the app will not be able to fetch real-time data and map information.
 
 Press OK to launch the Location Services screen and enable the Location Services permission there.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="97"/>
-        <location filename="../src/ApplicationUI.cpp" line="119"/>
-        <location filename="../src/ApplicationUI.cpp" line="174"/>
+        <location filename="../src/ApplicationUI.cpp" line="98"/>
+        <location filename="../src/ApplicationUI.cpp" line="120"/>
+        <location filename="../src/ApplicationUI.cpp" line="175"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="94"/>
+        <location filename="../src/ApplicationUI.cpp" line="95"/>
         <source>Warning: It seems like the app does not have access to access your shared folder. This permission is needed to allow you to set custom athan sounds. Without this permission some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="97"/>
+        <location filename="../src/ApplicationUI.cpp" line="98"/>
         <source>As&apos;salaamu alaykum wa rahmatullahi wabarakathu,
 
 JazakAllahu khair for using Salat10. While our Islamic apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal.
@@ -859,32 +839,32 @@ May Allah reward you, and bless you and your family.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="145"/>
+        <location filename="../src/ApplicationUI.cpp" line="146"/>
         <source>Location successfully set to %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="147"/>
+        <location filename="../src/ApplicationUI.cpp" line="148"/>
         <source>Location could not be detected %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="174"/>
+        <location filename="../src/ApplicationUI.cpp" line="175"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="243"/>
+        <location filename="../src/ApplicationUI.cpp" line="244"/>
         <source>Scheduled events cleared!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="252"/>
+        <location filename="../src/ApplicationUI.cpp" line="253"/>
         <source>Export complete!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="303"/>
+        <location filename="../src/ApplicationUI.cpp" line="304"/>
         <source>Almost %1</source>
         <translation type="unfinished"></translation>
     </message>

@@ -28,6 +28,7 @@ class DataModelWrapper : public QObject
 
 	void calculateAndAppend(QDateTime const& reference);
 	QVariantList matchValue(QDateTime const& reference);
+	void init();
 
 private slots:
     void itemAdded(QVariantList indexPath);
