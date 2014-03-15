@@ -62,7 +62,9 @@ ListView
                 }
             },
             
-            ActionItem {
+            ActionItem
+            {
+                id: copyAction
                 title: qsTr("Copy") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_copy.png"
                 
@@ -71,7 +73,9 @@ ListView
                 }
             },
             
-            InvokeActionItem {
+            InvokeActionItem
+            {
+                id: shareAction
                 title: qsTr("Share") + Retranslate.onLanguageChanged
                 
                 query {
@@ -85,6 +89,7 @@ ListView
             },
             
             ActionItem {
+                id: customSoundAction
                 title: qsTr("Set Custom Sound") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_athaan_custom.png"
                 
@@ -94,6 +99,7 @@ ListView
             },
             
             DeleteActionItem {
+                id: resetSoundAction
                 title: qsTr("Reset Sound") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_reset_athaan.png"
                 
@@ -109,7 +115,7 @@ ListView
     onSelectionChanged: {
         var n = selectionList().length
         multiSelectHandler.status = qsTr("+%n Events Selected", "", n) + Retranslate.onLanguageChanged
-        enableAthaan.enabled = muteAthaans.enabled = n > 0;
+        copyAction.enabled = shareAction.enabled = resetSoundAction.enabled = customSoundAction.enabled = enableAthaan.enabled = muteAthaans.enabled = n > 0;
     }
     
     listItemComponents: [
