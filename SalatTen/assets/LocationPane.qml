@@ -48,7 +48,10 @@ NavigationPane
                 
                 onCreationCompleted: {
                     persist.settingChanged.connect(onSettingChanged);
-                    onSettingChanged("location");
+                    
+                    if (!boundary.empty) {
+                        onSettingChanged("location");
+                    }
                 }
                 
                 attachedObjects: [

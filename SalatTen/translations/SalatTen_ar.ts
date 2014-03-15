@@ -494,7 +494,7 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation>الموقع</translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="75"/>
+        <location filename="../assets/LocationPane.qml" line="78"/>
         <source>Location successfully set to %1!</source>
         <translation type="unfinished"></translation>
     </message>
