@@ -21,8 +21,6 @@
 #include <bb/platform/Notification>
 #include <bb/platform/NotificationMode>
 
-#include <bb/system/InvokeManager>
-
 #include <bb/cascades/maps/MapView>
 #include <bb/platform/geo/GeoLocation>
 #include <bb/cascades/maps/MapData>

@@ -325,22 +325,22 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation type="obsolete">مشاركة</translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="59"/>
+        <location filename="../assets/EventListItem.qml" line="66"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="96"/>
+        <location filename="../assets/EventListItem.qml" line="103"/>
         <source>%1 minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="99"/>
+        <location filename="../assets/EventListItem.qml" line="106"/>
         <source>%1 minutes %2 seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="102"/>
+        <location filename="../assets/EventListItem.qml" line="109"/>
         <source>%1 seconds</source>
         <translation type="unfinished"></translation>
     </message>
@@ -489,17 +489,17 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation>تحديث</translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="45"/>
+        <location filename="../assets/LocationPane.qml" line="44"/>
         <source>Choose Location</source>
         <translation>الموقع</translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="80"/>
+        <location filename="../assets/LocationPane.qml" line="78"/>
         <source>Location successfully set to %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="135"/>
+        <location filename="../assets/LocationPane.qml" line="131"/>
         <source>Almost %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -623,67 +623,67 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="24"/>
+        <location filename="../assets/SettingsPage.qml" line="32"/>
         <source>General Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="37"/>
+        <location filename="../assets/SettingsPage.qml" line="51"/>
         <source>Calculation Angles</source>
         <translation>طرق الحساب</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="108"/>
+        <location filename="../assets/SettingsPage.qml" line="122"/>
         <source>Salat10 will use %1 angles to calculate the prayer times.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="116"/>
+        <location filename="../assets/SettingsPage.qml" line="130"/>
         <source>Asr Ratio</source>
         <translation>المذهب الفقهي</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="121"/>
+        <location filename="../assets/SettingsPage.qml" line="135"/>
         <source>Shafii, Maliki, Hanbali</source>
         <translation>شافعي، مالكي ، حنبلي</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="122"/>
+        <location filename="../assets/SettingsPage.qml" line="136"/>
         <source>Asr begins when the height of an object is equal to the height of its shadow.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="128"/>
+        <location filename="../assets/SettingsPage.qml" line="142"/>
         <source>Hanafi</source>
         <translation>حنفي</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="129"/>
+        <location filename="../assets/SettingsPage.qml" line="143"/>
         <source>Asr begins when the height of the shadow of an object is twice the height of the object.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="142"/>
+        <location filename="../assets/SettingsPage.qml" line="157"/>
         <source>All Alerts Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="148"/>
+        <location filename="../assets/SettingsPage.qml" line="163"/>
         <source>Phone Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="154"/>
+        <location filename="../assets/SettingsPage.qml" line="169"/>
         <source>Vibrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="160"/>
+        <location filename="../assets/SettingsPage.qml" line="175"/>
         <source>Silent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="31"/>
+        <location filename="../assets/SettingsPage.qml" line="45"/>
         <source>Dhuhr Athan on Friday</source>
         <translation type="unfinished"></translation>
     </message>
@@ -704,52 +704,52 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>TimingsPane</name>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="51"/>
+        <location filename="../assets/TimingsPane.qml" line="55"/>
         <source>Refresh</source>
         <translation>تحديث</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="69"/>
+        <location filename="../assets/TimingsPane.qml" line="73"/>
         <source>Share</source>
         <translation>مشاركة</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="104"/>
+        <location filename="../assets/TimingsPane.qml" line="108"/>
         <source>Export to Calendar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="130"/>
+        <location filename="../assets/TimingsPane.qml" line="134"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="138"/>
+        <location filename="../assets/TimingsPane.qml" line="142"/>
         <source>Clear Exported Events</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="150"/>
+        <location filename="../assets/TimingsPane.qml" line="154"/>
         <source>Confirmation</source>
         <translation>تأكيد</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="151"/>
+        <location filename="../assets/TimingsPane.qml" line="155"/>
         <source>Are you sure you want to clear all the scheduled calendar reminders?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="152"/>
+        <location filename="../assets/TimingsPane.qml" line="156"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="153"/>
+        <location filename="../assets/TimingsPane.qml" line="157"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="177"/>
+        <location filename="../assets/TimingsPane.qml" line="181"/>
         <source>No coordinates detected. Either wait for the GPS to detect your location or tap here to pick a location.</source>
         <translation type="unfinished"></translation>
     </message>
