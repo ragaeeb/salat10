@@ -72,7 +72,7 @@ public:
 
     Q_INVOKABLE void loadAccounts();
     Q_INVOKABLE void exportToCalendar(int numDays, QVariantList const& events, int accountId);
-    Q_INVOKABLE void renderMap(QObject* mapView, qreal latitude, qreal longitude, QString name, bool focus=false);
+    Q_INVOKABLE void renderMap(QObject* mapView, qreal latitude, qreal longitude, QString const& name, QString const& event, bool focus=false);
     Q_INVOKABLE void cleanupCalendarEvents();
     Q_INVOKABLE QObject* refreshLocation();
     Q_INVOKABLE void fetchCheckins();
