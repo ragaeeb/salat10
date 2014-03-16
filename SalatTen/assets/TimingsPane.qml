@@ -36,6 +36,10 @@ NavigationPane
         property bool actionsEnabled: false;
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         
+        onPeekedAtChanged: {
+            listView.secretPeek = peekedAt;
+        }
+        
         titleBar: SalatTitleBar
         {
             onEditTitleTriggered: {
@@ -186,6 +190,7 @@ NavigationPane
             {
                 id: listView
                 visible: !boundary.empty
+                property bool secretPeek: false
                 
                 function manualDeselect()
                 {

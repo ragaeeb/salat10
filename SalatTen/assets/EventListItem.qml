@@ -5,6 +5,7 @@ StandardListItem
 {
     id: sli
     property variant data: ListItem.data
+    property bool peek: sli.ListItem.view.secretPeek
     title: ListItemData ? ListItem.view.localization.renderStandardTime(ListItemData.value) : undefined;
     description: ListItemData ? ListItem.view.translation.render(ListItemData.key) : undefined;
     imageSource: {
@@ -18,6 +19,12 @@ StandardListItem
             }
         } else {
             return undefined;
+        }
+    }
+    
+    onPeekChanged: {
+        if (peek) {
+            showAnim.play();
         }
     }
     
