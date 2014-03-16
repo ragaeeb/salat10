@@ -489,13 +489,18 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation>تحديث</translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="42"/>
+        <location filename="../assets/LocationPane.qml" line="45"/>
         <source>Choose Location</source>
         <translation>الموقع</translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="78"/>
+        <location filename="../assets/LocationPane.qml" line="80"/>
         <source>Location successfully set to %1!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/LocationPane.qml" line="135"/>
+        <source>Almost %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -560,32 +565,32 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="66"/>
+        <location filename="../assets/ResultListView.qml" line="68"/>
         <source>Copy</source>
         <translation>نسخ</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="75"/>
+        <location filename="../assets/ResultListView.qml" line="79"/>
         <source>Share</source>
         <translation>مشاركة</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="88"/>
+        <location filename="../assets/ResultListView.qml" line="93"/>
         <source>Set Custom Sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="97"/>
+        <location filename="../assets/ResultListView.qml" line="103"/>
         <source>Reset Sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="106"/>
+        <location filename="../assets/ResultListView.qml" line="112"/>
         <source>None selected</source>
         <translation>لم يتم تحديد أي شيء</translation>
     </message>
     <message numerus="yes">
-        <location filename="../assets/ResultListView.qml" line="111"/>
+        <location filename="../assets/ResultListView.qml" line="117"/>
         <source>+%n Events Selected</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -832,19 +837,19 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>salat::ApplicationUI</name>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="91"/>
+        <location filename="../src/ApplicationUI.cpp" line="97"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that accurate calculations can be made. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Salat10 and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="95"/>
+        <location filename="../src/ApplicationUI.cpp" line="101"/>
         <source>Warning: It seems like the app does not have access to access your shared folder. This permission is needed to allow you to set custom athan sounds. Without this permission some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="98"/>
+        <location filename="../src/ApplicationUI.cpp" line="104"/>
         <source>As&apos;salaamu alaykum wa rahmatullahi wabarakathu,
 
 JazakAllahu khair for using Salat10. While our Islamic apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal.
@@ -853,48 +858,43 @@ May Allah reward you, and bless you and your family.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="98"/>
-        <location filename="../src/ApplicationUI.cpp" line="120"/>
-        <location filename="../src/ApplicationUI.cpp" line="175"/>
+        <location filename="../src/ApplicationUI.cpp" line="104"/>
+        <location filename="../src/ApplicationUI.cpp" line="126"/>
+        <location filename="../src/ApplicationUI.cpp" line="181"/>
         <source>OK</source>
         <translation>موافق</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="120"/>
+        <location filename="../src/ApplicationUI.cpp" line="126"/>
         <source>Warning: It seems like the location services is not enabled on your BB10 device so the app will not be able to fetch real-time data and map information.
 
 Press OK to launch the Location Services screen and enable the Location Services permission there.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="146"/>
+        <location filename="../src/ApplicationUI.cpp" line="152"/>
         <source>Location successfully set to %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="148"/>
+        <location filename="../src/ApplicationUI.cpp" line="154"/>
         <source>Location could not be detected %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="175"/>
+        <location filename="../src/ApplicationUI.cpp" line="181"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="244"/>
+        <location filename="../src/ApplicationUI.cpp" line="250"/>
         <source>Scheduled events cleared!</source>
         <translation>مسح الأحداث المجدولة</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="253"/>
+        <location filename="../src/ApplicationUI.cpp" line="259"/>
         <source>Export complete!</source>
         <translation>إكمال</translation>
-    </message>
-    <message>
-        <location filename="../src/ApplicationUI.cpp" line="304"/>
-        <source>Almost %1</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

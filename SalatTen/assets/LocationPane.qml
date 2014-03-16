@@ -36,22 +36,22 @@ NavigationPane
                 
                 function onSettingChanged(key)
                 {
-                    if (key == "location")
+                    if (key == "longitude" && notification.calculationFeasible)
                     {
+                        mapViewDelegate.delegateActive = true;
+                        
                         var location = persist.getValueFor("location");
                         location = location ? location : qsTr("Choose Location");
                         locationAction.title = location;
+                        var current = boundary.getCurrent( new Date() );
                         
-                        app.renderMap(mapView, persist.getValueFor("latitude"), persist.getValueFor("longitude"), location, true);
+                        app.renderMap(mapViewDelegate.control, persist.getValueFor("latitude"), persist.getValueFor("longitude"), location, translator.render(current.key), true);
                     }
                 }
                 
                 onCreationCompleted: {
                     persist.settingChanged.connect(onSettingChanged);
-                    
-                    if (!boundary.empty) {
-                        onSettingChanged("location");
-                    }
+                    onSettingChanged("longitude");
                 }
                 
                 attachedObjects: [
@@ -93,7 +93,8 @@ NavigationPane
             
             ControlDelegate
             {
-                delegateActive: !boundary.empty
+                id: mapViewDelegate
+                delegateActive: false
                 
                 sourceComponent: ComponentDefinition
                 {
@@ -106,11 +107,33 @@ NavigationPane
                         
                         function onMapDataLoaded(data)
                         {
+                            var allKeys = translator.eventKeys();
+                            var max = 1000*60*30;
+                            
                             for (var i = data.length-1; i >= 0; i--)
                             {
                                 var current = data[i];
-                                var name = data[i].city+": "+data[i].comment;
-                                app.renderMap(mapView, data[i].latitude, data[i].longitude, name);
+                                var name = current.location;
+                                var key = current.current;
+                                var rendered;
+                                
+                                if (current.diff < max) // less than 30 mins
+                                {
+                                    var index = allKeys.indexOf(key);
+                                    
+                                    if (index < allKeys.length-1) {
+                                        ++index;
+                                    } else {
+                                        index = 0;
+                                    }
+                                    
+                                    key = allKeys[index];
+                                    rendered = qsTr("Almost %1").arg( translator.render(key) );
+                                } else {
+                                    rendered = translator.render(key);
+                                }
+                                
+                                app.renderMap(mapView, current.latitude, current.longitude, name, rendered);
                             }
                         }
                         
