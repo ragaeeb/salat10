@@ -4,6 +4,7 @@ INCLUDEPATH += ../src ../../../canadainc/src/ ../../salat/src/
 CONFIG += qt warn_on cascades10 mobility
 LIBS += -lbbplatform -lbbplatformplaces -lbbcascadesmaps -lbbcascadesplaces -lbbsystem -lbbdevice -lbbpim -lbb -lbbutilityi18n -lQtLocationSubset -lbbdata -lbbcascadespickers
 MOBILITY += sensors
+QT += network
 
 CONFIG(release, debug|release) {
     DESTDIR = o.le-v7

@@ -67,12 +67,12 @@ NavigationPane
                     
                     if (place && place.latitude && place.longitude)
                     {
-                        persist.saveValueFor("city", place.city);
-                        persist.saveValueFor("location", place.name);
-                        persist.saveValueFor("altitude", place.altitude);
-                        persist.saveValueFor("latitude", place.latitude);
-                        persist.saveValueFor("longitude", place.longitude);
-                        persist.saveValueFor("country", place.country);
+                        persist.saveValueFor("city", place.city, false);
+                        persist.saveValueFor("location", place.name, false);
+                        persist.saveValueFor("altitude", place.altitude, false);
+                        persist.saveValueFor("latitude", place.latitude, true);
+                        persist.saveValueFor("longitude", place.longitude, true);
+                        persist.saveValueFor("country", place.country, false);
                         locationAction.title = place.name;
 
                         persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/ic_map.png" );

@@ -115,7 +115,7 @@ Page
                             "maghribInterval": selectedOption.maghribInterval
                         };
                         
-                        var strategySaved = persist.saveValueFor("strategy", selectedOption.value);
+                        var strategySaved = persist.saveValueFor("strategy", selectedOption.value, false);
                         var anglesSaved = persist.saveValueFor("angles", parameters);
                         
                         if (strategySaved && anglesSaved) {
@@ -186,7 +186,7 @@ Page
                         onCheckedChanged: {
                             var profiles = persist.getValueFor("profiles");
                             profiles[value] = checked;
-                            persist.saveValueFor("profiles", profiles);
+                            persist.saveValueFor("profiles", profiles, false);
                         }
                     }
                 }

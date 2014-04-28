@@ -154,7 +154,7 @@ TabbedPane
                 
                 persist.saveValueFor("notifications", notifications);
                 persist.saveValueFor("athaans", athaans);
-                persist.saveValueFor("athanPrompted", 1);
+                persist.saveValueFor("athanPrompted", 1, false);
             }
         }
     ]

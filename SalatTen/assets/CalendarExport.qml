@@ -50,7 +50,7 @@ Page
                     }
                     
                     onSelectedValueChanged: {
-                        persist.saveValueFor("accountId", selectedValue);
+                        persist.saveValueFor("accountId", selectedValue, false);
                     }
                 }
             }
