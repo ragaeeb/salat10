@@ -44,8 +44,8 @@ void DataModelWrapper::init()
             notifications[ eventKeys[i] ] = salatMap.contains( eventKeys[i] );
         }
 
-        m_persistance.saveValueFor("athaans", notifications);
-        m_persistance.saveValueFor("notifications", notifications);
+        m_persistance.saveValueFor("athaans", notifications, false);
+        m_persistance.saveValueFor("notifications", notifications, false);
     }
 
     if ( !m_persistance.contains("adjustments") )
@@ -70,7 +70,7 @@ void DataModelWrapper::init()
         profiles[ QString::number(NotificationMode::PhoneOnly) ] = true;
         profiles[ QString::number(NotificationMode::AlertsOff) ] = false;
 
-        m_persistance.saveValueFor("profiles", profiles);
+        m_persistance.saveValueFor("profiles", profiles, false);
     }
 }
 
