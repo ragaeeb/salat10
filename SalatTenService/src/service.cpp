@@ -7,10 +7,10 @@
 #include "SalatParameters.h"
 #include "Translator.h"
 
-namespace {
+#define audio_fajr_athaan "asset:///audio/athaan_fajr.mp3"
+#define audio_athaan "asset:///audio/athaan.mp3"
 
-const char* audio_fajr_athaan = "asset:///audio/athaan_fajr.mp3";
-const char* audio_athaan = "asset:///audio/athaan.mp3";
+namespace {
 
 QList<QDateTime> adjust(QList<QDateTime> list, QStringList const& allEvents, QVariantMap const& adjustments)
 {
@@ -47,8 +47,21 @@ Service::Service(bb::Application* app) : QObject(app), m_mkw(NULL)
 	connect( &m_settingsWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( recalculate(QString const&) ) );
 	connect( &m_clock, SIGNAL( clockSettingsChanged() ), this, SLOT( recalculate() ) );
 	connect( &m_invokeManager, SIGNAL( invoked(const bb::system::InvokeRequest&) ), this, SLOT( handleInvoke(const bb::system::InvokeRequest&) ) );
+	connect( &m_player, SIGNAL( playbackCompleted() ), this, SLOT( onPlayingStateChanged() ) );
+	connect( &m_player, SIGNAL( playingChanged() ), this, SLOT( onPlayingStateChanged() ) );
 
 	recalculate();
+}
+
+
+void Service::onPlayingStateChanged()
+{
+    if ( !m_player.playing() && m_mkw )
+    {
+        LOGGER("No longer playing, destroying!");
+        m_mkw->deleteLater();
+        m_mkw = NULL;
+    }
 }
 
 
@@ -162,10 +175,11 @@ void Service::timeout(bool init)
 
 void Service::onShortPress(bb::multimedia::MediaKey::Type key)
 {
-	LOGGER("========== SHORT PRESSED!!!!" << key << m_player.playing());
+	LOGGER("SHORT PRESSED!!!!" << key << m_player.playing());
 
-	if ( m_player.playing() && key == MediaKey::VolumeDown ) {
-		LOGGER("===== STOPPING");
+	if ( m_player.playing() && key == MediaKey::VolumeDown )
+	{
+		LOGGER("STOPPING");
 		m_player.stop();
 		Notification::clearEffectsForAll();
 		Notification::deleteAllFromInbox();

@@ -42,9 +42,10 @@ signals:
 
 private slots:
 	void handleInvoke(const bb::system::InvokeRequest &);
+	void onPlayingStateChanged();
+    void onShortPress(bb::multimedia::MediaKey::Type key);
 	void recalculate(QString const& key=QString());
-	void timeout(bool init=false);
-	void onShortPress(bb::multimedia::MediaKey::Type key);
+    void timeout(bool init=false);
 
 public:
 	~Service();
