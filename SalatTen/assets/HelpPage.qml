@@ -1,13 +1,12 @@
 import bb.cascades 1.0
-import bb 1.0
 
 Page
 {
     id: root
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
-    titleBar: TitleBar {
-        title: qsTr("Help") + Retranslate.onLanguageChanged
+    titleBar: AboutTitleBar {
+        id: atb
     }
     
     actions: [
@@ -17,12 +16,13 @@ Page
             ActionBar.placement: ActionBarPlacement.OnBar
             
             query {
-                invokeTargetId: "sys.bbm.channels.card.previewer"
-                uri: "bbmc:C0034D28B"
+                invokeTargetId: atb.invokeTargetId
+                uri: atb.channelUri
             }
         },
         
-        InvokeActionItem {
+        InvokeActionItem
+        {
             query {
                 mimeType: "text/html"
                 uri: "http://www.youtube.com/watch?v=AbHZLmWSKts"
@@ -32,52 +32,12 @@ Page
             imageSource: "images/ic_tutorial.png"
             title: qsTr("Video Tutorial") + Retranslate.onLanguageChanged
             ActionBar.placement: ActionBarPlacement.OnBar
-        },
-        
-        InvokeActionItem {
-            query {
-                mimeType: "application/pdf"
-                uri: "http://abdurrahman.org/sunnah/bulughalmaramNotes/BM_129-143-TimesOfSalah-35p.pdf"
-                invokeActionId: "bb.action.OPEN"
-            }
-
-			title: qsTr("Times of Salah") + Retranslate.onLanguageChanged
-        },
-
-        InvokeActionItem {
-            query {
-                mimeType: "text/html"
-                uri: "http://abdurrahman.org/sunnah/sahihBukhari/010.sbt.html"
-                invokeActionId: "bb.action.OPEN"
-            }
-
-			title: qsTr("Times of the Prayers") + Retranslate.onLanguageChanged
-        },
-
-        InvokeActionItem {
-            query {
-                mimeType: "text/html"
-                uri: "http://abdurrahman.org/sunnah/sahihBukhari/008.sbt.html"
-                invokeActionId: "bb.action.OPEN"
-            }
-
-			title: qsTr("Bukhari: Salat") + Retranslate.onLanguageChanged
-        },
-
-        InvokeActionItem {
-            query {
-                mimeType: "text/html"
-                uri: "http://abdurrahman.org/sunnah/sahihMuslim/004.smt.html"
-                invokeActionId: "bb.action.OPEN"
-            }
-
-			title: qsTr("Kitab Al-Salat") + Retranslate.onLanguageChanged
         }
     ]
     
     Container
     {
-        leftPadding: 20; rightPadding: 20;
+        leftPadding: 10; rightPadding: 10;
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         
@@ -87,17 +47,8 @@ Page
 	        verticalAlignment: VerticalAlignment.Fill
 	        scrollViewProperties.pinchToZoomEnabled: true
 	        
-	        Label {
-		        attachedObjects: [
-		            ApplicationInfo {
-					    id: appInfo
-					},
-					
-					PackageInfo {
-					    id: packageInfo
-					}
-		        ]
-	            
+	        Label
+	        {
 	            multiline: true
 		        horizontalAlignment: HorizontalAlignment.Fill
 		        verticalAlignment: VerticalAlignment.Center
@@ -105,13 +56,7 @@ Page
 	            textStyle.fontSize: FontSize.XSmall
 	            textStyle.lineHeight: 1.25
 	            content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
-	            text:
-"\n(c) 2013 " + packageInfo.author + ". All Rights Reserved.\n" +
-appInfo.title + " " + appInfo.version +"\n\n" +
-"Please report all bugs to:
-support@canadainc.org
-
-Salat10 is a prayer time calculator for Muslims and offers a lot of additional features that other apps do not have. It also calculates Hijri dates based on the current Julian calendar date.
+	            text: "\n\nSalat10 is a prayer time calculator for Muslims and offers a lot of additional features that other apps do not have. It also calculates Hijri dates based on the current Julian calendar date.
 
 The usage of the app is very simple and the app tries to take care of most of the manual work for you. It will automatically determine your location and pick the calculation angles that are most relevant to your area to give you accurate timings. However you still have control over these settings if you want to adjust them yourself.
 
