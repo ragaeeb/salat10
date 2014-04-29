@@ -102,7 +102,7 @@ void Service::timeout(bool init)
 	LOGGER("Current" << currentEventKey << currentEventTime);
 	LOGGER("Now:" << now << "next: " << nextEventTime);
 
-	qint64 diff = nextEventTime.toMSecsSinceEpoch() - now.toMSecsSinceEpoch();
+	qint64 diff = nextEventTime.toMSecsSinceEpoch() - now.toMSecsSinceEpoch() + 1000; // 1 second lee way in case the OS pre-empts us too early
 	m_timer.start(diff);
 
 	LOGGER("Started timer for " << diff);
@@ -117,7 +117,8 @@ void Service::timeout(bool init)
 
 		LOGGER("Athaans" << athaans << playAthaan << currentEventKey);
 
-        if (playAthaan) {
+        if ( playAthaan && (m_prevKey != currentEventKey) )
+        {
             LOGGER("Should play maybe?");
 
             if ( currentEventKey == Translator::key_dhuhr && now.date().dayOfWeek() == Qt::Friday && settings.value("skipJumahAthaan").toInt() == 1 ) {
@@ -134,7 +135,8 @@ void Service::timeout(bool init)
 
                 LOGGER("okToPlay" << okToPlay << "map" << salatMap << currentEventKey);
 
-                if ( okToPlay && salatMap.contains(currentEventKey) ) {
+                if ( okToPlay && salatMap.contains(currentEventKey) )
+                {
                     LOGGER("Playing athaan mode" << mode);
                     QString destinationFile = currentEventKey == Translator::key_fajr ? audio_fajr_athaan : audio_athaan;
 
@@ -147,6 +149,8 @@ void Service::timeout(bool init)
                     }
 
                     LOGGER("destination file" << destinationFile);
+
+                    m_prevKey = currentEventKey;
 
                     m_player.play(destinationFile);
 
@@ -166,7 +170,7 @@ void Service::timeout(bool init)
             n.setTitle("Salat10");
             n.setBody( t.render(currentEventKey) );
             n.setTimestamp(currentEventTime);
-            n.setIconUrl( QUrl( QString("file:///usr/share/icons/clock_alarm.png") ) );
+            n.setIconUrl( QString("file:///usr/share/icons/clock_alarm.png") );
             n.notify();
         }
 	}

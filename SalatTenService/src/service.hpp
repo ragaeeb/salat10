@@ -34,6 +34,7 @@ class Service: public QObject
 	QTimer m_timer;
 	LazyMediaPlayer m_player;
 	bb::multimedia::MediaKeyWatcher* m_mkw;
+	QString m_prevKey;
 
 	Service(bb::Application * app);
 
