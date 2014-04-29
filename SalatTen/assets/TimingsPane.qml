@@ -19,11 +19,20 @@ NavigationPane
         if (key == "hijri") {
             mainPage.titleBar.bannerText = hijri.writeIslamicDate( persist.getValueFor("hijri") );
         }
+        
+        if (mainPage.actionsEnabled) {
+            persist.tutorialVideo("http://www.youtube.com/watch?v=AbHZLmWSKts");
+        }
+    }
+    
+    function initialized()
+    {
+        persist.settingChanged.connect(onSettingChanged);
+        onSettingChanged("hijri");
     }
     
     onCreationCompleted: {
-        persist.settingChanged.connect(onSettingChanged);
-        onSettingChanged("hijri");
+        app.initialize.connect(initialized);
     }
     
     onPopTransitionEnded: {
