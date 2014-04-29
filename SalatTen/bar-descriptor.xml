@@ -152,6 +152,7 @@
 	</asset>
 
 	<asset path="splash_n.png">splash_n.png</asset>
+	<asset path="../../canadainc/assets/AboutTitleBar.qml">assets/AboutTitleBar.qml</asset>
 	<asset path="../../canadainc/assets/AccountsDropDown.qml">assets/AccountsDropDown.qml</asset>
     <asset path="../../canadainc/assets/BugReportPage.qml">assets/BugReportPage.qml</asset>
     <asset path="../../canadainc/assets/CanadaIncMenu.qml">assets/CanadaIncMenu.qml</asset>
@@ -163,10 +164,10 @@
 	<permission system="true">_sys_run_headless</permission>
 	<permission system="true">_sys_headless_nostop</permission>
 	<permission>post_notification</permission>
- <permission>access_pimdomain_calendars</permission>
- <permission>access_location_services</permission>
- <permission>access_shared</permission>
- <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib" />
- <env var="CASCADES_THEME" value="dark"/>
+	<permission>access_pimdomain_calendars</permission>
+	<permission>access_location_services</permission>
+	<permission>access_shared</permission>
+	<env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib" />
+	<env var="CASCADES_THEME" value="dark"/>
 
 </qnx>
