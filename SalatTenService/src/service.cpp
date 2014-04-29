@@ -162,10 +162,7 @@ void Service::timeout(bool init)
                     LOGGER("Skipping athaan mode" << mode);
                 }
             }
-		}
-
-        if (playNotification)
-        {
+		} else if (playNotification) {
             Notification n;
             n.setTitle("Salat10");
             n.setBody( t.render(currentEventKey) );
