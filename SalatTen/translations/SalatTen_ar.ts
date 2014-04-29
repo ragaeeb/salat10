@@ -40,157 +40,157 @@
 <context>
     <name>ArticlesPage</name>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="26"/>
+        <location filename="../assets/ArticlesPage.qml" line="27"/>
         <source>Times of Salah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="38"/>
+        <location filename="../assets/ArticlesPage.qml" line="40"/>
         <source>Times of the Prayers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="50"/>
+        <location filename="../assets/ArticlesPage.qml" line="53"/>
         <source>Bukhari: Salat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="61"/>
+        <location filename="../assets/ArticlesPage.qml" line="65"/>
         <source>Kitab Al-Salat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="79"/>
+        <location filename="../assets/ArticlesPage.qml" line="83"/>
         <source>Articles</source>
         <translation>مقالات</translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="94"/>
+        <location filename="../assets/ArticlesPage.qml" line="98"/>
         <source>Filter</source>
         <translation>فلترة حسب</translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="97"/>
+        <location filename="../assets/ArticlesPage.qml" line="101"/>
         <source>Common Mistakes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="98"/>
+        <location filename="../assets/ArticlesPage.qml" line="102"/>
         <source>Articles and fatwa related to errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="104"/>
+        <location filename="../assets/ArticlesPage.qml" line="108"/>
         <source>Duha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="105"/>
+        <location filename="../assets/ArticlesPage.qml" line="109"/>
         <source>Articles and fatwa related to Salat-ul Duha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="111"/>
+        <location filename="../assets/ArticlesPage.qml" line="115"/>
         <source>Eid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="112"/>
+        <location filename="../assets/ArticlesPage.qml" line="116"/>
         <source>Articles and fatwa related to Salat-Eid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="118"/>
+        <location filename="../assets/ArticlesPage.qml" line="122"/>
         <source>Fard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="119"/>
+        <location filename="../assets/ArticlesPage.qml" line="123"/>
         <source>Articles related to the 5 wajib prayers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="125"/>
+        <location filename="../assets/ArticlesPage.qml" line="129"/>
         <source>Fiqh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="126"/>
+        <location filename="../assets/ArticlesPage.qml" line="130"/>
         <source>Articles related to the the fiqh of Salah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="132"/>
+        <location filename="../assets/ArticlesPage.qml" line="136"/>
         <source>Istikhaarah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="133"/>
+        <location filename="../assets/ArticlesPage.qml" line="137"/>
         <source>Articles related to the Salat-ul Istikhaarah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="139"/>
+        <location filename="../assets/ArticlesPage.qml" line="143"/>
         <source>Janaza</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="140"/>
+        <location filename="../assets/ArticlesPage.qml" line="144"/>
         <source>Articles related to the Funeral Prayer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="146"/>
+        <location filename="../assets/ArticlesPage.qml" line="150"/>
         <source>Jumu&apos;ah</source>
         <translation>الجمعة</translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="147"/>
+        <location filename="../assets/ArticlesPage.qml" line="151"/>
         <source>Articles and fatwa related to Salatul-Jumu&apos;ah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="153"/>
+        <location filename="../assets/ArticlesPage.qml" line="157"/>
         <source>Sutrah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="154"/>
+        <location filename="../assets/ArticlesPage.qml" line="158"/>
         <source>Articles related to the the sutrah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="160"/>
+        <location filename="../assets/ArticlesPage.qml" line="164"/>
         <source>Tahiyyatul-Masjid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="161"/>
+        <location filename="../assets/ArticlesPage.qml" line="165"/>
         <source>Articles related to Tahiyyatul-Masjid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="168"/>
+        <location filename="../assets/ArticlesPage.qml" line="172"/>
         <source>Uncategorized</source>
         <translation>غير مصنف</translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="169"/>
+        <location filename="../assets/ArticlesPage.qml" line="173"/>
         <source>Unclassified articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="175"/>
+        <location filename="../assets/ArticlesPage.qml" line="179"/>
         <source>Witr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="176"/>
+        <location filename="../assets/ArticlesPage.qml" line="180"/>
         <source>Articles related to Salatul-Witr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="208"/>
+        <location filename="../assets/ArticlesPage.qml" line="212"/>
         <source>There are no articles loaded. Select a category from the dropdown to load them or tap here.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -698,52 +698,52 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>TimingsPane</name>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="55"/>
+        <location filename="../assets/TimingsPane.qml" line="64"/>
         <source>Refresh</source>
         <translation>تحديث</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="73"/>
+        <location filename="../assets/TimingsPane.qml" line="82"/>
         <source>Share</source>
         <translation>مشاركة</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="108"/>
+        <location filename="../assets/TimingsPane.qml" line="117"/>
         <source>Export to Calendar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="134"/>
+        <location filename="../assets/TimingsPane.qml" line="143"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="142"/>
+        <location filename="../assets/TimingsPane.qml" line="151"/>
         <source>Clear Exported Events</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="154"/>
+        <location filename="../assets/TimingsPane.qml" line="163"/>
         <source>Confirmation</source>
         <translation>تأكيد</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="155"/>
+        <location filename="../assets/TimingsPane.qml" line="164"/>
         <source>Are you sure you want to clear all the scheduled calendar reminders?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="156"/>
+        <location filename="../assets/TimingsPane.qml" line="165"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="157"/>
+        <location filename="../assets/TimingsPane.qml" line="166"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="181"/>
+        <location filename="../assets/TimingsPane.qml" line="190"/>
         <source>No coordinates detected. Either wait for the GPS to detect your location or tap here to pick a location.</source>
         <translation type="unfinished"></translation>
     </message>
