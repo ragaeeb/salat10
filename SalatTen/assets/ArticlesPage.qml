@@ -139,19 +139,6 @@ NavigationPane
             }
         }
         
-        actions: [
-            InvokeActionItem
-            {
-                ActionBar.placement: ActionBarPlacement.OnBar
-                title: qsTr("Al-Salaf Al-Saleh") + Retranslate.onLanguageChanged
-                
-                query {
-                    invokeTargetId: "sys.bbm.channels.card.previewer"
-                    uri: "bbmc:C002455DF"
-                }
-            }
-        ]
-        
         Container
         {
             horizontalAlignment: HorizontalAlignment.Fill
