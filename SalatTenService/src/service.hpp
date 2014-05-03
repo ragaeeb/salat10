@@ -46,6 +46,7 @@ struct AthanHelpers
     bb::multimedia::MediaKeyWatcher* mkw;
     QString prevKey;
     QTimer timer;
+    bool atLeastOneEvent;
 };
 
 class Service: public QObject
