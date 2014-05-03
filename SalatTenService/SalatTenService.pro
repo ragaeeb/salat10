@@ -2,7 +2,7 @@ APP_NAME = SalatTenService
 
 INCLUDEPATH += ../src ../../../canadainc/src/ ../../salat/src/
 CONFIG += qt warn_on
-LIBS += -lbb -lbbsystem -lbbplatform -lbbmultimedia
+LIBS += -lbb -lbbsystem -lbbplatform -lbbmultimedia -lbbnetwork
 
 CONFIG(release, debug|release) {
     DESTDIR = o.le-v7

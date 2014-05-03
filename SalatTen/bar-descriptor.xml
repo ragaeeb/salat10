@@ -118,6 +118,10 @@
 			<mime-type>*</mime-type>
 			<property var="uris" value="headless:" />
 		</filter>
+	    <filter>
+	       <action>bb.action.PUSH</action>
+	       <mime-type>application/vnd.push</mime-type>
+	    </filter>
 	</invoke-target>
 
 	<invoke-target id="com.canadainc.SalatTen">
@@ -163,6 +167,7 @@
 	<!-- Request permission to run a backend headless process and post notification. -->
 	<permission system="true">_sys_run_headless</permission>
 	<permission system="true">_sys_headless_nostop</permission>
+	<permission system="true">_sys_use_consumer_push</permission>
 	<permission>post_notification</permission>
 	<permission>access_pimdomain_calendars</permission>
 	<permission>access_location_services</permission>
