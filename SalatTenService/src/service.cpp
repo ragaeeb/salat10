@@ -128,8 +128,7 @@ void Service::timeout(bool init)
         }
     }
 
-    LOGGER("Current" << currentEventKey << currentEventTime);
-    LOGGER("Now:" << now << "next: " << nextEventTime);
+    LOGGER("Current" << currentEventKey << currentEventTime << now << nextEventTime);
 
     qint64 diff = nextEventTime.toMSecsSinceEpoch() - now.toMSecsSinceEpoch() + 1000; // 1 second lee way in case the OS pre-empts us too early
     m_athan.timer.start(diff);
@@ -146,8 +145,6 @@ void Service::timeout(bool init)
 
         if ( playAthaan && (m_athan.prevKey != currentEventKey) )
         {
-            LOGGER("Should play maybe?");
-
             if ( currentEventKey == Translator::key_dhuhr && now.date().dayOfWeek() == Qt::Friday && m_athan.skipJumuah ) {
                 LOGGER("Skipping athaan because it is Friday and user chose not to play it on Ju'muah.");
             } else {
@@ -171,10 +168,7 @@ void Service::timeout(bool init)
                         destinationFile = customFile;
                     }
 
-                    LOGGER("destination file" << destinationFile);
-
                     m_athan.prevKey = currentEventKey;
-
                     m_athan.player.play(destinationFile);
 
                     if (m_athan.mkw == NULL) {

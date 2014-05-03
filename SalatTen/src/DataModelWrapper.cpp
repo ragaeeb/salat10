@@ -77,11 +77,10 @@ void DataModelWrapper::init()
 
 QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 {
+    LOGGER(local << numDays);
 	Coordinates geo = Calculator::createCoordinates( local, m_persistance.getValueFor("latitude"), m_persistance.getValueFor("longitude") );
 	SalatParameters angles = Calculator::createParams( m_persistance.getValueFor("angles").toMap() );
 	qreal asrRatio = m_persistance.getValueFor("asrRatio").toReal();
-
-	LOGGER("Calculating with" << angles.fajrTwilightAngle << angles.ishaTwilightAngle << geo.timeZone << geo.position);
 
 	QVariantList wrapped;
 	QStringList keys = Translator::eventKeys();
@@ -123,8 +122,6 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 		local = local.addDays(1);
 	}
 
-    LOGGER("\n\nCalculation result" << wrapped << "\n\n");
-
     return wrapped;
 }
 
@@ -137,18 +134,14 @@ QVariantList DataModelWrapper::matchValue(QDateTime const& reference)
 
 	QVariantList next = m_model.upperBound(map);
 
-	LOGGER("=== NEXT" << m_model.size() << next);
-
-	if ( next.isEmpty() ) {
-		LOGGER("NEXT EMPTY SO APPENDING");
-
+	if ( next.isEmpty() )
+	{
 		if ( m_model.isEmpty() ) { // for past midnight but before fajr
 			calculateAndAppend( reference.addDays(-1) );
 		}
 
 		calculateAndAppend(reference);
 		next = m_model.upperBound(map);
-		LOGGER("=== NEW NEXT" << m_model.size() << next);
 	}
 
 	return next;
@@ -157,7 +150,6 @@ QVariantList DataModelWrapper::matchValue(QDateTime const& reference)
 
 QVariantMap DataModelWrapper::getCurrent(QDateTime const& reference)
 {
-	LOGGER("get Current" << reference);
 	QVariantList next = matchValue(reference);
 
 	QVariantList current = m_model.before(next);
@@ -170,7 +162,6 @@ QVariantMap DataModelWrapper::getCurrent(QDateTime const& reference)
 
 QVariantMap DataModelWrapper::getNext(QDateTime const& reference)
 {
-	LOGGER("get Next" << reference);
 	QVariantList next = matchValue(reference);
 
 	QVariantMap nextMap = m_model.data(next).toMap();
@@ -182,8 +173,6 @@ QVariantMap DataModelWrapper::getNext(QDateTime const& reference)
 
 void DataModelWrapper::loadBeginning()
 {
-	LOGGER("LOAD BEGINNING");
-
 	QDateTime reference = m_model.data( m_model.first() ).toMap().value("value").toDateTime().addDays(-1);
 	calculateAndAppend(reference);
 }
@@ -192,15 +181,12 @@ void DataModelWrapper::loadBeginning()
 void DataModelWrapper::calculateAndAppend(QDateTime const& reference)
 {
 	QVariantList wrapped = calculate(reference);
-	LOGGER(">> Inserting into model" << wrapped);
 	m_model.insertList(wrapped);
 }
 
 
 void DataModelWrapper::loadMore()
 {
-	LOGGER("LOAD MORE!");
-
 	if ( !m_model.isEmpty() ) {
 
 		QVariantList i = m_model.last();
@@ -257,6 +243,8 @@ Translator* DataModelWrapper::getTranslator() {
 
 void DataModelWrapper::itemAdded(QVariantList indexPath)
 {
+    Q_UNUSED(indexPath);
+
     if (m_empty) {
         m_empty = false;
         emit emptyChanged();
@@ -266,6 +254,9 @@ void DataModelWrapper::itemAdded(QVariantList indexPath)
 
 void DataModelWrapper::itemsChanged(bb::cascades::DataModelChangeType::Type eChangeType, QSharedPointer<bb::cascades::DataModel::IndexMapper> indexMapper)
 {
+    Q_UNUSED(indexMapper);
+    Q_UNUSED(eChangeType);
+
     if ( m_empty != m_model.isEmpty() ) {
         m_empty = m_model.isEmpty();
         emit emptyChanged();
