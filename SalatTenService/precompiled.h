@@ -5,3 +5,6 @@
 #include <bb/Application>
 
 #include <bb/multimedia/MediaKeyWatcher>
+
+#include <bb/network/PushStatus>
+#include <bb/network/PushPayload>
