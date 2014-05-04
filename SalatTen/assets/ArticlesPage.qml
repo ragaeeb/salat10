@@ -185,7 +185,7 @@ NavigationPane
                         onSelectedOptionChanged:
                         {
                             sql.query = "SELECT * from articles WHERE %1".arg(selectedOption.value);
-                            sql.load();
+                            sql.load(QueryId.GetArticles);
                         }
                     }
                 }

@@ -43,6 +43,8 @@ Sheet
                     
                     persist.saveValueFor("athanPicked", 1, false);
                     persist.showToast( qsTr("Athan Successfully Set"), "", "asset:///images/ic_athaan_custom.png" );
+                    
+                    root.close();
                 }
             }
         }
@@ -52,6 +54,7 @@ Sheet
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Center
             background: bg.imagePaint
+            topPadding: 10;
             
             Label
             {
@@ -59,6 +62,10 @@ Sheet
                 multiline: true
                 horizontalAlignment: HorizontalAlignment.Fill
                 textStyle.textAlign: TextAlign.Center
+            }
+            
+            Divider {
+                bottomMargin: 0
             }
             
             ListView
@@ -173,13 +180,14 @@ Sheet
             attachedObjects: [
                 ImagePaintDefinition {
                     id: bg
-                    imageSource: "images/backgrounds/hd_bg_blue.amd"
+                    imageSource: "asset:///images/graphics/banner_expanded.amd"
                 }
             ]
         }
     }
     
     onClosed: {
+        player.stop();
         destroy();
     }
 }
