@@ -169,7 +169,7 @@ void Service::timeout(bool init)
 
                     LOGGER("Custom file" << customFile);
 
-                    if ( QFile::exists(customFile) ) {
+                    if ( QFile::exists( QUrl(customFile).toLocalFile() ) ) {
                         destinationFile = customFile;
                     }
 
