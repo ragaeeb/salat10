@@ -9,7 +9,6 @@ TabbedPane
         id: menuDef
         projectName: "salat10"
         allowDonations: true
-        promoteChannel: true
         bbWorldID: "21198062"
     }
     
