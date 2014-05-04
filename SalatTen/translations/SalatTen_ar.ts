@@ -196,6 +196,25 @@
     </message>
 </context>
 <context>
+    <name>AthanPreviewSheet</name>
+    <message>
+        <location filename="../assets/AthanPreviewSheet.qml" line="11"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="84"/>
+        <source>Select Athan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/AthanPreviewSheet.qml" line="17"/>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/AthanPreviewSheet.qml" line="34"/>
+        <source>Please choose your preferred athan:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CalendarExport</name>
     <message>
         <location filename="../assets/CalendarExport.qml" line="23"/>
@@ -803,27 +822,27 @@ If you see a spinning icon at the top it means the compass readings are still be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="133"/>
+        <location filename="../assets/main.qml" line="135"/>
         <source>Enable Athan?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="134"/>
+        <location filename="../assets/main.qml" line="136"/>
         <source>Do you want to enable athans to automatically play when it is time for salah?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="135"/>
+        <location filename="../assets/main.qml" line="137"/>
         <source>Display notifications in the BlackBerry Hub</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="136"/>
+        <location filename="../assets/main.qml" line="138"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="137"/>
+        <location filename="../assets/main.qml" line="139"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>

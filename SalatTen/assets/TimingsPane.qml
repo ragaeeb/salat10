@@ -5,12 +5,6 @@ NavigationPane
 {
     id: navigationPane
     signal locateClicked();
-
-    attachedObjects: [
-        ComponentDefinition {
-            id: definition
-        }
-    ]
     
     function onSettingChanged(key)
     {
@@ -29,6 +23,14 @@ NavigationPane
     {
         persist.settingChanged.connect(onSettingChanged);
         onSettingChanged("hijri");
+        
+        if ( !persist.contains("athanPrompted") ) {
+            athaanDialog.show();
+        } else if ( !persist.contains("athanPicked") && app.atLeastOneAthanScheduled ) {
+            definition.source = "AthanPreviewSheet.qml";
+            var picker = definition.createObject();
+            picker.open();
+        }
     }
     
     onCreationCompleted: {
@@ -291,4 +293,40 @@ NavigationPane
             }   
         ]
 	}
+	
+    attachedObjects: [
+        ComponentDefinition {
+            id: definition
+        },
+        
+        SystemDialog {
+            id: athaanDialog
+            title: qsTr("Enable Athan?") + Retranslate.onLanguageChanged
+            body: qsTr("Do you want to enable athans to automatically play when it is time for salah?") + Retranslate.onLanguageChanged
+            rememberMeText: qsTr("Display notifications in the BlackBerry Hub") + Retranslate.onLanguageChanged
+            cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
+            confirmButton.label: qsTr("Yes") + Retranslate.onLanguageChanged
+            rememberMeChecked: true
+            includeRememberMe: true
+            
+            onFinished: {
+                var enableAthaan = result == SystemUiResult.ConfirmButtonSelection;
+                var enableNotifications = rememberMeSelection();
+                
+                var notifications = persist.getValueFor("notifications");
+                var athaans = persist.getValueFor("athaans");
+                var keys = translator.eventKeys();
+                
+                for (var i = keys.length-1; i >= 0; i--)
+                {
+                    notifications[ keys[i] ] = enableNotifications;
+                    athaans[ keys[i] ] = enableAthaan;
+                }
+                
+                persist.saveValueFor("notifications", notifications);
+                persist.saveValueFor("athaans", athaans);
+                persist.saveValueFor("athanPrompted", 1, false);
+            }
+        }
+    ]
 }
