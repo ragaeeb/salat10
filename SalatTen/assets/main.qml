@@ -10,6 +10,8 @@ TabbedPane
         projectName: "salat10"
         allowDonations: true
         bbWorldID: "21198062"
+        showServiceLogging: true
+        showSubmitLogs: true
     }
     
     onActiveTabChanged: {

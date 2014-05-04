@@ -2,7 +2,9 @@
 
 #include "service.hpp"
 #include "Logger.h"
+#include "LogMonitor.h"
 #include "IOUtils.h"
+#include "SalatUtils.h"
 #include "Translator.h"
 
 #define audio_fajr_athaan "asset:///audio/athaan_fajr.mp3"
@@ -30,6 +32,7 @@ using namespace bb::network;
 using namespace bb::system;
 using namespace bb::platform;
 using namespace bb::multimedia;
+using namespace canadainc;
 
 Service::Service(bb::Application* app) :
             QObject(app), m_pushService(BLACKBERRY_PUSH_APPLICATION_ID, "com.canadainc.SalatTenService", app)
@@ -53,6 +56,8 @@ Service::Service(bb::Application* app) :
 
 void Service::init()
 {
+    new LogMonitor(SERVICE_KEY, SERVICE_LOG_FILE, this);
+
     m_athan.timer.setSingleShot(true);
     connect( &m_athan.timer, SIGNAL( timeout() ), this, SLOT( timeout() ) );
     connect( &m_settingsWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( recalculate(QString const&) ) );
