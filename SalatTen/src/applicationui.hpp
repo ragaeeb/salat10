@@ -78,6 +78,7 @@ public:
     Q_INVOKABLE QObject* refreshLocation();
     Q_INVOKABLE void fetchCheckins();
     Q_INVOKABLE void setCustomAthaans(QStringList const& keys, QString const& uri=QString());
+    Q_INVOKABLE void launchUrl(QString const& url);
     bool atLeastOneAthanScheduled();
     bool hasCalendarAccess();
 };
