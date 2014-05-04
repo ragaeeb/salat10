@@ -982,19 +982,19 @@ If you need step-by-step tutorials on the prayer, please have a look at the &apo
 <context>
     <name>salat::ApplicationUI</name>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="97"/>
+        <location filename="../src/ApplicationUI.cpp" line="101"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that accurate calculations can be made. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Salat10 and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="101"/>
+        <location filename="../src/ApplicationUI.cpp" line="105"/>
         <source>Warning: It seems like the app does not have access to access your shared folder. This permission is needed to allow you to set custom athan sounds. Without this permission some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="104"/>
+        <location filename="../src/ApplicationUI.cpp" line="108"/>
         <source>As&apos;salaamu alaykum wa rahmatullahi wabarakathu,
 
 JazakAllahu khair for using Salat10. While our Islamic apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal.
@@ -1003,41 +1003,41 @@ May Allah reward you, and bless you and your family.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="104"/>
-        <location filename="../src/ApplicationUI.cpp" line="126"/>
-        <location filename="../src/ApplicationUI.cpp" line="181"/>
+        <location filename="../src/ApplicationUI.cpp" line="108"/>
+        <location filename="../src/ApplicationUI.cpp" line="130"/>
+        <location filename="../src/ApplicationUI.cpp" line="185"/>
         <source>OK</source>
         <translation>موافق</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="126"/>
+        <location filename="../src/ApplicationUI.cpp" line="130"/>
         <source>Warning: It seems like the location services is not enabled on your BB10 device so the app will not be able to fetch real-time data and map information.
 
 Press OK to launch the Location Services screen and enable the Location Services permission there.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="152"/>
+        <location filename="../src/ApplicationUI.cpp" line="156"/>
         <source>Location successfully set to %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="154"/>
+        <location filename="../src/ApplicationUI.cpp" line="158"/>
         <source>Location could not be detected %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="181"/>
+        <location filename="../src/ApplicationUI.cpp" line="185"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="250"/>
+        <location filename="../src/ApplicationUI.cpp" line="254"/>
         <source>Scheduled events cleared!</source>
         <translation>مسح الأحداث المجدولة</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="259"/>
+        <location filename="../src/ApplicationUI.cpp" line="263"/>
         <source>Export complete!</source>
         <translation>إكمال</translation>
     </message>

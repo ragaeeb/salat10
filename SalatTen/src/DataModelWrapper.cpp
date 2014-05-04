@@ -4,8 +4,11 @@
 #include "Coordinates.h"
 #include "Logger.h"
 #include "SalatParameters.h"
+#include "SalatUtils.h"
 #include "SolarCalculator.h"
 #include "Translator.h"
+
+#define UI_KEY "logUI"
 
 namespace salat {
 
@@ -27,6 +30,9 @@ DataModelWrapper::DataModelWrapper(QObject* parent) :
 
 void DataModelWrapper::init()
 {
+    INIT_SETTING(UI_KEY, true);
+    INIT_SETTING(SERVICE_KEY, false);
+
     INIT_FRESH("v3.2");
     INIT_SETTING("strategy", "isna");
     INIT_SETTING("skipJumahAthaan", 1);
