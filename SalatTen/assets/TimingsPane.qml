@@ -280,6 +280,10 @@ NavigationPane
                     }
                 }
             }
+            
+            BenefitOverlay {
+                id: benefit
+            }
         }
         
         attachedObjects: [

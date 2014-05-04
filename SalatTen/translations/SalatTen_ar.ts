@@ -198,19 +198,60 @@
 <context>
     <name>AthanPreviewSheet</name>
     <message>
-        <location filename="../assets/AthanPreviewSheet.qml" line="11"/>
-        <location filename="../assets/AthanPreviewSheet.qml" line="84"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="13"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="162"/>
         <source>Select Athan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AthanPreviewSheet.qml" line="17"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="20"/>
         <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AthanPreviewSheet.qml" line="34"/>
-        <source>Please choose your preferred athan:</source>
+        <location filename="../assets/AthanPreviewSheet.qml" line="45"/>
+        <source>Athan Successfully Set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/AthanPreviewSheet.qml" line="61"/>
+        <source>Please choose your preferred athan for Dhuhr to Isha (you will have to set the Fajr one on your own):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/AthanPreviewSheet.qml" line="127"/>
+        <source>Shaykh Al-Albaani (rahimahullah)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/AthanPreviewSheet.qml" line="128"/>
+        <source>Wright Street, Birmingham Masjid</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BenefitOverlay</name>
+    <message>
+        <source>Confirmation</source>
+        <translation type="obsolete">تأكيد</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete">نعم</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete">لا</translation>
+    </message>
+    <message>
+        <location filename="../assets/BenefitOverlay.qml" line="18"/>
+        <source>&quot;%1&quot; - %2
+%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BenefitOverlay.qml" line="20"/>
+        <source>&quot;%1&quot; - %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -717,134 +758,134 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>TimingsPane</name>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="64"/>
+        <location filename="../assets/TimingsPane.qml" line="66"/>
         <source>Refresh</source>
         <translation>تحديث</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="82"/>
+        <location filename="../assets/TimingsPane.qml" line="84"/>
         <source>Share</source>
         <translation>مشاركة</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="117"/>
+        <location filename="../assets/TimingsPane.qml" line="119"/>
         <source>Export to Calendar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="143"/>
+        <location filename="../assets/TimingsPane.qml" line="145"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="151"/>
+        <location filename="../assets/TimingsPane.qml" line="153"/>
         <source>Clear Exported Events</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="163"/>
+        <location filename="../assets/TimingsPane.qml" line="165"/>
         <source>Confirmation</source>
         <translation>تأكيد</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="164"/>
+        <location filename="../assets/TimingsPane.qml" line="166"/>
         <source>Are you sure you want to clear all the scheduled calendar reminders?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="165"/>
+        <location filename="../assets/TimingsPane.qml" line="167"/>
+        <location filename="../assets/TimingsPane.qml" line="312"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="166"/>
+        <location filename="../assets/TimingsPane.qml" line="168"/>
+        <location filename="../assets/TimingsPane.qml" line="311"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="190"/>
+        <location filename="../assets/TimingsPane.qml" line="192"/>
         <source>No coordinates detected. Either wait for the GPS to detect your location or tap here to pick a location.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/TimingsPane.qml" line="308"/>
+        <source>Enable Athan?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/TimingsPane.qml" line="309"/>
+        <source>Do you want to enable athans to automatically play when it is time for salah?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/TimingsPane.qml" line="310"/>
+        <source>Display notifications in the BlackBerry Hub</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="24"/>
+        <location filename="../assets/main.qml" line="23"/>
         <source>Timings</source>
         <translation>المواقيت</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="25"/>
+        <location filename="../assets/main.qml" line="24"/>
         <source>Salah Times</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="48"/>
+        <location filename="../assets/main.qml" line="47"/>
         <source>Qibla</source>
         <translation>القبلة</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="49"/>
+        <location filename="../assets/main.qml" line="48"/>
         <source>Compass</source>
         <translation>بوصلة</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="59"/>
         <location filename="../assets/main.qml" line="60"/>
-        <location filename="../assets/main.qml" line="61"/>
         <source>Articles</source>
         <translation>مقالات</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="72"/>
+        <location filename="../assets/main.qml" line="71"/>
         <source>Sujud As-Sahw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="73"/>
+        <location filename="../assets/main.qml" line="72"/>
         <source>Prostration of Forgetfulness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="84"/>
-        <location filename="../assets/main.qml" line="92"/>
+        <location filename="../assets/main.qml" line="83"/>
+        <location filename="../assets/main.qml" line="91"/>
         <source>Location</source>
         <translation>موقع</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="110"/>
+        <location filename="../assets/main.qml" line="109"/>
         <source>Tutorial</source>
         <translation>البرنامج التعليمي</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="111"/>
+        <location filename="../assets/main.qml" line="110"/>
         <source>Step by Step</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="135"/>
-        <source>Enable Athan?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="136"/>
-        <source>Do you want to enable athans to automatically play when it is time for salah?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="137"/>
-        <source>Display notifications in the BlackBerry Hub</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="138"/>
         <source>No</source>
-        <translation>لا</translation>
+        <translation type="obsolete">لا</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="139"/>
         <source>Yes</source>
-        <translation>نعم</translation>
+        <translation type="obsolete">نعم</translation>
     </message>
 </context>
 <context>

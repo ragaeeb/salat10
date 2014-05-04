@@ -16,6 +16,7 @@ public:
     	GetAllAngles,
     	GetAnglesForStrategy,
         GetSujudArticles,
+        GetRandomBenefit
     };
 };
 
