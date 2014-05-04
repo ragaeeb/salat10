@@ -6,7 +6,7 @@
 #include "Translator.h"
 
 #define audio_fajr_athaan "asset:///audio/athaan_fajr.mp3"
-#define audio_athaan "asset:///audio/athaan.mp3"
+#define audio_athaan "asset:///audio/athan_albaani.mp3"
 #define BLACKBERRY_PUSH_APPLICATION_ID "4145-8h3l783296i5R2y341f131ii9r42a9177k5"
 #define BLACKBERRY_PUSH_URL "http://cp4145.pushapi.eval.blackberry.com"
 
