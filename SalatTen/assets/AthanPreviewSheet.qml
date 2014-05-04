@@ -41,6 +41,7 @@ Sheet
                         customAthans[ all[i] ] = selected;
                     }
                     
+                    persist.saveValueFor("customAthaans", customAthans, false);
                     persist.saveValueFor("athanPicked", 1, false);
                     persist.showToast( qsTr("Athan Successfully Set"), "", "asset:///images/ic_athaan_custom.png" );
                     

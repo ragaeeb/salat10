@@ -217,7 +217,7 @@
     <name>AthanPreviewSheet</name>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="13"/>
-        <location filename="../assets/AthanPreviewSheet.qml" line="162"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="163"/>
         <source>Select Athan</source>
         <translation type="unfinished"></translation>
     </message>
@@ -227,22 +227,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AthanPreviewSheet.qml" line="45"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="46"/>
         <source>Athan Successfully Set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AthanPreviewSheet.qml" line="61"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="62"/>
         <source>Please choose your preferred athan for Dhuhr to Isha (you will have to set the Fajr one on your own):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AthanPreviewSheet.qml" line="127"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="128"/>
         <source>Shaykh Al-Albaani (rahimahullah)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/AthanPreviewSheet.qml" line="128"/>
+        <location filename="../assets/AthanPreviewSheet.qml" line="129"/>
         <source>Wright Street, Birmingham Masjid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -919,54 +919,54 @@ If you need step-by-step tutorials on the prayer, please have a look at the &apo
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="22"/>
+        <location filename="../assets/main.qml" line="24"/>
         <source>Timings</source>
         <translation>المواقيت</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="23"/>
+        <location filename="../assets/main.qml" line="25"/>
         <source>Salah Times</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="46"/>
+        <location filename="../assets/main.qml" line="48"/>
         <source>Qibla</source>
         <translation>القبلة</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="47"/>
+        <location filename="../assets/main.qml" line="49"/>
         <source>Compass</source>
         <translation>بوصلة</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="58"/>
-        <location filename="../assets/main.qml" line="59"/>
+        <location filename="../assets/main.qml" line="60"/>
+        <location filename="../assets/main.qml" line="61"/>
         <source>Articles</source>
         <translation>مقالات</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="70"/>
+        <location filename="../assets/main.qml" line="72"/>
         <source>Sujud As-Sahw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="71"/>
+        <location filename="../assets/main.qml" line="73"/>
         <source>Prostration of Forgetfulness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="82"/>
-        <location filename="../assets/main.qml" line="90"/>
+        <location filename="../assets/main.qml" line="84"/>
+        <location filename="../assets/main.qml" line="92"/>
         <source>Location</source>
         <translation>موقع</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="108"/>
+        <location filename="../assets/main.qml" line="110"/>
         <source>Tutorial</source>
         <translation>البرنامج التعليمي</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="109"/>
+        <location filename="../assets/main.qml" line="111"/>
         <source>Step by Step</source>
         <translation type="unfinished"></translation>
     </message>
