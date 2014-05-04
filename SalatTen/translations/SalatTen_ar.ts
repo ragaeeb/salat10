@@ -244,13 +244,13 @@
         <translation type="obsolete">لا</translation>
     </message>
     <message>
-        <location filename="../assets/BenefitOverlay.qml" line="18"/>
+        <location filename="../assets/BenefitOverlay.qml" line="19"/>
         <source>&quot;%1&quot; - %2
 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BenefitOverlay.qml" line="20"/>
+        <location filename="../assets/BenefitOverlay.qml" line="21"/>
         <source>&quot;%1&quot; - %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -559,6 +559,26 @@ If you see a spinning icon at the top it means the compass readings are still be
     </message>
 </context>
 <context>
+    <name>MuteAthanTutorial</name>
+    <message>
+        <location filename="../assets/MuteAthanTutorial.qml" line="11"/>
+        <source>Athan Canceling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/MuteAthanTutorial.qml" line="16"/>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/MuteAthanTutorial.qml" line="89"/>
+        <source>
+
+To mute the athan while it is playing, simply press the volume down button to cancel it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ResultListUtil</name>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="61"/>
@@ -758,69 +778,69 @@ If you see a spinning icon at the top it means the compass readings are still be
 <context>
     <name>TimingsPane</name>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="66"/>
+        <location filename="../assets/TimingsPane.qml" line="70"/>
         <source>Refresh</source>
         <translation>تحديث</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="84"/>
+        <location filename="../assets/TimingsPane.qml" line="88"/>
         <source>Share</source>
         <translation>مشاركة</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="119"/>
+        <location filename="../assets/TimingsPane.qml" line="123"/>
         <source>Export to Calendar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="145"/>
+        <location filename="../assets/TimingsPane.qml" line="149"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="153"/>
+        <location filename="../assets/TimingsPane.qml" line="157"/>
         <source>Clear Exported Events</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="165"/>
+        <location filename="../assets/TimingsPane.qml" line="169"/>
         <source>Confirmation</source>
         <translation>تأكيد</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="166"/>
+        <location filename="../assets/TimingsPane.qml" line="170"/>
         <source>Are you sure you want to clear all the scheduled calendar reminders?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="167"/>
-        <location filename="../assets/TimingsPane.qml" line="312"/>
+        <location filename="../assets/TimingsPane.qml" line="171"/>
+        <location filename="../assets/TimingsPane.qml" line="316"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="168"/>
-        <location filename="../assets/TimingsPane.qml" line="311"/>
+        <location filename="../assets/TimingsPane.qml" line="172"/>
+        <location filename="../assets/TimingsPane.qml" line="315"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="192"/>
+        <location filename="../assets/TimingsPane.qml" line="196"/>
         <source>No coordinates detected. Either wait for the GPS to detect your location or tap here to pick a location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="308"/>
+        <location filename="../assets/TimingsPane.qml" line="312"/>
         <source>Enable Athan?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="309"/>
+        <location filename="../assets/TimingsPane.qml" line="313"/>
         <source>Do you want to enable athans to automatically play when it is time for salah?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="310"/>
+        <location filename="../assets/TimingsPane.qml" line="314"/>
         <source>Display notifications in the BlackBerry Hub</source>
         <translation type="unfinished"></translation>
     </message>

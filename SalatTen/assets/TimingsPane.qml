@@ -30,6 +30,10 @@ NavigationPane
             definition.source = "AthanPreviewSheet.qml";
             var picker = definition.createObject();
             picker.open();
+        } else if ( !persist.contains("tutorialMuteAthan") ) {
+            definition.source = "MuteAthanTutorial.qml";
+            var picker = definition.createObject();
+            picker.open();
         }
     }
     
