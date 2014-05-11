@@ -9,8 +9,8 @@
 
 #define audio_fajr_athaan "asset:///audio/athaan_fajr.mp3"
 #define audio_athaan "asset:///audio/athan_albaani.mp3"
-#define BLACKBERRY_PUSH_APPLICATION_ID "4145-8h3l783296i5R2y341f131ii9r42a9177k5"
-#define BLACKBERRY_PUSH_URL "http://cp4145.pushapi.eval.blackberry.com"
+#define BLACKBERRY_PUSH_APPLICATION_ID "1171-9014r27221trt37r2o430150l5a1es42l44"
+#define BLACKBERRY_PUSH_URL "https://cp1171.pushapi.na.blackberry.com"
 
 namespace {
 
@@ -145,10 +145,11 @@ void Service::timeout(bool init)
         bool playAthaan = m_athan.athaans.value(currentEventKey).toBool();
         bool playNotification = m_athan.notifications.value(currentEventKey).toBool();
         Translator t;
+        QMap<QString, bool> salatMap = t.salatMap();
 
-        LOGGER("Athaans" << m_athan.athaans << playAthaan << currentEventKey);
+        LOGGER("Athaans" << m_athan.athaans << playAthaan << m_athan.notifications << playNotification);
 
-        if ( playAthaan && (m_athan.prevKey != currentEventKey) )
+        if ( playAthaan && (m_athan.prevKey != currentEventKey) && salatMap.contains(currentEventKey) )
         {
             if ( currentEventKey == Translator::key_dhuhr && now.date().dayOfWeek() == Qt::Friday && m_athan.skipJumuah ) {
                 LOGGER("Skipping athaan because it is Friday and user chose not to play it on Ju'muah.");
@@ -156,11 +157,10 @@ void Service::timeout(bool init)
                 NotificationGlobalSettings g;
                 NotificationMode::Type mode = g.mode();
                 bool okToPlay = m_athan.profiles.value( QString::number(mode) ).toBool();
-                QMap<QString, bool> salatMap = t.salatMap();
 
-                LOGGER("okToPlay" << okToPlay << "map" << salatMap << currentEventKey);
+                LOGGER("okToPlay" << okToPlay);
 
-                if ( okToPlay && salatMap.contains(currentEventKey) )
+                if (okToPlay)
                 {
                     LOGGER("Playing athaan mode" << mode);
                     QString destinationFile = currentEventKey == Translator::key_fajr ? audio_fajr_athaan : audio_athaan;
@@ -169,7 +169,7 @@ void Service::timeout(bool init)
 
                     LOGGER("Custom file" << customFile);
 
-                    if ( QFile::exists( QUrl(customFile).toLocalFile() ) ) {
+                    if ( customFile.startsWith("asset://") || QFile::exists( QUrl(customFile).toLocalFile() ) ) {
                         destinationFile = customFile;
                     }
 
