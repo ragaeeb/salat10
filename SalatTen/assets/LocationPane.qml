@@ -13,7 +13,7 @@ NavigationPane
         actions: [
             ActionItem {
                 title: qsTr("Refresh") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_reset.png"
+                imageSource: "images/menu/ic_reset.png"
                 ActionBar.placement: ActionBarPlacement.OnBar
 
                 function onFound(l,p) {
@@ -75,7 +75,7 @@ NavigationPane
                         persist.saveValueFor("country", place.country, false);
                         locationAction.title = place.name;
 
-                        persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/ic_map.png" );
+                        persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/tabs/ic_map.png" );
                     }
                     
                     picker.destroy();

@@ -36,7 +36,9 @@ ListView
     
     dataModel: boundary.getModel()
     
-    multiSelectAction: MultiSelectActionItem {}
+    multiSelectAction: MultiSelectActionItem {
+        imageSource: "images/menu/ic_select_more.png"
+    }
     
     multiSelectHandler
     {
@@ -66,7 +68,7 @@ ListView
             {
                 id: copyAction
                 title: qsTr("Copy") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_copy.png"
+                imageSource: "images/menu/ic_copy.png"
                 
                 onTriggered: {
                     persist.copyToClipboard( listUtil.textualizeSelected() );
@@ -76,6 +78,7 @@ ListView
             InvokeActionItem
             {
                 id: shareAction
+                imageSource: "images/menu/ic_share.png"
                 title: qsTr("Share") + Retranslate.onLanguageChanged
                 
                 query {
@@ -101,7 +104,7 @@ ListView
             DeleteActionItem {
                 id: resetSoundAction
                 title: qsTr("Reset Sound") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_reset_athaan.png"
+                imageSource: "images/menu/ic_reset_athaan.png"
                 
                 onTriggered: {
                     listUtil.resetSound( listUtil.getSelectedKeys() );

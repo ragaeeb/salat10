@@ -29,7 +29,7 @@ NavigationPane
             ActionItem {
                 id: chartAction
                 title: qsTr("Useful Chart") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_table.png"
+                imageSource: "images/menu/ic_table.png"
                 ActionBar.placement: ActionBarPlacement.OnBar
                 
                 onTriggered: {
@@ -126,7 +126,7 @@ NavigationPane
 
             ActionItem {
                 property variant data
-                imageSource: "images/ic_article.png"
+                imageSource: "images/tabs/ic_article.png"
                 
                 onDataChanged: {
                     title = data.title;

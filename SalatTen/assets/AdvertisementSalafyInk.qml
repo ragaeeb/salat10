@@ -13,7 +13,7 @@ Sheet
             dismissAction: ActionItem
             {
                 title: qsTr("Back") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_clock.png"
+                imageSource: "images/tabs/ic_clock.png"
                 
                 onTriggered: {
                     console.log("UserEvent: SalafyInkBack");
