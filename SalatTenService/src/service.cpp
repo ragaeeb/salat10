@@ -56,7 +56,7 @@ Service::Service(bb::Application* app) :
 
 void Service::init()
 {
-    new LogMonitor(SERVICE_KEY, SERVICE_LOG_FILE, this);
+    LogMonitor::create(SERVICE_KEY, SERVICE_LOG_FILE, this);
 
     m_athan.timer.setSingleShot(true);
     connect( &m_athan.timer, SIGNAL( timeout() ), this, SLOT( timeout() ) );

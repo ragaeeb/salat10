@@ -21,7 +21,7 @@ QByteArray SalatCollector::compressFiles()
     AppLogFetcher::dumpDeviceInfo();
 
     QStringList files;
-    files << DEVICE_INFO_LOG;
+    files << DEFAULT_LOGS;
     files << SERVICE_LOG_FILE;
     files << UI_LOG_FILE;
     files << QSettings().fileName();
