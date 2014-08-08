@@ -5,11 +5,11 @@ TabbedPane
     id: root
     activeTab: timingsTab
     
-    Menu.definition: CanadaIncMenu {
+    Menu.definition: CanadaIncMenu
+    {
         id: menuDef
         projectName: "salat10"
         allowDonations: true
-        bbWorldID: "21198062"
         showServiceLogging: true
         showSubmitLogs: true
     }
@@ -83,6 +83,7 @@ TabbedPane
         id: location
         title: qsTr("Location") + Retranslate.onLanguageChanged
         imageSource: "images/ic_map.png"
+        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
         
         function onSettingChanged(key)
         {
@@ -97,8 +98,6 @@ TabbedPane
             persist.settingChanged.connect(onSettingChanged);
             onSettingChanged("location");
         }
-        
-        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
         
         delegate: Delegate {
             source: "LocationPane.qml"

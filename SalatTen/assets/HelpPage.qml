@@ -10,28 +10,28 @@ Page
     }
     
     actions: [
-        InvokeActionItem
+        ActionItem
         {
-            title: qsTr("Our BBM Channel") + Retranslate.onLanguageChanged
-            ActionBar.placement: ActionBarPlacement.OnBar
+            imageSource: "file:///usr/share/icons/bb_action_openbbmchannel.png"
+            title: atb.channelTitle
+            ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             
-            query {
-                invokeTargetId: atb.invokeTargetId
-                uri: atb.channelUri
+            onTriggered: {
+                console.log("UserEvent: OpenChannelTriggered");
+                persist.openChannel();
             }
         },
         
-        InvokeActionItem
+        ActionItem
         {
-            query {
-                mimeType: "text/html"
-                uri: "http://www.youtube.com/watch?v=AbHZLmWSKts"
-                invokeActionId: "bb.action.OPEN"
-            }
-            
-            imageSource: "images/ic_tutorial.png"
+            imageSource: "images/menu/ic_video_tutorial.png"
             title: qsTr("Video Tutorial") + Retranslate.onLanguageChanged
             ActionBar.placement: ActionBarPlacement.OnBar
+            
+            onTriggered: {
+                console.log("UserEvent: VideoTutorialTriggered");
+                persist.tutorialVideo("http://www.youtube.com/watch?v=AbHZLmWSKts", false);
+            }
         }
     ]
     
