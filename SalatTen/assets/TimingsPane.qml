@@ -36,8 +36,8 @@ NavigationPane
         else if ( persist.tutorial( "tutorialCustomAthan", qsTr("Do you know how to choose your own custom athan?\n\nIf you wanted your own custom athan to be played for all Maghrib prayers for example, tap on the Maghrib item in the list, and from the menu choose 'Set Custom Sound'. Then choose the audio file to play.\n\nTo reset back to default, use the Reset Sound action from the menu."), "asset:///images/ic_athaan_custom.png" ) ) {}
         else if ( persist.tutorial( "tutorialExportCalendar", qsTr("Do you want to sync the timings with your device calendar?\n\nYou can do this by tapping on the '...' icon on the bottom-right menu, and choosing 'Export to Calendar'\n\nTo remove them, use the Clear Exported Events action."), "asset:///images/ic_calendar_empty.png" ) ) {}
         else if ( persist.tutorial( "tutorialHijriDate", qsTr("Did you know you can see the current Hijri date by tapping on the SALAT10 title-bar at the top? Try it!\n\nIf your Hijri date is off by a day or two, simply press-and-hold on it and choose 'Edit' from the menu on the right!"), "asset:///images/ic_calendar_empty.png" ) ) {}
-        else if ( persist.tutorial( "tutorialEdit", qsTr("Are your timings off by a few minutes from your local masjid?\n\nThat's easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose 'Edit'. You will then be able to adjust the results by up to 10 minutes."), "asset:///images/ic_edit.png" ) ) {}
-        else if ( persist.tutorial( "tutorialNewMuslim", qsTr("Are you a new Muslim?\n\nIf you need step-by-step tutorials on the prayer, please have a look at the 'Tutorial' tab on the menu on the left-side. It should be of help to you in shaa Allah!"), "asset:///images/ic_tutorial.png" ) ) {}
+        else if ( persist.tutorial( "tutorialEdit", qsTr("Are your timings off by a few minutes from your local masjid?\n\nThat's easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose 'Edit'. You will then be able to adjust the results by up to 10 minutes."), "asset:///images/menu/ic_edit.png" ) ) {}
+        else if ( persist.tutorial( "tutorialNewMuslim", qsTr("Are you a new Muslim?\n\nIf you need step-by-step tutorials on the prayer, please have a look at the 'Tutorial' tab on the menu on the left-side. It should be of help to you in shaa Allah!"), "asset:///images/tabs/ic_tutorial.png" ) ) {}
         else if ( !persist.contains("advertisedSalafyInk") ) {
             definition.source = "AdvertisementSalafyInk.qml";
             var picker = definition.createObject();
@@ -76,7 +76,7 @@ NavigationPane
 	    actions: [
             ActionItem {
                 title: qsTr("Refresh") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_refresh.png"
+                imageSource: "images/menu/ic_refresh.png"
                 enabled: mainPage.actionsEnabled
                 ActionBar.placement: ActionBarPlacement.OnBar
                 
@@ -94,6 +94,7 @@ NavigationPane
             InvokeActionItem {
                 id: iai
                 title: qsTr("Share") + Retranslate.onLanguageChanged
+                imageSource: "images/menu/ic_share.png"
                 enabled: mainPage.actionsEnabled
                 
                 query {
@@ -163,7 +164,7 @@ NavigationPane
 	        {
 	            id: clearAction
                 title: qsTr("Clear Exported Events") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_calendar_delete.png"
+                imageSource: "images/menu/ic_calendar_delete.png"
 	            
 	            onTriggered: {
                     if (app.hasCalendarAccess) {

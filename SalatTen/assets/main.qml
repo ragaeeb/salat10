@@ -12,6 +12,10 @@ TabbedPane
         allowDonations: true
         showServiceLogging: true
         showSubmitLogs: true
+        help.imageSource: "images/menu/ic_help.png"
+        help.title: qsTr("Help") + Retranslate.onLanguageChanged
+        settings.imageSource: "images/menu/ic_settings.png"
+        settings.title: qsTr("Settings") + Retranslate.onLanguageChanged
     }
     
     onActiveTabChanged: {
@@ -23,7 +27,7 @@ TabbedPane
         id: timingsTab
         title: qsTr("Timings") + Retranslate.onLanguageChanged
         description: qsTr("Salah Times") + Retranslate.onLanguageChanged
-        imageSource: "images/ic_clock.png"
+        imageSource: "images/tabs/ic_clock.png"
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivateWhenSelected
         
         delegate: Delegate
@@ -59,7 +63,7 @@ TabbedPane
         id: articles
         title: qsTr("Articles") + Retranslate.onLanguageChanged
         description: qsTr("Articles") + Retranslate.onLanguageChanged
-        imageSource: "images/ic_article.png"
+        imageSource: "images/tabs/ic_article.png"
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
         
         delegate: Delegate {
@@ -71,7 +75,7 @@ TabbedPane
         id: sujud
         title: qsTr("Sujud As-Sahw") + Retranslate.onLanguageChanged
         description: qsTr("Prostration of Forgetfulness") + Retranslate.onLanguageChanged
-        imageSource: "images/ic_articles.png"
+        imageSource: "images/tabs/ic_articles.png"
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
         
         delegate: Delegate {
@@ -82,7 +86,7 @@ TabbedPane
     Tab {
         id: location
         title: qsTr("Location") + Retranslate.onLanguageChanged
-        imageSource: "images/ic_map.png"
+        imageSource: "images/tabs/ic_map.png"
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
         
         function onSettingChanged(key)
@@ -108,7 +112,7 @@ TabbedPane
         id: tutorial
         title: qsTr("Tutorial") + Retranslate.onLanguageChanged
         description: qsTr("Step by Step") + Retranslate.onLanguageChanged
-        imageSource: "images/ic_tutorial.png"
+        imageSource: "images/tabs/ic_tutorial.png"
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
         
         delegate: Delegate {

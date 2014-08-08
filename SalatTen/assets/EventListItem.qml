@@ -64,7 +64,7 @@ StandardListItem
             
             ActionItem {
                 title: qsTr("Edit") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_edit.png"
+                imageSource: "images/menu/ic_edit.png"
                 
                 onTriggered: {
                     sli.ListItem.view.edit(sli.ListItem.indexPath);

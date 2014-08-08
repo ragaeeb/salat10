@@ -23,7 +23,7 @@ NavigationPane
                 }
                 
                 ActionBar.placement: ActionBarPlacement.OnBar
-                imageSource: "images/ic_articles.png"
+                imageSource: "images/tabs/ic_articles.png"
                 title: qsTr("Times of Salah") + Retranslate.onLanguageChanged
             },
             
@@ -36,7 +36,7 @@ NavigationPane
                 }
                 
                 ActionBar.placement: ActionBarPlacement.OnBar
-                imageSource: "images/ic_table.png"
+                imageSource: "images/menu/ic_table.png"
                 title: qsTr("Times of the Prayers") + Retranslate.onLanguageChanged
             },
             
@@ -275,7 +275,7 @@ NavigationPane
                             StandardListItem {
                                 title: ListItemData ? ListItemData.author : ""
                                 description: ListItemData ? ListItemData.title : ""
-                                imageSource: "images/ic_article.png"
+                                imageSource: "images/tabs/ic_article.png"
                             }
                             
                             ControlDelegate
