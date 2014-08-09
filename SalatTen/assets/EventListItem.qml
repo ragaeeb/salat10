@@ -97,19 +97,52 @@ StandardListItem
                 sli.status = undefined;
             }
             
+            function renderIqamah(now)
+            {
+                var diff = sli.data.iqamah - now;
+
+                if (diff > 0)
+                {
+                    var minutes = Math.floor( diff / (1000 * 60) );
+                    var difference = diff - minutes * (1000 * 60);
+                    var seconds = Math.floor(difference / 1000);
+
+                    if (minutes > 30) {
+                        sli.status = qsTr("Iqamah: %1").arg( sli.ListItem.view.localization.renderStandardTime( new Date(ListItemData.iqamah) ) );
+                        start(diff-60000*30);
+                    } else if (minutes <= 30 && minutes > 5) {
+                        interval = 60000;
+                        sli.status = qsTr("Iqamah: %1 minutes").arg(minutes);
+                    } else if (minutes >= 1) {
+                        interval = 1000;
+                        sli.status = qsTr("Iqamah: %1 minutes %2 seconds").arg(minutes).arg(seconds);
+                    } else if (seconds > 0) {
+                        interval = 1000;
+                        sli.status = qsTr("Iqamah: %1 seconds").arg(seconds);
+                    }
+                } else {
+                    cancel();
+                }
+            }
+            
             function updateStatus()
             {
                 var now = new Date();
-                var diff = ListItemData.value - now;
+                var diff = sli.data.value - now;
                 
-                if (diff > 0) {
+                if (diff > 0)
+                {
                     var minutes = Math.floor( diff / (1000 * 60) );
                     var difference = diff - minutes * (1000 * 60);
-                    
                     var seconds = Math.floor(difference / 1000);
                     
-                    if (minutes > 30) {
+                    if (minutes > 30)
+                    {
                         start(diff-60000*30);
+
+                        if (sli.data.iqamah) {
+                            renderIqamah(now);
+                        }
                     } else if (minutes <= 30 && minutes > 5) {
                         interval = 60000;
                         sli.status = qsTr("%1 minutes").arg(minutes);
@@ -120,31 +153,8 @@ StandardListItem
                         interval = 1000;
                         sli.status = qsTr("%1 seconds").arg(seconds);
                     }
-                } else if (ListItemData.iqamah) {
-                    diff = ListItemData.iqamah - now;
-                    
-                    if (diff > 0) {
-                        var minutes = Math.floor( diff / (1000 * 60) );
-                        var difference = diff - minutes * (1000 * 60);
-                        
-                        var seconds = Math.floor(difference / 1000);
-                        
-                        if (minutes > 30) {
-                            sli.status = qsTr("Iqamah: %1").arg( sli.ListItem.view.localization.renderStandardTime( new Date(ListItemData.iqamah) ) );
-                            start(diff-60000*30);
-                        } else if (minutes <= 30 && minutes > 5) {
-                            interval = 60000;
-                            sli.status = qsTr("Iqamah: %1 minutes").arg(minutes);
-                        } else if (minutes >= 1) {
-                            interval = 1000;
-                            sli.status = qsTr("Iqamah: %1 minutes %2 seconds").arg(minutes).arg(seconds);
-                        } else if (seconds > 0) {
-                            interval = 1000;
-                            sli.status = qsTr("Iqamah: %1 seconds").arg(seconds);
-                        }
-                    } else {
-                        cancel();
-                    }
+                } else if (sli.data.iqamah) {
+                    renderIqamah(now);
                 } else {
                     cancel();
                 }

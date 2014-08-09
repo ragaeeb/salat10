@@ -47,6 +47,7 @@ public:
 	Q_INVOKABLE QVariantList calculate(QDateTime qdt, int numDays=1);
 	Q_INVOKABLE void reset();
 	bool isEmpty() const;
+	void applyDiff(QString const& settingKey, QString const& itemKey);
 
 	/**
 	 * @return The next event after the reference point.
@@ -57,6 +58,9 @@ public:
 	Persistance* getPersist();
 	Calculator* getCalculator();
 	Translator* getTranslator();
+
+	Q_INVOKABLE void saveIqamah(QString const& key, QDateTime const& time);
+	void updateIqamahs();
 };
 
 } /* namespace salat */

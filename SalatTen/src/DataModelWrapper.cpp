@@ -116,8 +116,11 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 			map["dateValue"] = result[j].date();
 			map["isSalat"] = salatMap.contains(key);
 
-			if ( iqamahs.contains(key) ) {
-			    map["iqamah"] = iqamahs.value(key);
+			if ( iqamahs.contains(key) )
+			{
+	            QDateTime iqamah = QDateTime( result[j].date(), iqamahs.value(key).toTime() );
+	            LOGGER(key << iqamah);
+	            map["iqamah"] = iqamah;
 			}
 
 			if ( athaans.contains(key) ) {
@@ -197,6 +200,56 @@ void DataModelWrapper::calculateAndAppend(QDateTime const& reference)
 }
 
 
+void DataModelWrapper::applyDiff(QString const& settingKey, QString const& itemKey)
+{
+    int sections = m_model.childCount( QVariantList() );
+    QVariantMap settingValue = m_persistance.getValueFor(settingKey).toMap();
+
+    for (int i = 0; i < sections; i++)
+    {
+        int childrenInSection = m_model.childCount( QVariantList() << i );
+
+        for (int j = 0; j < childrenInSection; j++)
+        {
+            QVariantList indexPath = QVariantList() << i << j;
+            QVariantMap current = m_model.data(indexPath).toMap();
+            current[itemKey] = settingValue.value( current.value("key").toString() );
+            m_model.updateItem(indexPath, current);
+        }
+    }
+}
+
+
+void DataModelWrapper::updateIqamahs()
+{
+    int sections = m_model.childCount( QVariantList() );
+    QVariantMap iqamahs = m_persistance.getValueFor("iqamahs").toMap();
+
+    for (int i = 0; i < sections; i++)
+    {
+        int childrenInSection = m_model.childCount( QVariantList() << i );
+
+        for (int j = 0; j < childrenInSection; j++)
+        {
+            QVariantList indexPath = QVariantList() << i << j;
+            QVariantMap current = m_model.data(indexPath).toMap();
+            QString key = current.value("key").toString();
+
+            if ( iqamahs.contains(key) )
+            {
+                QDateTime iqamah = QDateTime( current.value("dateValue").toDate(), iqamahs.value(key).toTime() );
+                LOGGER(key << iqamah);
+                current["iqamah"] = iqamah;
+            } else {
+                current.remove("iqamah");
+            }
+
+            m_model.updateItem(indexPath, current);
+        }
+    }
+}
+
+
 void DataModelWrapper::loadMore()
 {
 	if ( !m_model.isEmpty() ) {
@@ -257,7 +310,8 @@ void DataModelWrapper::itemAdded(QVariantList indexPath)
 {
     Q_UNUSED(indexPath);
 
-    if (m_empty) {
+    if (m_empty)
+    {
         m_empty = false;
         emit emptyChanged();
     }
@@ -269,10 +323,21 @@ void DataModelWrapper::itemsChanged(bb::cascades::DataModelChangeType::Type eCha
     Q_UNUSED(indexMapper);
     Q_UNUSED(eChangeType);
 
-    if ( m_empty != m_model.isEmpty() ) {
+    if ( m_empty != m_model.isEmpty() )
+    {
         m_empty = m_model.isEmpty();
         emit emptyChanged();
     }
+}
+
+
+void DataModelWrapper::saveIqamah(QString const& key, QDateTime const& time)
+{
+    LOGGER(key << time);
+
+    QVariantMap iqamahs = m_persistance.getValueFor("iqamahs").toMap();
+    iqamahs[key] = time.time();
+    m_persistance.saveValueFor("iqamahs", iqamahs);
 }
 
 
