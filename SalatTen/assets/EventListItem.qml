@@ -33,7 +33,9 @@ StandardListItem
             return;
         }
         
-        if ( ListItemData.value > new Date() ) {
+        var now = new Date();
+        
+        if ( ListItemData.value > now || ListItemData.iqamah > now ) {
             status = undefined;
             statusTimer.timeout.connect(statusTimer.updateStatus);
             statusTimer.start(1000);   
@@ -70,6 +72,16 @@ StandardListItem
                     sli.ListItem.view.edit(sli.ListItem.indexPath);
                 }
             }
+            
+            ActionItem {
+                title: qsTr("Set Jamaah Time") + Retranslate.onLanguageChanged
+                imageSource: "images/menu/ic_set_jamaah.png"
+                enabled: ListItemData.isSalat
+                
+                onTriggered: {
+                    sli.ListItem.view.setJamaah(sli.ListItem.indexPath);
+                }
+            }
         }
     ]
     
@@ -87,10 +99,10 @@ StandardListItem
             
             function updateStatus()
             {
-                var diff = ListItemData.value - new Date();
+                var now = new Date();
+                var diff = ListItemData.value - now;
                 
-                if (diff > 0)
-                {
+                if (diff > 0) {
                     var minutes = Math.floor( diff / (1000 * 60) );
                     var difference = diff - minutes * (1000 * 60);
                     
@@ -107,6 +119,31 @@ StandardListItem
                     } else if (seconds > 0) {
                         interval = 1000;
                         sli.status = qsTr("%1 seconds").arg(seconds);
+                    }
+                } else if (ListItemData.iqamah) {
+                    diff = ListItemData.iqamah - now;
+                    
+                    if (diff > 0) {
+                        var minutes = Math.floor( diff / (1000 * 60) );
+                        var difference = diff - minutes * (1000 * 60);
+                        
+                        var seconds = Math.floor(difference / 1000);
+                        
+                        if (minutes > 30) {
+                            sli.status = qsTr("Iqamah: %1").arg( sli.ListItem.view.localization.renderStandardTime( new Date(ListItemData.iqamah) ) );
+                            start(diff-60000*30);
+                        } else if (minutes <= 30 && minutes > 5) {
+                            interval = 60000;
+                            sli.status = qsTr("Iqamah: %1 minutes").arg(minutes);
+                        } else if (minutes >= 1) {
+                            interval = 1000;
+                            sli.status = qsTr("Iqamah: %1 minutes %2 seconds").arg(minutes).arg(seconds);
+                        } else if (seconds > 0) {
+                            interval = 1000;
+                            sli.status = qsTr("Iqamah: %1 seconds").arg(seconds);
+                        }
+                    } else {
+                        cancel();
                     }
                 } else {
                     cancel();
