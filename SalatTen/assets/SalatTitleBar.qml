@@ -34,9 +34,35 @@ TitleBar
                 rightMargin: 0
                 bottomMargin: 0
                 scalingMethod: ScalingMethod.AspectFill
-                
                 horizontalAlignment: HorizontalAlignment.Left
                 verticalAlignment: VerticalAlignment.Center
+                translationX: -300
+                
+                animations: [
+                    ParallelAnimation
+                    {
+                        id: arrowAnim
+                        delay: 1000
+                        
+                        FadeTransition {
+                            easingCurve: StockCurve.QuinticIn
+                            fromOpacity: 0
+                            toOpacity: 1
+                            duration: 500
+                        }
+                        
+                        TranslateTransition {
+                            toX: 0
+                            fromX: -300
+                            duration: 1000
+                            easingCurve: StockCurve.SineOut
+                        }
+                        
+                        onCreationCompleted: {
+                            play();
+                        }
+                    }
+                ]
             }
             
             ImageView {
@@ -46,14 +72,51 @@ TitleBar
                 rightMargin: 0
                 bottomMargin: 0
                 scalingMethod: ScalingMethod.AspectFit
-                
                 horizontalAlignment: HorizontalAlignment.Left
                 verticalAlignment: VerticalAlignment.Center
+                translationX: -300
+                
+                animations: [
+                    ParallelAnimation
+                    {
+                        id: translateFade
+                        
+                        FadeTransition {
+                            easingCurve: StockCurve.CircularOut
+                            fromOpacity: 0
+                            toOpacity: 1
+                            duration: 500
+                        }
+                        
+                        TranslateTransition {
+                            toX: 0
+                            fromX: -300
+                            duration: 1000
+                            easingCurve: StockCurve.ExponentialInOut
+                        }
+                        
+                        onCreationCompleted: {
+                            play();
+                        }
+                    }
+                ]
+                
+                onCreationCompleted: {
+                    translateFade.play();
+                }
             }
         }
         
         expandableArea
         {
+            onExpandedChanged: {
+                if (expanded) {
+                    fader.play();
+                } else {
+                    bannerLabel.opacity = 0;
+                }
+            }
+            
             content: Container
             {
                 id: exContainer
@@ -115,6 +178,18 @@ TitleBar
                         verticalAlignment: VerticalAlignment.Center
                         textStyle.fontSize: FontSize.XSmall
                         textStyle.textAlign: TextAlign.Center
+                        opacity: 0
+                        
+                        animations: [
+                            FadeTransition {
+                                id: fader
+                                fromOpacity: 0
+                                toOpacity: 1
+                                easingCurve: StockCurve.CubicIn
+                                duration: 1000
+                                delay: 250
+                            }
+                        ]
                     }
                 }
                 
