@@ -58,7 +58,7 @@ void DataModelWrapper::init()
     {
         QVariantMap adjustments;
 
-        QStringList salatKeys = Translator::salatKeys();
+        QStringList salatKeys = Translator::eventKeys();
 
         for (int i = salatKeys.size()-1; i >= 0; i--) {
             adjustments[ salatKeys[i] ] = 0;
