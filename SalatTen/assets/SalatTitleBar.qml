@@ -113,7 +113,7 @@ TitleBar
                 if (expanded) {
                     fader.play();
                 } else {
-                    bannerLabel.opacity = 0;
+                    bannerLabel.translationY = -100;
                 }
             }
             
@@ -178,16 +178,16 @@ TitleBar
                         verticalAlignment: VerticalAlignment.Center
                         textStyle.fontSize: FontSize.XSmall
                         textStyle.textAlign: TextAlign.Center
-                        opacity: 0
+                        translationY: -100
                         
                         animations: [
-                            FadeTransition {
+                            TranslateTransition
+                            {
                                 id: fader
-                                fromOpacity: 0
-                                toOpacity: 1
-                                easingCurve: StockCurve.CubicIn
-                                duration: 1000
-                                delay: 250
+                                fromY: -100
+                                toY: 0
+                                easingCurve: StockCurve.BounceOut
+                                duration: 750
                             }
                         ]
                     }
