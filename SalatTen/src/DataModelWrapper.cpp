@@ -95,6 +95,7 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 	QVariantMap adjustments = m_persistance.getValueFor("adjustments").toMap();
 	QVariantMap athaans = m_persistance.getValueFor("athaans").toMap();
 	QVariantMap notifications = m_persistance.getValueFor("notifications").toMap();
+	QVariantMap iqamahs = m_persistance.getValueFor("iqamahs").toMap();
 
 	for (int i = 0; i < numDays; i++)
 	{
@@ -113,6 +114,10 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 			map["value"] = result[j].addSecs(adjust*60);
 			map["dateValue"] = result[j].date();
 			map["isSalat"] = salatMap.contains(key);
+
+			if ( iqamahs.contains(key) ) {
+			    map["iqamah"] = iqamahs.value(key);
+			}
 
 			if ( athaans.contains(key) ) {
 				map["athaan"] = athaans.value(key);

@@ -30,6 +30,18 @@ ListView
         dialog.open();
     }
     
+    function setJamaah(indexPath)
+    {
+        definition.source = "JamaahPickerDialog.qml";
+        
+        var data = dataModel.data(indexPath);
+        
+        var dialog = definition.createObject();
+        dialog.key = data.key;
+        dialog.base = data.value;
+        dialog.open();
+    }
+    
     onCreationCompleted: {
         notification.currentEventChanged.connect(onCurrentEventChanged);
     }
