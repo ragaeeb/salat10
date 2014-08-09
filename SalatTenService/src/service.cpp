@@ -174,6 +174,7 @@ void Service::timeout(bool init)
                     }
 
                     m_athan.prevKey = currentEventKey;
+                    LOGGER( "Playing with volume" << m_athan.player.volume() );
                     m_athan.player.play(destinationFile);
 
                     if (m_athan.mkw == NULL) {
@@ -227,6 +228,9 @@ void Service::recalculate(QString const& path)
         m_athan.profiles = m_settings.value("profiles").toMap();
         m_athan.customAthaans = m_settings.value("customAthaans").toMap();
         m_athan.skipJumuah = m_settings.value("skipJumahAthaan").toInt() == 1;
+        LOGGER("new vol received" << m_settings.value("athanVolume").toDouble());
+        m_athan.player.setVolume( m_settings.contains("athanVolume") ? m_settings.value("athanVolume").toDouble() : 1 );
+        LOGGER("new vol" << m_athan.player.volume());
 
         QVariantList values = m_athan.athaans.values();
         values.append( m_athan.notifications.values() );

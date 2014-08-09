@@ -38,6 +38,7 @@ void DataModelWrapper::init()
     INIT_SETTING("skipJumahAthaan", 1);
     INIT_SETTING("asrRatio", 1);
     INIT_SETTING("hijri", 0);
+    INIT_SETTING("athanVolume", 1.0);
 
     if ( !m_persistance.contains("athaans") )
     {
