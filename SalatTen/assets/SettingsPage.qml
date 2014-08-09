@@ -27,6 +27,27 @@ Page
                 verticalAlignment: VerticalAlignment.Fill
                 leftPadding: 10; rightPadding: 10; topPadding: 10; bottomPadding: 10
             }
+            
+            Header {
+                id: volumeHeader
+                title: qsTr("Athan Volume") + Retranslate.onLanguageChanged
+            }
+            
+            Slider {
+                id: volumeSlider
+                horizontalAlignment: HorizontalAlignment.Fill
+                value: persist.getValueFor("athanVolume")
+                fromValue: 0.5
+                toValue: 1
+                
+                onValueChanged: {
+                    var changed = persist.saveValueFor("athanVolume", value, false);
+                }
+                
+                onImmediateValueChanged: {
+                    volumeHeader.subtitle = Math.floor(immediateValue*100);
+                }
+            }
 	    	
 	    	Header {
 	    	    title: qsTr("General Settings") + Retranslate.onLanguageChanged
