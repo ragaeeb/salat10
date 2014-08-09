@@ -42,7 +42,7 @@ Page
                 {
                     topMargin: 20
                     key: "skipJumahAthaan"
-                    text: qsTr("Dhuhr Athan on Friday") + Retranslate.onLanguageChanged
+                    text: qsTr("Skip Athan on Jumuah") + Retranslate.onLanguageChanged
                 }
                 
                 DropDown
