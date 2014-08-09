@@ -17,14 +17,7 @@ FullScreenDialog
     }
     
     onClosing: {
-        var iqamahs = persist.getValueFor("iqamahs");
-        
-        if (!iqamahs) {
-            iqamahs = {};
-        }
-        
-        iqamahs[key] = Math.floor(dtp.value);
-        persist.saveValueFor("iqamahs", iqamahs);
+        boundary.saveIqamah(key, dtp.value);
     }
     
     onOpened: {
