@@ -341,6 +341,16 @@ void DataModelWrapper::saveIqamah(QString const& key, QDateTime const& time)
 }
 
 
+void DataModelWrapper::removeIqamah(QString const& key)
+{
+    LOGGER(key);
+
+    QVariantMap iqamahs = m_persistance.getValueFor("iqamahs").toMap();
+    iqamahs.remove(key);
+    m_persistance.saveValueFor("iqamahs", iqamahs);
+}
+
+
 DataModelWrapper::~DataModelWrapper() {
 	m_model.setParent(NULL);
 }

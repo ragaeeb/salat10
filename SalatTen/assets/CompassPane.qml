@@ -55,7 +55,8 @@ NavigationPane
                 }
             }
             
-            Container {
+            Container
+            {
                 id: mainContainer
                 rotationZ: -compass.azimuth
                 
@@ -123,6 +124,22 @@ NavigationPane
                         }
                     ]
                 }
+                
+                animations: [
+                    ScaleTransition
+                    {
+                        fromX: 0
+                        fromY: 0
+                        toX: 1
+                        toY: 1
+                        duration: 1000
+                        easingCurve: StockCurve.CircularInOut
+                        
+                        onCreationCompleted: {
+                            play();
+                        }
+                    }
+                ]
             }
         }
     }

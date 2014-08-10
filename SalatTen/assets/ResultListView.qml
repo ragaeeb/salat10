@@ -42,6 +42,12 @@ ListView
         dialog.open();
     }
     
+    function removeJamaah(indexPath)
+    {
+        boundary.removeIqamah( dataModel.data(indexPath).key );
+        persist.showToast( qsTr("Iqamah time removed"), "", "asset:///images/menu/ic_remove_jamaah.png" );
+    }
+    
     onCreationCompleted: {
         notification.currentEventChanged.connect(onCurrentEventChanged);
     }
