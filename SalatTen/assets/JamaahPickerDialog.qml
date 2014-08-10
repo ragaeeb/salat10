@@ -18,11 +18,11 @@ FullScreenDialog
     
     onClosing: {
         boundary.saveIqamah(key, dtp.value);
+        persist.showToast( qsTr("Iqamah time set to: %1").arg( localizer.renderStandardTime(dtp.value) ), "", "asset:///images/menu/ic_set_jamaah.png" );
     }
     
     onOpened: {
-        dtp.expanded = true;
-        persist.tutorial( "tutorialJamaah", qsTr("Please set the time the congregational prayer for %1 at the masjid/musalla. Then tap anywhere outside the picker to save and dismiss it.").arg( translator.render(key) ), "asset:///images/menu/ic_set_jamaah.png" );
+        tt.play();
     }
     
     dialogContent: Container
@@ -30,6 +30,22 @@ FullScreenDialog
         bottomPadding: 30
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Center
+        
+        animations: [
+            TranslateTransition
+            {
+                id: tt
+                fromY: -720
+                toY: 0
+                easingCurve: StockCurve.ExponentialOut
+                duration: 1000
+                
+                onEnded: {
+                    dtp.expanded = true;
+                    persist.tutorial( "tutorialJamaah", qsTr("Please set the time the congregational prayer for %1 at the masjid/musalla. Then tap anywhere outside the picker to save and dismiss it.").arg( translator.render(key) ), "asset:///images/menu/ic_set_jamaah.png" );
+                }
+            }
+        ]
         
         DateTimePicker
         {

@@ -60,6 +60,7 @@ public:
 	Translator* getTranslator();
 
 	Q_INVOKABLE void saveIqamah(QString const& key, QDateTime const& time);
+	Q_INVOKABLE void removeIqamah(QString const& key);
 	void updateIqamahs();
 };
 

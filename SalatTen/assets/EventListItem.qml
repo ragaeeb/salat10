@@ -60,11 +60,13 @@ StandardListItem
     }
     
     contextActions: [
-        ActionSet {
+        ActionSet
+        {
             title: sli.title
             subtitle: sli.description
             
-            ActionItem {
+            ActionItem
+            {
                 title: qsTr("Edit") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_edit.png"
                 
@@ -74,12 +76,24 @@ StandardListItem
             }
             
             ActionItem {
-                title: qsTr("Set Jamaah Time") + Retranslate.onLanguageChanged
+                title: qsTr("Set Iqamah") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_set_jamaah.png"
-                enabled: ListItemData.isSalat
+                enabled: sli.data.isSalat
                 
                 onTriggered: {
+                    console.log("UserEvent: SetIqamah");
                     sli.ListItem.view.setJamaah(sli.ListItem.indexPath);
+                }
+            }
+            
+            DeleteActionItem {
+                title: qsTr("Remove Iqamah") + Retranslate.onLanguageChanged
+                imageSource: "images/menu/ic_remove_jamaah.png"
+                enabled: sli.data.isSalat && sli.data.iqamah
+                
+                onTriggered: {
+                    console.log("UserEvent: RemoveIqamah");
+                    sli.ListItem.view.removeJamaah(sli.ListItem.indexPath);
                 }
             }
         }
@@ -100,8 +114,9 @@ StandardListItem
             function renderIqamah(now)
             {
                 var diff = sli.data.iqamah - now;
+                var diffDays = Math.ceil( diff/(1000*3600*24) );
 
-                if (diff > 0)
+                if (diff > 0 && diffDays < 2)
                 {
                     var minutes = Math.floor( diff / (1000 * 60) );
                     var difference = diff - minutes * (1000 * 60);
