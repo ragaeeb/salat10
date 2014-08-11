@@ -115,6 +115,8 @@ TitleBar
                 } else {
                     bannerLabel.translationY = -100;
                 }
+                
+                console.log("UserEvent: SalatTitleExpanded", expanded);
             }
             
             content: Container
@@ -132,6 +134,7 @@ TitleBar
                             imageSource: "images/menu/ic_edit.png"
                             
                             onTriggered: {
+                                console.log("UserEvent: EditHijriDate");
                                 editTitleTriggered();
                             }
                         }

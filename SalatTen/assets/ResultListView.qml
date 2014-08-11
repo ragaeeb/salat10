@@ -67,6 +67,7 @@ ListView
                 imageSource: "images/ic_athaan_enable.png"
                 
                 onTriggered: {
+                    console.log("UserEvent: EnableAthans");
                     listUtil.toggleAthaans(true);
                 }
             },
@@ -78,6 +79,7 @@ ListView
                 imageSource: "images/ic_athaan_mute.png"
                 
                 onTriggered: {
+                    console.log("UserEvent: MuteAthans");
                     listUtil.toggleAthaans(false);
                 }
             },
@@ -89,6 +91,7 @@ ListView
                 imageSource: "images/menu/ic_copy.png"
                 
                 onTriggered: {
+                    console.log("UserEvent: CopyMultiToClipboard");
                     persist.copyToClipboard( listUtil.textualizeSelected() );
                 }
             },
@@ -105,6 +108,7 @@ ListView
                 }
                 
                 onTriggered: {
+                    console.log("UserEvent: ShareMultiResults");
                     data = persist.convertToUtf8( listUtil.textualizeSelected() );
                 }
             },
@@ -115,6 +119,7 @@ ListView
                 imageSource: "images/ic_athaan_custom.png"
                 
                 onTriggered: {
+                    console.log("UserEvent: SetCustomSound");
                     listUtil.setCustomAthaans( listUtil.getSelectedKeys() );
                 }
             },
@@ -125,6 +130,7 @@ ListView
                 imageSource: "images/menu/ic_reset_athaan.png"
                 
                 onTriggered: {
+                    console.log("UserEvent: ResetCustomAthan");
                     listUtil.resetSound( listUtil.getSelectedKeys() );
                 }
             }

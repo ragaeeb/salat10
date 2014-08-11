@@ -42,6 +42,10 @@ Page
                 
                 onValueChanged: {
                     var changed = persist.saveValueFor("athanVolume", value, false);
+                    
+                    if (changed) {
+                        console.log("UserEvent: AthanVolumeChanged", value);
+                    }
                 }
                 
                 onImmediateValueChanged: {

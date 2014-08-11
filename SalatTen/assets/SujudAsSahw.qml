@@ -33,6 +33,7 @@ NavigationPane
                 ActionBar.placement: ActionBarPlacement.OnBar
                 
                 onTriggered: {
+                    console.log("UserEvent: UsefulChartTriggered");
                     webView.url = "local:///assets/html/sujud_as_sahw.html";
                 }
                 
@@ -133,6 +134,7 @@ NavigationPane
                 }
                 
                 onTriggered: {
+                    console.log("UserEvent: SujudArticleTriggered");
                     titleControl.title = data.author;
                     webView.html = replaceAll("\n", "<br>", data.body)+"<br><br>"+data.reference;
                 }

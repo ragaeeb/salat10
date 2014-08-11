@@ -12,7 +12,7 @@ const char* key_hour_of_response = "hourResponse";
 
 void schedule(CalendarService& service, CalendarEvent& ev, int accountId, QString const& subject, QDateTime const& startTime, QDateTime const& endTime, QString const& body=QString())
 {
-    LOGGER("======== Saving" << subject << startTime << endTime);
+    LOGGER("= Saving" << subject << startTime << endTime);
 
     EventSearchParameters params;
     params.setStart(startTime);
@@ -39,7 +39,7 @@ void schedule(CalendarService& service, CalendarEvent& ev, int accountId, QStrin
 
         service.createEvent(ev);
 
-        LOGGER("===== Current one" << ev.id());
+        LOGGER("= Current one" << ev.id());
     } else {
         LOGGER("ScheduleEvent::run() duplicate calendar event found, not scheduling");
     }

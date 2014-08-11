@@ -34,6 +34,7 @@ Sheet
                 }
                 
                 onTriggered: {
+                    console.log("UserEvent: AcceptAthan");
                     var customAthans = {};
                     var all = translator.salatKeys();
                     
@@ -78,6 +79,7 @@ Sheet
                 }
                 
                 onTriggered: {
+                    console.log("UserEvent: AthanTriggered", indexPath);
                     clearSelection();
                     toggleSelection(indexPath);
                     
@@ -167,10 +169,12 @@ Sheet
                         }
                         
                         onFileSelected : {
+                            console.log("UserEvent: AthanFileSelected", selectedFiles[0]);
                             accept.selected = "file://"+selectedFiles[0];
                         }
                         
                         onCanceled: {
+                            console.log("UserEvent: AthanFileCanceled");
                             accept.selected = "";
                             listView.clearSelection();
                         }

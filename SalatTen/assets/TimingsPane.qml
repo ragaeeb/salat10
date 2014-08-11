@@ -81,6 +81,7 @@ NavigationPane
                 ActionBar.placement: ActionBarPlacement.OnBar
                 
                 onTriggered: {
+                    console.log("UserEvent: RefreshTimes");
                     listView.onCurrentEventChanged();
                 }
                 
@@ -103,6 +104,7 @@ NavigationPane
                 }
                 
                 onTriggered: {
+                    console.log("UserEvent: ShareTimes");
                     var target = new Date();
                     var today = boundary.calculate(target);
                     var location = persist.getValueFor("location");
@@ -130,7 +132,7 @@ NavigationPane
 	        {
 	            id: exportAction
 	            title: qsTr("Export to Calendar")
-	            imageSource: "file:///usr/share/icons/ic_add_event.png"
+	            imageSource: "images/menu/ic_calendar_add.png"
 	            enabled: mainPage.actionsEnabled
 	            
                 function onExportReady(daysToExport, result, accountId)
@@ -142,6 +144,8 @@ NavigationPane
                 }
 
 	            onTriggered: {
+                    console.log("UserEvent: ExportToCalendar");
+	                
 	                if (app.hasCalendarAccess)
 	                {
                         definition.source = "CalendarExport.qml";
@@ -167,6 +171,8 @@ NavigationPane
                 imageSource: "images/menu/ic_calendar_delete.png"
 	            
 	            onTriggered: {
+                    console.log("UserEvent: ClearExportedEvents");
+	                
                     if (app.hasCalendarAccess) {
                         prompt.show();
                     }
@@ -181,7 +187,9 @@ NavigationPane
                         cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
                         
 			            onFinished: {
-			                if (result == SystemUiResult.ConfirmButtonSelection) {
+                            console.log("UserEvent: ClearExportedConfirmation", value);
+			                
+			                if (value == SystemUiResult.ConfirmButtonSelection) {
                                 progressDelegate.delegateActive = true;
 			                    app.cleanupCalendarEvents();
 			                }
@@ -229,6 +237,8 @@ NavigationPane
                 }
                 
                 onTriggered: {
+                    console.log("UserEvent: TimeTriggered", indexPath);
+                    
                     if (manualSelected) {
                         manualDeselect();
                     }
