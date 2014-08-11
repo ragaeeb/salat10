@@ -82,7 +82,7 @@ Sheet
     }
     
     onClosed: {
-        persist.saveValueFor("advertisedAlFurqan", 1, false);
+        persist.saveValueFor("alFurqanAdvertised", 1, false);
         destroy();
     }
 }
