@@ -42,7 +42,7 @@ NavigationPane
             definition.source = "AlFurqanAdvertisement.qml";
             var picker = definition.createObject();
             picker.open();
-        }
+        } else if ( reporter.performCII() ) {}
     }
     
     onCreationCompleted: {
