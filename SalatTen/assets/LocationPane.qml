@@ -21,6 +21,8 @@ NavigationPane
                 }
 
                 onTriggered: {
+                    console.log("UserEvent: RefreshLocation");
+                    
                     var geoFinder = app.refreshLocation();
                     
                     if (geoFinder) {
@@ -62,6 +64,8 @@ NavigationPane
                 ]
                 
                 onTriggered: {
+                    console.log("UserEvent: LocationPickerTriggered");
+                    
                     var picker = pickerDefinition.createObject();
                     var place = picker.show();
                     

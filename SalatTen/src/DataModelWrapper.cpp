@@ -84,7 +84,6 @@ void DataModelWrapper::init()
 
 QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 {
-    LOGGER(local << numDays);
 	Coordinates geo = Calculator::createCoordinates( local, m_persistance.getValueFor("latitude"), m_persistance.getValueFor("longitude") );
 	SalatParameters angles = Calculator::createParams( m_persistance.getValueFor("angles").toMap() );
 	qreal asrRatio = m_persistance.getValueFor("asrRatio").toReal();
@@ -101,9 +100,11 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 	for (int i = 0; i < numDays; i++)
 	{
 		m_mutex.lock();
-		QList<QDateTime> result = m_calculator.calculate( local.date(), geo, angles, asrRatio ); // use Shafii ratio of 1:1 object:shadow
+		QList<QDateTime> result = m_calculator.calculate( local.date(), geo, angles, asrRatio );
 		//	result << local.addSecs(30) << local.addSecs(60) << local.addSecs(90) << local.addSecs(120) << local.addSecs(150) << local.addSecs(180) << local.addSecs(210) << local.addSecs(240) << local.addSecs(270);
 		m_mutex.unlock();
+
+		LOGGER(result);
 
 		for (int j = 0; j < result.size(); j++)
 		{
@@ -119,7 +120,6 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 			if ( iqamahs.contains(key) )
 			{
 	            QDateTime iqamah = QDateTime( result[j].date(), iqamahs.value(key).toTime() );
-	            LOGGER(key << iqamah);
 	            map["iqamah"] = iqamah;
 			}
 
@@ -238,7 +238,6 @@ void DataModelWrapper::updateIqamahs()
             if ( iqamahs.contains(key) )
             {
                 QDateTime iqamah = QDateTime( current.value("dateValue").toDate(), iqamahs.value(key).toTime() );
-                LOGGER(key << iqamah);
                 current["iqamah"] = iqamah;
             } else {
                 current.remove("iqamah");
@@ -261,7 +260,7 @@ void DataModelWrapper::loadMore()
 			QVariantList prev = m_model.before(i);
 
 			if ( prev.isEmpty() ) {
-				LOGGER("How did I get here?");
+				LOGGER("[HOW_THE_HECK_DID_I_GET_HERE]");
 				return;
 			} else if ( m_model.data(prev).toMap().value("key") != fajrKey ) {
 				i = prev;

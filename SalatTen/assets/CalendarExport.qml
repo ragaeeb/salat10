@@ -31,6 +31,10 @@ Page
             {
                 expanded: true
                 
+                onExpandedChanged: {
+                    console.log("UserEvent: CalendarTitleExpanded", expanded);
+                }
+                
                 content: AccountsDropDown
                 {
                     id: accountChoice
@@ -50,7 +54,11 @@ Page
                     }
                     
                     onSelectedValueChanged: {
-                        persist.saveValueFor("accountId", selectedValue, false);
+                        var changed = persist.saveValueFor("accountId", selectedValue, false);
+                        
+                        if (changed) {
+                            console.log("UserEvent: CalendarAccountChosen", selectedValue);
+                        }
                     }
                 }
             }
@@ -61,13 +69,15 @@ Page
         ActionItem
         {
             id: exportAction
-            imageSource: "file:///usr/share/icons/ic_add_event.png"
+            imageSource: "images/menu/ic_calendar_add.png"
             title: qsTr("Export") + Retranslate.onLanguageChanged
             ActionBar.placement: ActionBarPlacement.OnBar
             enabled: false
             
             onTriggered:
             {
+                console.log("UserEvent: ExportCalendar");
+                
                 var selectedIndices = listView.selectionList();
                 var result = [];
                 
@@ -116,6 +126,7 @@ Page
                 
                 onValueChanged: {
                     circularLabel.text = qsTr( "Export %n days", "", Math.floor(value) );
+                    console.log("UserEvent: ExportDaysValue", value);
                 }
             }
             
@@ -163,6 +174,8 @@ Page
                     } else {
                         infoText.text = qsTr("No reminder will be scheduled between Asr and Maghrib for the Hour of Response.");
                     }
+                    
+                    console.log("UserEvent: CalendarFridayTriggered", checked);
                 }
                 
                 slideControl.onValueChanged: {
@@ -213,6 +226,7 @@ Page
             ]
             
             onTriggered: {
+                console.log("UserEvent: CalendarItemTriggered", indexPath);
                 toggleSelection(indexPath);
             }
             

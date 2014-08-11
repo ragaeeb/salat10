@@ -25,6 +25,10 @@ NavigationPane
                 ActionBar.placement: ActionBarPlacement.OnBar
                 imageSource: "images/tabs/ic_articles.png"
                 title: qsTr("Times of Salah") + Retranslate.onLanguageChanged
+                
+                onTriggered: {
+                    console.log("UserEvent: TimesOfSalahTriggered");
+                }
             },
             
             InvokeActionItem
@@ -38,6 +42,10 @@ NavigationPane
                 ActionBar.placement: ActionBarPlacement.OnBar
                 imageSource: "images/menu/ic_table.png"
                 title: qsTr("Times of the Prayers") + Retranslate.onLanguageChanged
+                
+                onTriggered: {
+                    console.log("UserEvent: TimesOfPrayers");
+                }
             },
             
             InvokeActionItem
@@ -51,6 +59,10 @@ NavigationPane
                 ActionBar.placement: ActionBarPlacement.OnBar
                 imageSource: "file:///usr/share/icons/ic_accept.png"
                 title: qsTr("Bukhari: Salat") + Retranslate.onLanguageChanged
+                
+                onTriggered: {
+                    console.log("UserEvent: TimesOfPrayers");
+                }
             },
             
             InvokeActionItem
@@ -63,6 +75,10 @@ NavigationPane
                 
                 imageSource: "images/dropdown/ic_article_filter.png"
                 title: qsTr("Kitab Al-Salat") + Retranslate.onLanguageChanged
+                
+                onTriggered: {
+                    console.log("UserEvent: KitabAlSalat");
+                }
             }
         ]
         
@@ -184,6 +200,8 @@ NavigationPane
                         
                         onSelectedOptionChanged:
                         {
+                            console.log("UserEvent: ArticleCategoryChosen", selectedOption.value);
+                            
                             sql.query = "SELECT * from articles WHERE %1".arg(selectedOption.value);
                             sql.load(QueryId.GetArticles);
                         }
@@ -267,6 +285,7 @@ NavigationPane
                             gestureHandlers: [
                                 TapHandler {
                                     onTapped: {
+                                        console.log("UserEvent: ExpandArticle");
                                         bodyDelegate.delegateActive = !bodyDelegate.delegateActive;
                                     }
                                 }

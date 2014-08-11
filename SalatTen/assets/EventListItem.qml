@@ -71,6 +71,7 @@ StandardListItem
                 imageSource: "images/menu/ic_edit.png"
                 
                 onTriggered: {
+                    console.log("UserEvent: EditTime");
                     sli.ListItem.view.edit(sli.ListItem.indexPath);
                 }
             }
@@ -89,7 +90,7 @@ StandardListItem
             DeleteActionItem {
                 title: qsTr("Remove Iqamah") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_remove_jamaah.png"
-                enabled: sli.data.isSalat && sli.data.iqamah
+                enabled: sli.data.isSalat && (sli.data.iqamah != undefined)
                 
                 onTriggered: {
                     console.log("UserEvent: RemoveIqamah");
