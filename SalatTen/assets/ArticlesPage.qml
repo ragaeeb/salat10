@@ -282,19 +282,19 @@ NavigationPane
                                 showAnim.play();
                             }
                             
-                            gestureHandlers: [
-                                TapHandler {
-                                    onTapped: {
-                                        console.log("UserEvent: ExpandArticle");
-                                        bodyDelegate.delegateActive = !bodyDelegate.delegateActive;
-                                    }
-                                }
-                            ]
-                            
                             StandardListItem {
                                 title: ListItemData ? ListItemData.author : ""
                                 description: ListItemData ? ListItemData.title : ""
                                 imageSource: "images/tabs/ic_article.png"
+                                
+                                gestureHandlers: [
+                                    TapHandler {
+                                        onTapped: {
+                                            console.log("UserEvent: ExpandArticle");
+                                            bodyDelegate.delegateActive = !bodyDelegate.delegateActive;
+                                        }
+                                    }
+                                ]
                             }
                             
                             ControlDelegate
@@ -306,25 +306,13 @@ NavigationPane
 
                                 sourceComponent: ComponentDefinition
                                 {
-                                    Container
+                                    TextArea
                                     {
+                                        backgroundVisible: false
+                                        content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
+                                        editable: false
                                         horizontalAlignment: HorizontalAlignment.Fill
-                                        verticalAlignment: VerticalAlignment.Fill
-                                        leftPadding: 10; rightPadding: 10; topPadding: 10; bottomPadding: 10
-                                        
-                                        Label {
-                                            horizontalAlignment: HorizontalAlignment.Fill
-                                            text: ListItemData.body
-                                            multiline: true
-                                        }
-                                        
-                                        Label {
-                                            topMargin: 20
-                                            horizontalAlignment: HorizontalAlignment.Fill
-                                            text: ListItemData.reference
-                                            content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
-                                            multiline: true
-                                        }
+                                        text: ListItemData.body+"\n\n"+ListItemData.reference
                                     }
                                 }
                             }
