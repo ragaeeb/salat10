@@ -30,7 +30,7 @@ NavigationPane
                 id: chartAction
                 title: qsTr("Useful Chart") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_table.png"
-                ActionBar.placement: ActionBarPlacement.OnBar
+                ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                 
                 onTriggered: {
                     console.log("UserEvent: UsefulChartTriggered");
