@@ -39,9 +39,15 @@ NavigationPane
         else if ( persist.tutorial( "tutorialEdit", qsTr("Are your timings off by a few minutes from your local masjid?\n\nThat's easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose 'Edit'. You will then be able to adjust the results by up to 10 minutes."), "asset:///images/menu/ic_edit.png" ) ) {}
         else if ( persist.tutorial( "tutorialNewMuslim", qsTr("Are you a new Muslim?\n\nIf you need step-by-step tutorials on the prayer, please have a look at the 'Tutorial' tab on the menu on the left-side. It should be of help to you in shaa Allah!"), "asset:///images/tabs/ic_tutorial.png" ) ) {}
         else if ( !persist.contains("alFurqanAdvertised") ) {
-            definition.source = "AlFurqanAdvertisement.qml";
+            definition.source = "AlFurqanAdvertisementPage.qml";
             var picker = definition.createObject();
-            picker.open();
+            navigationPane.push(picker);
+            persist.saveValueFor("alFurqanAdvertised", 1, false);
+        } else if ( !persist.contains("clarified") ) {
+            definition.source = "ClarificationPage.qml";
+            var picker = definition.createObject();
+            navigationPane.push(picker);
+            persist.saveValueFor("clarified", 1, false);
         } else if ( reporter.performCII() ) {}
     }
     
