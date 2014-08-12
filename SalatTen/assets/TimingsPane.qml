@@ -98,11 +98,13 @@ NavigationPane
                 ]
             },
             
-            InvokeActionItem {
+            InvokeActionItem
+            {
                 id: iai
                 title: qsTr("Share") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_share.png"
                 enabled: mainPage.actionsEnabled
+                ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                 
                 query {
                     mimeType: "text/plain"
@@ -130,8 +132,6 @@ NavigationPane
                     result = result.substring(0, result.length-1); // remove last new line
                     iai.data = result
                 }
-                
-                ActionBar.placement: ActionBarPlacement.OnBar
             },
 	        
 	        ActionItem

@@ -32,9 +32,11 @@ NavigationPane
                 }
             },
             
-            ActionItem {
+            ActionItem
+            {
                 id: locationAction
                 imageSource: "file:///usr/share/icons/ic_map_all.png"
+                ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                 
                 function onSettingChanged(key)
                 {
@@ -84,8 +86,6 @@ NavigationPane
                     
                     picker.destroy();
                 }
-                
-                ActionBar.placement: ActionBarPlacement.OnBar
             }
         ]
         

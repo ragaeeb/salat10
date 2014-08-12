@@ -22,7 +22,7 @@ NavigationPane
                     invokeActionId: "bb.action.OPEN"
                 }
                 
-                ActionBar.placement: ActionBarPlacement.OnBar
+                ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                 imageSource: "images/tabs/ic_articles.png"
                 title: qsTr("Times of Salah") + Retranslate.onLanguageChanged
                 

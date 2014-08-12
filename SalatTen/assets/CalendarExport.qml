@@ -71,7 +71,7 @@ Page
             id: exportAction
             imageSource: "images/menu/ic_calendar_add.png"
             title: qsTr("Export") + Retranslate.onLanguageChanged
-            ActionBar.placement: ActionBarPlacement.OnBar
+            ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             enabled: false
             
             onTriggered:
