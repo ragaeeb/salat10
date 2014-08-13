@@ -3,7 +3,7 @@
 
 #include <QTimer>
 
-#include "DataModelWrapper.h"
+#include "ClockUtil.h"
 #include "NetworkProcessor.h"
 
 namespace salat {
@@ -11,12 +11,15 @@ namespace salat {
 using namespace bb::cascades;
 using namespace canadainc;
 
+class DataModelWrapper;
+
 class NotificationThread : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool calculationFeasible READ calculationFeasible)
 
-	DataModelWrapper m_model;
+    ClockUtil m_clock;
+	DataModelWrapper* m_model;
 	QTimer m_timer;
 	QMap<QString, QString> m_athaanMap;
     NetworkProcessor m_network;
@@ -25,19 +28,21 @@ class NotificationThread : public QObject
 
 signals:
 	void currentEventChanged();
-	void readyToCheckin(QVariantMap const& current, QVariantMap const& next);
+    void mapDataLoaded(QVariantList const& data);
 
 private slots:
+    void readyToCheckin(QVariantMap const& current, QVariantMap const& next);
 	void recalculate(QString const& key);
+    void requestComplete(QVariant const& cookie, QByteArray const& data);
 	void timeout(bool init=false);
 
 public:
-	NotificationThread(QObject* parent=NULL);
+	NotificationThread(DataModelWrapper* model, QObject* parent=NULL);
 	virtual ~NotificationThread();
 
 	Q_SLOT void run();
+    Q_INVOKABLE void fetchCheckins();
     bool calculationFeasible();
-	DataModelWrapper* getModel();
 };
 
 } /* namespace salat */

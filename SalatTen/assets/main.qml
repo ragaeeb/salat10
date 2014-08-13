@@ -119,10 +119,15 @@ TabbedPane
             source: "Tutorial.qml"
         }
     }
-
-    onCreationCompleted: {
+    
+    function initialized()
+    {
         if ( !persist.contains("angles") ) {
             menuDef.settings.triggered();
         }
+    }
+
+    onCreationCompleted: {
+        app.lazyInitComplete.connect(initialized);
     }
 }

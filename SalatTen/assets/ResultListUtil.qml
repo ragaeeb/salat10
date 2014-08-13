@@ -5,7 +5,7 @@ import com.canadainc.data 1.0
 
 QtObject
 {
-    property FilePicker picker: FilePicker
+    property variant picker: FilePicker
     {
         property variant keys
         defaultType: FileType.Music
@@ -19,6 +19,36 @@ QtObject
             app.setCustomAthaans(keys, selectedFiles[0]);
             
             persist.showToast( qsTr("Successfully set athans to %1").arg(uri), "", "asset:///images/ic_athaan_custom.png" );
+        }
+    }
+    
+    property variant athanDialog: SystemDialog
+    {
+        title: qsTr("Enable Athan?") + Retranslate.onLanguageChanged
+        body: qsTr("Do you want to enable athans to automatically play when it is time for salah?") + Retranslate.onLanguageChanged
+        rememberMeText: qsTr("Display notifications in the BlackBerry Hub") + Retranslate.onLanguageChanged
+        cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
+        confirmButton.label: qsTr("Yes") + Retranslate.onLanguageChanged
+        rememberMeChecked: true
+        includeRememberMe: true
+        
+        onFinished: {
+            var enableAthaan = result == SystemUiResult.ConfirmButtonSelection;
+            var enableNotifications = rememberMeSelection();
+            
+            var notifications = persist.getValueFor("notifications");
+            var athaans = persist.getValueFor("athaans");
+            var keys = translator.eventKeys();
+            
+            for (var i = keys.length-1; i >= 0; i--)
+            {
+                notifications[ keys[i] ] = enableNotifications;
+                athaans[ keys[i] ] = enableAthaan;
+            }
+            
+            persist.saveValueFor("notifications", notifications);
+            persist.saveValueFor("athaans", athaans);
+            persist.saveValueFor("athanPrompted", 1, false);
         }
     }
     
@@ -61,10 +91,10 @@ QtObject
             keepNotifications = persist.showBlockingDialog( qsTr("Mute Athan"), qsTr("Do you want notifications to show up in BlackBerry Hub?"), qsTr("Yes"), qsTr("No") );
         }
 
-        var selected = parent.selectionList();
+        var selected = parent.parent.selectionList();
         var athaans = persist.getValueFor("athaans");
         var notifications = persist.getValueFor("notifications");
-        var dm = parent.dataModel;
+        var dm = parent.parent.dataModel;
 
         for (var i = 0; i < selected.length; i++)
         {
@@ -99,12 +129,12 @@ QtObject
     
     function getSelectedKeys()
     {
-        var selected = parent.selectionList();
+        var selected = parent.parent.selectionList();
         var result = [];
         
         for (var i = 0; i < selected.length; i++)
         {
-            var current = parent.dataModel.data(selected[i]);
+            var current = parent.parent.dataModel.data(selected[i]);
             result.push(current.key);
         }
         
@@ -114,17 +144,17 @@ QtObject
     
     function textualizeSelected()
     {
-        var selected = parent.selectionList();
+        var selected = parent.parent.selectionList();
         var result = "";
         
         if (selected.length > 0)
         {
-            var lastDate = parent.dataModel.data(selected[0]).dateValue;
+            var lastDate = parent.parent.dataModel.data(selected[0]).dateValue;
             result += Qt.formatDate(lastDate, Qt.SystemLocaleLongDate) + "\n";
             
             for (var i = 0; i < selected.length; i++)
             {
-                var current = parent.dataModel.data(selected[i]);
+                var current = parent.parent.dataModel.data(selected[i]);
                 var dv = current.dateValue.valueOf();
                 
                 if ( dv != lastDate.valueOf() ) {

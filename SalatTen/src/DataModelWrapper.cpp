@@ -3,23 +3,19 @@
 #include "DataModelWrapper.h"
 #include "Coordinates.h"
 #include "Logger.h"
+#include "Persistance.h"
 #include "SalatParameters.h"
-#include "SalatUtils.h"
 #include "SolarCalculator.h"
 #include "Translator.h"
-
-#define UI_KEY "logUI"
 
 namespace salat {
 
 using namespace bb::cascades;
-using namespace bb::platform;
 
-DataModelWrapper::DataModelWrapper(QObject* parent) :
-        QObject(parent), m_model( QStringList() << "dateValue", this ), m_empty(true)
+DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
+        QObject(parent), m_persistance(p),
+        m_model( QStringList() << "dateValue", this ), m_empty(true)
 {
-    init();
-
 	m_model.setSortingKeys( QStringList() << "dateValue" << "value" );
 	m_model.setGrouping(ItemGrouping::ByFullValue);
 
@@ -28,74 +24,20 @@ DataModelWrapper::DataModelWrapper(QObject* parent) :
 }
 
 
-void DataModelWrapper::init()
-{
-    INIT_SETTING(UI_KEY, true);
-    INIT_SETTING(SERVICE_KEY, false);
-
-    INIT_FRESH("v3.2");
-    INIT_SETTING("strategy", "isna");
-    INIT_SETTING("skipJumahAthaan", 1);
-    INIT_SETTING("asrRatio", 1);
-    INIT_SETTING("hijri", 0);
-    INIT_SETTING("athanVolume", 1.0);
-
-    if ( !m_persistance.contains("athaans") )
-    {
-        QVariantMap notifications;
-
-        QStringList eventKeys = Translator::eventKeys();
-        QMap<QString, bool> salatMap = Translator().salatMap();
-
-        for (int i = eventKeys.size()-1; i >= 0; i--) {
-            notifications[ eventKeys[i] ] = salatMap.contains( eventKeys[i] );
-        }
-
-        m_persistance.saveValueFor("athaans", notifications, false);
-        m_persistance.saveValueFor("notifications", notifications, false);
-    }
-
-    if ( !m_persistance.contains("adjustments") )
-    {
-        QVariantMap adjustments;
-
-        QStringList salatKeys = Translator::eventKeys();
-
-        for (int i = salatKeys.size()-1; i >= 0; i--) {
-            adjustments[ salatKeys[i] ] = 0;
-        }
-
-        m_persistance.saveValueFor("adjustments", adjustments);
-    }
-
-    if ( !m_persistance.contains("profiles") )
-    {
-        QVariantMap profiles;
-        profiles[ QString::number(NotificationMode::Silent) ] = false;
-        profiles[ QString::number(NotificationMode::Vibrate) ] = true;
-        profiles[ QString::number(NotificationMode::Normal) ] = true;
-        profiles[ QString::number(NotificationMode::PhoneOnly) ] = true;
-        profiles[ QString::number(NotificationMode::AlertsOff) ] = false;
-
-        m_persistance.saveValueFor("profiles", profiles, false);
-    }
-}
-
-
 QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 {
-	Coordinates geo = Calculator::createCoordinates( local, m_persistance.getValueFor("latitude"), m_persistance.getValueFor("longitude") );
-	SalatParameters angles = Calculator::createParams( m_persistance.getValueFor("angles").toMap() );
-	qreal asrRatio = m_persistance.getValueFor("asrRatio").toReal();
+	Coordinates geo = Calculator::createCoordinates( local, m_persistance->getValueFor("latitude"), m_persistance->getValueFor("longitude") );
+	SalatParameters angles = Calculator::createParams( m_persistance->getValueFor("angles").toMap() );
+	qreal asrRatio = m_persistance->getValueFor("asrRatio").toReal();
 
 	QVariantList wrapped;
 	QStringList keys = Translator::eventKeys();
 	QMap<QString, bool> salatMap = Translator().salatMap();
 
-	QVariantMap adjustments = m_persistance.getValueFor("adjustments").toMap();
-	QVariantMap athaans = m_persistance.getValueFor("athaans").toMap();
-	QVariantMap notifications = m_persistance.getValueFor("notifications").toMap();
-	QVariantMap iqamahs = m_persistance.getValueFor("iqamahs").toMap();
+	QVariantMap adjustments = m_persistance->getValueFor("adjustments").toMap();
+	QVariantMap athaans = m_persistance->getValueFor("athaans").toMap();
+	QVariantMap notifications = m_persistance->getValueFor("notifications").toMap();
+	QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
 
 	for (int i = 0; i < numDays; i++)
 	{
@@ -203,7 +145,7 @@ void DataModelWrapper::calculateAndAppend(QDateTime const& reference)
 void DataModelWrapper::applyDiff(QString const& settingKey, QString const& itemKey)
 {
     int sections = m_model.childCount( QVariantList() );
-    QVariantMap settingValue = m_persistance.getValueFor(settingKey).toMap();
+    QVariantMap settingValue = m_persistance->getValueFor(settingKey).toMap();
 
     for (int i = 0; i < sections; i++)
     {
@@ -223,7 +165,7 @@ void DataModelWrapper::applyDiff(QString const& settingKey, QString const& itemK
 void DataModelWrapper::updateIqamahs()
 {
     int sections = m_model.childCount( QVariantList() );
-    QVariantMap iqamahs = m_persistance.getValueFor("iqamahs").toMap();
+    QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
 
     for (int i = 0; i < sections; i++)
     {
@@ -276,7 +218,7 @@ void DataModelWrapper::loadMore()
 
 
 Persistance* DataModelWrapper::getPersist() {
-	return &m_persistance;
+	return m_persistance;
 }
 
 
@@ -334,9 +276,9 @@ void DataModelWrapper::saveIqamah(QString const& key, QDateTime const& time)
 {
     LOGGER(key << time);
 
-    QVariantMap iqamahs = m_persistance.getValueFor("iqamahs").toMap();
+    QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
     iqamahs[key] = time.time();
-    m_persistance.saveValueFor("iqamahs", iqamahs);
+    m_persistance->saveValueFor("iqamahs", iqamahs);
 }
 
 
@@ -344,9 +286,9 @@ void DataModelWrapper::removeIqamah(QString const& key)
 {
     LOGGER(key);
 
-    QVariantMap iqamahs = m_persistance.getValueFor("iqamahs").toMap();
+    QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
     iqamahs.remove(key);
-    m_persistance.saveValueFor("iqamahs", iqamahs);
+    m_persistance->saveValueFor("iqamahs", iqamahs);
 }
 
 

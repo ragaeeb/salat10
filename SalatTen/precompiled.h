@@ -8,6 +8,9 @@
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/TouchEvent>
 
+#include <bb/cascades/maps/MapView>
+#include <bb/cascades/maps/MapData>
+
 #include <bb/cascades/places/PlacePicker>
 #include <bb/cascades/pickers/FilePicker>
 
@@ -21,8 +24,8 @@
 #include <bb/platform/Notification>
 #include <bb/platform/NotificationMode>
 
-#include <bb/cascades/maps/MapView>
 #include <bb/platform/geo/GeoLocation>
-#include <bb/cascades/maps/MapData>
+
+#include <bb/system/InvokeManager>
 
 #include <QtLocationSubset/QGeoAddress>

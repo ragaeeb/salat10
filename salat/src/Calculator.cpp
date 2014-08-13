@@ -10,22 +10,22 @@ namespace {
 using namespace salat;
 
 /** The ratio to the height. */
-const qreal height_ratio = 12/M_PI;
+#define height_ratio 12/M_PI
 
-const qreal linear_ratio = 0.45;
+#define linear_ratio 0.45
 
 /** The multiplier value. */
-const  qreal multiplier = 1.3369;
+#define multiplier 1.3369
 
 /** Safety time used to give some room for error handling. */
-const  qreal safety_time = 0.016389; // //(59/TimeFormatter.TOTAL_SECONDS_IN_MINUTE)/TimeFormatter.TOTAL_MINUTES_IN_HOUR; // but times are off with IslamicFinder
+#define safety_time 0.016389 // //(59/TimeFormatter.TOTAL_SECONDS_IN_MINUTE)/TimeFormatter.TOTAL_MINUTES_IN_HOUR; // but times are off with IslamicFinder
 
-const int total_seconds_in_minute = 60;
-const int minimumSecond = 0;
-const int maxMinuteValue = 59;
-const int maxHourValue = 23;
-const int totalHoursInDay = 24;
-const int totalMinutesInHour = 60;
+#define total_seconds_in_minute 60
+#define minimumSecond 0
+#define maxMinuteValue 59
+#define maxHourValue 23
+#define totalHoursInDay 24
+#define totalMinutesInHour 60
 
 /**
  * Computes the height value given the ratio.
