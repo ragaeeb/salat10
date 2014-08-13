@@ -5,10 +5,13 @@
 #include <QMutex>
 
 #include "Calculator.h"
-#include "Persistance.h"
 #include "Translator.h"
 
 #include <bb/cascades/GroupDataModel>
+
+namespace canadainc {
+    class Persistance;
+}
 
 namespace salat {
 
@@ -19,7 +22,7 @@ class DataModelWrapper : public QObject
 	Q_OBJECT
 	Q_PROPERTY(bool empty READ isEmpty NOTIFY emptyChanged)
 
-	Persistance m_persistance;
+	Persistance* m_persistance;
 	Calculator m_calculator;
 	QMutex m_mutex;
 	bb::cascades::GroupDataModel m_model;
@@ -28,7 +31,6 @@ class DataModelWrapper : public QObject
 
 	void calculateAndAppend(QDateTime const& reference);
 	QVariantList matchValue(QDateTime const& reference);
-	void init();
 
 private slots:
     void itemAdded(QVariantList indexPath);
@@ -38,7 +40,7 @@ signals:
     void emptyChanged();
 
 public:
-	DataModelWrapper(QObject* parent=NULL);
+	DataModelWrapper(Persistance* p, QObject* parent=NULL);
 	virtual ~DataModelWrapper();
 
 	Q_INVOKABLE QVariant getModel();

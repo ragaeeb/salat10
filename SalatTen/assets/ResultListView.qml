@@ -1,4 +1,4 @@
-import bb.cascades 1.0
+import bb.cascades 1.2
 
 ListView
 {
@@ -8,6 +8,10 @@ ListView
     property variant localization: localizer
     property alias util: listUtil
     property bool manualSelected: false
+    
+    function showAthanPrompt() {
+        listUtil.object.athanDialog.show();
+    }
     
     function onCurrentEventChanged()
     {
@@ -68,7 +72,8 @@ ListView
                 
                 onTriggered: {
                     console.log("UserEvent: EnableAthans");
-                    listUtil.toggleAthaans(true);
+                    listUtil.active = true;
+                    listUtil.object.toggleAthaans(true);
                 }
             },
             
@@ -80,7 +85,8 @@ ListView
                 
                 onTriggered: {
                     console.log("UserEvent: MuteAthans");
-                    listUtil.toggleAthaans(false);
+                    listUtil.active = true;
+                    listUtil.object.toggleAthaans(false);
                 }
             },
             
@@ -92,7 +98,8 @@ ListView
                 
                 onTriggered: {
                     console.log("UserEvent: CopyMultiToClipboard");
-                    persist.copyToClipboard( listUtil.textualizeSelected() );
+                    listUtil.active = true;
+                    persist.copyToClipboard( listUtil.object.textualizeSelected() );
                 }
             },
             
@@ -109,6 +116,7 @@ ListView
                 
                 onTriggered: {
                     console.log("UserEvent: ShareMultiResults");
+                    listUtil.active = true;
                     data = persist.convertToUtf8( listUtil.textualizeSelected() );
                 }
             },
@@ -120,6 +128,7 @@ ListView
                 
                 onTriggered: {
                     console.log("UserEvent: SetCustomSound");
+                    listUtil.active = true;
                     listUtil.setCustomAthaans( listUtil.getSelectedKeys() );
                 }
             },
@@ -131,6 +140,7 @@ ListView
                 
                 onTriggered: {
                     console.log("UserEvent: ResetCustomAthan");
+                    listUtil.active = true;
                     listUtil.resetSound( listUtil.getSelectedKeys() );
                 }
             }
@@ -181,8 +191,10 @@ ListView
             }
         },
         
-        ResultListUtil {
+        Delegate {
             id: listUtil
+            active: false
+            source: "ResultListUtil.qml"
         }
     ]
 }

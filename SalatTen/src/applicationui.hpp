@@ -1,17 +1,13 @@
 #ifndef ApplicationUI_HPP_
 #define ApplicationUI_HPP_
 
-#include <bb/system/InvokeManager>
-
-#include <QTimer>
-
-#include "ClockUtil.h"
 #include "customsqldatasource.h"
+#include "DataModelWrapper.h"
 #include "LazyMediaPlayer.h"
 #include "LazySceneCover.h"
 #include "LocaleUtil.h"
-#include "NetworkProcessor.h"
 #include "NotificationThread.h"
+#include "Persistance.h"
 
 namespace bb {
 	namespace cascades {
@@ -37,16 +33,14 @@ class ApplicationUI : public QObject
 	Q_PROPERTY(bool hasCalendarAccess READ hasCalendarAccess)
 	Q_PROPERTY(bool atLeastOneAthanScheduled READ atLeastOneAthanScheduled)
 
+	Persistance m_persistance;
 	LocaleUtil m_locale;
-	NotificationThread m_notification;
 	LazySceneCover m_cover;
-	ClockUtil m_clock;
-	QTimer m_timer;
 	CustomSqlDataSource m_sql;
-	bb::system::InvokeManager m_invokeManager;
 	CleanupEvents* m_cleanup;
 	ScheduleEvents* m_schedule;
-	NetworkProcessor m_network;
+    DataModelWrapper m_model;
+    NotificationThread m_notification;
 
     ApplicationUI(bb::cascades::Application *app);
 
@@ -55,15 +49,13 @@ signals:
 	void operationProgress(int current, int total);
 	void operationComplete(QString const& toastMessage, QString const& icon);
 	void initialize();
-	void mapDataLoaded(QVariantList const& data);
+	void lazyInitComplete();
 
 private slots:
     void handleExportComplete(QObject* obj);
     void handleCleanupComplete(QObject* obj);
-    void init();
+    void lazyInit();
     void onFullScreen();
-    void readyToCheckin(QVariantMap const& current, QVariantMap const& next);
-    void requestComplete(QVariant const& cookie, QByteArray const& data);
     void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);
     void terminateThreads();
 
@@ -74,11 +66,9 @@ public:
     Q_INVOKABLE void loadAccounts();
     Q_INVOKABLE void exportToCalendar(int numDays, QVariantList const& events, int accountId);
     Q_INVOKABLE void renderMap(QObject* mapView, qreal latitude, qreal longitude, QString const& name, QString const& event, bool focus=false);
-    Q_INVOKABLE void cleanupCalendarEvents();
     Q_INVOKABLE QObject* refreshLocation();
-    Q_INVOKABLE void fetchCheckins();
+    Q_INVOKABLE void cleanupCalendarEvents();
     Q_INVOKABLE void setCustomAthaans(QStringList const& keys, QString const& uri=QString());
-    Q_INVOKABLE void launchUrl(QString const& url);
     bool atLeastOneAthanScheduled();
     bool hasCalendarAccess();
 };

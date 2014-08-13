@@ -21,7 +21,7 @@ NavigationPane
         onSettingChanged("hijri");
         
         if ( !persist.contains("athanPrompted") ) {
-            athaanDialog.show();
+            listView.showAthanPrompt();
         } else if ( !persist.contains("athanPicked") && app.atLeastOneAthanScheduled ) {
             definition.source = "AthanPreviewSheet.qml";
             var picker = definition.createObject();
@@ -38,6 +38,7 @@ NavigationPane
         else if ( persist.tutorial( "tutorialHijriDate", qsTr("Did you know you can see the current Hijri date by tapping on the SALAT10 title-bar at the top? Try it!\n\nIf your Hijri date is off by a day or two, simply press-and-hold on it and choose 'Edit' from the menu on the right!"), "asset:///images/ic_calendar_empty.png" ) ) {}
         else if ( persist.tutorial( "tutorialEdit", qsTr("Are your timings off by a few minutes from your local masjid?\n\nThat's easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose 'Edit'. You will then be able to adjust the results by up to 10 minutes."), "asset:///images/menu/ic_edit.png" ) ) {}
         else if ( persist.tutorial( "tutorialNewMuslim", qsTr("Are you a new Muslim?\n\nIf you need step-by-step tutorials on the prayer, please have a look at the 'Tutorial' tab on the menu on the left-side. It should be of help to you in shaa Allah!"), "asset:///images/tabs/ic_tutorial.png" ) ) {}
+        else if ( persist.tutorial( "tutorialDonate", qsTr("As'salaamu alaykum wa rahmatullahi wabarakathu,\n\nJazakAllahu khair for using Salat10. While our Islamic apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal.\n\nMay Allah reward you, and bless you and your family."), "asset:///images/ic_donate.png" ) ) {}
         else if ( !persist.contains("alFurqanAdvertised") ) {
             definition.source = "AlFurqanAdvertisementPage.qml";
             var picker = definition.createObject();
@@ -52,7 +53,7 @@ NavigationPane
     }
     
     onCreationCompleted: {
-        app.initialize.connect(initialized);
+        app.lazyInitComplete.connect(initialized);
     }
     
     onPopTransitionEnded: {
@@ -330,36 +331,6 @@ NavigationPane
     attachedObjects: [
         ComponentDefinition {
             id: definition
-        },
-        
-        SystemDialog {
-            id: athaanDialog
-            title: qsTr("Enable Athan?") + Retranslate.onLanguageChanged
-            body: qsTr("Do you want to enable athans to automatically play when it is time for salah?") + Retranslate.onLanguageChanged
-            rememberMeText: qsTr("Display notifications in the BlackBerry Hub") + Retranslate.onLanguageChanged
-            cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
-            confirmButton.label: qsTr("Yes") + Retranslate.onLanguageChanged
-            rememberMeChecked: true
-            includeRememberMe: true
-            
-            onFinished: {
-                var enableAthaan = result == SystemUiResult.ConfirmButtonSelection;
-                var enableNotifications = rememberMeSelection();
-                
-                var notifications = persist.getValueFor("notifications");
-                var athaans = persist.getValueFor("athaans");
-                var keys = translator.eventKeys();
-                
-                for (var i = keys.length-1; i >= 0; i--)
-                {
-                    notifications[ keys[i] ] = enableNotifications;
-                    athaans[ keys[i] ] = enableAthaan;
-                }
-                
-                persist.saveValueFor("notifications", notifications);
-                persist.saveValueFor("athaans", athaans);
-                persist.saveValueFor("athanPrompted", 1, false);
-            }
         }
     ]
 }

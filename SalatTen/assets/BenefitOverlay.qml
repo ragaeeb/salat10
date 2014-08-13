@@ -36,7 +36,7 @@ ControlDelegate
         var random = Math.floor( Math.random()*10 ) + 1;
         
         if (random > 7) {
-            app.initialize.connect(initialized);
+            app.lazyInitComplete.connect(initialized);
         }
     }
     
@@ -90,7 +90,7 @@ ControlDelegate
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Fill
                 layout: DockLayout {}
-                
+
                 Label {
                     text: benefitText
                     multiline: true
@@ -98,7 +98,7 @@ ControlDelegate
                     textStyle.textAlign: TextAlign.Center
                     textStyle.fontSize: FontSize.XXSmall
                 }
-                
+
                 attachedObjects: [
                     ImagePaintDefinition {
                         id: bg

@@ -142,8 +142,8 @@ NavigationPane
                         }
                         
                         onCreationCompleted: {
-                            app.mapDataLoaded.connect(onMapDataLoaded);
-                            app.fetchCheckins();
+                            notification.mapDataLoaded.connect(onMapDataLoaded);
+                            notification.fetchCheckins();
                         }
                     }
                 }
