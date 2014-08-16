@@ -2,6 +2,8 @@ import bb.cascades 1.0
 
 Page
 {
+    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+    
     titleBar: TitleBar {
         title: qsTr("Clarification") + Retranslate.onLanguageChanged
     }
@@ -70,7 +72,7 @@ Page
                     {'name': qsTr("Abu Khaliyl")},
                     {'name': qsTr("Fawzee al-Bahraini"), 'uri': "http://www.salafitalk.net/st/viewmessages.cfm?Forum=25&Topic=11688"},
                     {'name': qsTr("Mohammad bin Rizq at-Tarhuni")},
-                    {'name': qsTr("Suhaib Hasan"), 'uri': "https://www.youtube.com/watch?v=plhQLPlNbWA"}
+                    {'name': qsTr("Suhaib Hasan"), 'uri': "http://www.troid.ca/index.php/manhaj/abandoning-innovation/groups-and-partisanship/363-deviant-sects-of-the-20th-century"}
                 ];
                 
                 adm.append(misguided);

@@ -10,6 +10,8 @@ NavigationPane
     
     Page
     {
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        
         actions: [
             ActionItem {
                 title: qsTr("Refresh") + Retranslate.onLanguageChanged
