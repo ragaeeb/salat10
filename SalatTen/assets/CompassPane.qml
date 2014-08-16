@@ -33,11 +33,12 @@ NavigationPane
             topPadding: 20; leftPadding: 20; rightPadding: 20
             background: back.imagePaint
             
-            ActivityIndicator {
-                running: compass.calibration < 1
-                visible: running
-                verticalAlignment: VerticalAlignment.Top
-                horizontalAlignment: HorizontalAlignment.Center
+            ProgressControl
+            {
+                id: busy
+                asset: "images/loading/loading_compass.png"
+                delegateActive: compass.calibration < 1
+                loadingText: qsTr("Calibrating...") + Retranslate.onLanguageChanged
             }
             
             Label {
