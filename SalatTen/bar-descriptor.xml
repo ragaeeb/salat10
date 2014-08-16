@@ -164,6 +164,7 @@
     <asset path="../../canadainc/assets/FullScreenDialog.qml">assets/FullScreenDialog.qml</asset>
     <asset path="../../canadainc/assets/PersistCheckBox.qml">assets/PersistCheckBox.qml</asset>
 	<asset path="../../canadainc/assets/PersistDropDown.qml">assets/PersistDropDown.qml</asset>
+	<asset path="../../canadainc/assets/ProgressControl.qml">assets/ProgressControl.qml</asset>
 
 	<!-- Request permission to run a backend headless process and post notification. -->
 	<permission system="true">_sys_run_headless</permission>
