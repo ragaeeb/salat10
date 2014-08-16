@@ -16,7 +16,6 @@ class DataModelWrapper;
 class NotificationThread : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool calculationFeasible READ calculationFeasible)
 
     ClockUtil m_clock;
 	DataModelWrapper* m_model;
@@ -32,17 +31,14 @@ signals:
 
 private slots:
     void readyToCheckin(QVariantMap const& current, QVariantMap const& next);
-	void recalculate(QString const& key);
     void requestComplete(QVariant const& cookie, QByteArray const& data);
-	void timeout(bool init=false);
+	void timeout();
 
 public:
 	NotificationThread(DataModelWrapper* model, QObject* parent=NULL);
 	virtual ~NotificationThread();
 
-	Q_SLOT void run();
     Q_INVOKABLE void fetchCheckins();
-    bool calculationFeasible();
 };
 
 } /* namespace salat */

@@ -90,7 +90,8 @@ QtObject
         return myRes;
     }
 
-    function writeIslamicDate(adjustment) {
+    function writeIslamicDate(adjustment)
+    {
         var wdNames = new Array( qsTr("Ahad"), qsTr("Ithnin"), qsTr("Thulatha"), qsTr("Arbaa"), qsTr("Khams"), qsTr("Jumuah"), qsTr("Sabt") );
         var iMonthNames = new Array( qsTr("Muharram"), qsTr("Safar"), qsTr("Rabi'ul Awwal"), qsTr("Rabi'ul Akhir"),
         qsTr("Jumadal Ula"), qsTr("Jumadal Akhira"), qsTr("Rajab"), qsTr("Sha'ban"),

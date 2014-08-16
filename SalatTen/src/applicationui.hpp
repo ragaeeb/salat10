@@ -31,7 +31,6 @@ class ApplicationUI : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool hasCalendarAccess READ hasCalendarAccess)
-	Q_PROPERTY(bool atLeastOneAthanScheduled READ atLeastOneAthanScheduled)
 
 	Persistance m_persistance;
 	LocaleUtil m_locale;
@@ -69,7 +68,6 @@ public:
     Q_INVOKABLE QObject* refreshLocation();
     Q_INVOKABLE void cleanupCalendarEvents();
     Q_INVOKABLE void setCustomAthaans(QStringList const& keys, QString const& uri=QString());
-    bool atLeastOneAthanScheduled();
     bool hasCalendarAccess();
 };
 

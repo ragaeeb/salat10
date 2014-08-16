@@ -224,7 +224,8 @@ NavigationPane
                 }
             ]
             
-            EmptyDelegate {
+            EmptyDelegate
+            {
                 id: emptyDelegate
                 graphic: "images/empty/ic_no_articles.png"
                 labelText: qsTr("There are no articles loaded. Select a category from the dropdown to load them or tap here.")

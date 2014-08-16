@@ -6,7 +6,7 @@
     <message>
         <location filename="../assets/AdjustEventDialog.qml" line="45"/>
         <source>%1 will be adjusted %2 minutes before its calculated time.</source>
-        <translation>%1 va être ajustée %2 minutes avant l'heure calculée</translation>
+        <translation>%1 va être ajustée %2 minutes avant l&apos;heure calculée</translation>
     </message>
     <message>
         <location filename="../assets/AdjustEventDialog.qml" line="47"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="../assets/AdjustEventDialog.qml" line="49"/>
         <source>%1 will be adjusted %2 minutes after its calculated time.</source>
-        <translation>%1 Va être ajustée %2 minutes après l'heure calculée.</translation>
+        <translation>%1 Va être ajustée %2 minutes après l&apos;heure calculée.</translation>
     </message>
 </context>
 <context>
@@ -42,7 +42,7 @@
     <message>
         <location filename="../assets/AlFurqanAdvertisementPage.qml" line="6"/>
         <source>Learn Arabic!</source>
-        <translation>Apprendre l'arabe!</translation>
+        <translation>Apprendre l&apos;arabe!</translation>
     </message>
     <message>
         <location filename="../assets/AlFurqanAdvertisementPage.qml" line="50"/>
@@ -211,9 +211,9 @@ www.alfurqanarabic.org</source>
         <translation>Articles concernant Salat-ul Witr</translation>
     </message>
     <message>
-        <location filename="../assets/ArticlesPage.qml" line="230"/>
+        <location filename="../assets/ArticlesPage.qml" line="231"/>
         <source>There are no articles loaded. Select a category from the dropdown to load them or tap here.</source>
-        <translation>Il n'y a aucun articles chargé. Sélectionner une catégorie du "dropdown" pour les charger ou toucher ici.</translation>
+        <translation>Il n&apos;y a aucun articles chargé. Sélectionner une catégorie du &quot;dropdown&quot; pour les charger ou toucher ici.</translation>
     </message>
 </context>
 <context>
@@ -222,7 +222,7 @@ www.alfurqanarabic.org</source>
         <location filename="../assets/AthanPreviewSheet.qml" line="13"/>
         <location filename="../assets/AthanPreviewSheet.qml" line="165"/>
         <source>Select Athan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sélectionner l&apos;athan</translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="20"/>
@@ -237,7 +237,7 @@ www.alfurqanarabic.org</source>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="63"/>
         <source>Please choose your preferred athan for Dhuhr to Isha (you will have to set the Fajr one on your own):</source>
-        <translation>Choisissez votre athan préféré pour dhur jusqu'à Isha(vous devrez mettre celui du fajr manuellement)</translation>
+        <translation>Choisissez votre athan préféré pour dhur jusqu&apos;à Isha(vous devrez mettre celui du fajr manuellement)</translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="130"/>
@@ -274,16 +274,16 @@ www.alfurqanarabic.org</source>
     <message>
         <location filename="../assets/CalendarExport.qml" line="45"/>
         <source>Did not find any accounts. Maybe the app does not have the permissions it needs...</source>
-        <translation>Aucun compte trouve. Il se peut que l'application n'ai pas les permissions nécessaires...</translation>
+        <translation>Aucun compte trouve. Il se peut que l&apos;application n&apos;ai pas les permissions nécessaires...</translation>
     </message>
     <message>
         <location filename="../assets/CalendarExport.qml" line="47"/>
         <source>You can export the salat times to your device calendar so that a reminder can scheduled when it is time for salat even when this app is not running.
 
 Please choose the number of days to export using the circular slider.</source>
-        <translation>Vous pouvez exporter les heures de prière dans le calendrier de votre appareil ce qui permet d'avoir des rappels quand arrive l'heure de la prière même si cette application n'est pas en cours.
+        <translation>Vous pouvez exporter les heures de prière dans le calendrier de votre appareil ce qui permet d&apos;avoir des rappels quand arrive l&apos;heure de la prière même si cette application n&apos;est pas en cours.
         
-Choisissez le nombre de jours à exporter en utilisant le "slider " circulaire</translation>
+Choisissez le nombre de jours à exporter en utilisant le &quot;slider &quot; circulaire</translation>
     </message>
     <message>
         <location filename="../assets/CalendarExport.qml" line="47"/>
@@ -306,12 +306,12 @@ Choisissez le nombre de jours à exporter en utilisant le "slider " circulaire</
     <message>
         <location filename="../assets/CalendarExport.qml" line="164"/>
         <source>Friday Du&apos;aa Reminder</source>
-        <translation>Rappel des du'aa du vendredi</translation>
+        <translation>Rappel des du&apos;aa du vendredi</translation>
     </message>
     <message>
         <location filename="../assets/CalendarExport.qml" line="172"/>
         <source>On Fridays between Asr and Maghrib a reminder will be scheduled for when the du&apos;aa is accepted.</source>
-        <translation>Le vendredi, entre Asr and Maghrib un rappel va être prévu lorsque les du'aa sont acceptés.</translation>
+        <translation>Le vendredi, entre Asr and Maghrib un rappel va être prévu lorsque les du&apos;aa sont acceptés.</translation>
     </message>
     <message>
         <location filename="../assets/CalendarExport.qml" line="175"/>
@@ -322,8 +322,8 @@ Choisissez le nombre de jours à exporter en utilisant le "slider " circulaire</
         <location filename="../assets/CalendarExport.qml" line="183"/>
         <source>On Fridays a reminder will be scheduled %n minutes before Maghrib for you to make du&apos;aa.</source>
         <translation>
-            <numerusform>Le vendredi, un rappel va être prévu %n minute avant l'heure du Maghrib pour que vous faites les du'aa.</numerusform>
-            <numerusform>Le vendredi, un rappel va être prévu %n minutes avant l'heure du Maghrib pour que vous faites les du'aa.</numerusform>
+            <numerusform>Le vendredi, un rappel va être prévu %n minute avant l&apos;heure du Maghrib pour que vous faites les du&apos;aa.</numerusform>
+            <numerusform>Le vendredi, un rappel va être prévu %n minutes avant l&apos;heure du Maghrib pour que vous faites les du&apos;aa.</numerusform>
         </translation>
     </message>
     <message>
@@ -334,7 +334,7 @@ Choisissez le nombre de jours à exporter en utilisant le "slider " circulaire</
     <message>
         <location filename="../assets/CalendarExport.qml" line="199"/>
         <source>You will be notified for %1 exactly on time.</source>
-        <translation>Vous allez être notifié pour %1 À l'heure exacte.</translation>
+        <translation>Vous allez être notifié pour %1 À l&apos;heure exacte.</translation>
     </message>
     <message>
         <location filename="../assets/CalendarExport.qml" line="201"/>
@@ -406,7 +406,7 @@ JazakAllahu khayran. May Allah forgive us for our shortcomings and keep us uprig
 If you see a spinning icon at the top it means the compass readings are still being adjusted. If you see this, keep rotating and moving until it goes away.</source>
         <translation>Écartez vous du métal et essayez de faire correspondre la valeur de la boussole avec celle de Qibla azimuth. Lorsque vous pointez vers la bonne direction, votre appareil vibrera.
 
-Si vous voyez une icône tourné en haut, cela signifie que la boussole doit encore être ajustée. Continuez de tourner et bouger jusqu'à qu'elle disparaisse.</translation>
+Si vous voyez une icône tourné en haut, cela signifie que la boussole doit encore être ajustée. Continuez de tourner et bouger jusqu&apos;à qu&apos;elle disparaisse.</translation>
     </message>
     <message>
         <location filename="../assets/CompassPane.qml" line="17"/>
@@ -421,7 +421,7 @@ Si vous voyez une icône tourné en haut, cela signifie que la boussole doit enc
     <message>
         <location filename="../assets/CompassPane.qml" line="53"/>
         <source>Compass backend failed to connect! Either your device does not support Qibla detection or it is in a bad state and you should reset your device or the app and try again!</source>
-        <translation>La connexion de la boussole à échoué. Soit votre appareil ne supporte pas la détection de la Qibla ou il est réglé sur un mauvais pays, vous devez alors redémarrer votre appareil ou l'application puis essayée de nouveau!</translation>
+        <translation>La connexion de la boussole à échoué. Soit votre appareil ne supporte pas la détection de la Qibla ou il est réglé sur un mauvais pays, vous devez alors redémarrer votre appareil ou l&apos;application puis essayée de nouveau!</translation>
     </message>
     <message>
         <location filename="../assets/CompassPane.qml" line="105"/>
@@ -501,97 +501,97 @@ Si vous voyez une icône tourné en haut, cela signifie que la boussole doit enc
 <context>
     <name>HijriCalculator</name>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="94"/>
+        <location filename="../assets/HijriCalculator.qml" line="95"/>
         <source>Ahad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="94"/>
+        <location filename="../assets/HijriCalculator.qml" line="95"/>
         <source>Ithnin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="94"/>
+        <location filename="../assets/HijriCalculator.qml" line="95"/>
         <source>Thulatha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="94"/>
+        <location filename="../assets/HijriCalculator.qml" line="95"/>
         <source>Arbaa</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="94"/>
+        <location filename="../assets/HijriCalculator.qml" line="95"/>
         <source>Khams</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="94"/>
+        <location filename="../assets/HijriCalculator.qml" line="95"/>
         <source>Jumuah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="94"/>
+        <location filename="../assets/HijriCalculator.qml" line="95"/>
         <source>Sabt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="95"/>
+        <location filename="../assets/HijriCalculator.qml" line="96"/>
         <source>Muharram</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="95"/>
+        <location filename="../assets/HijriCalculator.qml" line="96"/>
         <source>Safar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="95"/>
+        <location filename="../assets/HijriCalculator.qml" line="96"/>
         <source>Rabi&apos;ul Awwal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="95"/>
+        <location filename="../assets/HijriCalculator.qml" line="96"/>
         <source>Rabi&apos;ul Akhir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="96"/>
+        <location filename="../assets/HijriCalculator.qml" line="97"/>
         <source>Jumadal Ula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="96"/>
+        <location filename="../assets/HijriCalculator.qml" line="97"/>
         <source>Jumadal Akhira</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="96"/>
+        <location filename="../assets/HijriCalculator.qml" line="97"/>
         <source>Rajab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="96"/>
+        <location filename="../assets/HijriCalculator.qml" line="97"/>
         <source>Sha&apos;ban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="97"/>
+        <location filename="../assets/HijriCalculator.qml" line="98"/>
         <source>Ramadan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="97"/>
+        <location filename="../assets/HijriCalculator.qml" line="98"/>
         <source>Shawwal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="97"/>
+        <location filename="../assets/HijriCalculator.qml" line="98"/>
         <source>Dhul Qa&apos;ada</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HijriCalculator.qml" line="97"/>
+        <location filename="../assets/HijriCalculator.qml" line="98"/>
         <source>Dhul Hijja</source>
         <translation type="unfinished"></translation>
     </message>
@@ -642,7 +642,7 @@ Si vous voyez une icône tourné en haut, cela signifie que la boussole doit enc
     <message>
         <location filename="../assets/MuteAthanTutorial.qml" line="11"/>
         <source>Athan Canceling</source>
-        <translation>Annulation De L'Athan</translation>
+        <translation>Annulation De L&apos;Athan</translation>
     </message>
     <message>
         <location filename="../assets/MuteAthanTutorial.qml" line="16"/>
@@ -654,7 +654,7 @@ Si vous voyez une icône tourné en haut, cela signifie que la boussole doit enc
         <source>
 
 To mute the athan while it is playing, simply press the volume down button to cancel it.</source>
-        <translation>Pour muter l'athan pendant la notification, pressez juste le bouton volume bas pour l'arrêter.</translation>
+        <translation>Pour muter l&apos;athan pendant la notification, pressez juste le bouton volume bas pour l&apos;arrêter.</translation>
     </message>
 </context>
 <context>
@@ -665,42 +665,59 @@ To mute the athan while it is playing, simply press the volume down button to ca
         <translation>Athan mis avec succès pour %1</translation>
     </message>
     <message>
+        <location filename="../assets/ResultListUtil.qml" line="27"/>
+        <source>Enable Athan?</source>
+        <translation>Activer L&apos;Athan?</translation>
+    </message>
+    <message>
         <location filename="../assets/ResultListUtil.qml" line="28"/>
+        <source>Do you want to enable athans to automatically play when it is time for salah?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ResultListUtil.qml" line="29"/>
+        <source>Display notifications in the BlackBerry Hub</source>
+        <translation>Afficher les notifications dans le BlackBerry Hub</translation>
+    </message>
+    <message>
+        <location filename="../assets/ResultListUtil.qml" line="58"/>
         <source>Successfully reset athans to default sound</source>
-        <translation>La mise par defaults des sons de l'athan est un succès.</translation>
+        <translation>La mise par defaults des sons de l&apos;athan est un succès.</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="34"/>
+        <location filename="../assets/ResultListUtil.qml" line="64"/>
         <source>Select Athan</source>
-        <translation>Sélectionner l'athan</translation>
+        <translation>Sélectionner l&apos;athan</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="61"/>
+        <location filename="../assets/ResultListUtil.qml" line="91"/>
         <source>Mute Athan</source>
-        <translation>Muter l'athan</translation>
+        <translation>Muter l&apos;athan</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="61"/>
+        <location filename="../assets/ResultListUtil.qml" line="91"/>
         <source>Do you want notifications to show up in BlackBerry Hub?</source>
         <translation>Voulez vous que les notifications apparaissent dans le blackberry Hub?</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="61"/>
+        <location filename="../assets/ResultListUtil.qml" line="31"/>
+        <location filename="../assets/ResultListUtil.qml" line="91"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="61"/>
+        <location filename="../assets/ResultListUtil.qml" line="30"/>
+        <location filename="../assets/ResultListUtil.qml" line="91"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="90"/>
+        <location filename="../assets/ResultListUtil.qml" line="120"/>
         <source>Successfully enabled alarms/athans.</source>
         <translation>Les alarmes/athans ont été activé avec succès.</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="93"/>
+        <location filename="../assets/ResultListUtil.qml" line="123"/>
         <source>Successfully muted alarms/athans.</source>
         <translation>Les alarmes / athans ont été muté avec succès.</translation>
     </message>
@@ -708,47 +725,47 @@ To mute the athan while it is playing, simply press the volume down button to ca
 <context>
     <name>ResultListView</name>
     <message>
-        <location filename="../assets/ResultListView.qml" line="48"/>
+        <location filename="../assets/ResultListView.qml" line="52"/>
         <source>Iqamah time removed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="66"/>
+        <location filename="../assets/ResultListView.qml" line="70"/>
         <source>Enable Alarms/Athans</source>
         <translation>Activer alarmes/athans</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="78"/>
+        <location filename="../assets/ResultListView.qml" line="83"/>
         <source>Mute Alarms/Athans</source>
         <translation>Muter Alarmes/Athans</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="90"/>
+        <location filename="../assets/ResultListView.qml" line="96"/>
         <source>Copy</source>
         <translation>Copie</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="103"/>
+        <location filename="../assets/ResultListView.qml" line="110"/>
         <source>Share</source>
         <translation>Partager</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="118"/>
+        <location filename="../assets/ResultListView.qml" line="126"/>
         <source>Set Custom Sound</source>
         <translation>Mettre un Son Personnaliser</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="129"/>
+        <location filename="../assets/ResultListView.qml" line="138"/>
         <source>Reset Sound</source>
         <translation>Réinitialiser le son</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListView.qml" line="139"/>
+        <location filename="../assets/ResultListView.qml" line="149"/>
         <source>None selected</source>
         <translation>Non sélectionné</translation>
     </message>
     <message numerus="yes">
-        <location filename="../assets/ResultListView.qml" line="144"/>
+        <location filename="../assets/ResultListView.qml" line="154"/>
         <source>+%n Events Selected</source>
         <translation>
             <numerusform>+ %n événement sélectionné</numerusform>
@@ -761,7 +778,7 @@ To mute the athan while it is playing, simply press the volume down button to ca
     <message>
         <location filename="../assets/SalatTitleBar.qml" line="133"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Editer</translation>
     </message>
 </context>
 <context>
@@ -774,7 +791,7 @@ To mute the athan while it is playing, simply press the volume down button to ca
     <message>
         <location filename="../assets/SettingsPage.qml" line="20"/>
         <source>Play the athan in the following modes</source>
-        <translation>Jouer l'athan dans les modes suivants</translation>
+        <translation>Jouer l&apos;athan dans les modes suivants</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="33"/>
@@ -814,7 +831,7 @@ To mute the athan while it is playing, simply press the volume down button to ca
     <message>
         <location filename="../assets/SettingsPage.qml" line="161"/>
         <source>Asr begins when the height of an object is equal to the height of its shadow.</source>
-        <translation>Asr commence lorsque la hauteur de l'ombre d'un objet est égal à la hauteur de celui-ci.</translation>
+        <translation>Asr commence lorsque la hauteur de l&apos;ombre d&apos;un objet est égal à la hauteur de celui-ci.</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="167"/>
@@ -824,7 +841,7 @@ To mute the athan while it is playing, simply press the volume down button to ca
     <message>
         <location filename="../assets/SettingsPage.qml" line="168"/>
         <source>Asr begins when the height of the shadow of an object is twice the height of the object.</source>
-        <translation>Asr commence lorsque l'ombre d'un objet atteint deux fois la taille de celui-ci.</translation>
+        <translation>Asr commence lorsque l&apos;ombre d&apos;un objet atteint deux fois la taille de celui-ci.</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="182"/>
@@ -848,14 +865,14 @@ To mute the athan while it is playing, simply press the volume down button to ca
     </message>
 </context>
 <context>
-    <name>SujudAsSahw</name>
+    <name>SujudAsSahwPane</name>
     <message>
-        <location filename="../assets/SujudAsSahw.qml" line="25"/>
+        <location filename="../assets/SujudAsSahwPane.qml" line="25"/>
         <source>Sujud As Sahw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SujudAsSahw.qml" line="31"/>
+        <location filename="../assets/SujudAsSahwPane.qml" line="31"/>
         <source>Useful Chart</source>
         <translation type="unfinished"></translation>
     </message>
@@ -867,18 +884,18 @@ To mute the athan while it is playing, simply press the volume down button to ca
         <source>If your Fajr and Isha prayer timings seem to be incorrect, you may need to choose another Calculation Angles that is specific to the area you are living in.
 
 To do this swipe-down from the top-bezel and go to Settings. You will then find the Calculation Angles dropdown.</source>
-        <translation>Si vos heures de prières du fajr et Isha semble incorrect, vous devriez avoir besoin de choisir un autre angle de calcul qui est spécifique à l'endroit où vous vivez.
+        <translation>Si vos heures de prières du fajr et Isha semble incorrect, vous devriez avoir besoin de choisir un autre angle de calcul qui est spécifique à l&apos;endroit où vous vivez.
 
-Pour faire cela, faite glisser à partir du haut de l'écran et aller dans paramètres. Vous trouverez alors les angles de calculs en menu déroulant.</translation>
+Pour faire cela, faite glisser à partir du haut de l&apos;écran et aller dans paramètres. Vous trouverez alors les angles de calculs en menu déroulant.</translation>
     </message>
     <message>
         <location filename="../assets/TimingsPane.qml" line="35"/>
         <source>Do you want to enable some athans but disable other ones?
 
 You can do this by tapping on the prayers that you want to play the athan for (ie: Fajr, Maghrib) so they become highlighted. Then from the menu on the right choose &apos;Enable Alarams/Athans&apos;.</source>
-        <translation>Voulez vous activer certains athans mais en muter d'autre?
+        <translation>Voulez vous activer certains athans mais en muter d&apos;autre?
 
-Vous pouvez faire cela en touchant la prière à laquelle vous voulez mettre l'athan (ie : Fajr, maghrib), ils deviennent donc illuminé. Ensuite à partir du menu sur la droite, choisissez "activer alarmes/athans".</translation>
+Vous pouvez faire cela en touchant la prière à laquelle vous voulez mettre l&apos;athan (ie : Fajr, maghrib), ils deviennent donc illuminé. Ensuite à partir du menu sur la droite, choisissez &quot;activer alarmes/athans&quot;.</translation>
     </message>
     <message>
         <location filename="../assets/TimingsPane.qml" line="36"/>
@@ -889,7 +906,7 @@ If you wanted your own custom athan to be played for all Maghrib prayers for exa
 To reset back to default, use the Reset Sound action from the menu.</source>
         <translation>Savez vous comment choisir un athan de votre choix?
 
-Si vous voulez mettre votre propre athan pour toutes les prières du maghrib par exemple, toucher l'icône maghrib dans la liste, et à partir du menu choisissez "mettre un son personnalisé". Puis choisir le fichier audio à entendre.
+Si vous voulez mettre votre propre athan pour toutes les prières du maghrib par exemple, toucher l&apos;icône maghrib dans la liste, et à partir du menu choisissez &quot;mettre un son personnalisé&quot;. Puis choisir le fichier audio à entendre.
 
 Pour remettre les valeurs par défaut, utiliser Réinitialiser le son à partir du menu.</translation>
     </message>
@@ -902,18 +919,18 @@ You can do this by tapping on the &apos;...&apos; icon on the bottom-right menu,
 To remove them, use the Clear Exported Events action.</source>
         <translation>Voulez vous synchroniser les heures de prière avec le calendrier de votre appareil?
 
-Vous pouvez faire cela en touchant l'icône "..." en bas à droite du menu, et choisissant "exporter vers le calendrier".
+Vous pouvez faire cela en touchant l&apos;icône &quot;...&quot; en bas à droite du menu, et choisissant &quot;exporter vers le calendrier&quot;.
 
-Pour les supprimer, utiliser l'action effacer les événements exportés.</translation>
+Pour les supprimer, utiliser l&apos;action effacer les événements exportés.</translation>
     </message>
     <message>
         <location filename="../assets/TimingsPane.qml" line="38"/>
         <source>Did you know you can see the current Hijri date by tapping on the SALAT10 title-bar at the top? Try it!
 
 If your Hijri date is off by a day or two, simply press-and-hold on it and choose &apos;Edit&apos; from the menu on the right!</source>
-        <translation>Savez vous que vous pouvez voir la date hijri actuel en touchant sur le titre SALAT10 en haut de l'écran? Essayez!
+        <translation>Savez vous que vous pouvez voir la date hijri actuel en touchant sur le titre SALAT10 en haut de l&apos;écran? Essayez!
 
-Si votre date hijri est décalé d'un jour ou deux, pressez et maintenez simplement sur la date et choisir "éditer " à partir du menu sur la droite!</translation>
+Si votre date hijri est décalé d&apos;un jour ou deux, pressez et maintenez simplement sur la date et choisir &quot;éditer &quot; à partir du menu sur la droite!</translation>
     </message>
     <message>
         <location filename="../assets/TimingsPane.qml" line="39"/>
@@ -922,7 +939,7 @@ Si votre date hijri est décalé d'un jour ou deux, pressez et maintenez simplem
 That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose &apos;Edit&apos;. You will then be able to adjust the results by up to 10 minutes.</source>
         <translation>Êtes vous décalé de quelques minutes par rapport à votre mosquée locale?
 
-C'est simple à régler, pressez et maintenant simplement le temps qui est décalé (ie: Maghrib), et à partir du menu de droite, choisir "éditer". Vous pourrez alors ajuster le temps en ajoutant ou en rentrant au maximum 10 minutes.</translation>
+C&apos;est simple à régler, pressez et maintenant simplement le temps qui est décalé (ie: Maghrib), et à partir du menu de droite, choisir &quot;éditer&quot;. Vous pourrez alors ajuster le temps en ajoutant ou en rentrant au maximum 10 minutes.</translation>
     </message>
     <message>
         <location filename="../assets/TimingsPane.qml" line="40"/>
@@ -931,74 +948,70 @@ C'est simple à régler, pressez et maintenant simplement le temps qui est déca
 If you need step-by-step tutorials on the prayer, please have a look at the &apos;Tutorial&apos; tab on the menu on the left-side. It should be of help to you in shaa Allah!</source>
         <translation>Êtes vous un nouveau Musulman?
 
-Si vous avez besoin d'un tutoriel étape par étape sur la prière, jetez un coup d'oeil sur l'onglet "tutoriel" sur le menu de gauche. Ça devraitvous aider inchallah.</translation>
+Si vous avez besoin d&apos;un tutoriel étape par étape sur la prière, jetez un coup d&apos;oeil sur l&apos;onglet &quot;tutoriel&quot; sur le menu de gauche. Ça devraitvous aider inchallah.</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="84"/>
+        <location filename="../assets/TimingsPane.qml" line="41"/>
+        <source>As&apos;salaamu alaykum wa rahmatullahi wabarakathu,
+
+JazakAllahu khair for using Salat10. While our Islamic apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal.
+
+May Allah reward you, and bless you and your family.</source>
+        <translation>As&apos;salaamu alaykum wa rahmatullahi wabarakathu,
+
+Jazakallahu khair d&apos;utiliser Salat10. Tandis que nos applications islamiques resteront toujours gratuites pour votre bénéfice, nous vous encourageons à faire un don de ce que vous pouvez pour aider le développement. Cela motivera les développeurs quivont continuer à mettre à jour l&apos;application, ajouter de nouvelles fonctions et corriger les bugs. Pour donner, glisser votre doigt à partir du haut de l&apos;écran vers le bas et toucher le bouton &quot;Dons&quot; pour envoyer de l&apos;argent via PayPal.
+
+Qu Allah vous récompense, vous bénisse vous et votre famille.</translation>
+    </message>
+    <message>
+        <location filename="../assets/TimingsPane.qml" line="85"/>
         <source>Refresh</source>
         <translation>Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="104"/>
+        <location filename="../assets/TimingsPane.qml" line="105"/>
         <source>Share</source>
         <translation>Partager</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="140"/>
+        <location filename="../assets/TimingsPane.qml" line="141"/>
         <source>Export to Calendar</source>
         <translation>Exporter Vers le Calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="168"/>
+        <location filename="../assets/TimingsPane.qml" line="169"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="176"/>
+        <location filename="../assets/TimingsPane.qml" line="177"/>
         <source>Clear Exported Events</source>
         <translation>Effacer Les événement Exportés</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="190"/>
+        <location filename="../assets/TimingsPane.qml" line="191"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="191"/>
+        <location filename="../assets/TimingsPane.qml" line="192"/>
         <source>Are you sure you want to clear all the scheduled calendar reminders?</source>
         <translation>Êtes vous sûr de vouloir effacer tout les rappel programmés dans le calendrier?</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="192"/>
-        <location filename="../assets/TimingsPane.qml" line="341"/>
+        <location filename="../assets/TimingsPane.qml" line="193"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="193"/>
-        <location filename="../assets/TimingsPane.qml" line="340"/>
+        <location filename="../assets/TimingsPane.qml" line="194"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../assets/TimingsPane.qml" line="219"/>
+        <location filename="../assets/TimingsPane.qml" line="220"/>
         <source>No coordinates detected. Either wait for the GPS to detect your location or tap here to pick a location.</source>
         <translation>Aucunes coordonnées détectés. Soit attendre que le gps détecte votre location ou toucher ici pour entrer une location.</translation>
-    </message>
-    <message>
-        <location filename="../assets/TimingsPane.qml" line="337"/>
-        <source>Enable Athan?</source>
-        <translation>Activer L'Athan?</translation>
-    </message>
-    <message>
-        <location filename="../assets/TimingsPane.qml" line="338"/>
-        <source>Do you want to enable athans to automatically play when it is time for salah?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/TimingsPane.qml" line="339"/>
-        <source>Display notifications in the BlackBerry Hub</source>
-        <translation>Afficher les notifications dans le BlackBerry Hub</translation>
     </message>
 </context>
 <context>
@@ -1024,44 +1037,44 @@ Si vous avez besoin d'un tutoriel étape par étape sur la prière, jetez un cou
         <translation>Temps des Prières</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="52"/>
+        <location filename="../assets/main.qml" line="53"/>
         <source>Qibla</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="53"/>
+        <location filename="../assets/main.qml" line="54"/>
         <source>Compass</source>
         <translation>Boussole</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="64"/>
         <location filename="../assets/main.qml" line="65"/>
+        <location filename="../assets/main.qml" line="66"/>
         <source>Articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="76"/>
+        <location filename="../assets/main.qml" line="77"/>
         <source>Sujud As-Sahw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="77"/>
+        <location filename="../assets/main.qml" line="78"/>
         <source>Prostration of Forgetfulness</source>
-        <translation>Prosternation De L'oublie</translation>
+        <translation>Prosternation De L&apos;oublie</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="88"/>
-        <location filename="../assets/main.qml" line="97"/>
+        <location filename="../assets/main.qml" line="89"/>
+        <location filename="../assets/main.qml" line="115"/>
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="113"/>
+        <location filename="../assets/main.qml" line="100"/>
         <source>Tutorial</source>
         <translation>Tutoriel</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="114"/>
+        <location filename="../assets/main.qml" line="101"/>
         <source>Step by Step</source>
         <translation>étape par étape</translation>
     </message>
@@ -1069,70 +1082,75 @@ Si vous avez besoin d'un tutoriel étape par étape sur la prière, jetez un cou
 <context>
     <name>salat::ApplicationUI</name>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="100"/>
+        <location filename="../src/ApplicationUI.cpp" line="134"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that accurate calculations can be made. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Salat10 and please enable the Location permission.</source>
-        <translation>Avertissement: Il semble que l'application n'a pas accès à la location de votre appareil. Cette permission est nécessaire pour détecter votre position gps et une précision des angles de calculs peut être fait. Si vous laisser la permission sur off, l'application peut ne pas bien fonctionner.
+        <translation>Avertissement: Il semble que l&apos;application n&apos;a pas accès à la location de votre appareil. Cette permission est nécessaire pour détecter votre position gps et une précision des angles de calculs peut être fait. Si vous laisser la permission sur off, l&apos;application peut ne pas bien fonctionner.
 
-Pressez OK pour lancer les permissions de l'application, puis allez dans Salat10 et activer la permission de location.</translation>
+Pressez OK pour lancer les permissions de l&apos;application, puis allez dans Salat10 et activer la permission de location.</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="104"/>
+        <location filename="../src/ApplicationUI.cpp" line="135"/>
         <source>Warning: It seems like the app does not have access to access your shared folder. This permission is needed to allow you to set custom athan sounds. Without this permission some features may not work properly.</source>
-        <translation>Avertissement: Il semble quel'application n'a pas l'autorisation d'accéder à vos fichier partagés. Cette permission est nécessaire pour vous permettre de mettre un son personnalisé. Sans cette permission, certaines fonctionnalitésfonctionnalités ne vont pas fonctionner correctement.</translation>
+        <translation>Avertissement: Il semble quel&apos;application n&apos;a pas l&apos;autorisation d&apos;accéder à vos fichier partagés. Cette permission est nécessaire pour vous permettre de mettre un son personnalisé. Sans cette permission, certaines fonctionnalitésfonctionnalités ne vont pas fonctionner correctement.</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="107"/>
-        <source>As&apos;salaamu alaykum wa rahmatullahi wabarakathu,
-
-JazakAllahu khair for using Salat10. While our Islamic apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal.
-
-May Allah reward you, and bless you and your family.</source>
-        <translation>As'salaamu alaykum wa rahmatullahi wabarakathu,
-
-Jazakallahu khair d'utiliser Salat10. Tandis que nos applications islamiques resteront toujours gratuites pour votre bénéfice, nous vous encourageons à faire un don de ce que vous pouvez pour aider le développement. Cela motivera les développeurs quivont continuer à mettre à jour l'application, ajouter de nouvelles fonctions et corriger les bugs. Pour donner, glisser votre doigt à partir du haut de l'écran vers le bas et toucher le bouton "Dons" pour envoyer de l'argent via PayPal.
-
-Qu Allah vous récompense, vous bénisse vous et votre famille.</translation>
-    </message>
-    <message>
-        <location filename="../src/ApplicationUI.cpp" line="107"/>
-        <location filename="../src/ApplicationUI.cpp" line="129"/>
-        <location filename="../src/ApplicationUI.cpp" line="182"/>
+        <location filename="../src/ApplicationUI.cpp" line="217"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="129"/>
-        <source>Warning: It seems like the location services is not enabled on your BB10 device so the app will not be able to fetch real-time data and map information.
-
-Press OK to launch the Location Services screen and enable the Location Services permission there.</source>
-        <translation>Avertissement: Il semble que le service de location n'est pas activé sur votre appareil BB10 donc l'application ne sera pas capable de rapporter les donnés et les informations de la carte en temps réel.
-
-Presser OK pour lancer la page du services locations et activer la permission du service de location ici.</translation>
+        <location filename="../src/ApplicationUI.cpp" line="161"/>
+        <source>Location Services</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="155"/>
+        <location filename="../src/ApplicationUI.cpp" line="161"/>
+        <source>Warning: It seems like the location services is not enabled on your BlackBerry 10 device so the app will not be able to fetch real-time data and map information.
+
+Would you like to launch the Location Services screen and enable the Location Services permission there?</source>
+        <translation>Avertissement: Il semble que le service de location n&apos;est pas activé sur votre appareil BB10 donc l&apos;application ne sera pas capable de rapporter les donnés et les informations de la carte en temps réel.
+
+Voulez-vous lancer la page du services locations et activer la permission du service de location?</translation>
+    </message>
+    <message>
+        <location filename="../src/ApplicationUI.cpp" line="161"/>
+        <source>Yes</source>
+        <translation type="unfinished">Oui</translation>
+    </message>
+    <message>
+        <location filename="../src/ApplicationUI.cpp" line="161"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ApplicationUI.cpp" line="161"/>
+        <source>Don&apos;t ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ApplicationUI.cpp" line="190"/>
         <source>Location successfully set to %1!</source>
         <translation>Location mise avec succès to %1!</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="157"/>
+        <location filename="../src/ApplicationUI.cpp" line="192"/>
         <source>Location could not be detected %1!</source>
         <translation>La location ne peut être détectée %1!</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="182"/>
+        <location filename="../src/ApplicationUI.cpp" line="217"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.</source>
-        <translation>Avertissement: Il semble que l'application n'a pas accès à votre calendrier. Cette permission est nécessaire pour l'application à répondre aux commande du "calebdrier" si vous laissez cette permission désactivé,  certaines fonctionnalités peuvent mal fonctionner. Toucher OK pour activer la permission dans lapavé des permissions de l'application.</translation>
+        <translation>Avertissement: Il semble que l&apos;application n&apos;a pas accès à votre calendrier. Cette permission est nécessaire pour l&apos;application à répondre aux commande du &quot;calebdrier&quot; si vous laissez cette permission désactivé,  certaines fonctionnalités peuvent mal fonctionner. Toucher OK pour activer la permission dans lapavé des permissions de l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="251"/>
+        <location filename="../src/ApplicationUI.cpp" line="286"/>
         <source>Scheduled events cleared!</source>
         <translation>événements prévu effacés!</translation>
     </message>
     <message>
-        <location filename="../src/ApplicationUI.cpp" line="260"/>
+        <location filename="../src/ApplicationUI.cpp" line="295"/>
         <source>Export complete!</source>
         <translation>Exportation Fini!</translation>
     </message>
@@ -1153,12 +1171,12 @@ The Messenger of Allah (صلى الله عليه وسلم) said:
 “The day of Friday has twelve hours, in which there is no Muslim slave who asks Allah for anything but He will grant it to him, so seek it in the last hour after ‘Asr.”
 
 Reported by Abu Dawood (1048) and an-Nasaa’i (1389); classed as saheeh by al-Albaani in Saheeh Abi Dawood; and by an-Nawawi in al-Majmoo‘, 4/471</source>
-        <translation>Rapporté par Jaabir Ibn 'Abdillah (qu'Allah l'agré) qui a dit:
+        <translation>Rapporté par Jaabir Ibn &apos;Abdillah (qu&apos;Allah l&apos;agré) qui a dit:
 
-Le Messager D'Allah (صلى الله عليه وسلم) à dit:
-"Le jour du vendredi à douze heures, dans chacune, il n'y a pas d'esclave musulman qui demande à Allah ce qu'il veut sans qu'allah ne lui donne, cherchez donc cela dans la dernière heure après 'Asr'.
+Le Messager D&apos;Allah (صلى الله عليه وسلم) à dit:
+&quot;Le jour du vendredi à douze heures, dans chacune, il n&apos;y a pas d&apos;esclave musulman qui demande à Allah ce qu&apos;il veut sans qu&apos;allah ne lui donne, cherchez donc cela dans la dernière heure après &apos;Asr&apos;.
 
-Rapporté par Abou Dawoud (1048) et An-Nasaa'i (1389); classé comme sahih par Al-Albaani dans saheeh Abi Dawud; et par An-Nawawi dans Al-Majmoo', 4/471</translation>
+Rapporté par Abou Dawoud (1048) et An-Nasaa&apos;i (1389); classé comme sahih par Al-Albaani dans saheeh Abi Dawud; et par An-Nawawi dans Al-Majmoo&apos;, 4/471</translation>
     </message>
     <message>
         <location filename="../src/ScheduleEvents.cpp" line="113"/>

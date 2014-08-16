@@ -34,8 +34,9 @@ TabbedPane
         {
             source: "TimingsPane.qml"
             
-            function onLocateClicked() {
-                location.triggered();
+            function onLocateClicked()
+            {
+                locationTab.triggered();
                 activeTab = location;
             }
             
@@ -79,29 +80,15 @@ TabbedPane
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
         
         delegate: Delegate {
-            source: "SujudAsSahw.qml"
+            source: "SujudAsSahwPane.qml"
         }
     }
     
     Tab {
-        id: location
+        id: locationTab
         title: qsTr("Location") + Retranslate.onLanguageChanged
         imageSource: "images/tabs/ic_map.png"
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
-        
-        function onSettingChanged(key)
-        {
-            if (key == "location")
-            {
-                var location = persist.getValueFor("location");
-                description = location ? location : qsTr("Location");
-            }
-        }
-        
-        onCreationCompleted: {
-            persist.settingChanged.connect(onSettingChanged);
-            onSettingChanged("location");
-        }
         
         delegate: Delegate {
             source: "LocationPane.qml"
@@ -116,8 +103,25 @@ TabbedPane
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
         
         delegate: Delegate {
-            source: "Tutorial.qml"
+            source: "TutorialPane.qml"
         }
+    }
+    
+    function onSettingChanged(key)
+    {
+        if (key == "location")
+        {
+            var location = persist.getValueFor("location");
+            locationTab.description = location ? location : qsTr("Location");
+        }
+    }
+    
+    function onSidebarVisualStateChanged(newState)
+    {
+        sidebarStateChanged.disconnect(onSidebarVisualStateChanged);
+        onSettingChanged("location");
+        
+        persist.settingChanged.connect(onSettingChanged);
     }
     
     function initialized()
@@ -125,6 +129,8 @@ TabbedPane
         if ( !persist.contains("angles") ) {
             menuDef.settings.triggered();
         }
+        
+        sidebarStateChanged.connect(onSidebarVisualStateChanged);
     }
 
     onCreationCompleted: {
