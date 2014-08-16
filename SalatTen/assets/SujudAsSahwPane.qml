@@ -20,7 +20,8 @@ NavigationPane
         id: rootPage
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         
-        titleBar: TitleBar {
+        titleBar: TitleBar
+        {
             id: titleControl
             title: qsTr("Sujud As Sahw") + Retranslate.onLanguageChanged
         }

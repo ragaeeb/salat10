@@ -11,6 +11,20 @@ NavigationPane
         id: rootPage
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         
+        actions: [
+            ActionItem
+            {
+                ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
+                imageSource: "images/menu/ic_help.png"
+                title: qsTr("Prayer Guide") + Retranslate.onLanguageChanged
+                
+                onTriggered: {
+                    console.log("UserEvent: PrayerGuideTriggered");
+                    app.launchBrowser("http://abdurrahman.org/dawah/A-Simple-Prayer-Guide-for-new-Muslims-with-Illustrations-troid.org.pdf");
+                }
+            }
+        ]
+        
         Container
         {
             horizontalAlignment: HorizontalAlignment.Fill
