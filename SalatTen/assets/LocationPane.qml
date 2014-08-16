@@ -40,7 +40,7 @@ NavigationPane
                 
                 function onSettingChanged(key)
                 {
-                    if (key == "longitude" && notification.calculationFeasible)
+                    if (key == "longitude" && boundary.calculationFeasible)
                     {
                         mapViewDelegate.delegateActive = true;
                         

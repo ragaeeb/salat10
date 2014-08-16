@@ -3,6 +3,7 @@
 #include <bb/cascades/Application>
 #include <bb/cascades/Container>
 #include <bb/cascades/DockLayout>
+#include <bb/cascades/GroupDataModel>
 #include <bb/cascades/ImageView>
 #include <bb/cascades/OrientationSupport>
 #include <bb/cascades/QmlDocument>

@@ -8,7 +8,7 @@ NavigationPane
     
     function onSettingChanged(key)
     {
-        mainPage.actionsEnabled = persist.contains("latitude") && persist.contains("longitude");
+        mainPage.actionsEnabled = boundary.calculationFeasible;
         
         if (key == "hijri") {
             mainPage.titleBar.bannerText = hijri.writeIslamicDate( persist.getValueFor("hijri") );
@@ -22,7 +22,7 @@ NavigationPane
         
         if ( !persist.contains("athanPrompted") ) {
             listView.showAthanPrompt();
-        } else if ( !persist.contains("athanPicked") && app.atLeastOneAthanScheduled ) {
+        } else if ( !persist.contains("athanPicked") && boundary.atLeastOneAthanScheduled ) {
             definition.source = "AthanPreviewSheet.qml";
             var picker = definition.createObject();
             picker.open();

@@ -58,7 +58,7 @@ Container
     onCreationCompleted: {
         notification.currentEventChanged.connect(onCurrentEventChanged);
         
-        if (notification.calculationFeasible) {
+        if (boundary.calculationFeasible) {
             onCurrentEventChanged();
         }
     }
