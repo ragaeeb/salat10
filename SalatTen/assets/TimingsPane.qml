@@ -235,13 +235,22 @@ NavigationPane
                 onTriggered: {
                     console.log("UserEvent: EventTriggered", indexPath);
                     
-                    if (indexPath.length > 1)
+                    multiSelectHandler.active = true;
+                    
+                    if (indexPath.length == 1)
                     {
+                        clearSelection();
+                        var n = dataModel.childCount(indexPath);
+                        
+                        for (var i = 0; i < n; i++) {
+                            var ip = [indexPath[0], i];
+                            select(ip, true);
+                        }
+                    } else {
                         if (manualSelected) {
                             manualDeselect();
                         }
                         
-                        multiSelectHandler.active = true;
                         toggleSelection(indexPath);
                     }
                 }
@@ -309,10 +318,6 @@ NavigationPane
         }
         
         attachedObjects: [
-            HijriCalculator {
-                id: hijri
-            },
-            
             ImagePaintDefinition {
                 id: back
                 imageSource: "images/graphics/background.png"

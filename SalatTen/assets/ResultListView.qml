@@ -153,14 +153,21 @@ ListView
     }
     
     onSelectionChanged: {
-        var n = selectionList().length
+        if (selected && indexPath.length == 1) {
+            select(indexPath, false);
+            return;
+        }
+        
+        var n = selectionList().length;
         multiSelectHandler.status = qsTr("+%n Events Selected", "", n) + Retranslate.onLanguageChanged
         copyAction.enabled = shareAction.enabled = resetSoundAction.enabled = customSoundAction.enabled = enableAthaan.enabled = muteAthaans.enabled = n > 0;
     }
     
     listItemComponents: [
-        ListItemComponent {
+        ListItemComponent
+        {
             type: "header"
+            
             Header {
                 title: Qt.formatDate(ListItemData, Qt.SystemLocaleLongDate);
             }
