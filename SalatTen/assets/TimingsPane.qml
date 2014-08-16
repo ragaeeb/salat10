@@ -233,14 +233,17 @@ NavigationPane
                 }
                 
                 onTriggered: {
-                    console.log("UserEvent: TimeTriggered", indexPath);
+                    console.log("UserEvent: EventTriggered", indexPath);
                     
-                    if (manualSelected) {
-                        manualDeselect();
+                    if (indexPath.length > 1)
+                    {
+                        if (manualSelected) {
+                            manualDeselect();
+                        }
+                        
+                        multiSelectHandler.active = true;
+                        toggleSelection(indexPath);
                     }
-                    
-                    multiSelectHandler.active = true;
-                    toggleSelection(indexPath);
                 }
             }
             
