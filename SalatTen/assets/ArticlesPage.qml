@@ -333,6 +333,7 @@ NavigationPane
 
                             listView.visible = data.length > 0;
                             emptyDelegate.delegateActive = data.length == 0;
+                            navigationPane.parent.unreadContentCount = data.length;
                         }
                     });
                 }
