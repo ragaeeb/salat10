@@ -6,20 +6,8 @@ NavigationPane
     id: navigationPane
     signal locateClicked();
     
-    function onSettingChanged(key)
-    {
-        mainPage.actionsEnabled = boundary.calculationFeasible;
-        
-        if (key == "hijri") {
-            mainPage.titleBar.bannerText = hijri.writeIslamicDate( persist.getValueFor("hijri") );
-        }
-    }
-    
     function initialized()
     {
-        persist.settingChanged.connect(onSettingChanged);
-        onSettingChanged("hijri");
-        
         if ( !persist.contains("athanPrompted") ) {
             listView.showAthanPrompt();
         } else if ( !persist.contains("athanPicked") && boundary.atLeastOneAthanScheduled ) {
@@ -33,12 +21,13 @@ NavigationPane
         } else if ( persist.tutorialVideo("http://www.youtube.com/watch?v=AbHZLmWSKts") ) {}
         else if ( persist.tutorial( "tutorialSettings", qsTr("If your Fajr and Isha prayer timings seem to be incorrect, you may need to choose another Calculation Angles that is specific to the area you are living in.\n\nTo do this swipe-down from the top-bezel and go to Settings. You will then find the Calculation Angles dropdown."), "asset:///images/dropdown/ic_angles.png" ) ) {}
         else if ( persist.tutorial( "tutorialSelectiveAthan", qsTr("Do you want to enable some athans but disable other ones?\n\nYou can do this by tapping on the prayers that you want to play the athan for (ie: Fajr, Maghrib) so they become highlighted. Then from the menu on the right choose 'Enable Alarams/Athans'."), "asset:///images/ic_athaan_enable.png" ) ) {}
-        else if ( persist.tutorial( "tutorialCustomAthan", qsTr("Do you know how to choose your own custom athan?\n\nIf you wanted your own custom athan to be played for all Maghrib prayers for example, tap on the Maghrib item in the list, and from the menu choose 'Set Custom Sound'. Then choose the audio file to play.\n\nTo reset back to default, use the Reset Sound action from the menu."), "asset:///images/ic_athaan_custom.png" ) ) {}
+        else if ( persist.tutorial( "tutorialCustomAthan", qsTr("Do you know how to choose your own custom athan?\n\nIf you wanted your own custom athan to be played for all Maghrib prayers for example, tap on the Maghrib item in the list, and from the menu choose 'Change Sound'. Then choose the audio file to play.\n\nTo reset back to default, use the Reset Sound action from the menu."), "asset:///images/ic_athaan_custom.png" ) ) {}
         else if ( persist.tutorial( "tutorialExportCalendar", qsTr("Do you want to sync the timings with your device calendar?\n\nYou can do this by tapping on the '...' icon on the bottom-right menu, and choosing 'Export to Calendar'\n\nTo remove them, use the Clear Exported Events action."), "asset:///images/ic_calendar_empty.png" ) ) {}
         else if ( persist.tutorial( "tutorialHijriDate", qsTr("Did you know you can see the current Hijri date by tapping on the SALAT10 title-bar at the top? Try it!\n\nIf your Hijri date is off by a day or two, simply press-and-hold on it and choose 'Edit' from the menu on the right!"), "asset:///images/ic_calendar_empty.png" ) ) {}
         else if ( persist.tutorial( "tutorialEdit", qsTr("Are your timings off by a few minutes from your local masjid?\n\nThat's easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose 'Edit'. You will then be able to adjust the results by up to 10 minutes."), "asset:///images/menu/ic_edit.png" ) ) {}
         else if ( persist.tutorial( "tutorialNewMuslim", qsTr("Are you a new Muslim?\n\nIf you need step-by-step tutorials on the prayer, please have a look at the 'Tutorial' tab on the menu on the left-side. It should be of help to you in shaa Allah!"), "asset:///images/tabs/ic_tutorial.png" ) ) {}
         else if ( persist.tutorial( "tutorialDonate", qsTr("As'salaamu alaykum wa rahmatullahi wabarakathu,\n\nJazakAllahu khair for using Salat10. While our Islamic apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal.\n\nMay Allah reward you, and bless you and your family."), "asset:///images/ic_donate.png" ) ) {}
+        else if ( persist.reviewed() ) {}
         else if ( !persist.contains("alFurqanAdvertised") ) {
             definition.source = "AlFurqanAdvertisementPage.qml";
             var picker = definition.createObject();
@@ -63,7 +52,7 @@ NavigationPane
 	Page
 	{
         id: mainPage
-        property bool actionsEnabled: false;
+        property bool actionsEnabled: boundary.calculationFeasible
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         
         onPeekedAtChanged: {

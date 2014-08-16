@@ -287,7 +287,7 @@ void DataModelWrapper::itemsChanged(bb::cascades::DataModelChangeType::Type eCha
 
 bool DataModelWrapper::atLeastOneAthanScheduled()
 {
-    QVariantList values = m_persistance->getValueFor("athaans").toMap().values();
+    QVariantList values = m_cache.athaans.values();
     return values.contains(true);
 }
 

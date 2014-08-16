@@ -3,7 +3,6 @@ import bb.cascades 1.0
 TitleBar
 {
     signal editTitleTriggered();
-    property alias bannerText: bannerLabel.text
     
     kind: TitleBarKind.FreeForm
     kindProperties: FreeFormTitleBarKindProperties
@@ -110,97 +109,119 @@ TitleBar
         expandableArea
         {
             onExpandedChanged: {
-                if (expanded) {
-                    fader.play();
-                } else {
-                    bannerLabel.translationY = -100;
-                }
-                
                 console.log("UserEvent: SalatTitleExpanded", expanded);
+                hijriDelegate.delegateActive = expanded;
             }
             
-            content: Container
+            content: ControlDelegate
             {
-                id: exContainer
+                id: hijriDelegate
+                delegateActive: false
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 
-                contextActions: [
-                    ActionSet {
-                        title: bannerText
-                        
-                        ActionItem {
-                            title: qsTr("Edit") + Retranslate.onLanguageChanged
-                            imageSource: "images/menu/ic_edit.png"
-                            
-                            onTriggered: {
-                                console.log("UserEvent: EditHijriDate");
-                                editTitleTriggered();
-                            }
-                        }
-                    }
-                ]
-                
-                onTouch: {
-                    if ( event.isDown() ) {
-                        exContainer.opacity = 0.5;
-                    } else if ( event.isUp() || event.isCancel() ) {
-                        exContainer.opacity = 1;
-                    }
-                }
-                
-                Container {
-                    background: Color.White
-                    preferredHeight: 2
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Top
-                }
-                
-                Container
+                sourceComponent: ComponentDefinition
                 {
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Fill
-                    layout: DockLayout {}
-                    
-                    ImageView {
-                        imageSource: "asset:///images/graphics/banner_expanded.amd"
-                        topMargin: 0
-                        leftMargin: 0
-                        rightMargin: 0
-                        bottomMargin: 0
-                        scalingMethod: ScalingMethod.AspectFill
-                        maxHeight: 75
-                        
+                    Container
+                    {
+                        id: exContainer
                         horizontalAlignment: HorizontalAlignment.Fill
-                        verticalAlignment: VerticalAlignment.Top
-                    }
-                    
-                    Label {
-                        id: bannerLabel
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        verticalAlignment: VerticalAlignment.Center
-                        textStyle.fontSize: FontSize.XSmall
-                        textStyle.textAlign: TextAlign.Center
-                        translationY: -100
+                        verticalAlignment: VerticalAlignment.Fill
                         
-                        animations: [
-                            TranslateTransition
-                            {
-                                id: fader
-                                fromY: -100
-                                toY: 0
-                                easingCurve: StockCurve.BounceOut
-                                duration: 750
+                        contextActions: [
+                            ActionSet {
+                                title: bannerLabel.text
+                                
+                                ActionItem {
+                                    title: qsTr("Edit") + Retranslate.onLanguageChanged
+                                    imageSource: "images/menu/ic_edit.png"
+                                    
+                                    onTriggered: {
+                                        console.log("UserEvent: EditHijriDate");
+                                        editTitleTriggered();
+                                    }
+                                }
                             }
                         ]
+                        
+                        onTouch: {
+                            if ( event.isDown() ) {
+                                exContainer.opacity = 0.5;
+                            } else if ( event.isUp() || event.isCancel() ) {
+                                exContainer.opacity = 1;
+                            }
+                        }
+                        
+                        Container {
+                            background: Color.White
+                            preferredHeight: 2
+                            horizontalAlignment: HorizontalAlignment.Fill
+                            verticalAlignment: VerticalAlignment.Top
+                        }
+                        
+                        Container
+                        {
+                            horizontalAlignment: HorizontalAlignment.Fill
+                            verticalAlignment: VerticalAlignment.Fill
+                            layout: DockLayout {}
+                            
+                            ImageView {
+                                imageSource: "asset:///images/graphics/banner_expanded.amd"
+                                topMargin: 0
+                                leftMargin: 0
+                                rightMargin: 0
+                                bottomMargin: 0
+                                scalingMethod: ScalingMethod.AspectFill
+                                maxHeight: 75
+                                
+                                horizontalAlignment: HorizontalAlignment.Fill
+                                verticalAlignment: VerticalAlignment.Top
+                            }
+                            
+                            Label {
+                                id: bannerLabel
+                                horizontalAlignment: HorizontalAlignment.Fill
+                                verticalAlignment: VerticalAlignment.Center
+                                textStyle.fontSize: FontSize.XSmall
+                                textStyle.textAlign: TextAlign.Center
+                                translationY: -100
+                                
+                                animations: [
+                                    TranslateTransition
+                                    {
+                                        id: fader
+                                        fromY: -100
+                                        toY: 0
+                                        easingCurve: StockCurve.BounceOut
+                                        duration: 750
+                                        
+                                        onCreationCompleted: {
+                                            play();
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                        
+                        Container {
+                            background: Color.White
+                            preferredHeight: 2
+                            horizontalAlignment: HorizontalAlignment.Fill
+                            verticalAlignment: VerticalAlignment.Bottom
+                        }
+                        
+                        function onSettingChanged(key)
+                        {                            
+                            if (key == "hijri") {
+                                bannerLabel.text = hijri.writeIslamicDate( persist.getValueFor("hijri") );
+                            }
+                        }
+                        
+                        onCreationCompleted: {
+                            onSettingChanged("hijri");
+                            persist.settingChanged.connect(onSettingChanged);
+                        }
                     }
-                }
-                
-                Container {
-                    background: Color.White
-                    preferredHeight: 2
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Bottom
                 }
             }
         }

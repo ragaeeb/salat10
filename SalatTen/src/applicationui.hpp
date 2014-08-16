@@ -68,6 +68,9 @@ public:
     Q_INVOKABLE QObject* refreshLocation();
     Q_INVOKABLE void cleanupCalendarEvents();
     Q_INVOKABLE void setCustomAthaans(QStringList const& keys, QString const& uri=QString());
+    Q_INVOKABLE void launchBrowser(QString const& uri);
+    Q_INVOKABLE void saveIqamah(QString const& key, QDateTime const& time);
+    Q_INVOKABLE void removeIqamah(QString const& key);
     bool hasCalendarAccess();
 };
 

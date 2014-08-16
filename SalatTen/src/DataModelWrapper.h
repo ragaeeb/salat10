@@ -32,7 +32,7 @@ class DataModelWrapper : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool empty READ isEmpty NOTIFY emptyChanged)
-    Q_PROPERTY(bool calculationFeasible READ calculationFeasible)
+    Q_PROPERTY(bool calculationFeasible READ calculationFeasible NOTIFY recalculationNeeded)
     Q_PROPERTY(bool atLeastOneAthanScheduled READ atLeastOneAthanScheduled)
 
 	Persistance* m_persistance;
@@ -77,8 +77,6 @@ public:
 	Calculator* getCalculator();
 	Translator* getTranslator();
 
-	Q_INVOKABLE void saveIqamah(QString const& key, QDateTime const& time);
-	Q_INVOKABLE void removeIqamah(QString const& key);
     bool calculationFeasible() const;
     bool atLeastOneAthanScheduled();
 };

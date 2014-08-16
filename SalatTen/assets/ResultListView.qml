@@ -9,7 +9,9 @@ ListView
     property alias util: listUtil
     property bool manualSelected: false
     
-    function showAthanPrompt() {
+    function showAthanPrompt()
+    {
+        listUtil.active = true;
         listUtil.object.athanDialog.show();
     }
     
@@ -123,13 +125,14 @@ ListView
             
             ActionItem {
                 id: customSoundAction
-                title: qsTr("Set Custom Sound") + Retranslate.onLanguageChanged
+                title: qsTr("Change Sound") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_athaan_custom.png"
                 
                 onTriggered: {
-                    console.log("UserEvent: SetCustomSound");
-                    listUtil.active = true;
-                    listUtil.setCustomAthaans( listUtil.getSelectedKeys() );
+                    console.log("UserEvent: ChangeSound");
+                    definition.source = "AthanPreviewSheet.qml";
+                    var picker = definition.createObject();
+                    picker.open();
                 }
             },
             

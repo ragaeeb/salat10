@@ -1,27 +1,9 @@
 import bb.cascades 1.0
-import bb.cascades.pickers 1.0
 import bb.system 1.2
 import com.canadainc.data 1.0
 
 QtObject
 {
-    property variant picker: FilePicker
-    {
-        property variant keys
-        defaultType: FileType.Music
-        
-        directories :  {
-            return ["/accounts/1000/removable/sdcard/music", "/accounts/1000/shared/music"]
-        }
-        
-        onFileSelected : {
-            var uri = selectedFiles[0];
-            app.setCustomAthaans(keys, selectedFiles[0]);
-            
-            persist.showToast( qsTr("Successfully set athans to %1").arg(uri), "", "asset:///images/ic_athaan_custom.png" );
-        }
-    }
-    
     property variant athanDialog: SystemDialog
     {
         title: qsTr("Enable Athan?") + Retranslate.onLanguageChanged
@@ -56,13 +38,6 @@ QtObject
     {
         app.setCustomAthaans(keys,"");
         persist.showToast( qsTr("Successfully reset athans to default sound"), "", "asset:///images/menu/ic_reset_athaan.png" );
-    }
-    
-    function setCustomAthaans(keys)
-    {
-        picker.keys = keys;
-        picker.title = qsTr("Select Athan");
-        picker.open();
     }
     
     function textualize(data)

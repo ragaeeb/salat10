@@ -16,6 +16,7 @@ Page
             editable: false
             textFormat: TextFormat.Html
             text: qsTr("Bismillah,\nAlhamdulillah,\nWa salaatu wa salaamu ala rasoolillah.\nAs'salaamu alaykum wa rahmatullahi wabarakathu.\n\nIn the past version of the app we have erroneously included in our articles and tutorials some individuals who have issues in their manhaj. We would like to publicly clarify and free ourselves from such individuals and make it clear that we do not support them.\n\nThe individuals we are listed below and you can find more information about their issues if you click on them in shaa Allah.\n\nJazakAllahu khayran. May Allah forgive us for our shortcomings and keep us upright. BaarakAllahu feekum.")
+            maxHeight: 300
         }
         
         ListView
@@ -55,13 +56,11 @@ Page
             ]
             
             onTriggered: {
+                console.log("UserEvent: ClarificationTriggered", indexPath);
                 var uri = dataModel.data(indexPath).uri;
                 
-                if (uri)
-                {
-                    invoker.query.uri = uri;
-                    invoker.query.updateQuery();
-                    invoker.trigger("bb.action.OPEN");
+                if (uri) {
+                    app.launchBrowser(uri);
                 }
             }
             
@@ -78,15 +77,4 @@ Page
             }
         }
     }
-    
-    attachedObjects: [
-        Invocation
-        {
-            id: invoker
-            
-            query {
-                mimeType: "text/html"
-            }
-        }
-    ]
 }
