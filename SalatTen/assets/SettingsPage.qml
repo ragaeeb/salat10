@@ -1,10 +1,11 @@
 import bb.cascades 1.0
 import bb.platform 1.0
-import bb.system 1.0
 import com.canadainc.data 1.0
 
 Page
 {
+    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+    
     titleBar: TitleBar {
         title: qsTr("Settings") + Retranslate.onLanguageChanged
     }
@@ -26,6 +27,13 @@ Page
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 leftPadding: 10; rightPadding: 10; topPadding: 10; bottomPadding: 10
+                
+                PersistCheckBox
+                {
+                    id: skipJumuah
+                    key: "skipJumahAthaan"
+                    text: qsTr("Skip Athan on Jumuah") + Retranslate.onLanguageChanged
+                }
             }
             
             Header {
@@ -63,13 +71,6 @@ Page
 	    	    verticalAlignment: VerticalAlignment.Fill
                 leftPadding: 10; rightPadding: 10; topPadding: 10; bottomPadding: 10
 	    	    
-                PersistCheckBox
-                {
-                    topMargin: 20
-                    key: "skipJumahAthaan"
-                    text: qsTr("Skip Athan on Jumuah") + Retranslate.onLanguageChanged
-                }
-                
                 DropDown
                 {
                     id: calcStrategy
@@ -91,43 +92,44 @@ Page
                         }
                     ]
                     
-                    onCreationCompleted: {
-                        sql.dataLoaded.connect( function(id, data)
+                    function onDataLoaded(id, data)
+                    {
+                        if (id == QueryId.GetAllAngles)
                         {
-                                if (id == QueryId.GetAllAngles)
-                                {
-                                    var strategy = persist.getValueFor("strategy");
-                                    var firstTime = !persist.contains("angles");
-                                    
-                                    for (var i = 0; i < data.length; i++)
-                                    {
-                                        var current = data[i];
-                                        
-                                        var def = optionDefinition.createObject();
-                                        def.text = current.name;
-                                        def.description = current.description;
-                                        def.value = current.strategy_key;
-                                        def.fajrTwilight = current.fajr_twilight;
-                                        def.ishaTwilight = current.isha_twilight;
-                                        def.dhuhrInterval = current.dhuhr_interval;
-                                        def.maghribInterval = current.maghrib_interval;
-                                        def.ishaInterval = current.isha_interval;
-                                        
-                                        if (def.value == strategy) {
-                                            def.selected = true;
-                                        }
-                                        
-                                        calcStrategy.add(def);
-                                    }
-                                    
-                                    if (firstTime) {
-                                        calcStrategy.expanded = true;
-                                    }
+                            var strategy = persist.getValueFor("strategy");
+                            var firstTime = !persist.contains("angles");
+                            
+                            for (var i = 0; i < data.length; i++)
+                            {
+                                var current = data[i];
+                                
+                                var def = optionDefinition.createObject();
+                                def.text = current.name;
+                                def.description = current.description;
+                                def.value = current.strategy_key;
+                                def.fajrTwilight = current.fajr_twilight;
+                                def.ishaTwilight = current.isha_twilight;
+                                def.dhuhrInterval = current.dhuhr_interval;
+                                def.maghribInterval = current.maghrib_interval;
+                                def.ishaInterval = current.isha_interval;
+                                
+                                if (def.value == strategy) {
+                                    def.selected = true;
                                 }
-                        });
+                                
+                                calcStrategy.add(def);
+                            }
+                            
+                            if (firstTime) {
+                                calcStrategy.expanded = true;
+                            }
+                        }
+                    }
                     
-                    sql.query = "SELECT * FROM angles ORDER BY name";
-                    sql.load(QueryId.GetAllAngles);
+                    onCreationCompleted: {
+                        sql.dataLoaded.connect(onDataLoaded);
+                        sql.query = "SELECT * FROM angles ORDER BY name";
+                        sql.load(QueryId.GetAllAngles);
                     }
                     
                     onSelectedOptionChanged:

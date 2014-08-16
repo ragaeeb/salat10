@@ -6,6 +6,8 @@ Sheet
     
     Page
     {
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        
         titleBar: TitleBar
         {
             title: qsTr("Athan Canceling") + Retranslate.onLanguageChanged

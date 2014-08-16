@@ -2,6 +2,8 @@ import bb.cascades 1.0
 
 Page
 {
+    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+    
     titleBar: TitleBar {
         title: qsTr("Learn Arabic!") + Retranslate.onLanguageChanged
     }

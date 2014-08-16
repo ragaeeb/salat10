@@ -55,8 +55,10 @@ StandardListItem
         }
     ]
     
-    onCreationCompleted: {
-        showAnim.play();
+    ListItem.onInitializedChanged: {
+        if (initialized) {
+            showAnim.play();
+        }
     }
     
     contextActions: [

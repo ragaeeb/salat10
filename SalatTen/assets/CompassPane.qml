@@ -13,6 +13,8 @@ NavigationPane
     
     Page
     {
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        
         onCreationCompleted: {
             persist.showToast( qsTr("Move away from metal and try to match the value on the compass to the Qibla azimuth value at the top. When you are pointing in the correct direction your device will vibrate.\n\nIf you see a spinning icon at the top it means the compass readings are still being adjusted. If you see this, keep rotating and moving until it goes away."), qsTr("OK"), "asset:///images/compass/ic_compass.png" );
         }

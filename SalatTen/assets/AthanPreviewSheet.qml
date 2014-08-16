@@ -8,6 +8,8 @@ Sheet
     
     Page
     {
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        
         titleBar: TitleBar
         {
             title: qsTr("Select Athan") + Retranslate.onLanguageChanged
@@ -127,9 +129,9 @@ Sheet
                 ]
                 
                 onCreationCompleted: {
-                    adm.append({'artist': qsTr("Shaykh Al-Albaani (rahimahullah)"), 'imageSource': "images/ic_athaan_enable.png", 'uri': "asset:///audio/athan_albaani.mp3"});
-                    adm.append({'artist': qsTr("Muhammad Ibn Ibrahim Al Luhaidan"), 'imageSource': "images/ic_notification_enable.png", 'uri': "asset:///audio/athan_birmingham.mp3"});
                     adm.append({'artist': qsTr("Anonymous"), 'imageSource': "images/menu/ic_help.png", 'uri': "asset:///audio/athan_sahabah.mp3"});
+                    adm.append({'artist': qsTr("Muhammad Ibn Ibrahim Al Luhaidan"), 'imageSource': "images/ic_notification_enable.png", 'uri': "asset:///audio/athan_birmingham.mp3"});
+                    adm.append({'artist': qsTr("Shaykh Al-Albaani (rahimahullah)"), 'imageSource': "images/ic_athaan_enable.png", 'uri': "asset:///audio/athan_albaani.mp3"});
                     adm.append({'artist': "Custom", 'imageSource': "images/ic_athaan_custom.png", 'uri': null});
                 }
                 
