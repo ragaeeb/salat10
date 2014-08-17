@@ -252,6 +252,9 @@ Page
             
             adm.append(elements);
             listView.selectAll();
+            
+            listView.scroll(0);
+            listView.scroll(-250);
         }
     }
 }
