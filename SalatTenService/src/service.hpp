@@ -70,6 +70,7 @@ signals:
 private slots:
     void createChannelCompleted(bb::network::PushStatus const&, QString const&);
     void createSessionCompleted(const bb::network::PushStatus&);
+    void error(QString const& message);
 	void handleInvoke(const bb::system::InvokeRequest &);
 	void init();
 	void onPlayingStateChanged();

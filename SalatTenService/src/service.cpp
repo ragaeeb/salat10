@@ -65,6 +65,7 @@ void Service::init()
     connect( &m_invokeManager, SIGNAL( invoked(const bb::system::InvokeRequest&) ), this, SLOT( handleInvoke(const bb::system::InvokeRequest&) ) );
     connect( &m_athan.player, SIGNAL( playbackCompleted() ), this, SLOT( onPlayingStateChanged() ) );
     connect( &m_athan.player, SIGNAL( playingChanged() ), this, SLOT( onPlayingStateChanged() ) );
+    connect( &m_athan.player, SIGNAL( error(QString const&) ), this, SLOT( error(QString const&) ) );
 
     connect( &m_pushService, SIGNAL( createSessionCompleted(bb::network::PushStatus const&) ), SLOT( createSessionCompleted(bb::network::PushStatus const&) ) );
 
@@ -88,6 +89,18 @@ void Service::createSessionCompleted(const bb::network::PushStatus& status)
     if ( !status.isError() ) {
         connect( &m_pushService, SIGNAL( createChannelCompleted(bb::network::PushStatus const&, QString const&) ), SLOT( createChannelCompleted(bb::network::PushStatus const&, QString const&) ) );
         m_pushService.createChannel( QUrl(BLACKBERRY_PUSH_URL) );
+    }
+}
+
+
+void Service::error(QString const& message)
+{
+    LOGGER(message);
+
+    if (m_athan.mkw)
+    {
+        m_athan.mkw->deleteLater();
+        m_athan.mkw = NULL;
     }
 }
 
@@ -175,12 +188,13 @@ void Service::timeout(bool init)
 
                     m_athan.prevKey = currentEventKey;
                     LOGGER( "PlayingWithVol" << m_athan.player.volume() );
-                    m_athan.player.play(destinationFile);
 
                     if (m_athan.mkw == NULL) {
                         m_athan.mkw = new MediaKeyWatcher(MediaKey::VolumeDown, this);
                         connect( m_athan.mkw, SIGNAL( shortPress(bb::multimedia::MediaKey::Type) ), this, SLOT( onShortPress(bb::multimedia::MediaKey::Type) ) );
                     }
+
+                    m_athan.player.play(destinationFile);
                 } else {
                     LOGGER("Skipping athaan mode" << mode);
                 }
