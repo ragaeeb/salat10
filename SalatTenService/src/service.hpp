@@ -68,12 +68,12 @@ signals:
 	void initialize();
 
 private slots:
+    void onAthanStateChanged();
     void createChannelCompleted(bb::network::PushStatus const&, QString const&);
     void createSessionCompleted(const bb::network::PushStatus&);
     void error(QString const& message);
 	void handleInvoke(const bb::system::InvokeRequest &);
 	void init();
-	void onPlayingStateChanged();
     void onShortPress(bb::multimedia::MediaKey::Type key);
 	void recalculate(QString const& key=QString());
     void timeout(bool init=false);

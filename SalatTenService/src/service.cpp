@@ -63,8 +63,8 @@ void Service::init()
     connect( &m_settingsWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( recalculate(QString const&) ) );
     connect( &m_clock, SIGNAL( clockSettingsChanged() ), this, SLOT( recalculate() ) );
     connect( &m_invokeManager, SIGNAL( invoked(const bb::system::InvokeRequest&) ), this, SLOT( handleInvoke(const bb::system::InvokeRequest&) ) );
-    connect( &m_athan.player, SIGNAL( playbackCompleted() ), this, SLOT( onPlayingStateChanged() ) );
-    connect( &m_athan.player, SIGNAL( playingChanged() ), this, SLOT( onPlayingStateChanged() ) );
+    connect( &m_athan.player, SIGNAL( playbackCompleted() ), this, SLOT( onAthanStateChanged() ) );
+    connect( &m_athan.player, SIGNAL( playingChanged() ), this, SLOT( onAthanStateChanged() ) );
     connect( &m_athan.player, SIGNAL( error(QString const&) ), this, SLOT( error(QString const&) ) );
 
     connect( &m_pushService, SIGNAL( createSessionCompleted(bb::network::PushStatus const&) ), SLOT( createSessionCompleted(bb::network::PushStatus const&) ) );
@@ -105,9 +105,11 @@ void Service::error(QString const& message)
 }
 
 
-void Service::onPlayingStateChanged()
+void Service::onAthanStateChanged()
 {
-    if ( !m_athan.player.playing() && m_athan.mkw )
+    MediaPlayer* mp = m_athan.player.mediaPlayer();
+
+    if ( mp && mp->mediaState() == MediaState::Stopped && m_athan.mkw )
     {
         LOGGER("No longer playing, destroying!");
         m_athan.mkw->deleteLater();
