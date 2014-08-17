@@ -35,7 +35,8 @@ StandardListItem
         
         var now = new Date();
         
-        if ( ListItemData.value > now || ListItemData.iqamah > now ) {
+        if ( ListItemData.value > now || ListItemData.iqamah > now )
+        {
             status = undefined;
             statusTimer.timeout.connect(statusTimer.updateStatus);
             statusTimer.start(1000);   
