@@ -239,13 +239,11 @@ void DataModelWrapper::updateCache(QStringList const& keys)
         } else if (key == "iqamahs") {
             QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
             m_cache.iqamahs.clear();
-            LOGGER("changed" << iqamahs);
 
             foreach ( QString const& key, iqamahs.keys() ) {
                 m_cache.iqamahs.insert( key, iqamahs[key].toTime() );
             }
 
-            LOGGER("difing" << m_cache.iqamahs);
             DiffUtil::diffIqamahs(&m_model, m_cache.iqamahs);
         } else if (key == "latitude") {
             m_cache.latitude = m_persistance->getValueFor("latitude").toReal();
