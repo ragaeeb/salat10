@@ -5,27 +5,20 @@
 #include <math.h>
 #include <QDateTime>
 
+#define height_ratio 12/M_PI // The ratio to the height.
+#define linear_ratio 0.45
+#define maxHourValue 23
+#define maxMinuteValue 59
+#define minimumSecond 0
+#define multiplier 1.3369
+#define safety_time 0.016389 // Safety time used to give some room for error handling. //(59/TimeFormatter.TOTAL_SECONDS_IN_MINUTE)/TimeFormatter.TOTAL_MINUTES_IN_HOUR; // but times are off with IslamicFinder
+#define total_seconds_in_minute 60
+#define totalHoursInDay 24
+#define totalMinutesInHour 60
+
 namespace {
 
 using namespace salat;
-
-/** The ratio to the height. */
-#define height_ratio 12/M_PI
-
-#define linear_ratio 0.45
-
-/** The multiplier value. */
-#define multiplier 1.3369
-
-/** Safety time used to give some room for error handling. */
-#define safety_time 0.016389 // //(59/TimeFormatter.TOTAL_SECONDS_IN_MINUTE)/TimeFormatter.TOTAL_MINUTES_IN_HOUR; // but times are off with IslamicFinder
-
-#define total_seconds_in_minute 60
-#define minimumSecond 0
-#define maxMinuteValue 59
-#define maxHourValue 23
-#define totalHoursInDay 24
-#define totalMinutesInHour 60
 
 /**
  * Computes the height value given the ratio.
@@ -88,7 +81,7 @@ qreal getMaximumAngle() { // the maximum isha angle
 QList<QDateTime> initList()
 {
     QList<QDateTime> todayResults;
-    for (int i = salat::Calculator::index_fajr; i <= salat::Calculator::index_lastThirdNight; i++) {
+    for (int i = index_fajr; i <= index_lastThirdNight; i++) {
     	todayResults << QDateTime();
     }
 
@@ -100,29 +93,20 @@ QList<QDateTime> initList()
 
 namespace salat {
 
-const int Calculator::index_fajr = 0;
-const int Calculator::index_sunrise = 1;
-const int Calculator::index_dhuhr = 2;
-const int Calculator::index_asr = 3;
-const int Calculator::index_maghrib = 4;
-const int Calculator::index_isha = 5;
-const int Calculator::index_halfNight = 6;
-const int Calculator::index_lastThirdNight = 7;
-
 Calculator::Calculator()
 {
 }
 
 
-Coordinates Calculator::createCoordinates(QDateTime local, QVariant const& latitude, QVariant const& longitude)
+Coordinates Calculator::createCoordinates(QDateTime local, qreal latitude, qreal longitude)
 {
 	QDateTime utc = local.toUTC();
 	local.setTimeSpec(Qt::UTC);
 
 	Coordinates geo; // timezoneoffset returns -4 instead of -5 if daylight savings is in effect
 	geo.timeZone = -utc.secsTo(local) / 3600;
-	geo.position.setX( SolarCalculator::degreesToRadians( latitude.toReal() ) );
-	geo.position.setY( SolarCalculator::degreesToRadians( longitude.toReal() ) );
+	geo.position.setX( SolarCalculator::degreesToRadians(latitude) );
+	geo.position.setY( SolarCalculator::degreesToRadians(longitude) );
 
 	return geo;
 }

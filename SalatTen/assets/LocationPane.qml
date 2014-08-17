@@ -39,6 +39,7 @@ NavigationPane
                 id: locationAction
                 imageSource: "file:///usr/share/icons/ic_map_all.png"
                 ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
+                title: qsTr("Choose Location") + Retranslate.onLanguageChanged
                 
                 function onSettingChanged(key)
                 {
@@ -77,7 +78,6 @@ NavigationPane
                     {
                         persist.saveValueFor("city", place.city, false);
                         persist.saveValueFor("location", place.name, false);
-                        persist.saveValueFor("altitude", place.altitude, false);
                         persist.saveValueFor("latitude", place.latitude, true);
                         persist.saveValueFor("longitude", place.longitude, true);
                         persist.saveValueFor("country", place.country, false);

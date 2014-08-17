@@ -1,18 +1,21 @@
 #include "precompiled.h"
 
 #include "ScheduleEvents.h"
-#include "DataModelWrapper.h"
+#include "Calculator.h"
+#include "Coordinates.h"
 #include "Logger.h"
+#include "SalatParameters.h"
+#include "Translator.h"
 
 using namespace bb::pim::calendar;
 
+#define key_hour_of_response "hourResponse"
+
 namespace {
 
-const char* key_hour_of_response = "hourResponse";
-
-void schedule(CalendarService& service, CalendarEvent& ev, int accountId, QString const& subject, QDateTime const& startTime, QDateTime const& endTime, QString const& body=QString())
+void schedule(CalendarService& service, CalendarEvent& ev, qint64 accountId, QString const& subject, QDateTime const& startTime, QDateTime const& endTime, QString const& body=QString())
 {
-    LOGGER("= Saving" << subject << startTime << endTime);
+    LOGGER(subject << startTime << endTime);
 
     EventSearchParameters params;
     params.setStart(startTime);
@@ -22,9 +25,8 @@ void schedule(CalendarService& service, CalendarEvent& ev, int accountId, QStrin
 
     QList<CalendarEvent> evs = service.events(params);
 
-    if ( evs.isEmpty() ) {
-        LOGGER("ScheduleEvent::run() no duplicates found, scheduling");
-
+    if ( evs.isEmpty() )
+    {
         ev.setAccountId(accountId);
         ev.setFolderId(1);
         ev.setStartTime(startTime);
@@ -35,11 +37,7 @@ void schedule(CalendarService& service, CalendarEvent& ev, int accountId, QStrin
             ev.setBody(body);
         }
 
-        LOGGER("Set body" << body);
-
         service.createEvent(ev);
-
-        LOGGER("= Current one" << ev.id());
     } else {
         LOGGER("ScheduleEvent::run() duplicate calendar event found, not scheduling");
     }
@@ -52,8 +50,8 @@ namespace salat {
 using namespace bb::system;
 using namespace bb;
 
-ScheduleEvents::ScheduleEvents(DataModelWrapper* model, int numDays, QMap<QString,int> const& events, int accountId) :
-		m_numDays(numDays), m_events(events), m_model(model), m_accountId(accountId), m_quit(false)
+ScheduleEvents::ScheduleEvents(int numDays, QMap<QString,int> const& events, qint64 accountId) :
+		m_numDays(numDays), m_events(events), m_accountId(accountId), m_quit(false)
 {
 }
 
@@ -67,67 +65,86 @@ void ScheduleEvents::cancel()
 
 void ScheduleEvents::run()
 {
-	LOGGER("Run: " << m_events);
+	LOGGER(m_events);
 
-	QVariantList results = m_model->calculate( QDateTime::currentDateTime(), m_numDays );
-	CalendarService service;
+	Calculator calculator;
+    CalendarService service;
     CalendarEvent ev;
 
-	int total = results.size()-3; // we don't need to consider the very last first 1/3 night ends, half-night begins, last 1/3 night begins
+    QSettings settings;
+	qreal latitude = settings.value("latitude").toReal();
+	qreal longitude = settings.value("longitude").toReal();
+    qreal asrRatio = settings.value("asrRatio").toReal();
+	SalatParameters angles = Calculator::createParams( settings.value("angles").toMap() );
+    QStringList keys = Translator::eventKeys();
+    Translator t;
 
-    for (int i = 0; i < total; i++)
-    {
-    	QVariantMap current = results[i].toMap();
-    	QString currentKey = current.value("key").toString();
+    QMap<QString, int> adjustments;
+    QVariantMap adjustmentMap = settings.value("adjustments").toMap();
 
-    	LOGGER("m_quit" << m_quit);
-
-    	QDateTime value = current.value("value").toDateTime();
-
-    	if ( currentKey == Translator::key_maghrib && value.date().dayOfWeek() == Qt::Friday && m_events.contains(key_hour_of_response) )
-    	{
-            int minuteAdjustment = m_events.value(key_hour_of_response);
-            QDateTime endTime = value;
-            QDateTime startTime = endTime.addSecs(minuteAdjustment*60);
-            QString eventName = tr("Salat10: Hour of Response");
-            QString body = trUtf8("Narrated by Jaabir ibn ‘Abdillah (may Allah be pleased with him) who said:\n\nThe Messenger of Allah (صلى الله عليه وسلم) said:\n\n“The day of Friday has twelve hours, in which there is no Muslim slave who asks Allah for anything but He will grant it to him, so seek it in the last hour after ‘Asr.”\n\nReported by Abu Dawood (1048) and an-Nasaa’i (1389); classed as saheeh by al-Albaani in Saheeh Abi Dawood; and by an-Nawawi in al-Majmoo‘, 4/471");
-
-            if (m_quit) {
-                return;
-            }
-
-            schedule(service, ev, m_accountId, eventName, startTime, endTime, body);
-    	}
-
-    	if ( m_events.contains(currentKey) )
-    	{
-    		int minuteAdjustment = m_events.value(currentKey);
-    		QDateTime startTime = value.addSecs(minuteAdjustment*60);
-    		int forward = currentKey == "isha" ? 2 : 1;
-    		QDateTime endTime = results[i+forward].toMap().value("value").toDateTime();
-    		QString eventName = m_model->getTranslator()->render(currentKey);
-
-    		QString subject;
-
-    		if (minuteAdjustment == 0) {
-    			 subject = tr("Salat10: %1").arg(eventName);
-    		} else if (minuteAdjustment > 0) {
-    			subject = tr("Salat10: %1 started %2 minutes ago").arg(eventName).arg(minuteAdjustment);
-    		} else if (minuteAdjustment < 0) {
-    			subject = tr("Salat10: %1 in %2 minutes").arg(eventName).arg( abs(minuteAdjustment) );
-    		}
-
-            if (m_quit) {
-                return;
-            }
-
-    		schedule(service, ev, m_accountId, subject, startTime, endTime);
-    	}
-
-        emit progress(i, total);
+    foreach ( QString const& key, adjustmentMap.keys() ) {
+        adjustments.insert( key, adjustmentMap[key].toInt() );
     }
 
-    emit progress(total, total);
+	QDateTime current = QDateTime::currentDateTime();
+
+	for (int i = 0; i < m_numDays; i++)
+	{
+	    Coordinates geo = Calculator::createCoordinates(current, latitude, longitude);
+	    QList<QDateTime> result = calculator.calculate( current.date(), geo, angles, asrRatio );
+
+	    for (int j = 0; j <= index_isha; j++)
+	    {
+	        if (j == index_sunrise) {
+	            continue;
+	        }
+
+	        QString currentKey = keys[j];
+	        QDateTime value = result[j].addSecs( adjustments.value(currentKey)*60 );
+
+	        if ( (j == index_maghrib) && ( value.date().dayOfWeek() == Qt::Friday ) && m_events.contains(key_hour_of_response) )
+	        {
+	            int minuteAdjustment = m_events.value(key_hour_of_response);
+	            QDateTime endTime = value;
+	            QDateTime startTime = endTime.addSecs(minuteAdjustment*60);
+	            QString eventName = tr("Salat10: Hour of Response");
+	            QString body = trUtf8("Narrated by Jaabir ibn ‘Abdillah (may Allah be pleased with him) who said:\n\nThe Messenger of Allah (صلى الله عليه وسلم) said:\n\n“The day of Friday has twelve hours, in which there is no Muslim slave who asks Allah for anything but He will grant it to him, so seek it in the last hour after ‘Asr.”\n\nReported by Abu Dawood (1048) and an-Nasaa’i (1389); classed as saheeh by al-Albaani in Saheeh Abi Dawood; and by an-Nawawi in al-Majmoo‘, 4/471");
+
+	            schedule(service, ev, m_accountId, eventName, startTime, endTime, body);
+	        }
+
+	        if ( m_events.contains(currentKey) )
+	        {
+	            int minuteAdjustment = m_events.value(currentKey);
+	            QDateTime startTime = value.addSecs(minuteAdjustment*60);
+	            QString nextKey = keys[j+1];
+	            QDateTime endTime = result[j+1].addSecs( adjustments.value(nextKey)*60 );
+	            QString eventName = t.render(currentKey);
+
+	            QString subject;
+
+	            if (minuteAdjustment == 0) {
+	                 subject = tr("Salat10: %1").arg(eventName);
+	            } else if (minuteAdjustment > 0) {
+	                subject = tr("Salat10: %1 started %2 minutes ago").arg(eventName).arg(minuteAdjustment);
+	            } else if (minuteAdjustment < 0) {
+	                subject = tr("Salat10: %1 in %2 minutes").arg(eventName).arg( abs(minuteAdjustment) );
+	            }
+
+	            schedule(service, ev, m_accountId, subject, startTime, endTime);
+	        }
+
+            if (m_quit) {
+                return;
+            }
+	    }
+
+	    current = current.addDays(1);
+
+	    emit progress(i, m_numDays);
+	}
+
+    emit progress(m_numDays, m_numDays);
 }
 
 ScheduleEvents::~ScheduleEvents()

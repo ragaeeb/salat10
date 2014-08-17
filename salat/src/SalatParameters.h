@@ -12,6 +12,10 @@ struct SalatParameters
 	qreal dhuhrInterval;
 	qreal ishaInterval; // The difference of Isha time from Maghrib.
 	qreal maghribInterval; // The number of minutes to add to the sunset time for the Maghrib prayer time.
+
+	SalatParameters() : fajrTwilightAngle(0), ishaTwilightAngle(0), dhuhrInterval(0), ishaInterval(0), maghribInterval(0)
+	{
+	}
 };
 
 } /* namespace salat */

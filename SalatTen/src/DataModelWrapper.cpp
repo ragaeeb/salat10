@@ -14,7 +14,7 @@ using namespace bb::cascades;
 
 DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
         QObject(parent), m_persistance(p),
-        m_model( QStringList() << "dateValue", this ), m_empty(true)
+        m_model( QStringList() << "dateValue", this )
 {
 	m_model.setSortingKeys( QStringList() << "dateValue" << "value" );
 	m_model.setGrouping(ItemGrouping::ByFullValue);
@@ -28,19 +28,14 @@ DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
 
 void DataModelWrapper::lazyInit()
 {
-    settingChanged("angles");
-    settingChanged("asrRatio");
-    settingChanged("adjustments");
-    settingChanged("athaans");
-    settingChanged("notifications");
-    settingChanged("iqamahs");
+    updateCache( QStringList() << "angles" << "asrRatio" << "adjustments" << "athaans" << "notifications" << "iqamahs" << "latitude" << "longitude" );
 }
 
 
 QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 {
     QMap<QString, bool> salatMap = Translator().salatMap();
-    Coordinates geo = Calculator::createCoordinates( local, m_persistance->getValueFor("latitude"), m_persistance->getValueFor("longitude") );
+    Coordinates geo = Calculator::createCoordinates(local, m_cache.latitude, m_cache.longitude);
 
 	QVariantList wrapped;
 	QStringList keys = Translator::eventKeys();
@@ -141,8 +136,11 @@ void DataModelWrapper::loadBeginning()
 
 void DataModelWrapper::calculateAndAppend(QDateTime const& reference)
 {
-	QVariantList wrapped = calculate(reference);
-	m_model.insertList(wrapped);
+    if ( m_cache.feasible() )
+    {
+        QVariantList wrapped = calculate(reference);
+        m_model.insertList(wrapped);
+    }
 }
 
 
@@ -163,8 +161,6 @@ void DataModelWrapper::applyDiff(QString const& settingKey, QString const& itemK
             m_model.updateItem(indexPath, current);
         }
     }
-
-    refreshNeeded();
 }
 
 
@@ -173,7 +169,6 @@ void DataModelWrapper::loadMore()
 	if ( !m_model.isEmpty() ) {
 
 		QVariantList i = m_model.last();
-		QString fajrKey = Translator::key_fajr;
 
 		while (true) { // backtrack until you hit fajr
 			QVariantList prev = m_model.before(i);
@@ -181,7 +176,7 @@ void DataModelWrapper::loadMore()
 			if ( prev.isEmpty() ) {
 				LOGGER("[HOW_THE_HECK_DID_I_GET_HERE]");
 				return;
-			} else if ( m_model.data(prev).toMap().value("key") != fajrKey ) {
+			} else if ( m_model.data(prev).toMap().value("key") != key_fajr ) {
 				i = prev;
 			} else {
 				break;
@@ -209,59 +204,62 @@ QVariant DataModelWrapper::getModel() {
 }
 
 
-bool DataModelWrapper::isEmpty() const {
-    return m_empty;
-}
-
-
 Translator* DataModelWrapper::getTranslator() {
 	return &m_translator;
 }
 
 
-void DataModelWrapper::itemAdded(QVariantList indexPath)
+void DataModelWrapper::updateCache(QStringList const& keys)
 {
-    Q_UNUSED(indexPath);
+    bool needsRefresh = false;
 
-    if (m_empty)
+    foreach (QString const& key, keys)
     {
-        m_empty = false;
-        emit emptyChanged();
+        if (key == "angles") {
+            m_cache.angles = Calculator::createParams( m_persistance->getValueFor("angles").toMap() );
+            needsRefresh = true;
+        } else if (key == "asrRatio") {
+            m_cache.asrRatio = m_persistance->getValueFor("asrRatio").toReal();
+            needsRefresh = true;
+        } else if (key == "adjustments") {
+            QVariantMap adjustments = m_persistance->getValueFor("adjustments").toMap();
+
+            foreach ( QString const& key, adjustments.keys() ) {
+                m_cache.adjustments.insert( key, adjustments[key].toInt() );
+            }
+
+            needsRefresh = true;
+        } else if (key == "athaans") {
+            m_cache.athaans = m_persistance->getValueFor("athaans").toMap();
+            applyDiff(key, "athaan");
+        } else if (key == "notifications") {
+            m_cache.notifications = m_persistance->getValueFor("notifications").toMap();
+            applyDiff(key, "notification");
+        } else if (key == "iqamahs") {
+            QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
+
+            foreach ( QString const& key, iqamahs.keys() ) {
+                m_cache.iqamahs.insert( key, iqamahs[key].toTime() );
+            }
+
+            DiffUtil::diffIqamahs(&m_model, m_cache.iqamahs);
+        } else if (key == "latitude") {
+            m_cache.latitude = m_persistance->getValueFor("latitude").toReal();
+            needsRefresh = true;
+        } else if (key == "longitude") {
+            m_cache.longitude = m_persistance->getValueFor("longitude").toReal();
+            needsRefresh = true;
+        }
+    }
+
+    if (needsRefresh) {
+        refreshNeeded();
     }
 }
 
 
-void DataModelWrapper::settingChanged(QString const& key)
-{
-    if (key == "angles") {
-        m_cache.angles = Calculator::createParams( m_persistance->getValueFor("angles").toMap() );
-        refreshNeeded();
-    } else if (key == "asrRatio") {
-        m_cache.asrRatio = m_persistance->getValueFor("asrRatio").toReal();
-        refreshNeeded();
-    } else if (key == "adjustments") {
-        QVariantMap adjustments = m_persistance->getValueFor("adjustments").toMap();
-
-        foreach ( QString const& key, adjustments.keys() ) {
-            m_cache.adjustments.insert( key, adjustments[key].toInt() );
-        }
-
-        refreshNeeded();
-    } else if (key == "athaans") {
-        m_cache.athaans = m_persistance->getValueFor("athaans").toMap();
-        applyDiff(key, "athaan");
-    } else if (key == "notifications") {
-        m_cache.notifications = m_persistance->getValueFor("notifications").toMap();
-        applyDiff(key, "notification");
-    } else if (key == "iqamahs") {
-        QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
-
-        foreach ( QString const& key, iqamahs.keys() ) {
-            m_cache.iqamahs.insert( key, iqamahs[key].toTime() );
-        }
-
-        DiffUtil::diffIqamahs(&m_model, m_cache.iqamahs);
-    }
+void DataModelWrapper::settingChanged(QString const& key) {
+    updateCache( QStringList() << key );
 }
 
 
@@ -269,19 +267,6 @@ void DataModelWrapper::refreshNeeded()
 {
     m_model.clear();
     emit recalculationNeeded();
-}
-
-
-void DataModelWrapper::itemsChanged(bb::cascades::DataModelChangeType::Type eChangeType, QSharedPointer<bb::cascades::DataModel::IndexMapper> indexMapper)
-{
-    Q_UNUSED(indexMapper);
-    Q_UNUSED(eChangeType);
-
-    if ( m_empty != m_model.isEmpty() )
-    {
-        m_empty = m_model.isEmpty();
-        emit emptyChanged();
-    }
 }
 
 
@@ -293,7 +278,12 @@ bool DataModelWrapper::atLeastOneAthanScheduled()
 
 
 bool DataModelWrapper::calculationFeasible() const {
-    return m_persistance->contains("latitude") && m_persistance->contains("longitude") && m_persistance->contains("angles");
+    return m_cache.feasible();
+}
+
+
+bool Cache::feasible() const {
+    return latitude != 0 && longitude != 0 && angles.fajrTwilightAngle != 0;
 }
 
 

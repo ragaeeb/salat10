@@ -5,6 +5,15 @@
 #include <QMap>
 #include <QStringList>
 
+#define key_fajr "fajr"
+#define key_sunrise "sunrise"
+#define key_dhuhr "dhuhr"
+#define key_asr "asr"
+#define key_maghrib "maghrib"
+#define key_isha "isha"
+#define key_half_night "halfNight"
+#define key_last_third_night "lastThirdNight"
+
 namespace salat {
 
 class Translator : public QObject
@@ -23,15 +32,6 @@ public:
 	Q_INVOKABLE static QStringList salatKeys();
 	QMap<QString, bool> salatMap();
 	void reload();
-
-	static const char* key_fajr;
-	static const char* key_sunrise;
-	static const char* key_dhuhr;
-	static const char* key_asr;
-	static const char* key_maghrib;
-	static const char* key_isha;
-	static const char* key_half_night;
-	static const char* key_last_third_night;
 };
 
 } /* namespace salat */

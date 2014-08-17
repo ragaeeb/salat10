@@ -7,23 +7,20 @@
 
 namespace salat {
 
-class DataModelWrapper;
-
 class ScheduleEvents : public QObject, public QRunnable
 {
 	Q_OBJECT
 
 	int m_numDays;
 	QMap<QString,int> m_events;
-	DataModelWrapper* m_model;
-	int m_accountId;
+	qint64 m_accountId;
 	bool m_quit;
 
 signals:
 	void progress(int progress, int total);
 
 public:
-	ScheduleEvents(DataModelWrapper* model, int numDays, QMap<QString,int> const& events, int accountId);
+	ScheduleEvents(int numDays, QMap<QString,int> const& events, qint64 accountId);
 	virtual ~ScheduleEvents();
 
 	Q_SLOT void cancel();
