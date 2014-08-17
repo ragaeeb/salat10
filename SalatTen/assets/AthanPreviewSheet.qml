@@ -5,6 +5,7 @@ import bb.multimedia 1.0
 Sheet
 {
     id: root
+    property variant all
     
     Page
     {
@@ -38,13 +39,12 @@ Sheet
                 onTriggered: {
                     console.log("UserEvent: AcceptAthan");
                     var customAthans = {};
-                    var all = translator.salatKeys();
                     
-                    for (var i = all.length-1; i > 0; i--) { // skip fajr
+                    for (var i = all.length-1; i >= 0; i--) {
                         customAthans[ all[i] ] = selected;
                     }
                     
-                    persist.saveValueFor("customAthaans", customAthans, false);
+                    persist.saveValueFor("customAthaans", customAthans);
                     persist.saveValueFor("athanPicked", 1, false);
                     persist.showToast( qsTr("Athan Successfully Set"), "", "asset:///images/ic_athaan_custom.png" );
                     

@@ -132,6 +132,9 @@ ListView
                     console.log("UserEvent: ChangeSound");
                     definition.source = "AthanPreviewSheet.qml";
                     var picker = definition.createObject();
+                    listUtil.active = true;
+
+                    picker.all = listUtil.object.getSelectedKeys();
                     picker.open();
                 }
             },
