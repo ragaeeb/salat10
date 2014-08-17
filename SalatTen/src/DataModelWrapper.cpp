@@ -223,6 +223,7 @@ void DataModelWrapper::updateCache(QStringList const& keys)
             needsRefresh = true;
         } else if (key == "adjustments") {
             QVariantMap adjustments = m_persistance->getValueFor("adjustments").toMap();
+            m_cache.adjustments.clear();
 
             foreach ( QString const& key, adjustments.keys() ) {
                 m_cache.adjustments.insert( key, adjustments[key].toInt() );
@@ -237,11 +238,14 @@ void DataModelWrapper::updateCache(QStringList const& keys)
             applyDiff(key, "notification");
         } else if (key == "iqamahs") {
             QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
+            m_cache.iqamahs.clear();
+            LOGGER("changed" << iqamahs);
 
             foreach ( QString const& key, iqamahs.keys() ) {
                 m_cache.iqamahs.insert( key, iqamahs[key].toTime() );
             }
 
+            LOGGER("difing" << m_cache.iqamahs);
             DiffUtil::diffIqamahs(&m_model, m_cache.iqamahs);
         } else if (key == "latitude") {
             m_cache.latitude = m_persistance->getValueFor("latitude").toReal();
