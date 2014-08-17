@@ -119,7 +119,7 @@ ListView
                 onTriggered: {
                     console.log("UserEvent: ShareMultiResults");
                     listUtil.active = true;
-                    data = persist.convertToUtf8( listUtil.textualizeSelected() );
+                    data = persist.convertToUtf8( listUtil.object.textualizeSelected() );
                 }
             },
             
@@ -144,7 +144,7 @@ ListView
                 onTriggered: {
                     console.log("UserEvent: ResetCustomAthan");
                     listUtil.active = true;
-                    listUtil.resetSound( listUtil.getSelectedKeys() );
+                    listUtil.object.resetSound( listUtil.object.getSelectedKeys() );
                 }
             }
         ]
