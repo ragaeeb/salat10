@@ -182,7 +182,7 @@ void Service::timeout(bool init)
 
                     QString customFile = m_athan.customAthaans.value(currentEventKey).toString();
 
-                    LOGGER("Custom file" << customFile);
+                    LOGGER("CustomFile" << customFile);
 
                     if ( customFile.startsWith("asset://") || QFile::exists( QUrl(customFile).toLocalFile() ) ) {
                         destinationFile = customFile;

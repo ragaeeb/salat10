@@ -22,6 +22,7 @@ NavigationPane
         } else if ( !persist.contains("athanPicked") && boundary.atLeastOneAthanScheduled ) {
             definition.source = "AthanPreviewSheet.qml";
             var picker = definition.createObject();
+            picker.all = ["dhuhr", "asr", "maghrib", "isha"];
             picker.open();
         } else if ( !persist.contains("tutorialMuteAthan") ) {
             definition.source = "MuteAthanTutorial.qml";
