@@ -6,8 +6,17 @@ NavigationPane
     id: navigationPane
     signal locateClicked();
     
+    function onRecalculate()
+    {
+        listView.visible = boundary.calculationFeasible;
+        emptyDelegate.delegateActive = !listView.visible;
+    }
+    
     function initialized()
     {
+        onRecalculate();
+        boundary.recalculationNeeded.connect(onRecalculate);
+        
         if ( !persist.contains("athanPrompted") ) {
             listView.showAthanPrompt();
         } else if ( !persist.contains("athanPicked") && boundary.atLeastOneAthanScheduled ) {
@@ -52,7 +61,7 @@ NavigationPane
 	Page
 	{
         id: mainPage
-        property bool actionsEnabled: boundary.calculationFeasible
+        property bool actionsEnabled: listView.visible
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         
         onPeekedAtChanged: {
@@ -207,7 +216,7 @@ NavigationPane
                 id: emptyDelegate
                 graphic: "images/empty/ic_no_coordinates.png"
                 labelText: qsTr("No coordinates detected. Either wait for the GPS to detect your location or tap here to pick a location.") + Retranslate.onLanguageChanged
-                delegateActive: boundary.empty && !persist.contains("latitude")
+                delegateActive: false
                 
                 onImageTapped: {
                     locateClicked();
@@ -217,7 +226,6 @@ NavigationPane
             ResultListView 
             {
                 id: listView
-                visible: !boundary.empty
                 property bool secretPeek: false
                 
                 function manualDeselect()

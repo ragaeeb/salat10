@@ -12,6 +12,10 @@ struct Coordinates
 	QString name;
 	QPointF position;
 	qreal timeZone;
+
+	Coordinates() : timeZone(0)
+	{
+	}
 };
 
 } /* namespace salat */

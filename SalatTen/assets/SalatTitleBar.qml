@@ -221,6 +221,12 @@ TitleBar
                             onSettingChanged("hijri");
                             persist.settingChanged.connect(onSettingChanged);
                         }
+                        
+                        attachedObjects: [
+                            HijriCalculator {
+                                id: hijri
+                            }
+                        ]
                     }
                 }
             }

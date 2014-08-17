@@ -2,16 +2,6 @@
 
 namespace salat {
 
-const char* Translator::key_fajr = "fajr";
-const char* Translator::key_sunrise = "sunrise";
-const char* Translator::key_dhuhr = "dhuhr";
-const char* Translator::key_asr = "asr";
-const char* Translator::key_maghrib = "maghrib";
-const char* Translator::key_isha = "isha";
-const char* Translator::key_half_night = "halfNight";
-const char* Translator::key_last_third_night = "lastThirdNight";
-
-
 Translator::Translator()
 {
 	reload();

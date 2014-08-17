@@ -19,7 +19,7 @@ TabbedPane
     }
     
     onActiveTabChanged: {
-        peekEnabled = activeTab != location;
+        peekEnabled = activeTab != locationTab;
     }
 
     Tab
@@ -37,7 +37,7 @@ TabbedPane
             function onLocateClicked()
             {
                 locationTab.triggered();
-                activeTab = location;
+                activeTab = locationTab;
             }
             
             onObjectChanged: {

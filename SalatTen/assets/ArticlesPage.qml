@@ -14,70 +14,50 @@ NavigationPane
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         
         actions: [
-            InvokeActionItem
+            ActionItem
             {
-                query {
-                    mimeType: "application/pdf"
-                    uri: "http://abdurrahman.org/sunnah/bulughalmaramNotes/BM_129-143-TimesOfSalah-35p.pdf"
-                    invokeActionId: "bb.action.OPEN"
-                }
-                
                 ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                 imageSource: "images/tabs/ic_articles.png"
                 title: qsTr("Times of Salah") + Retranslate.onLanguageChanged
                 
                 onTriggered: {
                     console.log("UserEvent: TimesOfSalahTriggered");
+                    app.launchBrowser("http://abdurrahman.org/sunnah/bulughalmaramNotes/BM_129-143-TimesOfSalah-35p.pdf");
                 }
             },
             
-            InvokeActionItem
+            ActionItem
             {
-                query {
-                    mimeType: "text/html"
-                    uri: "http://abdurrahman.org/sunnah/sahihBukhari/010.sbt.html"
-                    invokeActionId: "bb.action.OPEN"
-                }
-                
                 ActionBar.placement: ActionBarPlacement.OnBar
                 imageSource: "images/menu/ic_table.png"
                 title: qsTr("Times of the Prayers") + Retranslate.onLanguageChanged
                 
                 onTriggered: {
                     console.log("UserEvent: TimesOfPrayers");
+                    app.launchBrowser("http://abdurrahman.org/sunnah/sahihBukhari/010.sbt.html");
                 }
             },
             
-            InvokeActionItem
+            ActionItem
             {
-                query {
-                    mimeType: "text/html"
-                    uri: "http://abdurrahman.org/sunnah/sahihBukhari/008.sbt.html"
-                    invokeActionId: "bb.action.OPEN"
-                }
-                
                 ActionBar.placement: ActionBarPlacement.OnBar
                 imageSource: "file:///usr/share/icons/ic_accept.png"
                 title: qsTr("Bukhari: Salat") + Retranslate.onLanguageChanged
                 
                 onTriggered: {
                     console.log("UserEvent: TimesOfPrayers");
+                    app.launchBrowser("http://abdurrahman.org/sunnah/sahihBukhari/008.sbt.html");
                 }
             },
             
-            InvokeActionItem
+            ActionItem
             {
-                query {
-                    mimeType: "text/html"
-                    uri: "http://abdurrahman.org/sunnah/sahihMuslim/004.smt.html"
-                    invokeActionId: "bb.action.OPEN"
-                }
-                
                 imageSource: "images/dropdown/ic_article_filter.png"
                 title: qsTr("Kitab Al-Salat") + Retranslate.onLanguageChanged
                 
                 onTriggered: {
                     console.log("UserEvent: KitabAlSalat");
+                    app.launchBrowser("http://abdurrahman.org/sunnah/sahihMuslim/004.smt.html");
                 }
             }
         ]

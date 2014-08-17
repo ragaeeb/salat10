@@ -108,7 +108,7 @@ void Service::timeout(bool init)
     QDateTime now = QDateTime::currentDateTime();
     LOGGER(init << now);
 
-    m_params.geo = Calculator::createCoordinates( now, m_settings.value("latitude"), m_settings.value("longitude") );
+    m_params.geo = Calculator::createCoordinates( now, m_settings.value("latitude").toReal(), m_settings.value("longitude").toReal() );
     QStringList allEvents = Translator::eventKeys();
 
     Calculator calculator;
@@ -162,7 +162,7 @@ void Service::timeout(bool init)
 
                 if (okToPlay)
                 {
-                    LOGGER("Playing athaan mode" << mode);
+                    LOGGER("PlayingAthanMode" << mode);
                     QString destinationFile = currentEventKey == Translator::key_fajr ? audio_fajr_athaan : audio_athaan;
 
                     QString customFile = m_athan.customAthaans.value(currentEventKey).toString();
@@ -174,7 +174,7 @@ void Service::timeout(bool init)
                     }
 
                     m_athan.prevKey = currentEventKey;
-                    LOGGER( "Playing with volume" << m_athan.player.volume() );
+                    LOGGER( "PlayingWithVol" << m_athan.player.volume() );
                     m_athan.player.play(destinationFile);
 
                     if (m_athan.mkw == NULL) {
@@ -199,7 +199,7 @@ void Service::timeout(bool init)
 
 void Service::onShortPress(bb::multimedia::MediaKey::Type key)
 {
-    LOGGER("SHORT PRESSED!!!!" << key << m_athan.player.playing());
+    LOGGER( key << m_athan.player.playing() );
 
     if ( m_athan.player.playing() && key == MediaKey::VolumeDown )
     {
@@ -228,9 +228,7 @@ void Service::recalculate(QString const& path)
         m_athan.profiles = m_settings.value("profiles").toMap();
         m_athan.customAthaans = m_settings.value("customAthaans").toMap();
         m_athan.skipJumuah = m_settings.value("skipJumahAthaan").toInt() == 1;
-        LOGGER("new vol received" << m_settings.value("athanVolume").toDouble());
         m_athan.player.setVolume( m_settings.contains("athanVolume") ? m_settings.value("athanVolume").toDouble() : 1 );
-        LOGGER("new vol" << m_athan.player.volume());
 
         QVariantList values = m_athan.athaans.values();
         values.append( m_athan.notifications.values() );

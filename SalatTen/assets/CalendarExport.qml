@@ -3,7 +3,7 @@ import com.canadainc.data 1.0
 
 Page
 {
-    signal exportingReady(int daysToExport, variant result, int accountId)
+    signal exportingReady(int daysToExport, variant result, variant accountId)
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
     titleBar: TitleBar

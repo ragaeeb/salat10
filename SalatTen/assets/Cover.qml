@@ -11,10 +11,8 @@ Container
         
     background: back.imagePaint
     leftPadding: 10; rightPadding: 10
-    
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Fill
-    
     layout: DockLayout {}
 
     Container
