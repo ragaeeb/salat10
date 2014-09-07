@@ -28,6 +28,7 @@ class NotificationThread : public QObject
 signals:
 	void currentEventChanged();
     void mapDataLoaded(QVariantList const& data);
+    void locationsFound(QVariant const& result);
 
 private slots:
     void readyToCheckin(QVariantMap const& current, QVariantMap const& next);
@@ -39,6 +40,7 @@ public:
 	virtual ~NotificationThread();
 
     Q_INVOKABLE void fetchCheckins();
+    Q_INVOKABLE void geoLookup(QString const& location);
 };
 
 } /* namespace salat */
