@@ -9,6 +9,8 @@
 #include "NotificationThread.h"
 #include "Persistance.h"
 
+#include <bb/system/InvokeManager>
+
 namespace bb {
 	namespace cascades {
 		class Application;
@@ -23,6 +25,7 @@ namespace salat {
 
 using namespace canadainc;
 using namespace QtMobilitySubset;
+using namespace bb::system;
 
 class CleanupEvents;
 class ScheduleEvents;
@@ -40,6 +43,7 @@ class ApplicationUI : public QObject
 	ScheduleEvents* m_schedule;
     DataModelWrapper m_model;
     NotificationThread m_notification;
+    InvokeManager m_invokeManager;
 
     ApplicationUI(bb::cascades::Application *app);
 
@@ -51,6 +55,7 @@ signals:
 	void lazyInitComplete();
 
 private slots:
+    void onSunnahFinished();
     void handleExportComplete(QObject* obj);
     void handleCleanupComplete(QObject* obj);
     void lazyInit();
@@ -72,6 +77,7 @@ public:
     Q_INVOKABLE void saveIqamah(QString const& key, QDateTime const& time);
     Q_INVOKABLE void removeIqamah(QString const& key);
     bool hasCalendarAccess();
+    Q_INVOKABLE void launchSunnah(QString const& uri);
 };
 
 } // salat

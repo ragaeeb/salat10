@@ -34,7 +34,7 @@ NavigationPane
                 
                 onTriggered: {
                     console.log("UserEvent: TimesOfPrayers");
-                    app.launchBrowser("http://abdurrahman.org/sunnah/sahihBukhari/010.sbt.html");
+                    app.launchSunnah("sunnah://bukhari/10");
                 }
             },
             
@@ -46,7 +46,7 @@ NavigationPane
                 
                 onTriggered: {
                     console.log("UserEvent: TimesOfPrayers");
-                    app.launchBrowser("http://abdurrahman.org/sunnah/sahihBukhari/008.sbt.html");
+                    app.launchSunnah("sunnah://bukhari/8");
                 }
             },
             
@@ -57,7 +57,7 @@ NavigationPane
                 
                 onTriggered: {
                     console.log("UserEvent: KitabAlSalat");
-                    app.launchBrowser("http://abdurrahman.org/sunnah/sahihMuslim/004.smt.html");
+                    app.launchSunnah("sunnah://muslim/4");
                 }
             }
         ]
