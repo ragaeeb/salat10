@@ -30,5 +30,7 @@
 #include <bb/platform/geo/GeoLocation>
 
 #include <bb/system/InvokeManager>
+#include <bb/system/InvokeReplyError>
+#include <bb/system/InvokeTargetReply>
 
 #include <QtLocationSubset/QGeoAddress>
