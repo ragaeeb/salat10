@@ -59,6 +59,10 @@ NavigationPane
                 onCreationCompleted: {
                     persist.settingChanged.connect(onSettingChanged);
                     onSettingChanged("longitude");
+                    
+                    if ( !persist.contains("longitude") ) {
+                        searchField.requestFocus();
+                    }
                 }
                 
                 attachedObjects: [
@@ -90,6 +94,140 @@ NavigationPane
                 }
             }
         ]
+        
+        titleBar: TitleBar
+        {
+            id: tb
+            kind: TitleBarKind.FreeForm
+            kindProperties: FreeFormTitleBarKindProperties
+            {
+                Container
+                {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
+                    topPadding: 10; bottomPadding: 20; leftPadding: 10
+                    
+                    TextField
+                    {
+                        id: searchField
+                        hintText: qsTr("Enter location to search...") + Retranslate.onLanguageChanged
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        bottomMargin: 0
+                        
+                        input {
+                            submitKey: SubmitKey.Search
+                            flags: TextInputFlag.SpellCheck | TextInputFlag.WordSubstitution | TextInputFlag.AutoPeriodOff | TextInputFlag.AutoCorrection
+                            submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
+                            
+                            onSubmitted: {
+                                busy.running = true;
+                                
+                                var query = searchField.text.trim();
+                                notification.geoLookup(query);
+                            }
+                        }
+                        
+                        onCreationCompleted: {
+                            input["keyLayout"] = 7;
+                        }
+                    }
+                }
+                
+                expandableArea.onExpandedChanged: {
+                    searchField.requestFocus();
+                }
+                
+                expandableArea.content: Container
+                {
+                    DropDown
+                    {
+                        id: locations
+                        title: qsTr("No Locations Found") + Retranslate.onLanguageChanged
+                        
+                        function onLocationsFound(result)
+                        {
+                            if (result.status == "OK")
+                            {
+                                locations.removeAll();
+                                var n = result.results.length;
+                                
+                                for (var i = 0; i < n; i++) {
+                                    var option = optionDef.createObject();
+                                    option.value = result.results[i];
+                                    
+                                    locations.add(option);
+                                }
+                                
+                                locations.title = qsTr("%n locations found", "", n);
+                                tb.kindProperties.expandableArea.expanded = true;
+                                locations.expanded = true;
+                            } else {
+                                persist.showToast( qsTr("Could not fetch geolocation results. Please either use the 'Choose Location' from the bottom, tap on the 'Refresh' button use your GPS or please try again later."), "", "asset:///images/ic_location_failed.png" );
+                            }
+                            
+                            busy.running = false;
+                        }
+                        
+                        onSelectedValueChanged: {
+                            var parts = selectedValue.address_components;
+                            var city = "";
+                            var country = "";
+                            var latitude = selectedValue.geometry.location.lat;
+                            var longitude = selectedValue.geometry.location.lng;
+                            
+                            for (var i = parts.length-1; i >= 0; i--)
+                            {
+                                var types = parts[i].types;
+
+                                if ( types.indexOf("country") != -1 ) {
+                                    country = parts[i].long_name;
+                                } else if ( types.indexOf("locality") != -1 ) {
+                                    city = parts[i].long_name;
+                                }
+                            }
+
+                            mapViewDelegate.delegateActive = true;
+                            mapViewDelegate.control.animateToLocation(latitude, longitude, 50000);
+                            
+                            persist.saveValueFor("location", selectedValue.formatted_address, false);
+                            persist.saveValueFor("latitude", latitude, true);
+                            persist.saveValueFor("longitude", longitude, true);
+                            
+                            if (city.length > 0) {
+                                persist.saveValueFor("city", place.city, false);
+                            }
+                            
+                            if (country.length > 0) {
+                                persist.saveValueFor("country", place.country, false);
+                            }
+                            
+                            locationAction.title = selectedValue.formatted_address;
+                        }
+                        
+                        onCreationCompleted: {
+                            notification.locationsFound.connect(onLocationsFound);
+                        }
+                        
+                        attachedObjects: [
+                            ComponentDefinition
+                            {
+                                id: optionDef
+                                
+                                Option
+                                {
+                                    imageSource: "file:///usr/share/icons/ic_map_all.png"
+
+                                    onValueChanged: {
+                                        text = value.formatted_address;
+                                        description = "(" + value.geometry.location.lat + ", " + value.geometry.location.lng + ")";
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
         
         Container
         {

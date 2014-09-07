@@ -15,6 +15,8 @@
 #include <bb/cascades/places/PlacePicker>
 #include <bb/cascades/pickers/FilePicker>
 
+#include <bb/data/JsonDataAccess>
+
 #include <bb/pim/calendar/CalendarEvent>
 #include <bb/pim/calendar/CalendarService>
 #include <bb/pim/calendar/CalendarSettings>

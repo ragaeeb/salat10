@@ -11,7 +11,6 @@ TabbedPane
         projectName: "salat10"
         allowDonations: true
         showServiceLogging: true
-        showSubmitLogs: true
         help.imageSource: "images/menu/ic_help.png"
         help.title: qsTr("Help") + Retranslate.onLanguageChanged
         settings.imageSource: "images/menu/ic_settings.png"
@@ -46,6 +45,10 @@ TabbedPane
                 }
             }
         }
+
+        onTriggered: {
+            console.log("UserEvent: TimingsTab");
+        }
     }
 
     Tab {
@@ -57,6 +60,10 @@ TabbedPane
 
         delegate: Delegate {
             source: "CompassPane.qml"
+        }
+
+        onTriggered: {
+            console.log("UserEvent: CompassTab");
         }
     }
     
@@ -70,6 +77,10 @@ TabbedPane
         delegate: Delegate {
             source: "ArticlesPage.qml"
         }
+
+        onTriggered: {
+            console.log("UserEvent: ArticlesTab");
+        }
     }
     
     Tab {
@@ -82,6 +93,10 @@ TabbedPane
         delegate: Delegate {
             source: "SujudAsSahwPane.qml"
         }
+
+        onTriggered: {
+            console.log("UserEvent: SujudTab");
+        }
     }
     
     Tab {
@@ -92,6 +107,10 @@ TabbedPane
         
         delegate: Delegate {
             source: "LocationPane.qml"
+        }
+
+        onTriggered: {
+            console.log("UserEvent: LocationTab");
         }
     }
     
@@ -104,6 +123,10 @@ TabbedPane
         
         delegate: Delegate {
             source: "TutorialPane.qml"
+        }
+
+        onTriggered: {
+            console.log("UserEvent: TutorialTab");
         }
     }
     
