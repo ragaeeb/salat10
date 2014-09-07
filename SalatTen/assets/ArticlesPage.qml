@@ -92,6 +92,7 @@ NavigationPane
                         id: filter
                         horizontalAlignment: HorizontalAlignment.Fill
                         title: qsTr("Filter") + Retranslate.onLanguageChanged
+                        expanded: true
 
                         Option {
                             text: qsTr("Common Mistakes") + Retranslate.onLanguageChanged
