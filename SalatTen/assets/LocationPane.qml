@@ -189,7 +189,7 @@ NavigationPane
                             mapViewDelegate.delegateActive = true;
                             mapViewDelegate.control.animateToLocation(latitude, longitude, 50000);
                             
-                            persist.saveValueFor("location", selectedValue.formatted_address, false);
+                            persist.saveValueFor("location", selectedValue.formatted_address);
                             persist.saveValueFor("latitude", latitude, true);
                             persist.saveValueFor("longitude", longitude, true);
                             
