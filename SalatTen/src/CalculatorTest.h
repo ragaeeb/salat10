@@ -59,6 +59,7 @@ struct CalculatorTest
 
 		QStringList expected = expectedString.split(" ");
 		QList<QDateTime> actual = c.calculate(dateValue, coordinates, sp, asrRatio);
+		LOGGER(location << expected << actual);
 
 		compare(actual[0], "fajr", expected[0], location);
 		compare(actual[1], "sunrise", expected[1], location);
@@ -174,6 +175,18 @@ struct CalculatorTest
 		sp.fajrTwilightAngle = SolarCalculator::degreesToRadians(19);
 		dateValue = QDate(2013,1,15);
 		doTest("Jeddah, Makkah, Saudi Arabia", 3, 21.5169, 39.2192, "5:44 7:03 12:33 3:41 6:02 7:32", dateValue, sp);
+
+        sp.fajrTwilightAngle = SolarCalculator::degreesToRadians(18.5);
+		dateValue = QDate(2014,9,13);
+		doTest("Margao, India", 5.5, 15.1603, 73.9541, "5:10 6:22 12:31 3:50 6:38 8:08", dateValue, sp);
+
+        sp.fajrTwilightAngle = SolarCalculator::degreesToRadians(18);
+        sp.ishaTwilightAngle = SolarCalculator::degreesToRadians(17);
+        sp.dhuhrInterval = 1;
+        sp.ishaInterval = 0;
+        sp.maghribInterval = 1;
+        dateValue = QDate(2015,2,13);
+        doTest("Lokoja, Nigeria", 1, 7.8000, 6.7333, "5:41 6:51 12:48 4:09 6:44 7:51", dateValue, sp);
 	}
 };
 

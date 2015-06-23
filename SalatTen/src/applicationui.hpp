@@ -45,8 +45,6 @@ class ApplicationUI : public QObject
     NotificationThread m_notification;
     InvokeManager m_invokeManager;
 
-    ApplicationUI(bb::cascades::Application *app);
-
 signals:
     void accountsImported(QVariantList const& qvl);
 	void operationProgress(int current, int total);
@@ -64,7 +62,7 @@ private slots:
     void terminateThreads();
 
 public:
-	static void create(bb::cascades::Application* app);
+    ApplicationUI(InvokeManager* i);
     virtual ~ApplicationUI();
 
     Q_INVOKABLE void loadAccounts();

@@ -10,7 +10,6 @@ TabbedPane
         id: menuDef
         projectName: "salat10"
         allowDonations: true
-        showServiceLogging: true
         help.imageSource: "images/menu/ic_help.png"
         help.title: qsTr("Help") + Retranslate.onLanguageChanged
         settings.imageSource: "images/menu/ic_settings.png"
