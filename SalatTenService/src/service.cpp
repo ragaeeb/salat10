@@ -2,7 +2,6 @@
 
 #include "service.hpp"
 #include "Logger.h"
-#include "LogMonitor.h"
 #include "IOUtils.h"
 #include "SalatUtils.h"
 #include "Translator.h"
@@ -56,8 +55,6 @@ Service::Service(bb::Application* app) :
 
 void Service::init()
 {
-    LogMonitor::create(SERVICE_KEY, SERVICE_LOG_FILE, this);
-
     m_athan.timer.setSingleShot(true);
     connect( &m_athan.timer, SIGNAL( timeout() ), this, SLOT( timeout() ) );
     connect( &m_settingsWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( recalculate(QString const&) ) );
