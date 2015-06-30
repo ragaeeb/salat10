@@ -32,7 +32,7 @@ signals:
 
 private slots:
     void readyToCheckin(QVariantMap const& current, QVariantMap const& next);
-    void requestComplete(QVariant const& cookie, QByteArray const& data);
+    void requestComplete(QVariant const& cookie, QByteArray const& data, bool error);
 	void timeout();
 
 public:

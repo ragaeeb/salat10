@@ -5,81 +5,90 @@ Page
     id: root
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
-    titleBar: AboutTitleBar {
-        id: atb
-    }
-    
     actions: [
         ActionItem
         {
-            imageSource: "file:///usr/share/icons/bb_action_openbbmchannel.png"
-            title: atb.channelTitle
-            ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
-            
-            onTriggered: {
-                console.log("UserEvent: OpenChannelTriggered");
-                persist.openChannel();
-            }
-        },
-        
-        ActionItem
-        {
-            imageSource: "images/menu/ic_video_tutorial.png"
-            title: qsTr("Video Tutorial") + Retranslate.onLanguageChanged
+            property bool sujudSahw: false
             ActionBar.placement: ActionBarPlacement.OnBar
+            imageSource: "images/menu/ic_help.png"
+            title: sujudSahw ? qsTr("Sujud as-Sahw") + Retranslate.onLanguageChanged : qsTr("How To Pray") + Retranslate.onLanguageChanged
             
             onTriggered: {
-                console.log("UserEvent: VideoTutorialTriggered");
-                persist.tutorialVideo("http://www.youtube.com/watch?v=AbHZLmWSKts", false);
+                var dest = sujudSahw ? "sujud_as_sahw.html" : "tutorial.html";
+                webView.url = "local:///assets/html/"+dest;
+                sujudSahw = !sujudSahw;
+            }
+            
+            onCreationCompleted: {
+                triggered();
             }
         }
     ]
     
+    titleBar: AboutTitleBar
+    {
+        id: atb
+        videoTutorialUri: "http://www.youtube.com/watch?v=AbHZLmWSKts"
+    }
+    
+    function cleanUp()
+    {
+    }
+    
     Container
     {
-        leftPadding: 10; rightPadding: 10;
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
+        background: Color.White
+        layout: DockLayout {}
         
-	    ScrollView
-	    {
-	        horizontalAlignment: HorizontalAlignment.Fill
-	        verticalAlignment: VerticalAlignment.Fill
-	        scrollViewProperties.pinchToZoomEnabled: true
-	        
-	        Label
-	        {
-	            multiline: true
-		        horizontalAlignment: HorizontalAlignment.Fill
-		        verticalAlignment: VerticalAlignment.Center
-	            textStyle.textAlign: TextAlign.Center
-	            textStyle.fontSize: FontSize.XSmall
-	            textStyle.lineHeight: 1.25
-	            content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
-	            text: "\n\nSalat10 is a prayer time calculator for Muslims and offers a lot of additional features that other apps do not have. It also calculates Hijri dates based on the current Julian calendar date.
-
-The usage of the app is very simple and the app tries to take care of most of the manual work for you. It will automatically determine your location and pick the calculation angles that are most relevant to your area to give you accurate timings. However you still have control over these settings if you want to adjust them yourself.
-
-The app must remain open for the athan to function properly (until headless apps are officially supported on BlackBerry 10). 30 minutes before an event happens you will notice it display a message on the event itself, and 5 minutes before the event the countdown will get even more verbose. Once the new event comes in you will hear and see the notification if you have enabled the settings.
-
-
-The codebase for this class is based on the code of:
-Fayez Alhargan, 2001
-King Abdulaziz City for Science and Technology
-Computer and Electronics Research Institute
-Riyadh, Saudi Arabia
-alhargan@kacst.edu.sa
-Tel:4813770
-Fax:4813764
-version: opn1.2
-
-The Qibla compass formula was taken from the Azimuth/Distance calculator by Don Cross <http://cosinekitty.com/compass.html>
-
-Special thanks to:
-Muhammad Riaz <webif@islamicfinder.org>
-
-Hijri Calendar development credits: Habib bin Hilal <http://www.al-habib.info/islamic-calendar/hijricalendartext.htm>"
-	        }
-	    }
+        ScrollView
+        {
+            id: scrollView
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
+            scrollViewProperties.scrollMode: ScrollMode.Both
+            scrollViewProperties.pinchToZoomEnabled: true
+            scrollViewProperties.initialScalingMethod: ScalingMethod.AspectFill
+            
+            WebView
+            {
+                id: webView
+                settings.zoomToFitEnabled: true
+                settings.activeTextEnabled: true
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
+                
+                onLoadProgressChanged: {
+                    progressIndicator.value = loadProgress;
+                }
+                
+                onLoadingChanged: {
+                    if (loadRequest.status == WebLoadStatus.Started) {
+                        progressIndicator.visible = true;
+                        progressIndicator.state = ProgressIndicatorState.Progress;
+                    } else if (loadRequest.status == WebLoadStatus.Succeeded) {
+                        progressIndicator.visible = false;
+                        progressIndicator.state = ProgressIndicatorState.Complete;
+                    } else if (loadRequest.status == WebLoadStatus.Failed) {
+                        html = "<html><head><title>Load Fail</title><style>* { margin: 0px; padding 0px; }body { font-size: 48px; font-family: monospace; border: 1px solid #444; padding: 4px; }</style> </head> <body>Loading failed! Please check your internet connection.</body></html>"
+                        progressIndicator.visible = false;
+                        progressIndicator.state = ProgressIndicatorState.Error;
+                    }
+                }
+            }
+        }
+        
+        ProgressIndicator {
+            id: progressIndicator
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Top
+            visible: true
+            value: 0
+            fromValue: 0
+            toValue: 100
+            state: ProgressIndicatorState.Pause
+            topMargin: 0; bottomMargin: 0; leftMargin: 0; rightMargin: 0;
+        }
     }
 }

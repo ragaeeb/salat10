@@ -1,161 +1,117 @@
-import bb.cascades 1.2
+import bb.cascades 1.0
 
-TabbedPane
+NavigationPane
 {
     id: root
-    activeTab: timingsTab
     
     Menu.definition: CanadaIncMenu
     {
         id: menuDef
         projectName: "salat10"
         allowDonations: true
+        bbWorldID: "21198062"
         help.imageSource: "images/menu/ic_help.png"
         help.title: qsTr("Help") + Retranslate.onLanguageChanged
         settings.imageSource: "images/menu/ic_settings.png"
         settings.title: qsTr("Settings") + Retranslate.onLanguageChanged
     }
     
-    onActiveTabChanged: {
-        peekEnabled = activeTab != locationTab;
-    }
-
-    Tab
+    Page
     {
-        id: timingsTab
-        title: qsTr("Timings") + Retranslate.onLanguageChanged
-        description: qsTr("Salah Times") + Retranslate.onLanguageChanged
-        imageSource: "images/tabs/ic_clock.png"
-        delegateActivationPolicy: TabDelegateActivationPolicy.ActivateWhenSelected
-        
-        delegate: Delegate
-        {
-            source: "TimingsPane.qml"
-            
-            function onLocateClicked()
+        id: tabsPage
+        actionBarVisibility: lss.firstVisibleItem == 1 ? ChromeVisibility.Overlay : ChromeVisibility.Hidden;
+
+        actions: [
+            ActionItem
             {
-                locationTab.triggered();
-                activeTab = locationTab;
-            }
-            
-            onObjectChanged: {
-                if (active) {
-                    object.locateClicked.connect(onLocateClicked);
+                id: locationAction
+                imageSource: "file:///usr/share/icons/ic_map_all.png"
+                ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
+                title: qsTr("Choose Location") + Retranslate.onLanguageChanged
+                
+                onTriggered: {
+                    console.log("UserEvent: LocationPickerTriggered");
                 }
             }
-        }
+        ]
 
-        onTriggered: {
-            console.log("UserEvent: TimingsTab");
-        }
-    }
-
-    Tab {
-        id: compass
-        title: qsTr("Qibla") + Retranslate.onLanguageChanged
-        description: qsTr("Compass") + Retranslate.onLanguageChanged
-        imageSource: "images/compass/ic_compass.png"
-        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
-
-        delegate: Delegate {
-            source: "CompassPane.qml"
-        }
-
-        onTriggered: {
-            console.log("UserEvent: CompassTab");
-        }
-    }
-    
-    Tab {
-        id: articles
-        title: qsTr("Articles") + Retranslate.onLanguageChanged
-        description: qsTr("Articles") + Retranslate.onLanguageChanged
-        imageSource: "images/tabs/ic_article.png"
-        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
-        
-        delegate: Delegate {
-            source: "ArticlesPage.qml"
-        }
-
-        onTriggered: {
-            console.log("UserEvent: ArticlesTab");
-        }
-    }
-    
-    Tab {
-        id: sujud
-        title: qsTr("Sujud As-Sahw") + Retranslate.onLanguageChanged
-        description: qsTr("Prostration of Forgetfulness") + Retranslate.onLanguageChanged
-        imageSource: "images/tabs/ic_articles.png"
-        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
-        
-        delegate: Delegate {
-            source: "SujudAsSahwPane.qml"
-        }
-
-        onTriggered: {
-            console.log("UserEvent: SujudTab");
-        }
-    }
-    
-    Tab {
-        id: locationTab
-        title: qsTr("Location") + Retranslate.onLanguageChanged
-        imageSource: "images/tabs/ic_map.png"
-        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
-        
-        delegate: Delegate {
-            source: "LocationPane.qml"
-        }
-
-        onTriggered: {
-            console.log("UserEvent: LocationTab");
-        }
-    }
-    
-    Tab {
-        id: tutorial
-        title: qsTr("Tutorial") + Retranslate.onLanguageChanged
-        description: qsTr("Step by Step") + Retranslate.onLanguageChanged
-        imageSource: "images/tabs/ic_tutorial.png"
-        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
-        
-        delegate: Delegate {
-            source: "TutorialPane.qml"
-        }
-
-        onTriggered: {
-            console.log("UserEvent: TutorialTab");
-        }
-    }
-    
-    function onSettingChanged(key)
-    {
-        if (key == "location")
+        ListView
         {
-            var location = persist.getValueFor("location");
-            locationTab.description = location ? location : qsTr("Location");
-        }
-    }
-    
-    function onSidebarVisualStateChanged(newState)
-    {
-        sidebarStateChanged.disconnect(onSidebarVisualStateChanged);
-        onSettingChanged("location");
-        
-        persist.settingChanged.connect(onSettingChanged);
-    }
-    
-    function initialized()
-    {
-        if ( !persist.contains("angles") ) {
-            menuDef.settings.triggered();
-        }
-        
-        sidebarStateChanged.connect(onSidebarVisualStateChanged);
-    }
+            id: tabsList
+            property variant firstItem // keeps track of what current items is shown on screen
+            snapMode: SnapMode.LeadingEdge
+            flickMode: FlickMode.SingleItem
+            scrollIndicatorMode: ScrollIndicatorMode.None
+            
+            dataModel: ArrayDataModel {
+                id: adm
+            }
 
+            layout: StackListLayout {
+                orientation: LayoutOrientation.LeftToRight
+            }
+            
+            function itemType(data, indexPath)
+            {
+                return data.toString();
+            }
+            
+            listItemComponents: [
+                ListItemComponent
+                {
+                    type: "timings"
+                    
+                    TimingsContainer
+                    {
+                        id: cityItem
+                        property variant firstItem: ListItem.view.firstItem
+                        
+                        onFirstItemChanged: {
+                            if ("" + firstItem == "" + cityItem.ListItem.indexPath) {
+                                cityItem.showAnim();
+                            } else {
+                                cityItem.hideAnim();
+                            }
+                        }
+                    }
+                },
+                
+                ListItemComponent {
+                    type: "location"
+                    
+                    LocationPane {
+                        
+                    }
+                }
+            ]
+            
+            attachedObjects: [
+                ListScrollStateHandler
+                {
+                    id: lss
+                    
+                    onScrollingChanged: {
+                        if (!scrolling)
+                        {
+                            if (firstVisibleItem.length == 0) { // race condition check since scolling and firstVisible item is set simultaniously at startup
+                                tabsList.firstItem = 0;
+                            } else {
+                                tabsList.firstItem = firstVisibleItem;
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+    
+    function onReady()
+    {
+        adm.append("timings");
+        adm.append("location");
+    }
+    
     onCreationCompleted: {
-        app.lazyInitComplete.connect(initialized);
+        app.lazyInitComplete.connect(onReady);
     }
 }

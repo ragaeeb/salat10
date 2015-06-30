@@ -91,10 +91,10 @@ QtObject
         var icon;
         
         if (turnOn) {
-            icon = "asset:///images/ic_athaan_enable.png";
+            icon = "asset:///images/list/ic_athaan_enable.png";
             toastMessage = qsTr("Successfully enabled alarms/athans.");
         } else {
-            icon = "asset:///images/ic_athaan_mute.png";
+            icon = "asset:///images/list/ic_athaan_enable.png";
             toastMessage = qsTr("Successfully muted alarms/athans.");
         }
 

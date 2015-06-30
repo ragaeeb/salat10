@@ -9,7 +9,11 @@
 #include "NotificationThread.h"
 #include "Persistance.h"
 
-#include <bb/system/InvokeManager>
+#include <bb/system/CardDoneMessage>
+#include <bb/system/LocaleHandler>
+
+#include <bb/ImageData>
+#include <bb/cascades/ImageView>
 
 namespace bb {
 	namespace cascades {
@@ -43,7 +47,10 @@ class ApplicationUI : public QObject
 	ScheduleEvents* m_schedule;
     DataModelWrapper m_model;
     NotificationThread m_notification;
-    InvokeManager m_invokeManager;
+    bb::system::LocaleHandler m_timeRender;
+    bb::cascades::Image m_blurred;
+
+    void init(QString const& qml);
 
 signals:
     void accountsImported(QVariantList const& qvl);
@@ -53,13 +60,15 @@ signals:
 	void lazyInitComplete();
 
 private slots:
-    void onSunnahFinished();
+    void childCardDone(bb::system::CardDoneMessage const& message=bb::system::CardDoneMessage());
     void handleExportComplete(QObject* obj);
     void handleCleanupComplete(QObject* obj);
+    void invoked(bb::system::InvokeRequest const& request);
     void lazyInit();
     void onFullScreen();
     void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);
     void terminateThreads();
+    void onBlurred();
 
 public:
     ApplicationUI(InvokeManager* i);
@@ -71,11 +80,11 @@ public:
     Q_INVOKABLE QObject* refreshLocation();
     Q_INVOKABLE void cleanupCalendarEvents();
     Q_INVOKABLE void setCustomAthaans(QStringList const& keys, QString const& uri=QString());
-    Q_INVOKABLE void launchBrowser(QString const& uri);
     Q_INVOKABLE void saveIqamah(QString const& key, QDateTime const& time);
     Q_INVOKABLE void removeIqamah(QString const& key);
     bool hasCalendarAccess();
-    Q_INVOKABLE void launchSunnah(QString const& uri);
+    Q_INVOKABLE QString renderStandardTime(QDateTime const& theTime);
+    Q_INVOKABLE void blur(bb::cascades::ImageView* i);
 };
 
 } // salat

@@ -270,7 +270,8 @@ NavigationPane
                                 imageSource: "images/tabs/ic_article.png"
                                 
                                 gestureHandlers: [
-                                    TapHandler {
+                                    TapHandler
+                                    {
                                         onTapped: {
                                             console.log("UserEvent: ExpandArticle");
                                             bodyDelegate.delegateActive = !bodyDelegate.delegateActive;
