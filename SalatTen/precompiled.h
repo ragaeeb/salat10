@@ -34,3 +34,7 @@
 #include <bb/system/InvokeTargetReply>
 
 #include <QtLocationSubset/QGeoAddress>
+
+#include <bb/utility/i18n/Formatting>
+
+#include <bb/ImageData>

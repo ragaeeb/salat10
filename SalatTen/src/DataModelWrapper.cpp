@@ -19,9 +19,6 @@ DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
 	m_model.setSortingKeys( QStringList() << "dateValue" << "value" );
 	m_model.setGrouping(ItemGrouping::ByFullValue);
 
-	connect( &m_model, SIGNAL( itemAdded(QVariantList) ), this, SLOT( itemAdded(QVariantList) ) );
-	connect( &m_model, SIGNAL( itemsChanged(bb::cascades::DataModelChangeType::Type, QSharedPointer<bb::cascades::DataModel::IndexMapper>) ), this, SLOT( itemsChanged(bb::cascades::DataModelChangeType::Type, QSharedPointer<bb::cascades::DataModel::IndexMapper>) ) );
-
 	connect( p, SIGNAL( settingChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ), Qt::QueuedConnection );
 }
 
@@ -45,7 +42,7 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 		QList<QDateTime> result = m_calculator.calculate( local.date(), geo, m_cache.angles, m_cache.asrRatio );
 		//	result << local.addSecs(30) << local.addSecs(60) << local.addSecs(90) << local.addSecs(120) << local.addSecs(150) << local.addSecs(180) << local.addSecs(210) << local.addSecs(240) << local.addSecs(270);
 
-		LOGGER(result);
+		//LOGGER(result);
 
 		for (int j = 0; j < result.size(); j++)
 		{

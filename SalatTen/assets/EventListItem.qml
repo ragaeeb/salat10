@@ -5,26 +5,20 @@ StandardListItem
 {
     id: sli
     property variant data: ListItem.data
-    property bool peek: sli.ListItem.view.secretPeek
     title: ListItemData ? ListItem.view.localization.renderStandardTime(ListItemData.value) : undefined;
     description: ListItemData ? ListItem.view.translation.render(ListItemData.key) : undefined;
+    
     imageSource: {
         if (ListItemData) {
             if (ListItemData.athaan == true && ListItemData.isSalat) {
-                return "images/ic_athaan_enable.png";
+                return "images/list/ic_athaan_enable.png";
             } else if (ListItemData.notification == true) {
-                return "images/ic_notification_enable.png";
+                return "images/list/ic_notification_enable.png";
             } else {
-                return "images/ic_athaan_mute.png";
+                return "images/list/ic_athaan_enable.png";
             }
         } else {
             return undefined;
-        }
-    }
-    
-    onPeekChanged: {
-        if (peek) {
-            showAnim.play();
         }
     }
     
@@ -42,23 +36,6 @@ StandardListItem
             statusTimer.start(1000);   
         } else {
             statusTimer.cancel();
-        }
-    }
-    
-    opacity: 0
-    animations: [
-        FadeTransition
-        {
-            id: showAnim
-            fromOpacity: 0
-            toOpacity: 1
-            duration: sli.ListItem.indexInSection*300
-        }
-    ]
-    
-    ListItem.onInitializedChanged: {
-        if (initialized) {
-            showAnim.play();
         }
     }
     
