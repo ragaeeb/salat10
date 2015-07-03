@@ -29,8 +29,32 @@ NavigationPane
                 ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                 title: qsTr("Choose Location") + Retranslate.onLanguageChanged
                 
+                attachedObjects: [
+                    ComponentDefinition {
+                        id: pickerDefinition
+                        PlacePicker {}
+                    }
+                ]
+                
                 onTriggered: {
                     console.log("UserEvent: LocationPickerTriggered");
+                    
+                    var picker = pickerDefinition.createObject();
+                    var place = picker.show();
+                    
+                    if (place && place.latitude && place.longitude)
+                    {
+                        persist.saveValueFor("city", place.city, false);
+                        persist.saveValueFor("location", place.name, false);
+                        persist.saveValueFor("latitude", place.latitude, true);
+                        persist.saveValueFor("longitude", place.longitude, true);
+                        persist.saveValueFor("country", place.country, false);
+                        locationAction.title = place.name;
+                        
+                        persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/tabs/ic_map.png" );
+                    }
+                    
+                    picker.destroy();
                 }
             }
         ]

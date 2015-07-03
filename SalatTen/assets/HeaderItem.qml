@@ -26,23 +26,28 @@ Container
             spaceQuota: 1
         }
 
-        Container {
+        Container
+        {
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Center
-            Label {
+
+            Label
+            {
                 text: {
                     if (!root.ListItem.view.draggingStarted) {
                         var n = boundary.getCurrent( new Date() );
                         return translator.render(n.key);
                     } else {
-                        return "HeaderTitle";
+                        return root.ListItem.view.hijriCalc.writeIslamicDate( persist.getValueFor("hijri") );
                     }
                 }
+
                 textStyle.base: header.style
                 bottomMargin: 0
             }
 
-            Container {
+            Container
+            {
                 topMargin: 0
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight

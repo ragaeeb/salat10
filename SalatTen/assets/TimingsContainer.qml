@@ -11,21 +11,42 @@ Container
 
     layout: DockLayout {}
     
-    // background image goes here
     ScrollView
     {
         id: backgroundView
-        Container {
-            layout: DockLayout {
-            }
-            ImageView {
+        horizontalAlignment: HorizontalAlignment.Fill
+        verticalAlignment: VerticalAlignment.Fill
+
+        Container
+        {
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
+            layout: DockLayout {}
+
+            ImageView
+            {
                 id: bg
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
                 imageSource: "images/graphics/maghrib.jpg"
+                scalingMethod: ScalingMethod.AspectFill
+                
+                onCreationCompleted: {
+                    var current = boundary.getCurrent( new Date() );
+                    reporter.log(current);
+                    //imageSource = "images/graphics/%1.jpg".arg(current.key);
+                    console.log("***", imageSource);
+                }
             }
-            ImageView {
+
+            ImageView
+            {
                 id: bg2
                 opacity: 0
                 loadEffect: ImageViewLoadEffect.FadeZoom
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
+                scalingMethod: ScalingMethod.AspectFill
                 
                 onCreationCompleted: {
                     localizer.blur(bg2);
@@ -63,7 +84,6 @@ Container
                     } else if (atBeginning) {
                         cityList.draggingStarted = false
                         bg2.opacity = 0;
-                        
                     }
                 }
             },
