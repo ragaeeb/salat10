@@ -3,6 +3,7 @@
 
 #include "customsqldatasource.h"
 #include "DataModelWrapper.h"
+#include "DeviceUtils.h"
 #include "LazyMediaPlayer.h"
 #include "LazySceneCover.h"
 #include "LocaleUtil.h"
@@ -49,6 +50,7 @@ class ApplicationUI : public QObject
     NotificationThread m_notification;
     bb::system::LocaleHandler m_timeRender;
     bb::cascades::Image m_blurred;
+    DeviceUtils m_device;
 
     void init(QString const& qml);
 
@@ -84,7 +86,7 @@ public:
     Q_INVOKABLE void removeIqamah(QString const& key);
     bool hasCalendarAccess();
     Q_INVOKABLE QString renderStandardTime(QDateTime const& theTime);
-    Q_INVOKABLE void blur(bb::cascades::ImageView* i);
+    Q_INVOKABLE void blur(bb::cascades::ImageView* i, QString const& imageSrc);
 };
 
 } // salat

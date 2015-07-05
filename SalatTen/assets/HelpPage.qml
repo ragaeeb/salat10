@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import com.canadainc.data 1.0
 
 Page
 {
@@ -8,19 +9,24 @@ Page
     actions: [
         ActionItem
         {
+            ActionBar.placement: ActionBarPlacement.OnBar
+            imageSource: "images/menu/ic_help.png"
+            title: qsTr("Sujud as-Sahw") + Retranslate.onLanguageChanged
+            
+            onTriggered: {
+                webView.url = "local:///assets/html/sujud_as_sahw.html";
+            }
+        },
+        
+        ActionItem
+        {
             property bool sujudSahw: false
             ActionBar.placement: ActionBarPlacement.OnBar
             imageSource: "images/menu/ic_help.png"
-            title: sujudSahw ? qsTr("Sujud as-Sahw") + Retranslate.onLanguageChanged : qsTr("How To Pray") + Retranslate.onLanguageChanged
+            title: qsTr("How To Pray") + Retranslate.onLanguageChanged
             
             onTriggered: {
-                var dest = sujudSahw ? "sujud_as_sahw.html" : "tutorial.html";
-                webView.url = "local:///assets/html/"+dest;
-                sujudSahw = !sujudSahw;
-            }
-            
-            onCreationCompleted: {
-                triggered();
+                webView.url = "local:///assets/html/tutorial.html";
             }
         }
     ]
@@ -39,45 +45,101 @@ Page
     {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
-        background: Color.White
+        background: webView.delegateActive ? Color.White : SystemDefaults.Paints.ContainerBackground
         layout: DockLayout {}
         
-        ScrollView
+        ControlDelegate
         {
-            id: scrollView
-            horizontalAlignment: HorizontalAlignment.Fill
-            verticalAlignment: VerticalAlignment.Fill
-            scrollViewProperties.scrollMode: ScrollMode.Both
-            scrollViewProperties.pinchToZoomEnabled: true
-            scrollViewProperties.initialScalingMethod: ScalingMethod.AspectFill
+            id: articles
+            delegateActive: !webView.delegateActive
+            visible: delegateActive
             
-            WebView
+            sourceComponent: ComponentDefinition
             {
-                id: webView
-                settings.zoomToFitEnabled: true
-                settings.activeTextEnabled: true
-                horizontalAlignment: HorizontalAlignment.Fill
-                verticalAlignment: VerticalAlignment.Fill
-                
-                onLoadProgressChanged: {
-                    progressIndicator.value = loadProgress;
-                }
-                
-                onLoadingChanged: {
-                    if (loadRequest.status == WebLoadStatus.Started) {
-                        progressIndicator.visible = true;
-                        progressIndicator.state = ProgressIndicatorState.Progress;
-                    } else if (loadRequest.status == WebLoadStatus.Succeeded) {
-                        progressIndicator.visible = false;
-                        progressIndicator.state = ProgressIndicatorState.Complete;
-                    } else if (loadRequest.status == WebLoadStatus.Failed) {
-                        html = "<html><head><title>Load Fail</title><style>* { margin: 0px; padding 0px; }body { font-size: 48px; font-family: monospace; border: 1px solid #444; padding: 4px; }</style> </head> <body>Loading failed! Please check your internet connection.</body></html>"
-                        progressIndicator.visible = false;
-                        progressIndicator.state = ProgressIndicatorState.Error;
+                ListView
+                {
+                    id: listView
+                    
+                    dataModel: ArrayDataModel {
+                        id: adm
+                    }
+                    
+                    listItemComponents:
+                    [
+                        ListItemComponent {
+                            StandardListItem
+                            {
+                                imageSource: "images/tabs/ic_article.png"
+                                title: ListItemData.author
+                                description: ListItemData.title
+                            }
+                        }
+                    ]
+                    
+                    onCreationCompleted: {
+                        sql.dataLoaded.connect( function(id, data)
+                        {
+                                if (id == QueryId.GetArticles)
+                                {
+                                    adm.clear();
+                                    adm.append(data);
+                                }
+                        });
+                    
+                    sql.query = "SELECT suite_pages.id AS id,COALESCE(i.displayName, i.name) AS author,COALESCE(heading,title) AS title FROM suites LEFT JOIN individuals i ON i.id=suites.author INNER JOIN suite_pages ON suite_pages.suite_id=suites.id";
+                    sql.load(QueryId.GetArticles);
                     }
                 }
             }
         }
+
+        ControlDelegate
+        {
+            id: webView
+            property variant url
+            delegateActive: url != undefined
+            visible: delegateActive
+            
+            sourceComponent: ComponentDefinition
+            {
+                ScrollView
+                {
+                    id: scrollView
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
+                    scrollViewProperties.scrollMode: ScrollMode.Both
+                    scrollViewProperties.pinchToZoomEnabled: true
+                    scrollViewProperties.initialScalingMethod: ScalingMethod.AspectFill
+                    
+                    WebView
+                    {
+                        url: webView.url
+                        settings.zoomToFitEnabled: true
+                        settings.activeTextEnabled: true
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        verticalAlignment: VerticalAlignment.Fill
+                        
+                        onLoadProgressChanged: {
+                            progressIndicator.value = loadProgress;
+                        }
+                        
+                        onLoadingChanged: {
+                            if (loadRequest.status == WebLoadStatus.Started) {
+                                progressIndicator.visible = true;
+                                progressIndicator.state = ProgressIndicatorState.Progress;
+                            } else if (loadRequest.status == WebLoadStatus.Succeeded) {
+                                progressIndicator.visible = false;
+                                progressIndicator.state = ProgressIndicatorState.Complete;
+                            } else if (loadRequest.status == WebLoadStatus.Failed) {
+                                html = "<html><head><title>Load Fail</title><style>* { margin: 0px; padding 0px; }body { font-size: 48px; font-family: monospace; border: 1px solid #444; padding: 4px; }</style> </head> <body>Loading failed! Please check your internet connection.</body></html>"
+                                progressIndicator.visible = false;
+                                progressIndicator.state = ProgressIndicatorState.Error;
+                            }
+                        }
+                    }
+                }
+            }
+        }        
         
         ProgressIndicator {
             id: progressIndicator
