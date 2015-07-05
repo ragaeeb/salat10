@@ -1,8 +1,13 @@
 import bb.cascades 1.0
+import com.canadainc.data 1.0
 
 NavigationPane
 {
     id: root
+    
+    onPopTransitionEnded: {
+        page.destroy();
+    }
     
     Menu.definition: CanadaIncMenu
     {
@@ -19,120 +24,236 @@ NavigationPane
     Page
     {
         id: tabsPage
-        actionBarVisibility: lss.firstVisibleItem == 1 ? ChromeVisibility.Overlay : ChromeVisibility.Hidden;
 
-        actions: [
-            ActionItem
+        Container
+        {
+            id: cityItem
+            layout: DockLayout {}
+            
+            ScrollView
             {
-                id: locationAction
-                imageSource: "file:///usr/share/icons/ic_map_all.png"
-                ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
-                title: qsTr("Choose Location") + Retranslate.onLanguageChanged
+                id: backgroundView
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
+                scrollViewProperties.pinchToZoomEnabled: false
+                
+                Container
+                {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
+                    layout: DockLayout {}
+                    
+                    ImageView
+                    {
+                        id: bg
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        verticalAlignment: VerticalAlignment.Fill
+                        scalingMethod: ScalingMethod.AspectFill
+                    }
+                    
+                    ImageView
+                    {
+                        id: bg2
+                        opacity: 0
+                        loadEffect: ImageViewLoadEffect.FadeZoom
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        verticalAlignment: VerticalAlignment.Fill
+                        scalingMethod: ScalingMethod.AspectFill
+                    }
+                }
+            }
+            
+            ResultListView
+            {
+                id: cityList
+                // Lists tries to expand as much as possible and since it's located inside another listView it will get unlimited widht. 
+                stickToEdgePolicy: ListViewStickToEdgePolicy.Beginning
+                property bool draggingStarted: false
+                property alias hijriCalc: hijri
+                scrollIndicatorMode: ScrollIndicatorMode.None
+                
+                onCreationCompleted: {
+                    maxWidth = deviceUtils.pixelSize.width
+                    maxHeight = deviceUtils.pixelSize.height
+                    quoteLabel.maxWidth = maxWidth-100;
+                }
                 
                 attachedObjects: [
-                    ComponentDefinition {
-                        id: pickerDefinition
-                        PlacePicker {}
+                    ListScrollStateHandler {
+                        id: lssh
+                        property variant lastVisible
+                        
+                        onScrollingChanged: {
+                            if (scrolling) {
+                                cityList.draggingStarted = true
+                                bg2.opacity = 1;
+                            } else if (atBeginning) {
+                                cityList.draggingStarted = false;
+                                bg2.opacity = 0;
+                            }
+                        }
+                        
+                        onFirstVisibleItemChanged: {
+                            if (lastVisible != firstVisibleItem && firstVisibleItem.length == 1)
+                            {
+                                sql.query = "SELECT %1 AS author,i.id,body,TRIM( COALESCE(suites.title,'') || ' ' || COALESCE(quotes.reference,'') ) AS reference,birth,death,female,is_companion FROM quotes INNER JOIN individuals i ON i.id=quotes.author LEFT JOIN suites ON quotes.suite_id=suites.id WHERE quotes.id=( ABS( RANDOM() % (SELECT COUNT() AS total_quotes FROM quotes) )+1 )".arg( "coalesce(%1.displayName, TRIM((coalesce(%1.prefix,'') || ' ' || %1.name || ' ' || coalesce(%1.kunya,''))))".arg("i") );
+                                sql.load(QueryId.GetRandomBenefit);
+                                lastVisible = firstVisibleItem;
+                            }
+                        }
+                    },
+                    
+                    HijriCalculator {
+                        id: hijri
                     }
                 ]
                 
-                onTriggered: {
-                    console.log("UserEvent: LocationPickerTriggered");
+                // list offset. Currently set from HeaderItem.qml. Ideally something similar to visibleArea would be nice instead.
+                property int offset
+                onOffsetChanged: {
+                    // paralax-scrolling the background based on offset.
+                    backgroundView.scrollToPoint(0, - offset / 3, ScrollAnimation.None);
+                }
+                
+                listItemComponents: [
+                    ListItemComponent {
+                        type: "header"
+                        HeaderItem {
+                        }
+                    },
                     
-                    var picker = pickerDefinition.createObject();
-                    var place = picker.show();
-                    
-                    if (place && place.latitude && place.longitude)
+                    ListItemComponent
                     {
-                        persist.saveValueFor("city", place.city, false);
-                        persist.saveValueFor("location", place.name, false);
-                        persist.saveValueFor("latitude", place.latitude, true);
-                        persist.saveValueFor("longitude", place.longitude, true);
-                        persist.saveValueFor("country", place.country, false);
-                        locationAction.title = place.name;
+                        type: "item"
                         
-                        persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/tabs/ic_map.png" );
+                        EventListItem {
+                            id: eli
+                        }
+                    }
+                ]
+            }
+            
+            TextArea
+            {
+                id: quoteLabel
+                backgroundVisible: false
+                editable: false
+                textStyle.fontSize: FontSize.XXSmall
+                opacity: lssh.firstVisibleItem.length == 1 && !lssh.scrolling ? 1 : 0
+                textStyle.textAlign: TextAlign.Center
+                horizontalAlignment: HorizontalAlignment.Center
+                
+                function getSuffix(birth, death, isCompanion, female)
+                {
+                    if (isCompanion)
+                    {
+                        if (female) {
+                            return qsTr("رضي الله عنها");
+                        } else {
+                            return qsTr("رضي الله عنه");
+                        }
+                    } else if (death) {
+                        return qsTr(" (رحمه الله)");
+                    } else if (birth) {
+                        return qsTr(" (حفظه الله)");
                     }
                     
-                    picker.destroy();
+                    return "";
+                }
+                
+                function onDataLoaded(id, data)
+                {
+                    if (id == QueryId.GetRandomBenefit)
+                    {
+                        var quote = data[0];
+                        text = "<html><i>\n“%1”</i>\n\n- <b><a href=\"%5\">%2</a>%4</b>\n\n[%3]</html>".arg( quote.body.replace(/&/g,"&amp;") ).arg(quote.author).arg( quote.reference.replace(/&/g,"&amp;") ).arg( getSuffix(quote.birth, quote.death, quote.is_companion == 1, quote.female == 1) ).arg( quote.id.toString() );
+                    }
+                }
+                
+                onCreationCompleted: {
+                    sql.dataLoaded.connect(onDataLoaded);
+                }
+                
+                activeTextHandler: ActiveTextHandler
+                {
+                    onTriggered: {
+                        var link = event.href.toString();
+                        
+                        if ( link.match("\\d+") ) {
+                            persist.invoke("com.canadainc.Quran10.bio.previewer", "", "", "", link);
+                            reporter.record("OpenAuthorLink", link);
+                        }
+                        
+                        event.abort();
+                    }
                 }
             }
-        ]
-
-        ListView
-        {
-            id: tabsList
-            property variant firstItem // keeps track of what current items is shown on screen
-            snapMode: SnapMode.LeadingEdge
-            flickMode: FlickMode.SingleItem
-            scrollIndicatorMode: ScrollIndicatorMode.None
             
-            dataModel: ArrayDataModel {
-                id: adm
+            function showAnim() {
+                show.play();
             }
-
-            layout: StackListLayout {
-                orientation: LayoutOrientation.LeftToRight
+            function hideAnim() {
+                show.stop();
+                hide.play();
+                cityList.scrollToPosition(ScrollPosition.Beginning,ScrollAnimation.Smooth);
             }
             
-            function itemType(data, indexPath)
-            {
-                return data.toString();
-            }
-            
-            listItemComponents: [
-                ListItemComponent
-                {
-                    type: "timings"
-                    
-                    TimingsContainer
-                    {
-                        id: cityItem
-                        property variant firstItem: ListItem.view.firstItem
-                        
-                        onFirstItemChanged: {
-                            if ("" + firstItem == "" + cityItem.ListItem.indexPath) {
-                                cityItem.showAnim();
-                            } else {
-                                cityItem.hideAnim();
-                            }
-                        }
+            animations: [
+                ParallelAnimation {
+                    id: show
+                    target: cityList
+                    FadeTransition {
+                        fromOpacity: 0
+                        toOpacity: 1
+                        duration: 500
+                        easingCurve: StockCurve.CubicOut
+                    }
+                    TranslateTransition {
+                        fromY: 300
+                        toY: 0
+                        duration: 500
+                        easingCurve: StockCurve.CubicOut
                     }
                 },
-                
-                ListItemComponent {
-                    type: "location"
-                    
-                    LocationPane {
-                        
+                ParallelAnimation {
+                    id: hide
+                    target: cityList
+                    FadeTransition {
+                        toOpacity: 0
+                        duration: 100
+                        easingCurve: StockCurve.CubicIn
                     }
-                }
-            ]
-            
-            attachedObjects: [
-                ListScrollStateHandler
-                {
-                    id: lss
-                    
-                    onScrollingChanged: {
-                        if (!scrolling)
-                        {
-                            if (firstVisibleItem.length == 0) { // race condition check since scolling and firstVisible item is set simultaniously at startup
-                                tabsList.firstItem = 0;
-                            } else {
-                                tabsList.firstItem = firstVisibleItem;
-                            }
-                        }
+                    TranslateTransition {
+                        fromY: 0
+                        toY: 300
+                        duration: 500
+                        easingCurve: StockCurve.CubicIn
                     }
                 }
             ]
         }
     }
     
+    function onCurrentEventChanged()
+    {
+        var current = boundary.getCurrent( new Date() );
+        var k = current.key;
+        
+        if (k == "halfNight" || k == "lastThirdNight") {
+            k = "isha";
+        }
+        
+        var src = "images/graphics/%1.jpg".arg(k);
+        bg.imageSource = src;
+        localizer.blur(bg2, src);
+    }
+    
     function onReady()
     {
-        adm.append("timings");
-        adm.append("location");
+        notification.currentEventChanged.connect(onCurrentEventChanged);
+        onCurrentEventChanged();
+        
+        cityItem.showAnim();
     }
     
     onCreationCompleted: {

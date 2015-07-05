@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import bb.cascades.places 1.0
 import bb.platform 1.0
 import com.canadainc.data 1.0
 
@@ -9,6 +10,44 @@ Page
     titleBar: TitleBar {
         title: qsTr("Settings") + Retranslate.onLanguageChanged
     }
+    
+    actions: [
+        ActionItem
+        {
+            id: locationAction
+            imageSource: "file:///usr/share/icons/ic_map_all.png"
+            ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
+            title: qsTr("Choose Location") + Retranslate.onLanguageChanged
+            
+            attachedObjects: [
+                ComponentDefinition {
+                    id: pickerDefinition
+                    PlacePicker {}
+                }
+            ]
+            
+            onTriggered: {
+                console.log("UserEvent: LocationPickerTriggered");
+                
+                var picker = pickerDefinition.createObject();
+                var place = picker.show();
+                
+                if (place && place.latitude && place.longitude)
+                {
+                    persist.saveValueFor("city", place.city, false);
+                    persist.saveValueFor("location", place.name, false);
+                    persist.saveValueFor("latitude", place.latitude, true);
+                    persist.saveValueFor("longitude", place.longitude, true);
+                    persist.saveValueFor("country", place.country, false);
+                    locationAction.title = place.name;
+                    
+                    persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/tabs/ic_map.png" );
+                }
+                
+                picker.destroy();
+            }
+        }
+    ]
     
     ScrollView
     {
@@ -66,7 +105,7 @@ Page
                                 def.fajrTwilight = current.fajr_twilight;
                                 def.ishaTwilight = current.isha_twilight;
                                 def.dhuhrInterval = current.dhuhr_interval;
-                                def.maghribInterval = current.maghrib_interval;
+                                def.maghribInterval = current.maghrib_inteval;
                                 def.ishaInterval = current.isha_interval;
                                 
                                 if (def.value == strategy) {

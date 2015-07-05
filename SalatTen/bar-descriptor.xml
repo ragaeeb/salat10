@@ -158,13 +158,17 @@
 	<asset path="splash_n.png">splash_n.png</asset>
 	<asset path="../../canadainc/assets/AboutTitleBar.qml">assets/AboutTitleBar.qml</asset>
 	<asset path="../../canadainc/assets/AccountsDropDown.qml">assets/AccountsDropDown.qml</asset>
+	<asset path="../../canadainc/assets/AlFurqanAdvertisement.qml">assets/AlFurqanAdvertisement.qml</asset>
     <asset path="../../canadainc/assets/BugReportPage.qml">assets/BugReportPage.qml</asset>
     <asset path="../../canadainc/assets/CanadaIncMenu.qml">assets/CanadaIncMenu.qml</asset>
     <asset path="../../canadainc/assets/EmptyDelegate.qml">assets/EmptyDelegate.qml</asset>
     <asset path="../../canadainc/assets/FullScreenDialog.qml">assets/FullScreenDialog.qml</asset>
+    <asset path="../../canadainc/assets/OfflineDelegate.qml">assets/OfflineDelegate.qml</asset>
+    <asset path="../../canadainc/assets/PermissionToast.qml">assets/PermissionToast.qml</asset>
     <asset path="../../canadainc/assets/PersistCheckBox.qml">assets/PersistCheckBox.qml</asset>
 	<asset path="../../canadainc/assets/PersistDropDown.qml">assets/PersistDropDown.qml</asset>
 	<asset path="../../canadainc/assets/ProgressControl.qml">assets/ProgressControl.qml</asset>
+	<asset path="../../canadainc/assets/TutorialTip.qml">assets/TutorialTip.qml</asset>
 
 	<!-- Request permission to run a backend headless process and post notification. -->
 	<permission system="true">_sys_run_headless</permission>
