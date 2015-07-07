@@ -5,6 +5,7 @@
 #include "Coordinates.h"
 #include "Logger.h"
 #include "SalatParameters.h"
+#include "SalatUtils.h"
 #include "Translator.h"
 
 using namespace bb::pim::calendar;
@@ -72,15 +73,15 @@ void ScheduleEvents::run()
     CalendarEvent ev;
 
     QSettings settings;
-	qreal latitude = settings.value("latitude").toReal();
-	qreal longitude = settings.value("longitude").toReal();
-    qreal asrRatio = settings.value("asrRatio").toReal();
-	SalatParameters angles = Calculator::createParams( settings.value("angles").toMap() );
+	qreal latitude = settings.value(KEY_CALC_LATITUDE).toReal();
+	qreal longitude = settings.value(KEY_CALC_LONGITUDE).toReal();
+    qreal asrRatio = settings.value(KEY_CALC_ASR_RATIO).toReal();
+	SalatParameters angles = Calculator::createParams( settings.value(KEY_CALC_ANGLES).toMap() );
     QStringList keys = Translator::eventKeys();
     Translator t;
 
     QMap<QString, int> adjustments;
-    QVariantMap adjustmentMap = settings.value("adjustments").toMap();
+    QVariantMap adjustmentMap = settings.value(KEY_CALC_ADJUSTMENTS).toMap();
 
     foreach ( QString const& key, adjustmentMap.keys() ) {
         adjustments.insert( key, adjustmentMap[key].toInt() );

@@ -58,7 +58,7 @@ Container
                     text: {
                         if (!root.ListItem.view.draggingStarted) {
                             var n = boundary.getCurrent( new Date() );
-                            return localizer.renderStandardTime(n.value)+"\n"+root.ListItem.view.hijriCalc.writeIslamicDate( persist.getValueFor("hijri") );
+                            return offloader.renderStandardTime(n.value)+"\n"+root.ListItem.view.hijriCalc.writeIslamicDate( persist.getValueFor("hijri") );
                         } else {
                             return Qt.formatDate(ListItemData, Qt.SystemLocaleLongDate);
                         }

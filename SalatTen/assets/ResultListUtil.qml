@@ -44,7 +44,7 @@ QtObject
     {
         var event = translator.render(data.key);
         var dateString = Qt.formatDate(data.dateValue, Qt.SystemLocaleLongDate);
-        var timeValue = localizer.renderStandardTime(data.value);
+        var timeValue = offloader.renderStandardTime(data.value);
         var result = dateString+"\n"+event+": "+timeValue;
         
         return result;
@@ -138,7 +138,7 @@ QtObject
                 }
                 
                 var event = translator.render(current.key);
-                var timeValue = localizer.renderStandardTime(current.value);
+                var timeValue = offloader.renderStandardTime(current.value);
                 result += event+": "+timeValue+"\n";
             }
         }
