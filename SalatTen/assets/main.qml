@@ -96,8 +96,7 @@ NavigationPane
                         onFirstVisibleItemChanged: {
                             if (lastVisible != firstVisibleItem && firstVisibleItem.length == 1)
                             {
-                                sql.query = "SELECT %1 AS author,i.id,body,TRIM( COALESCE(suites.title,'') || ' ' || COALESCE(quotes.reference,'') ) AS reference,birth,death,female,is_companion FROM quotes INNER JOIN individuals i ON i.id=quotes.author LEFT JOIN suites ON quotes.suite_id=suites.id WHERE quotes.id=( ABS( RANDOM() % (SELECT COUNT() AS total_quotes FROM quotes) )+1 )".arg( "coalesce(%1.displayName, TRIM((coalesce(%1.prefix,'') || ' ' || %1.name || ' ' || coalesce(%1.kunya,''))))".arg("i") );
-                                sql.load(QueryId.GetRandomBenefit);
+                                sql.fetchRandomBenefit(quoteLabel);
                                 lastVisible = firstVisibleItem;
                             }
                         }
@@ -245,7 +244,7 @@ NavigationPane
         
         var src = "images/graphics/%1.jpg".arg(k);
         bg.imageSource = src;
-        localizer.blur(bg2, src);
+        offloader.blur(bg2, src);
     }
     
     function onReady()

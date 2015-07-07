@@ -45,11 +45,11 @@ Container
         var next = boundary.getNext(now);
         
         var n = translator.render(current.key);
-        var t = localizer.renderStandardTime(current.value);
+        var t = offloader.renderStandardTime(current.value);
         currentLabel.text = n + ": " + t;
         
         n = translator.render(next.key);
-        t = localizer.renderStandardTime(next.value);
+        t = offloader.renderStandardTime(next.value);
         nextLabel.text = n + ": " + t;
     }
     

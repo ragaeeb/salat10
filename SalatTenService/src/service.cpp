@@ -120,7 +120,7 @@ void Service::timeout(bool init)
     QDateTime now = QDateTime::currentDateTime();
     LOGGER(init << now);
 
-    m_params.geo = Calculator::createCoordinates( now, m_settings.value("latitude").toReal(), m_settings.value("longitude").toReal() );
+    m_params.geo = Calculator::createCoordinates( now, m_settings.value(KEY_CALC_LATITUDE).toReal(), m_settings.value(KEY_CALC_LONGITUDE).toReal() );
     QStringList allEvents = Translator::eventKeys();
 
     Calculator calculator;
@@ -230,18 +230,18 @@ void Service::recalculate(QString const& path)
 
     m_settings.sync();
 
-    if ( m_settings.contains("latitude") && m_settings.contains("longitude") && m_settings.contains("angles") )
+    if ( m_settings.contains(KEY_CALC_LATITUDE) && m_settings.contains(KEY_CALC_LONGITUDE) && m_settings.contains(KEY_CALC_ANGLES) )
     {
-        m_params.angles = Calculator::createParams( m_settings.value("angles").toMap() );
-        m_params.asrRatio = m_settings.value("asrRatio").toReal();
-        m_params.adjustments = m_settings.value("adjustments").toMap();
+        m_params.angles = Calculator::createParams( m_settings.value(KEY_CALC_ANGLES).toMap() );
+        m_params.asrRatio = m_settings.value(KEY_CALC_ASR_RATIO).toReal();
+        m_params.adjustments = m_settings.value(KEY_CALC_ADJUSTMENTS).toMap();
 
-        m_athan.athaans = m_settings.value("athaans").toMap();
-        m_athan.notifications = m_settings.value("notifications").toMap();
-        m_athan.profiles = m_settings.value("profiles").toMap();
-        m_athan.customAthaans = m_settings.value("customAthaans").toMap();
-        m_athan.skipJumuah = m_settings.value("skipJumahAthaan").toInt() == 1;
-        m_athan.player.setVolume( m_settings.contains("athanVolume") ? m_settings.value("athanVolume").toDouble() : 1 );
+        m_athan.athaans = m_settings.value(KEY_ATHANS).toMap();
+        m_athan.notifications = m_settings.value(KEY_NOTIFICATIONS).toMap();
+        m_athan.profiles = m_settings.value(KEY_PROFILES).toMap();
+        m_athan.customAthaans = m_settings.value(KEY_CUSTOM_ATHANS).toMap();
+        m_athan.skipJumuah = m_settings.value(KEY_SKIP_JUMUAH).toInt() == 1;
+        m_athan.player.setVolume( m_settings.contains(KEY_ATHAN_VOLUME) ? m_settings.value(KEY_ATHAN_VOLUME).toDouble() : 1 );
 
         QVariantList values = m_athan.athaans.values();
         values.append( m_athan.notifications.values() );

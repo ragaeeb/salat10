@@ -2,11 +2,12 @@
 
 #include "DataModelWrapper.h"
 #include "Coordinates.h"
-#include "DiffUtil.h"
 #include "Logger.h"
 #include "Persistance.h"
+#include "SalatUtils.h"
 #include "SolarCalculator.h"
 #include "Translator.h"
+#include "ThreadUtils.h"
 
 namespace salat {
 
@@ -14,9 +15,9 @@ using namespace bb::cascades;
 
 DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
         QObject(parent), m_persistance(p),
-        m_model( QStringList() << "dateValue", this )
+        m_model( QStringList() << KEY_SORT_DATE, this )
 {
-	m_model.setSortingKeys( QStringList() << "dateValue" << "value" );
+	m_model.setSortingKeys( QStringList() << KEY_SORT_DATE << PRAYER_TIME_VALUE );
 	m_model.setGrouping(ItemGrouping::ByFullValue);
 
 	connect( p, SIGNAL( settingChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ), Qt::QueuedConnection );
@@ -25,7 +26,7 @@ DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
 
 void DataModelWrapper::lazyInit()
 {
-    updateCache( QStringList() << "angles" << "asrRatio" << "adjustments" << "athaans" << "notifications" << "iqamahs" << "latitude" << "longitude" );
+    updateCache( QStringList() << KEY_CALC_ANGLES << KEY_CALC_ASR_RATIO << KEY_CALC_ADJUSTMENTS << KEY_ATHANS << KEY_NOTIFICATIONS << KEY_IQAMAHS << KEY_CALC_LATITUDE << KEY_CALC_LONGITUDE );
 }
 
 
@@ -50,23 +51,23 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 			int adjust = m_cache.adjustments.value(key);
 
 			QVariantMap map;
-			map["key"] = key;
-			map["value"] = result[j].addSecs(adjust*60);
-			map["dateValue"] = result[j].date();
+			map[PRAYER_KEY] = key;
+			map[PRAYER_TIME_VALUE] = result[j].addSecs(adjust*60);
+			map[KEY_SORT_DATE] = result[j].date();
 			map["isSalat"] = salatMap.contains(key);
 
 			if ( m_cache.iqamahs.contains(key) )
 			{
 	            QDateTime iqamah = QDateTime( result[j].date(), m_cache.iqamahs.value(key) );
-	            map["iqamah"] = iqamah;
+	            map[KEY_IQAMAH] = iqamah;
 			}
 
 			if ( m_cache.athaans.contains(key) ) {
-				map["athaan"] = m_cache.athaans.value(key);
+				map[KEY_ATHAN] = m_cache.athaans.value(key);
 			}
 
             if ( m_cache.notifications.contains(key) ) {
-                map["notification"] = m_cache.notifications.value(key);
+                map[KEY_ALARM_NOTIFICATION] = m_cache.notifications.value(key);
             }
 
 			wrapped << map;
@@ -82,8 +83,8 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 QVariantList DataModelWrapper::matchValue(QDateTime const& reference)
 {
 	QVariantMap map;
-	map["dateValue"] = reference.date();
-	map["value"] = reference;
+	map[KEY_SORT_DATE] = reference.date();
+	map[PRAYER_TIME_VALUE] = reference;
 
 	QVariantList next = m_model.upperBound(map);
 
@@ -126,7 +127,7 @@ QVariantMap DataModelWrapper::getNext(QDateTime const& reference)
 
 void DataModelWrapper::loadBeginning()
 {
-	QDateTime reference = m_model.data( m_model.first() ).toMap().value("value").toDateTime().addDays(-1);
+	QDateTime reference = m_model.data( m_model.first() ).toMap().value(PRAYER_TIME_VALUE).toDateTime().addDays(-1);
 	calculateAndAppend(reference);
 }
 
@@ -154,7 +155,7 @@ void DataModelWrapper::applyDiff(QString const& settingKey, QString const& itemK
         {
             QVariantList indexPath = QVariantList() << i << j;
             QVariantMap current = m_model.data(indexPath).toMap();
-            current[itemKey] = settingValue.value( current.value("key").toString() );
+            current[itemKey] = settingValue.value( current.value(PRAYER_KEY).toString() );
             m_model.updateItem(indexPath, current);
         }
     }
@@ -173,14 +174,14 @@ void DataModelWrapper::loadMore()
 			if ( prev.isEmpty() ) {
 				LOGGER("[HOW_THE_HECK_DID_I_GET_HERE]");
 				return;
-			} else if ( m_model.data(prev).toMap().value("key") != key_fajr ) {
+			} else if ( m_model.data(prev).toMap().value(PRAYER_KEY) != key_fajr ) {
 				i = prev;
 			} else {
 				break;
 			}
 		}
 
-		QDateTime reference = m_model.data(i).toMap().value("value").toDateTime().addDays(1);
+		QDateTime reference = m_model.data(i).toMap().value(PRAYER_TIME_VALUE).toDateTime().addDays(1);
 		calculateAndAppend(reference);
 	}
 }
@@ -212,14 +213,14 @@ void DataModelWrapper::updateCache(QStringList const& keys)
 
     foreach (QString const& key, keys)
     {
-        if (key == "angles") {
-            m_cache.angles = Calculator::createParams( m_persistance->getValueFor("angles").toMap() );
+        if (key == KEY_CALC_ANGLES) {
+            m_cache.angles = Calculator::createParams( m_persistance->getValueFor(KEY_CALC_ANGLES).toMap() );
             needsRefresh = true;
-        } else if (key == "asrRatio") {
-            m_cache.asrRatio = m_persistance->getValueFor("asrRatio").toReal();
+        } else if (key == KEY_CALC_ASR_RATIO) {
+            m_cache.asrRatio = m_persistance->getValueFor(KEY_CALC_ASR_RATIO).toReal();
             needsRefresh = true;
-        } else if (key == "adjustments") {
-            QVariantMap adjustments = m_persistance->getValueFor("adjustments").toMap();
+        } else if (key == KEY_CALC_ADJUSTMENTS) {
+            QVariantMap adjustments = m_persistance->getValueFor(KEY_CALC_ADJUSTMENTS).toMap();
             m_cache.adjustments.clear();
 
             foreach ( QString const& key, adjustments.keys() ) {
@@ -227,26 +228,26 @@ void DataModelWrapper::updateCache(QStringList const& keys)
             }
 
             needsRefresh = true;
-        } else if (key == "athaans") {
-            m_cache.athaans = m_persistance->getValueFor("athaans").toMap();
-            applyDiff(key, "athaan");
-        } else if (key == "notifications") {
-            m_cache.notifications = m_persistance->getValueFor("notifications").toMap();
-            applyDiff(key, "notification");
-        } else if (key == "iqamahs") {
-            QVariantMap iqamahs = m_persistance->getValueFor("iqamahs").toMap();
+        } else if (key == KEY_ATHANS) {
+            m_cache.athaans = m_persistance->getValueFor(KEY_ATHANS).toMap();
+            applyDiff(key, KEY_ATHAN);
+        } else if (key == KEY_NOTIFICATIONS) {
+            m_cache.notifications = m_persistance->getValueFor(KEY_NOTIFICATIONS).toMap();
+            applyDiff(key, KEY_ALARM_NOTIFICATION);
+        } else if (key == KEY_IQAMAHS) {
+            QVariantMap iqamahs = m_persistance->getValueFor(KEY_IQAMAHS).toMap();
             m_cache.iqamahs.clear();
 
             foreach ( QString const& key, iqamahs.keys() ) {
                 m_cache.iqamahs.insert( key, iqamahs[key].toTime() );
             }
 
-            DiffUtil::diffIqamahs(&m_model, m_cache.iqamahs);
-        } else if (key == "latitude") {
-            m_cache.latitude = m_persistance->getValueFor("latitude").toReal();
+            ThreadUtils::diffIqamahs(&m_model, m_cache.iqamahs);
+        } else if (key == KEY_CALC_LATITUDE) {
+            m_cache.latitude = m_persistance->getValueFor(KEY_CALC_LATITUDE).toReal();
             needsRefresh = true;
-        } else if (key == "longitude") {
-            m_cache.longitude = m_persistance->getValueFor("longitude").toReal();
+        } else if (key == KEY_CALC_LONGITUDE) {
+            m_cache.longitude = m_persistance->getValueFor(KEY_CALC_LONGITUDE).toReal();
             needsRefresh = true;
         }
     }

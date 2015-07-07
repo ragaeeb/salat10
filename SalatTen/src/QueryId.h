@@ -20,6 +20,6 @@ public:
     };
 };
 
-} /* namespace salat */
+}
 
-#endif /* QUERYID_H_ */
+#endif
