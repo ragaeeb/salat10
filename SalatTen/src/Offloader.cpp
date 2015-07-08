@@ -149,7 +149,6 @@ void Offloader::terminateThreads()
 QString Offloader::renderStandardTime(QDateTime const& theTime)
 {
     static QString format = bb::utility::i18n::timeFormat(bb::utility::i18n::DateFormat::Short);
-
     return m_timeRender.locale().toString(theTime, format);
 }
 
