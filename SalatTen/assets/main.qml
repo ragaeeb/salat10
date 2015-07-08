@@ -65,7 +65,15 @@ NavigationPane
             
             ResultListView
             {
-                id: cityList 
+                id: cityList
+                
+                function editHijriDate()
+                {
+                    menuDef.compDef.source = "AdjustHijriDialog.qml";
+                    
+                    var dialog = menuDef.compDef.createObject();
+                    dialog.open();
+                }
                 
                 onCreationCompleted: {
                     cityList.maxWidth = deviceUtils.pixelSize.width
@@ -87,6 +95,7 @@ NavigationPane
                 opacity: cityList.lssh.firstVisibleItem.length == 1 && !cityList.lssh.scrolling ? 1 : 0
                 textStyle.textAlign: TextAlign.Center
                 horizontalAlignment: HorizontalAlignment.Center
+                topMargin: 0;bottomMargin: 0
                 
                 function getSuffix(birth, death, isCompanion, female)
                 {

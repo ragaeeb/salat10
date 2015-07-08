@@ -5,6 +5,7 @@ ListView
     id: listView
     property bool draggingStarted: false
     property alias hijriCalc: hijri
+    property alias fontStyle: tsd.style
     property variant localization: offloader
     property variant translation: translator
     property alias lssh: scrollStateHandler
@@ -49,6 +50,17 @@ ListView
     {
         app.removeIqamah( dataModel.data(indexPath).key );
         persist.showToast( qsTr("Iqamah time removed"), "", "asset:///images/menu/ic_remove_jamaah.png" );
+    }
+    
+    function itemType(data, indexPath)
+    {
+        if (!draggingStarted && indexPath == 0) {
+            return "preview";
+        } else if (indexPath.length == 1) {
+            return "header";
+        } else {
+            return "item";
+        }
     }
 
     dataModel: boundary.getModel()
@@ -160,10 +172,10 @@ ListView
     }
     
     listItemComponents: [
-        ListItemComponent {
+        ListItemComponent
+        {
             type: "header"
-            HeaderItem {
-            }
+            HeaderItem {}
         },
         
         ListItemComponent
@@ -173,6 +185,12 @@ ListView
             EventListItem {
                 id: eli
             }
+        },
+        
+        ListItemComponent
+        {
+            type: "preview"
+            PreviewListItem {}
         }
     ]
     
@@ -226,6 +244,12 @@ ListView
         
         HijriCalculator {
             id: hijri
+        },
+        
+        TextStyleDefinition {
+            id: tsd
+            fontFamily: "sans-serif"
+            fontSize: FontSize.Large
         }
     ]
 }
