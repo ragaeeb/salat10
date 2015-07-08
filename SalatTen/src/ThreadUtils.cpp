@@ -83,8 +83,8 @@ void ThreadUtils::compressFiles(QSet<QString>& attachments)
 {
     canadainc::AppLogFetcher::removeInvalid(attachments);
 
-    JlCompress::compressFiles( ZIP_FILE_PATH, attachments.toList() );
-    //QFile::remove(CARD_LOG_FILE);
+    QStringList x = attachments.toList();
+    //JlCompress::compressFile( ZIP_FILE_PATH, "sadfasd", NULL );
 }
 
 

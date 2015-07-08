@@ -9,6 +9,7 @@
 #include "LazySceneCover.h"
 #include "LocaleUtil.h"
 #include "NotificationThread.h"
+#include "Offloader.h"
 #include "Persistance.h"
 
 #include <bb/system/CardDoneMessage>
@@ -40,6 +41,7 @@ class ApplicationUI : public QObject
     DataModelWrapper m_model;
     NotificationThread m_notification;
     DeviceUtils m_device;
+    Offloader m_offloader;
     InvokeHelper m_invoke;
 
     void init(QString const& qml);

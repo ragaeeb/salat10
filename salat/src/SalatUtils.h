@@ -10,6 +10,8 @@
 #define KEY_CALC_ADJUSTMENTS "adjustments"
 #define KEY_CALC_LATITUDE "latitude"
 #define KEY_CALC_LONGITUDE "longitude"
+#define KEY_CALC_STRATEGY "strategy"
+#define KEY_CALC_STRATEGY_ISNA "isna"
 #define KEY_CITY "city"
 #define KEY_COUNTRY "country"
 #define KEY_CUSTOM_ATHANS "customAthaans"

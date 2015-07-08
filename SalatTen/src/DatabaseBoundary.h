@@ -21,6 +21,8 @@ public:
 	DatabaseBoundary();
 	virtual ~DatabaseBoundary();
 
+    Q_INVOKABLE void fetchAngles(QObject* caller);
+    Q_INVOKABLE void fetchArticles(QObject* caller);
     Q_INVOKABLE void fetchRandomBenefit(QObject* caller);
 };
 
