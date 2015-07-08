@@ -87,7 +87,7 @@ Page
                     
                     onTriggered: {
                         var d = dataModel.data(indexPath);
-                        persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString() );
+                        persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), global );
                     }
                     
                     onCreationCompleted: {
