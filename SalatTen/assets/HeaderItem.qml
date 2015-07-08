@@ -3,8 +3,11 @@ import bb.cascades 1.2
 Container
 {
     id: root
-    topPadding: ListItem.view.maxHeight - contentContainer.preferredHeight//904
     horizontalAlignment: HorizontalAlignment.Fill
+    
+    onCreationCompleted: {
+        topPadding = ListItem.view.maxHeight - contentContainer.preferredHeight
+    }
     
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight

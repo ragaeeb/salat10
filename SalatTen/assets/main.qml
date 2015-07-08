@@ -73,9 +73,9 @@ NavigationPane
                 scrollIndicatorMode: ScrollIndicatorMode.None
                 
                 onCreationCompleted: {
-                    maxWidth = deviceUtils.pixelSize.width
-                    maxHeight = deviceUtils.pixelSize.height
-                    quoteLabel.maxWidth = maxWidth-100;
+                    cityList.maxWidth = deviceUtils.pixelSize.width
+                    cityList.maxHeight = deviceUtils.pixelSize.height
+                    quoteLabel.maxWidth = cityList.maxWidth-100;
                 }
                 
                 attachedObjects: [
