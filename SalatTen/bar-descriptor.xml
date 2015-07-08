@@ -37,7 +37,7 @@
 		can also be 1-part or 2-part. It is not necessary to have a 3-part value.
 		An updated version of application must have a versionNumber value higher
 		than the previous version. Required. -->
-	<versionNumber>3.7.0</versionNumber>
+	<versionNumber>4.0.0</versionNumber>
  <splashScreens>
     <image>splash_n.png</image>
  </splashScreens>
@@ -179,6 +179,6 @@
 	<permission>access_location_services</permission>
 	<permission>access_shared</permission>
 	<env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib" />
-	<env var="CASCADES_THEME" value="dark"/>
+	<env var="CASCADES_THEME" value="dark?primaryColor=0xA6C6FE"/>
 
 </qnx>

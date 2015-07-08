@@ -212,7 +212,7 @@ Page
             }
             
             onCreationCompleted: {
-                var profiles = persist.getValueFor(KEY_PROFILES);
+                var profiles = persist.getValueFor("profiles");
                 
                 checkBox = checkerDef.createObject();
                 profileContainer.insert(1, checkBox);
@@ -248,9 +248,9 @@ Page
                         property string value
                         
                         onCheckedChanged: {
-                            var profiles = persist.getValueFor(KEY_PROFILES);
+                            var profiles = persist.getValueFor("profiles");
                             profiles[value] = checked;
-                            persist.saveValueFor(KEY_PROFILES, profiles, false);
+                            persist.saveValueFor("profiles", profiles, false);
                         }
                     }
                 }
