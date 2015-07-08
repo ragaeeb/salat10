@@ -8,8 +8,6 @@
 
 #define audio_fajr_athaan "asset:///audio/athaan_fajr.mp3"
 #define audio_athaan "asset:///audio/athan_albaani.mp3"
-#define BLACKBERRY_PUSH_APPLICATION_ID "1171-9014r27221trt37r2o430150l5a1es42l44"
-#define BLACKBERRY_PUSH_URL "https://cp1171.pushapi.na.blackberry.com"
 
 namespace {
 
@@ -27,14 +25,13 @@ QList<QDateTime> adjust(QList<QDateTime> list, QStringList const& allEvents, QVa
 
 namespace salat {
 
-using namespace bb::network;
 using namespace bb::system;
 using namespace bb::platform;
 using namespace bb::multimedia;
 using namespace canadainc;
 
 Service::Service(bb::Application* app) :
-            QObject(app), m_pushService(BLACKBERRY_PUSH_APPLICATION_ID, "com.canadainc.SalatTenService", app)
+            QObject(app)
 {
     m_athan.mkw = NULL;
     m_athan.skipJumuah = true;
@@ -42,7 +39,7 @@ Service::Service(bb::Application* app) :
 
     if ( !QFile::exists( m_settings.fileName() ) )
     {
-        m_settings.setValue( "init", QDateTime::currentMSecsSinceEpoch() );
+        m_settings.setValue(KEY_CALC_STRATEGY, KEY_CALC_STRATEGY_ISNA);
         m_settings.sync();
     }
 
@@ -64,29 +61,7 @@ void Service::init()
     connect( &m_athan.player, SIGNAL( playingChanged() ), this, SLOT( onAthanStateChanged() ) );
     connect( &m_athan.player, SIGNAL( error(QString const&) ), this, SLOT( error(QString const&) ) );
 
-    connect( &m_pushService, SIGNAL( createSessionCompleted(bb::network::PushStatus const&) ), SLOT( createSessionCompleted(bb::network::PushStatus const&) ) );
-
-    m_pushService.createSession();
-
     recalculate();
-}
-
-
-void Service::createChannelCompleted(bb::network::PushStatus const& status, QString const& token)
-{
-    LOGGER( status.isError() << token );
-    m_pushService.registerToLaunch();
-}
-
-
-void Service::createSessionCompleted(const bb::network::PushStatus& status)
-{
-    LOGGER( status.isError() );
-
-    if ( !status.isError() ) {
-        connect( &m_pushService, SIGNAL( createChannelCompleted(bb::network::PushStatus const&, QString const&) ), SLOT( createChannelCompleted(bb::network::PushStatus const&, QString const&) ) );
-        m_pushService.createChannel( QUrl(BLACKBERRY_PUSH_URL) );
-    }
 }
 
 
@@ -172,7 +147,7 @@ void Service::timeout(bool init)
 
                 LOGGER("okToPlay" << okToPlay);
 
-                if (okToPlay)
+                if (okToPlay && false)
                 {
                     LOGGER("PlayingAthanMode" << mode);
                     QString destinationFile = currentEventKey == Translator::key_fajr ? audio_fajr_athaan : audio_athaan;
@@ -271,30 +246,6 @@ void Service::handleInvoke(bb::system::InvokeRequest const& request)
 
     if ( action.compare("com.canadainc.SalatTenService.RESET") == 0 && m_athan.atLeastOneEvent && !m_athan.timer.isActive() ) {
         recalculate();
-    } else if ( action.compare("bb.action.PUSH") == 0 ) {
-        PushPayload payload(request);
-
-        if ( payload.isValid() )
-        {
-            QStringList tokens = QString( payload.data() ).split("|");
-            LOGGER(tokens);
-
-            if ( !tokens.isEmpty() )
-            {
-                Notification n;
-                n.setTitle("Salat10");
-                n.setBody( tokens.first() );
-
-                QDateTime timestamp = tokens.size() > 1 ? QDateTime::fromMSecsSinceEpoch( tokens[1].toLongLong() ) : QDateTime::currentDateTime();
-                n.setTimestamp(timestamp);
-
-                n.setIconUrl( QString("file:///usr/share/icons/ic_go.png") );
-                LOGGER("Valid push data received, notifying");
-                n.notify();
-            } else {
-                LOGGER("Corrupt push data received!");
-            }
-        }
     }
 }
 

@@ -169,10 +169,6 @@ NavigationPane
                     }
                 }
                 
-                onCreationCompleted: {
-                    sql.dataLoaded.connect(onDataLoaded);
-                }
-                
                 activeTextHandler: ActiveTextHandler
                 {
                     onTriggered: {
@@ -253,6 +249,7 @@ NavigationPane
         onCurrentEventChanged();
         
         cityItem.showAnim();
+        sql.fetchRandomBenefit(quoteLabel);
     }
     
     onCreationCompleted: {

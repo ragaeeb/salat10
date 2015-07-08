@@ -5,7 +5,7 @@ ListView
     id: listView
     objectName: "listView"
     property variant translation: translator
-    property variant localization: localizer
+    property variant localization: offloader
     property bool manualSelected: false
     flickMode: FlickMode.SingleItem
 
@@ -50,7 +50,7 @@ ListView
             ActionItem {
                 id: enableAthaan
                 title: qsTr("Enable Alarms/Athans") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_athaan_enable.png"
+                imageSource: "images/list/ic_athaan_enable.png"
                 
                 onTriggered: {
                     console.log("UserEvent: EnableAthans");
@@ -63,7 +63,7 @@ ListView
                 id: muteAthaans
                 objectName: "endMultiChats"
                 title: qsTr("Mute Alarms/Athans") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_athaan_mute.png"
+                imageSource: "images/list/ic_athaan_mute.png"
                 
                 onTriggered: {
                     console.log("UserEvent: MuteAthans");
@@ -106,7 +106,7 @@ ListView
             ActionItem {
                 id: customSoundAction
                 title: qsTr("Change Sound") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_athaan_custom.png"
+                imageSource: "images/menu/ic_athaan_custom.png"
                 
                 onTriggered: {
                     console.log("UserEvent: ChangeSound");

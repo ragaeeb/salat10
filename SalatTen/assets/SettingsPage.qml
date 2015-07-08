@@ -122,9 +122,7 @@ Page
                     }
                     
                     onCreationCompleted: {
-                        sql.dataLoaded.connect(onDataLoaded);
-                        sql.query = "SELECT * FROM angles ORDER BY name";
-                        sql.load(QueryId.GetAllAngles);
+                        sql.fetchAngles(calcStrategy);
                     }
                     
                     onSelectedOptionChanged:

@@ -4,8 +4,6 @@
 #include <bb/system/InvokeManager>
 #include <bb/multimedia/MediaKey>
 
-#include <bb/network/PushService>
-
 #include <QFileSystemWatcher>
 #include <QTimer>
 
@@ -56,7 +54,6 @@ class Service: public QObject
 	bb::system::InvokeManager m_invokeManager;
 	ClockUtil m_clock;
 	QFileSystemWatcher m_settingsWatcher;
-	bb::network::PushService m_pushService;
 	QSettings m_settings;
 	Params m_params;
 	AthanHelpers m_athan;
@@ -69,8 +66,6 @@ signals:
 
 private slots:
     void onAthanStateChanged();
-    void createChannelCompleted(bb::network::PushStatus const&, QString const&);
-    void createSessionCompleted(const bb::network::PushStatus&);
     void error(QString const& message);
 	void handleInvoke(const bb::system::InvokeRequest &);
 	void init();
