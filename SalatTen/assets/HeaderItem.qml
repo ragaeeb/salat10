@@ -5,6 +5,16 @@ Container
     id: root
     horizontalAlignment: HorizontalAlignment.Fill
     
+    gestureHandlers: [
+        DoubleTapHandler {
+            onDoubleTapped: {
+                if (event.propagationPhase == PropagationPhase.AtTarget) {
+                    root.ListItem.view.refresh();
+                }
+            }
+        }
+    ]
+    
     onCreationCompleted: {
         topPadding = ListItem.view.maxHeight - contentContainer.preferredHeight
     }
@@ -90,15 +100,6 @@ Container
             id: header
             fontFamily: "sans-serif"
             fontSize: FontSize.Large
-        },
-
-        LayoutUpdateHandler {
-            onLayoutFrameChanged: {
-                if (root.ListItem.indexPath == 0) {
-                    // set the property offset residing in ListView based on this items y position.
-                	   root.ListItem.view.offset = layoutFrame.y;
-                }
-            }
         }
     ]
 }

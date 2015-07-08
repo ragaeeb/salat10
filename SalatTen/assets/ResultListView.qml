@@ -3,11 +3,24 @@ import bb.cascades 1.2
 ListView
 {
     id: listView
-    objectName: "listView"
-    property variant translation: translator
+    property bool draggingStarted: false
+    property alias hijriCalc: hijri
     property variant localization: offloader
-    property bool manualSelected: false
+    property variant translation: translator
+    property alias lssh: scrollStateHandler
+    signal footerShown()
     flickMode: FlickMode.SingleItem
+    objectName: "listView"
+    scrollIndicatorMode: ScrollIndicatorMode.None
+    snapMode: SnapMode.LeadingEdge
+    stickToEdgePolicy: ListViewStickToEdgePolicy.Beginning
+
+    function refresh()
+    {
+        var current = boundary.getCurrent( new Date() );
+
+        listView.scrollToItem(current.index, ScrollAnimation.Default);
+    }
 
     function edit(indexPath)
     {
@@ -146,14 +159,55 @@ ListView
         copyAction.enabled = shareAction.enabled = resetSoundAction.enabled = customSoundAction.enabled = enableAthaan.enabled = muteAthaans.enabled = n > 0;
     }
     
+    listItemComponents: [
+        ListItemComponent {
+            type: "header"
+            HeaderItem {
+            }
+        },
+        
+        ListItemComponent
+        {
+            type: "item"
+            
+            EventListItem {
+                id: eli
+            }
+        }
+    ]
+    
+    onTriggered: {
+        if (indexPath.length > 1)
+        {
+            multiSelectHandler.active = true;
+            toggleSelection(indexPath);
+        }
+    }
+    
     attachedObjects: [
-        ListScrollStateHandler {
+        ListScrollStateHandler
+        {
             id: scrollStateHandler
+            property variant lastVisible
             
             onFirstVisibleItemChanged:
             {
                 if (firstVisibleItem[0] == 0 && firstVisibleItem[1] == 0) {
                     boundary.loadBeginning();
+                }
+                
+                if (lastVisible != firstVisibleItem && firstVisibleItem.length == 1)
+                {
+                    footerShown();
+                    lastVisible = firstVisibleItem;
+                }
+            }
+            
+            onScrollingChanged: {
+                if (scrolling) {
+                    draggingStarted = true;
+                } else if (atBeginning) {
+                    draggingStarted = false;
                 }
             }
             
@@ -168,6 +222,10 @@ ListView
             id: listUtil
             active: false
             source: "ResultListUtil.qml"
+        },
+        
+        HijriCalculator {
+            id: hijri
         }
     ]
 }
