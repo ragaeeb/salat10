@@ -33,6 +33,17 @@ void DatabaseBoundary::fetchRandomBenefit(QObject* caller)
 }
 
 
+void DatabaseBoundary::searchArticles(QObject* caller, QString const& searchTerm)
+{
+    LOGGER(searchTerm);
+
+    QString query = "SELECT suite_pages.id AS id,COALESCE(i.displayName, i.name) AS author,COALESCE(heading,title) AS title FROM suites LEFT JOIN individuals i ON i.id=suites.author INNER JOIN suite_pages ON suite_pages.suite_id=suites.id WHERE (title LIKE '%' || ? || '%') OR (heading LIKE '%' || ? || '%')";
+    QVariantList args = QVariantList() << searchTerm << searchTerm;
+
+    m_sql.executeQuery(caller, query, QueryId::SearchArticles, args);
+}
+
+
 DatabaseBoundary::~DatabaseBoundary()
 {
 }
