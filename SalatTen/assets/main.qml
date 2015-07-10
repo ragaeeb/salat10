@@ -3,7 +3,7 @@ import com.canadainc.data 1.0
 
 NavigationPane
 {
-    id: root
+    id: navigationPane
     
     onPopTransitionEnded: {
         page.destroy();
@@ -27,7 +27,6 @@ NavigationPane
 
         Container
         {
-            id: cityItem
             layout: DockLayout {}
             
             Container
@@ -47,7 +46,7 @@ NavigationPane
                 ImageView
                 {
                     id: bg2
-                    opacity: cityList.draggingStarted ? 1 : 0
+                    opacity: timings.draggingStarted ? 1 : 0
                     loadEffect: ImageViewLoadEffect.FadeZoom
                     horizontalAlignment: HorizontalAlignment.Fill
                     verticalAlignment: VerticalAlignment.Fill
@@ -65,20 +64,50 @@ NavigationPane
             
             ResultListView
             {
-                id: cityList
+                id: timings
                 
-                function editHijriDate()
+                function onExportReady(daysToExport, result, accountId)
                 {
-                    menuDef.compDef.source = "AdjustHijriDialog.qml";
+                    progressDelegate.delegateActive = true;
+                    offloader.exportToCalendar(daysToExport, result, accountId);
                     
-                    var dialog = menuDef.compDef.createObject();
-                    dialog.open();
+                    navigationPane.pop();
+                }
+                
+                function exportToCalendar()
+                {
+                    if ( offloader.hasCalendarAccess() )
+                    {
+                        definition.source = "CalendarExport.qml";
+                        
+                        var exporter = definition.createObject();
+                        exporter.exportingReady.connect(onExportReady);
+                        
+                        navigationPane.push(exporter);
+                    }
+                }
+                
+                function onFinished(confirmed)
+                {
+                    if (confirmed) {
+                        console.log("UserEvent: ClearCalendarPromptYes");
+                        progressDelegate.delegateActive = true;
+                        offloader.cleanupCalendarEvents();
+                    } else {
+                        console.log("UserEvent: ClearCalendarPromptNo");
+                    }
+                    
+                    reporter.record("ClearCalendarResult", confirmed.toString());
+                }
+                
+                function clearCalendar() {
+                    persist.showDialog( timings, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
                 }
                 
                 onCreationCompleted: {
-                    cityList.maxWidth = deviceUtils.pixelSize.width
-                    cityList.maxHeight = deviceUtils.pixelSize.height
-                    quoteLabel.maxWidth = cityList.maxWidth-100;
+                    timings.maxWidth = deviceUtils.pixelSize.width
+                    timings.maxHeight = deviceUtils.pixelSize.height
+                    quoteLabel.maxWidth = timings.maxWidth-100;
                 }
                 
                 onFooterShown: {
@@ -92,7 +121,7 @@ NavigationPane
                 backgroundVisible: false
                 editable: false
                 textStyle.fontSize: FontSize.XXSmall
-                opacity: cityList.lssh.firstVisibleItem.length == 1 && !cityList.lssh.scrolling ? 1 : 0
+                opacity: timings.lssh.firstVisibleItem.length == 1 && !timings.lssh.scrolling ? 1 : 0
                 textStyle.textAlign: TextAlign.Center
                 horizontalAlignment: HorizontalAlignment.Center
                 topMargin: 0;bottomMargin: 0
@@ -122,29 +151,60 @@ NavigationPane
                     }
                 }
             }
-            
-            function showAnim() {
-                show.play();
-            }
-            
-            animations: [
-                ParallelAnimation {
-                    id: show
-                    target: cityList
-                    FadeTransition {
-                        fromOpacity: 0
-                        toOpacity: 1
-                        duration: 500
-                        easingCurve: StockCurve.CubicOut
-                    }
-                    TranslateTransition {
-                        fromY: 300
-                        toY: 0
-                        duration: 500
-                        easingCurve: StockCurve.CubicOut
+
+            ControlDelegate
+            {
+                id: progressDelegate
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
+                delegateActive: false;
+                visible: delegateActive
+                
+                function onProgressChanged(current, total)
+                {
+                    control.showBusy = false;
+                    control.value = current;
+                    control.toValue = total;
+                }
+                
+                function onComplete(message, icon)
+                {
+                    delegateActive = false;
+                    persist.showToast(message, icon);
+                }
+                
+                onCreationCompleted: {
+                    offloader.operationProgress.connect(onProgressChanged);
+                    offloader.operationComplete.connect(onComplete);
+                }
+                
+                sourceComponent: ComponentDefinition
+                {
+                    Container
+                    {
+                        property alias value: progress.value
+                        property alias toValue: progress.toValue
+                        property alias showBusy: busy.running
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        ActivityIndicator
+                        {
+                            id: busy
+                            horizontalAlignment: HorizontalAlignment.Center
+                            preferredHeight: 100; preferredWidth: 100
+                            running: true
+                        }
+                        
+                        ProgressIndicator
+                        {
+                            id: progress
+                            fromValue: 0;
+                            horizontalAlignment: HorizontalAlignment.Center
+                            state: ProgressIndicatorState.Progress
+                        }
                     }
                 }
-            ]
+            }
         }
     }
     
@@ -167,7 +227,7 @@ NavigationPane
         notification.currentEventChanged.connect(onCurrentEventChanged);
         onCurrentEventChanged();
         
-        cityItem.showAnim();
+        timings.anim.play();
         sql.fetchRandomBenefit(quoteLabel);
     }
     

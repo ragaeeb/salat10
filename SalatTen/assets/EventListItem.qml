@@ -10,13 +10,7 @@ StandardListItem
     
     imageSource: {
         if (ListItemData) {
-            if (ListItemData.athaan == true && ListItemData.isSalat) {
-                return "images/list/ic_athaan_enable.png";
-            } else if (ListItemData.notification == true) {
-                return "images/list/ic_notification_enable.png";
-            } else {
-                return "images/list/ic_athaan_enable.png";
-            }
+            return global.renderAthanStatus(ListItemData);
         } else {
             return undefined;
         }

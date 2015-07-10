@@ -9,6 +9,7 @@ ListView
     property variant localization: offloader
     property variant translation: translator
     property alias lssh: scrollStateHandler
+    property alias anim: showAnim
     signal footerShown()
     flickMode: FlickMode.SingleItem
     objectName: "listView"
@@ -27,20 +28,16 @@ ListView
     {
         var key = dataModel.data(indexPath).key;
         
-        definition.source = "AdjustEventDialog.qml";
-        
-        var dialog = definition.createObject();
+        var dialog = definition.init("AdjustEventDialog.qml");
         dialog.key = key;
         dialog.open();
     }
     
     function setJamaah(indexPath)
     {
-        definition.source = "JamaahPickerDialog.qml";
-        
         var data = dataModel.data(indexPath);
         
-        var dialog = definition.createObject();
+        var dialog = definition.init("JamaahPickerDialog.qml");
         dialog.key = data.key;
         dialog.base = data.value;
         dialog.open();
@@ -62,12 +59,8 @@ ListView
             return "item";
         }
     }
-
-    dataModel: boundary.getModel()
     
-    multiSelectAction: MultiSelectActionItem {
-        imageSource: "images/menu/ic_select_more.png"
-    }
+    dataModel: boundary.getModel()
     
     multiSelectHandler
     {
@@ -135,8 +128,7 @@ ListView
                 
                 onTriggered: {
                     console.log("UserEvent: ChangeSound");
-                    definition.source = "AthanPreviewSheet.qml";
-                    var picker = definition.createObject();
+                    var picker = definition.init("AthanPreviewSheet.qml");
                     listUtil.active = true;
                     
                     picker.all = listUtil.object.getSelectedKeys();
@@ -195,8 +187,9 @@ ListView
     ]
     
     onTriggered: {
-        if (indexPath.length > 1)
-        {
+        if (!draggingStarted && indexPath == 0) {
+            scrollToItem([0,0], ScrollAnimation.Smooth);
+        } else if (indexPath.length > 1) {
             multiSelectHandler.active = true;
             toggleSelection(indexPath);
         }
@@ -250,6 +243,27 @@ ListView
             id: tsd
             fontFamily: "sans-serif"
             fontSize: FontSize.Large
+        }
+    ]
+    
+    animations: [
+        ParallelAnimation
+        {
+            id: showAnim
+            
+            FadeTransition {
+                fromOpacity: 0
+                toOpacity: 1
+                duration: 500
+                easingCurve: StockCurve.CubicOut
+            }
+            
+            TranslateTransition {
+                fromY: 300
+                toY: 0
+                duration: 500
+                easingCurve: StockCurve.CubicOut
+            }
         }
     ]
 }

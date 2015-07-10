@@ -38,6 +38,7 @@ Page
                 content: AccountsDropDown
                 {
                     id: accountChoice
+                    controller: offloader
                     selectedAccountId: persist.getValueFor("accountId")
                     
                     onAccountsLoaded: {
