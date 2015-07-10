@@ -6,36 +6,25 @@ Page
     id: root
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
-    actions: [
-        ActionItem
-        {
-            ActionBar.placement: ActionBarPlacement.OnBar
-            imageSource: "images/menu/ic_help.png"
-            title: qsTr("Sujud as-Sahw") + Retranslate.onLanguageChanged
-            
-            onTriggered: {
-                webView.url = "local:///assets/html/sujud_as_sahw.html";
-            }
-        },
-        
-        ActionItem
-        {
-            property bool sujudSahw: false
-            ActionBar.placement: ActionBarPlacement.OnBar
-            imageSource: "images/menu/ic_help.png"
-            title: qsTr("How To Pray") + Retranslate.onLanguageChanged
-            
-            onTriggered: {
-                webView.url = "local:///assets/html/tutorial.html";
-            }
-        }
-    ]
-    
     titleBar: AboutTitleBar
     {
         id: atb
         videoTutorialUri: "http://www.youtube.com/watch?v=AbHZLmWSKts"
     }
+    
+    actions: [
+        ActionItem
+        {
+            ActionBar.placement: ActionBarPlacement.OnBar
+            imageSource: "images/compass/ic_compass.png"
+            title: qsTr("Compass") + Retranslate.onLanguageChanged
+            
+            onTriggered: {
+                var c = definition.init("CompassPane.qml");
+                navigationPane.push(c);
+            }
+        }
+    ]
     
     function cleanUp()
     {
@@ -66,7 +55,8 @@ Page
                     
                     listItemComponents:
                     [
-                        ListItemComponent {
+                        ListItemComponent
+                        {
                             StandardListItem
                             {
                                 imageSource: "images/tabs/ic_article.png"
@@ -81,13 +71,20 @@ Page
                         if (id == QueryId.GetArticles)
                         {
                             adm.clear();
+                            adm.append({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("How To Pray"), 'uri': "local:///assets/html/tutorial.html", 'imageSource': "images/menu/ic_help.png"});
+                            adm.append({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("Sujud as Sahw"), 'uri': "local:///assets/html/sujud_as_sahw.html", 'imageSource': "images/menu/ic_help.png"});
                             adm.append(data);
                         }
                     }
                     
                     onTriggered: {
                         var d = dataModel.data(indexPath);
-                        persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), global );
+                        
+                        if (d.type == "internal") {
+                            webView.url = d.uri;
+                        } else {
+                            persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), global );
+                        }
                     }
                     
                     onCreationCompleted: {

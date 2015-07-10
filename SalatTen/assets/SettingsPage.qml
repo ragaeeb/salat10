@@ -1,5 +1,4 @@
 import bb.cascades 1.0
-import bb.cascades.places 1.0
 import bb.platform 1.0
 import com.canadainc.data 1.0
 
@@ -7,47 +6,26 @@ Page
 {
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
-    titleBar: TitleBar {
-        title: qsTr("Settings") + Retranslate.onLanguageChanged
-    }
-    
     actions: [
         ActionItem
         {
             id: locationAction
             imageSource: "file:///usr/share/icons/ic_map_all.png"
             ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
-            title: qsTr("Choose Location") + Retranslate.onLanguageChanged
-            
-            attachedObjects: [
-                ComponentDefinition {
-                    id: pickerDefinition
-                    PlacePicker {}
-                }
-            ]
+            title: qsTr("Map") + Retranslate.onLanguageChanged
             
             onTriggered: {
-                console.log("UserEvent: LocationPickerTriggered");
-                
-                var picker = pickerDefinition.createObject();
-                var place = picker.show();
-                
-                if (place && place.latitude && place.longitude)
-                {
-                    persist.saveValueFor("city", place.city, false);
-                    persist.saveValueFor("location", place.name, false);
-                    persist.saveValueFor("latitude", place.latitude, true);
-                    persist.saveValueFor("longitude", place.longitude, true);
-                    persist.saveValueFor("country", place.country, false);
-                    locationAction.title = place.name;
-                    
-                    persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/tabs/ic_map.png" );
-                }
-                
-                picker.destroy();
+                console.log("UserEvent: OpenMap");
+
+                var x = definition.init("LocationPane.qml");
+                navigationPane.push(x);
             }
         }
     ]
+    
+    titleBar: TitleBar {
+        title: qsTr("Settings") + Retranslate.onLanguageChanged
+    }
     
     ScrollView
     {

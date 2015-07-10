@@ -6,7 +6,7 @@ NavigationPane
     id: navigationPane
     
     onPopTransitionEnded: {
-        page.destroy();
+        deviceUtils.cleanUpAndDestroy(page);
     }
     
     Menu.definition: CanadaIncMenu
@@ -74,9 +74,26 @@ NavigationPane
                     navigationPane.pop();
                 }
                 
+                function hasCalendar()
+                {
+                    if ( offloader.hasCalendarAccess() ) {
+                        return true;
+                    } else {
+                        var allMessages = [];
+                        var allIcons = [];
+                        allMessages.push("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.");
+                        allIcons.push("images/toast/ic_calendar_empty.png");
+                        permissions.messages = allMessages;
+                        permissions.icons = allIcons;
+                        permissions.delegateActive = true;
+                    }
+                    
+                    return false;
+                }
+                
                 function exportToCalendar()
                 {
-                    if ( offloader.hasCalendarAccess() )
+                    if ( hasCalendar() )
                     {
                         definition.source = "CalendarExport.qml";
                         
@@ -100,8 +117,11 @@ NavigationPane
                     reporter.record("ClearCalendarResult", confirmed.toString());
                 }
                 
-                function clearCalendar() {
-                    persist.showDialog( timings, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
+                function clearCalendar()
+                {
+                    if ( hasCalendar() ) {
+                        persist.showDialog( timings, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
+                    }
                 }
                 
                 onCreationCompleted: {
@@ -205,6 +225,36 @@ NavigationPane
                     }
                 }
             }
+            
+            PermissionToast
+            {
+                id: permissions
+                horizontalAlignment: HorizontalAlignment.Right
+                verticalAlignment: VerticalAlignment.Center
+                
+                function process()
+                {
+                    var allMessages = [];
+                    var allIcons = [];
+                    
+                    if ( !persist.hasLocationAccess() ) {
+                        allMessages.push("Warning: It seems like the app does not have access to access your device's location. This permission is needed to detect your GPS location so that accurate calculations can be made. If you keep this permission off, the app may not work properly.\n\nPress OK to launch the application permissions, then go to Salat10 and please enable the Location permission.");
+                        allIcons.push("images/toast/ic_location_failed.png");
+                    }
+                    
+                    if ( !persist.hasSharedFolderAccess() ) {
+                        allMessages.push("Warning: It seems like the app does not have access to access your shared folder. This permission is needed to allow you to set custom athan sounds. Without this permission some features may not work properly.");
+                        allIcons.push("images/toast/ic_no_shared_folder.png");
+                    }
+                    
+                    if (allMessages.length > 0)
+                    {
+                        messages = allMessages;
+                        icons = allIcons;
+                        delegateActive = true;
+                    }
+                }
+            }
         }
     }
     
@@ -229,6 +279,7 @@ NavigationPane
         
         timings.anim.play();
         sql.fetchRandomBenefit(quoteLabel);
+        permissions.process();
     }
     
     onCreationCompleted: {

@@ -46,14 +46,7 @@ void Offloader::onBlurred()
 bool Offloader::hasCalendarAccess()
 {
     bb::pim::calendar::CalendarSettings cs = bb::pim::calendar::CalendarService().settings();
-    bool ok = cs.isValid();
-
-    if (!ok) {
-        //m_persistance.showBlockingToast( tr("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page."), tr("OK"), "asset:///images/toast/ic_calendar_empty.png" );
-        //InvocationUtils::launchAppPermissionSettings();
-    }
-
-    return ok;
+    return cs.isValid();
 }
 
 
