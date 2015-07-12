@@ -62,7 +62,7 @@ Page
         TextField
         {
             id: searchField
-            hintText: qsTr("Enter text to search...") + Retranslate.onLanguageChanged
+            hintText: qsTr("Enter article title to search...") + Retranslate.onLanguageChanged
             input.submitKey: SubmitKey.Search
             input.flags: TextInputFlag.AutoCapitalizationOff | TextInputFlag.SpellCheck | TextInputFlag.WordSubstitution | TextInputFlag.AutoPeriodOff | TextInputFlag.AutoCorrection
             input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
@@ -90,7 +90,8 @@ Page
             property variant articleData
             
             onControlChanged: {
-                if (control && articleData) {
+                if (control && articleData)
+                {
                     control.dataModel.clear();
                     control.dataModel.append(articleData);
                 }

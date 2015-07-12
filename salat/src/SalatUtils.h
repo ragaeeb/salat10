@@ -17,6 +17,7 @@
 #define KEY_COUNTRY "country"
 #define KEY_CUSTOM_ATHANS "customAthaans"
 #define KEY_NOTIFICATIONS "notifications"
+#define KEY_ISHA_NIGHT "nightStartsIsha"
 #define KEY_IQAMAH "iqamah"
 #define KEY_IQAMAHS "iqamahs"
 #define KEY_PROFILES "profiles"

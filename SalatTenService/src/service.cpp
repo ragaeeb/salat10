@@ -30,7 +30,7 @@ using namespace bb::platform;
 using namespace bb::multimedia;
 using namespace canadainc;
 
-Service::Service(bb::Application* app) : QObject(app), m_activeFile()
+Service::Service(bb::Application* app) : QObject(app)
 {
     IOUtils::writeFile(ACTIVE_SERVICE_FILE, QByteArray(), false);
 
@@ -100,9 +100,9 @@ void Service::timeout(bool init)
     QStringList allEvents = Translator::eventKeys();
 
     Calculator calculator;
-    QList<QDateTime> result = adjust( calculator.calculate( now.date().addDays(-1), m_params.geo, m_params.angles, m_params.asrRatio ), allEvents, m_params.adjustments );
-    result.append( adjust( calculator.calculate( now.date(), m_params.geo, m_params.angles, m_params.asrRatio ), allEvents, m_params.adjustments ) );
-    result.append( adjust( calculator.calculate( now.date().addDays(1), m_params.geo, m_params.angles, m_params.asrRatio ), allEvents, m_params.adjustments ) );
+    QList<QDateTime> result = adjust( calculator.calculate( now.date().addDays(-1), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments );
+    result.append( adjust( calculator.calculate( now.date(), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments ) );
+    result.append( adjust( calculator.calculate( now.date().addDays(1), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments ) );
 
     allEvents.append( Translator::eventKeys() );
     allEvents.append( Translator::eventKeys() );

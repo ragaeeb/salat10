@@ -26,7 +26,7 @@ DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
 
 void DataModelWrapper::lazyInit()
 {
-    updateCache( QStringList() << KEY_CALC_ANGLES << KEY_CALC_ASR_RATIO << KEY_CALC_ADJUSTMENTS << KEY_ATHANS << KEY_NOTIFICATIONS << KEY_IQAMAHS << KEY_CALC_LATITUDE << KEY_CALC_LONGITUDE );
+    updateCache( QStringList() << KEY_CALC_ANGLES << KEY_CALC_ASR_RATIO << KEY_CALC_ADJUSTMENTS << KEY_ATHANS << KEY_NOTIFICATIONS << KEY_IQAMAHS << KEY_CALC_LATITUDE << KEY_CALC_LONGITUDE << KEY_ISHA_NIGHT );
 }
 
 
@@ -40,7 +40,7 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 
 	for (int i = 0; i < numDays; i++)
 	{
-		QList<QDateTime> result = m_calculator.calculate( local.date(), geo, m_cache.angles, m_cache.asrRatio );
+		QList<QDateTime> result = m_calculator.calculate( local.date(), geo, m_cache.angles, m_cache.asrRatio, m_cache.nightStartsIsha );
 		//	result << local.addSecs(30) << local.addSecs(60) << local.addSecs(90) << local.addSecs(120) << local.addSecs(150) << local.addSecs(180) << local.addSecs(210) << local.addSecs(240) << local.addSecs(270);
 
 		//LOGGER(result);
@@ -248,6 +248,9 @@ void DataModelWrapper::updateCache(QStringList const& keys)
             needsRefresh = true;
         } else if (key == KEY_CALC_LONGITUDE) {
             m_cache.longitude = m_persistance->getValueFor(KEY_CALC_LONGITUDE).toReal();
+            needsRefresh = true;
+        } else if (key == KEY_ISHA_NIGHT) {
+            m_cache.nightStartsIsha = m_persistance->getValueFor(KEY_ISHA_NIGHT).toBool();
             needsRefresh = true;
         }
     }

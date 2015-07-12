@@ -5,11 +5,6 @@ Container
     id: root
     horizontalAlignment: HorizontalAlignment.Fill
     
-    ListItem.onDataChanged: {
-        var gregDate = Qt.formatDate(ListItemData, Qt.SystemLocaleLongDate);
-        currentDetails.text = root.ListItem.view.hijriCalc.writeIslamicDate( persist.getValueFor("hijri") )+"\n"+gregDate;
-    }
-    
     gestureHandlers: [
         DoubleTapHandler {
             onDoubleTapped: {
@@ -20,8 +15,15 @@ Container
         }
     ]
     
-    onCreationCompleted: {
-        topPadding = ListItem.view.maxHeight - contentContainer.preferredHeight
+    ListItem.onInitializedChanged: {
+        if (initialized) {
+            topPadding = ListItem.view.maxHeight - contentContainer.preferredHeight
+        }
+    }
+    
+    ListItem.onDataChanged: {
+        dateDetails.text = root.ListItem.view.hijriCalc.writeIslamicDate( persist.getValueFor("hijri") );
+        gregDate.text = Qt.formatDate(ListItemData, Qt.SystemLocaleLongDate);
     }
     
     layout: StackLayout {
@@ -44,14 +46,68 @@ Container
             spaceQuota: 1
         }
         
-        Label
+        Container
         {
-            id: currentDetails
-            textStyle.base: root.ListItem.view.fontStyle
-            bottomMargin: 0
-            multiline: true
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Center
+            
+            Container
+            {
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Center
+                bottomPadding: 20
+                
+                layout: StackLayout {
+                    orientation: LayoutOrientation.LeftToRight
+                }
+                
+                ImageView
+                {
+                    imageSource: "images/list/ic_calendar_hijri.png"
+                    verticalAlignment: VerticalAlignment.Center
+                }
+                
+                Label
+                {
+                    id: dateDetails
+                    textStyle.fontSize: FontSize.XLarge
+                    verticalAlignment: VerticalAlignment.Center
+                    multiline: true
+                    
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: 1
+                    }
+                }
+            }
+            
+            Container
+            {
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Center
+                topPadding: 20
+                
+                layout: StackLayout {
+                    orientation: LayoutOrientation.LeftToRight
+                }
+                
+                ImageView
+                {
+                    imageSource: "images/list/ic_calendar.png"
+                    verticalAlignment: VerticalAlignment.Center
+                }
+                
+                Label
+                {
+                    id: gregDate
+                    textStyle.fontSize: FontSize.XLarge
+                    verticalAlignment: VerticalAlignment.Center
+                    multiline: true
+                    
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: 1
+                    }
+                }
+            }
         }
     }
 }

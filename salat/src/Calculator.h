@@ -6,19 +6,12 @@
 #include <QVariantMap>
 #include <QDateTime>
 
-#define index_fajr 0
-#define index_sunrise 1
-#define index_dhuhr 2
-#define index_asr 3
-#define index_maghrib 4
-#define index_isha 5
-#define index_halfNight 6
-#define index_lastThirdNight 7
-
 namespace salat {
 
 class Coordinates;
 class SalatParameters;
+
+enum PrayerIndex {Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha, HalfNight, LastThirdNight};
 
 class Calculator
 {
@@ -32,7 +25,7 @@ class Calculator
 
 public:
 	Calculator();
-	QList<QDateTime> calculate(QDate const& fixedDate, Coordinates const& geo, SalatParameters const& angles, qreal asrRatio);
+	QList<QDateTime> calculate(QDate const& fixedDate, Coordinates const& geo, SalatParameters const& angles, qreal asrRatio, bool nightStartsIsha=false);
 	static Coordinates createCoordinates(QDateTime local, qreal latitude, qreal longitude);
 	static SalatParameters createParams(QVariantMap const& angleMap);
 	virtual ~Calculator();

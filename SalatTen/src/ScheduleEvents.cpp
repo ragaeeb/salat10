@@ -76,6 +76,7 @@ void ScheduleEvents::run()
 	qreal latitude = settings.value(KEY_CALC_LATITUDE).toReal();
 	qreal longitude = settings.value(KEY_CALC_LONGITUDE).toReal();
     qreal asrRatio = settings.value(KEY_CALC_ASR_RATIO).toReal();
+    bool ishaStartsNight = settings.value(KEY_ISHA_NIGHT).toBool();
 	SalatParameters angles = Calculator::createParams( settings.value(KEY_CALC_ANGLES).toMap() );
     QStringList keys = Translator::eventKeys();
     Translator t;
@@ -92,18 +93,18 @@ void ScheduleEvents::run()
 	for (int i = 0; i < m_numDays; i++)
 	{
 	    Coordinates geo = Calculator::createCoordinates(current, latitude, longitude);
-	    QList<QDateTime> result = calculator.calculate( current.date(), geo, angles, asrRatio );
+	    QList<QDateTime> result = calculator.calculate( current.date(), geo, angles, asrRatio, ishaStartsNight );
 
-	    for (int j = 0; j <= index_isha; j++)
+	    for (int j = Fajr; j <= Isha; j++)
 	    {
-	        if (j == index_sunrise) {
+	        if (j == Sunrise) {
 	            continue;
 	        }
 
 	        QString currentKey = keys[j];
 	        QDateTime value = result[j].addSecs( adjustments.value(currentKey)*60 );
 
-	        if ( (j == index_maghrib) && ( value.date().dayOfWeek() == Qt::Friday ) && m_events.contains(key_hour_of_response) )
+	        if ( (j == Maghrib) && ( value.date().dayOfWeek() == Qt::Friday ) && m_events.contains(key_hour_of_response) )
 	        {
 	            int minuteAdjustment = m_events.value(key_hour_of_response);
 	            QDateTime endTime = value;
