@@ -81,7 +81,7 @@ qreal getMaximumAngle() { // the maximum isha angle
 QList<QDateTime> initList()
 {
     QList<QDateTime> todayResults;
-    for (int i = index_fajr; i <= index_lastThirdNight; i++) {
+    for (int i = Fajr; i <= LastThirdNight; i++) {
     	todayResults << QDateTime();
     }
 
@@ -133,16 +133,16 @@ SalatParameters Calculator::createParams(QVariantMap const& angleMap)
  * @param asrRatio The ratio of the length of the object to its shadow at noon.
  * @return The prayer times for the requested geographical coordinates and specified date.
  */
-QList<QDateTime> Calculator::calculate(QDate const& fixedDate, Coordinates const& geo, SalatParameters const& angles, qreal asrRatio)
+QList<QDateTime> Calculator::calculate(QDate const& fixedDate, Coordinates const& geo, SalatParameters const& angles, qreal asrRatio, bool nightStartsIsha)
 {
     // get today's results
     QList<QDateTime> todayResults = initList();
 
 	bool problematic = m_solar.calculateSolar( fixedDate, geo.timeZone, geo.position.y(), geo.position.x() ); // perform initial calculation
-	todayResults[index_sunrise] = computeDate( m_solar.getSunrise(), 0, fixedDate );
-	todayResults[index_dhuhr] = computeDate( m_solar.getNoonTime()+safety_time, floor( angles.dhuhrInterval ), fixedDate ); // Dhuhr time+extra time to make sure that the sun has moved from zawal
-	todayResults[index_maghrib] = computeDate( m_solar.getSunset(), floor( angles.maghribInterval ), fixedDate );
-	todayResults[index_asr] = computeDate( computeAsr(problematic, geo.position.x(), asrRatio), 0, fixedDate );
+	todayResults[Sunrise] = computeDate( m_solar.getSunrise(), 0, fixedDate );
+	todayResults[Dhuhr] = computeDate( m_solar.getNoonTime()+safety_time, floor( angles.dhuhrInterval ), fixedDate ); // Dhuhr time+extra time to make sure that the sun has moved from zawal
+	todayResults[Maghrib] = computeDate( m_solar.getSunset(), floor( angles.maghribInterval ), fixedDate );
+	todayResults[Asr] = computeDate( computeAsr(problematic, geo.position.x(), asrRatio), 0, fixedDate );
 	calculateFajrIsha(fixedDate, geo, angles, todayResults);
 
     // get tomorrow's results
@@ -150,18 +150,22 @@ QList<QDateTime> Calculator::calculate(QDate const& fixedDate, Coordinates const
     QList<QDateTime> tomorrowResults = initList();
     calculateFajrIsha(tomorrowDate, geo, angles, tomorrowResults);
 
-    qint64 fajrTomorrow = tomorrowResults[index_fajr].toMSecsSinceEpoch();
-    qint64 maghribToday = todayResults[index_maghrib].toMSecsSinceEpoch();
+    qint64 fajrTomorrow = tomorrowResults[Fajr].toMSecsSinceEpoch();
+    qint64 maghribToday = todayResults[Maghrib].toMSecsSinceEpoch();
+
+    if (nightStartsIsha) {
+        maghribToday = todayResults[Isha].toMSecsSinceEpoch();
+    }
 
     qint64 diff = fajrTomorrow-maghribToday;
     qint64 delta = diff/2; // (18-12)/2 = 3
     QDateTime halfNight = QDateTime::fromMSecsSinceEpoch(maghribToday+delta); // 12+3 = 15 = 3pm
-    todayResults[index_halfNight] = halfNight;
+    todayResults[HalfNight] = halfNight;
 
     delta = diff/3; // 9pm-12pm ( 21-12 = 9 )/3 = 3
 
     qint64 lastThird = fajrTomorrow-delta;
-    todayResults[index_lastThirdNight] = QDateTime::fromMSecsSinceEpoch(lastThird);
+    todayResults[LastThirdNight] = QDateTime::fromMSecsSinceEpoch(lastThird);
 
     return todayResults;
 }
@@ -196,7 +200,7 @@ bool Calculator::computeFajr(qreal fajrTwilight, qreal latitude, QDate const& fi
 	if (lessThan48 || notInSolstice) // If latitude is < 48 degrees: no problem
 	{
 	    qreal result = m_solar.getNoonTime() - computeH(cH) + safety_time;
-	    results[index_fajr] = computeDate(result, 0, fixedDate);
+	    results[Fajr] = computeDate(result, 0, fixedDate);
 
 		return true;
 	}
@@ -224,12 +228,12 @@ bool Calculator::computeIsha(qreal ishaTwilight, qreal ishaInterval, qreal latit
 
     if (ishaTwilight == 0) {
         qreal result = m_solar.getSunset() + ishaInterval; // Isha time OmAlqrah standard Sunset + fixed time (1.5 hours or 2 hours in Ramadan)
-        results[index_isha] = computeDate(result, ishaInterval, fixedDate); // TODO: This seems wrong, why are we adding ishaInterval twice?
+        results[Isha] = computeDate(result, ishaInterval, fixedDate); // TODO: This seems wrong, why are we adding ishaInterval twice?
 
         return true;
     } else if (lessThan48 || notInSolstice) {
         qreal result = m_solar.getNoonTime() + computeH(cH) + safety_time; // Isha time, instead of Sunset+1.5h
-        results[index_isha] = computeDate(result, ishaInterval, fixedDate); // TODO: This seems wrong, why are we adding ishaInterval twice?
+        results[Isha] = computeDate(result, ishaInterval, fixedDate); // TODO: This seems wrong, why are we adding ishaInterval twice?
 
         return true;
     }
@@ -291,7 +295,7 @@ void Calculator::computeFajrIshaInSolstice(Coordinates const& geo, SalatParamete
 		qreal fajrStart = (m_solar.getSunrise()-fajrReference)/night;
 
 	    qreal result = sunrise - nightLength*fajrStart; // According to the general ratio rule
-	    results[index_fajr] = computeDate(result, 0, fixedDate);
+	    results[Fajr] = computeDate(result, 0, fixedDate);
 	}
 
 	if (ishaInSolstice)
@@ -309,7 +313,7 @@ void Calculator::computeFajrIshaInSolstice(Coordinates const& geo, SalatParamete
 		qreal ishaStart = ( ishaReference - m_solar.getSunset() )/night;
 	    //qreal result = m_solar.getSunset() + nightLength*ishastart; // According to the Rabita method.
 		qreal result = sunset + nightLength*ishaStart; // According to the Rabita method.
-	    results[index_isha] = computeDate(result, angles.ishaInterval, fixedDate); // TODO: This seems wrong, why are we adding ishaInterval twice?
+	    results[Isha] = computeDate(result, angles.ishaInterval, fixedDate); // TODO: This seems wrong, why are we adding ishaInterval twice?
 	}
 }
 

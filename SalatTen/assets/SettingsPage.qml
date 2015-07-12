@@ -10,7 +10,7 @@ Page
         ActionItem
         {
             id: locationAction
-            imageSource: "file:///usr/share/icons/ic_map_all.png"
+            imageSource: "images/tabs/ic_map.png"
             ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             title: qsTr("Map") + Retranslate.onLanguageChanged
             
@@ -142,6 +142,13 @@ Page
                         imageSource: "images/dropdown/ic_asr_hanafi.png"
                         value: 2
                     }
+                }
+                
+                PersistCheckBox
+                {
+                    id: nightStartsIsha
+                    key: "nightStartsIsha"
+                    text: qsTr("Night Starts at Isha") + Retranslate.onLanguageChanged
                 }
             }
 	        

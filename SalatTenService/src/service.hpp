@@ -31,6 +31,7 @@ struct Params
     SalatParameters angles;
     qreal asrRatio;
     QVariantMap adjustments;
+    bool nightStartsIsha;
 };
 
 struct AthanHelpers
@@ -57,7 +58,6 @@ class Service: public QObject
 	QSettings m_settings;
 	Params m_params;
 	AthanHelpers m_athan;
-	QTemporaryFile m_activeFile;
 
 signals:
 	void currentEventChanged(QVariantList const& currentNext);

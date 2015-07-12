@@ -28,10 +28,11 @@ struct Cache
     QVariantMap athaans;
     QVariantMap notifications;
     QMap<QString, QTime> iqamahs;
+    bool nightStartsIsha;
 
     bool feasible() const;
 
-    Cache() : asrRatio(0), latitude(0), longitude(0)
+    Cache() : asrRatio(0), latitude(0), longitude(0), nightStartsIsha(false)
     {
     }
 };

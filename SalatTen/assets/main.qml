@@ -19,6 +19,13 @@ NavigationPane
         help.title: qsTr("Help") + Retranslate.onLanguageChanged
         settings.imageSource: "images/menu/ic_settings.png"
         settings.title: qsTr("Settings") + Retranslate.onLanguageChanged
+        
+        onFinished: {
+            notification.currentEventChanged.connect(onCurrentEventChanged);
+            onCurrentEventChanged();
+            
+            timings.anim.play();
+        }
     }
     
     Page
@@ -66,6 +73,7 @@ NavigationPane
             {
                 id: timings
                 anim.onEnded: {
+                    sql.fetchRandomBenefit(quoteLabel);
                     permissions.process();
                 }
                 
@@ -279,18 +287,5 @@ NavigationPane
         var src = "images/graphics/%1.jpg".arg(k);
         bg.imageSource = src;
         offloader.blur(bg2, src);
-    }
-    
-    function onReady()
-    {
-        notification.currentEventChanged.connect(onCurrentEventChanged);
-        onCurrentEventChanged();
-        
-        timings.anim.play();
-        sql.fetchRandomBenefit(quoteLabel);
-    }
-    
-    onCreationCompleted: {
-        app.lazyInitComplete.connect(onReady);
     }
 }
