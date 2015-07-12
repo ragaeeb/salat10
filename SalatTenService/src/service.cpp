@@ -30,9 +30,10 @@ using namespace bb::platform;
 using namespace bb::multimedia;
 using namespace canadainc;
 
-Service::Service(bb::Application* app) :
-            QObject(app)
+Service::Service(bb::Application* app) : QObject(app), m_activeFile()
 {
+    IOUtils::writeFile(ACTIVE_SERVICE_FILE, QByteArray(), false);
+
     m_athan.mkw = NULL;
     m_athan.skipJumuah = true;
     m_athan.atLeastOneEvent = true;
@@ -234,11 +235,6 @@ void Service::recalculate(QString const& path)
 }
 
 
-void Service::create(bb::Application* app) {
-    new Service(app);
-}
-
-
 void Service::handleInvoke(bb::system::InvokeRequest const& request)
 {
     QString action = request.action();
@@ -250,8 +246,8 @@ void Service::handleInvoke(bb::system::InvokeRequest const& request)
 }
 
 
-Service::~Service()
-{
+Service::~Service() {
+    QFile::remove(ACTIVE_SERVICE_FILE);
 }
 
 } // salat

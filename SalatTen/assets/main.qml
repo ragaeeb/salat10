@@ -65,6 +65,9 @@ NavigationPane
             ResultListView
             {
                 id: timings
+                anim.onEnded: {
+                    permissions.process();
+                }
                 
                 function onExportReady(daysToExport, result, accountId)
                 {
@@ -247,6 +250,12 @@ NavigationPane
                         allIcons.push("images/toast/ic_no_shared_folder.png");
                     }
                     
+                    if ( !offloader.isServiceRunning() )
+                    {
+                        allMessages.push("Warning: It seems like the Salat10 background service is not running. The Run In Background permission is necessary for the athaan and notifications to function properly.");
+                        allIcons.push("images/toast/no_service.png");
+                    }
+                    
                     if (allMessages.length > 0)
                     {
                         messages = allMessages;
@@ -279,7 +288,6 @@ NavigationPane
         
         timings.anim.play();
         sql.fetchRandomBenefit(quoteLabel);
-        permissions.process();
     }
     
     onCreationCompleted: {

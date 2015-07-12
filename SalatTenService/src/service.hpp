@@ -57,8 +57,7 @@ class Service: public QObject
 	QSettings m_settings;
 	Params m_params;
 	AthanHelpers m_athan;
-
-	Service(bb::Application * app);
+	QTemporaryFile m_activeFile;
 
 signals:
 	void currentEventChanged(QVariantList const& currentNext);
@@ -74,8 +73,8 @@ private slots:
     void timeout(bool init=false);
 
 public:
+    Service(bb::Application * app);
 	~Service();
-	static void create(bb::Application* app);
 };
 
 }
