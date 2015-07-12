@@ -139,6 +139,12 @@ void Offloader::terminateThreads()
 }
 
 
+bool Offloader::isServiceRunning()
+{
+    return QFile::exists(ACTIVE_SERVICE_FILE);
+}
+
+
 QString Offloader::renderStandardTime(QDateTime const& theTime)
 {
     static QString format = bb::utility::i18n::timeFormat(bb::utility::i18n::DateFormat::Short);

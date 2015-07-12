@@ -44,6 +44,7 @@ public:
     Q_INVOKABLE void loadAccounts();
     Q_INVOKABLE void renderMap(bb::cascades::maps::MapView* mapView, qreal latitude, qreal longitude, QString const& name, QString const& event, bool focus=false);
     Q_INVOKABLE QString renderStandardTime(QDateTime const& theTime);
+    Q_INVOKABLE static bool isServiceRunning();
 };
 
 } /* namespace quran */

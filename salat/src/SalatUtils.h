@@ -1,6 +1,7 @@
 #ifndef SALATUTILS_H_
 #define SALATUTILS_H_
 
+#define ACTIVE_SERVICE_FILE QString("%1/salat10_service.tmp").arg( QDir::homePath() )
 #define KEY_ALARM_NOTIFICATION "notification"
 #define KEY_ATHAN "athaan"
 #define KEY_ATHANS "athaans"
