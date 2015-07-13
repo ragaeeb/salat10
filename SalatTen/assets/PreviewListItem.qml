@@ -75,10 +75,15 @@ Container
                     orientation: LayoutOrientation.LeftToRight
                 }
                 
-                ImageView
+                ImageButton
                 {
-                    imageSource: "images/list/ic_calendar.png"
+                    defaultImageSource: "images/menu/ic_calendar_add.png"
+                    pressedImageSource: defaultImageSource
                     verticalAlignment: VerticalAlignment.Center
+                    
+                    onClicked: {
+                        root.ListItem.view.exportToCalendar();
+                    }
                 }
                 
                 Label
@@ -107,18 +112,6 @@ Container
 
                                 var dialog = definition.init("AdjustHijriDialog.qml");
                                 dialog.open();
-                            }
-                        }
-                        
-                        ActionItem
-                        {
-                            id: exportAction
-                            title: qsTr("Export to Calendar")
-                            imageSource: "images/menu/ic_calendar_add.png"
-                            
-                            onTriggered: {
-                                console.log("UserEvent: ExportToCalendar");
-                                root.ListItem.view.exportToCalendar();
                             }
                         }
                         

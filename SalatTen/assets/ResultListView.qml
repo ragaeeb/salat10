@@ -17,10 +17,15 @@ ListView
     snapMode: SnapMode.LeadingEdge
     stickToEdgePolicy: ListViewStickToEdgePolicy.Beginning
 
+    function showAthanPrompt()
+    {
+        listUtil.active = true;
+        listUtil.object.athanDialog.show();
+    }
+
     function refresh()
     {
         var current = boundary.getCurrent( new Date() );
-
         listView.scrollToItem(current.index, ScrollAnimation.Default);
     }
 
