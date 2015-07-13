@@ -45,7 +45,7 @@ Sheet
                     }
                     
                     persist.saveValueFor("customAthaans", customAthans);
-                    persist.saveValueFor("athanPicked", 1, false);
+                    persist.setFlag("athanPicked", 1);
                     persist.showToast( qsTr("Athan Successfully Set"), "", "asset:///images/menu/ic_athaan_custom.png" );
                     
                     root.close();

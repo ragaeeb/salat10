@@ -30,7 +30,7 @@ QtObject
             
             persist.saveValueFor("notifications", notifications);
             persist.saveValueFor("athaans", athaans);
-            persist.saveValueFor("athanPrompted", 1, false);
+            persist.setFlag("athanPrompted", 1);
         }
     }
     
