@@ -10,11 +10,18 @@ Page
     {
         id: atb
         videoTutorialUri: "http://www.youtube.com/watch?v=AbHZLmWSKts"
+        
+        onInitializedChanged: {
+            if (initialized) {
+                tutorial.execActionBar("openCompass", qsTr("You can locate the direction of the Qibla using this '%1' action.").arg(compass.title), "l");
+            }
+        }
     }
     
     actions: [
         ActionItem
         {
+            id: compass
             ActionBar.placement: ActionBarPlacement.OnBar
             imageSource: "images/compass/ic_compass.png"
             title: qsTr("Compass") + Retranslate.onLanguageChanged
@@ -34,11 +41,15 @@ Page
     {
         if (id == QueryId.GetArticles || id == QueryId.SearchArticles)
         {
-            webView.delegateActive = false;
+            webView.urlValue = undefined;
             
-            if (id == QueryId.GetArticles) {
+            if (id == QueryId.GetArticles)
+            {
                 data.unshift({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("How To Pray"), 'uri': "local:///assets/html/tutorial.html", 'imageSource': "images/menu/ic_help.png"});
                 data.unshift({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("Sujud as Sahw"), 'uri': "local:///assets/html/sujud_as_sahw.html"});
+                
+                tutorial.execCentered("openArticle", qsTr("Tap on any of the articles to open it. Note that you need to have the Quran10 app installed for this to function properly.") );
+                tutorial.execBelowTitleBar("searchArticle", qsTr("You can search for any keywords in the article title to quickly find it by typing it here and pressing the Enter key.") );
             }
 
             articles.articleData = data;
@@ -127,10 +138,11 @@ Page
                     ]
                     
                     onTriggered: {
+                        console.log("UserEvent: ArticleTapped");
                         var d = dataModel.data(indexPath);
-                        
+
                         if (d.type == "internal") {
-                            webView.url = d.uri;
+                            webView.urlValue = d.uri;
                         } else {
                             persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), global );
                         }
@@ -142,8 +154,8 @@ Page
         ControlDelegate
         {
             id: webView
-            property variant url
-            delegateActive: url != undefined
+            property variant urlValue
+            delegateActive: urlValue != undefined
             visible: delegateActive
             
             sourceComponent: ComponentDefinition
@@ -163,7 +175,7 @@ Page
                         
                         WebView
                         {
-                            url: webView.url
+                            url: webView.urlValue
                             settings.zoomToFitEnabled: true
                             settings.activeTextEnabled: true
                             horizontalAlignment: HorizontalAlignment.Fill
@@ -180,6 +192,8 @@ Page
                                 } else if (loadRequest.status == WebLoadStatus.Succeeded) {
                                     progressIndicator.visible = false;
                                     progressIndicator.state = ProgressIndicatorState.Complete;
+                                    
+                                    tutorial.execBelowTitleBar("returnToHelpList", qsTr("To switch back to the articles list, simply leave this search field empty and press Enter on it.") );
                                 } else if (loadRequest.status == WebLoadStatus.Failed) {
                                     html = "<html><head><title>Load Fail</title><style>* { margin: 0px; padding 0px; }body { font-size: 48px; font-family: monospace; border: 1px solid #444; padding: 4px; }</style> </head> <body>Loading failed! Please check your internet connection.</body></html>"
                                     progressIndicator.visible = false;

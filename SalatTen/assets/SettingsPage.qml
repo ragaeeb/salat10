@@ -1,4 +1,4 @@
-import bb.cascades 1.0
+import bb.cascades 1.3
 import bb.platform 1.0
 import com.canadainc.data 1.0
 
@@ -96,6 +96,14 @@ Page
                             if (firstTime) {
                                 calcStrategy.expanded = true;
                             }
+                            
+                            tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
+                            tutorial.execBelowTitleBar("calcAngles", qsTr("Different regions of the world use different conventions to calculate the prayer timings. Use the '%1' dropdown to set the appropriate one for your region for most accurate results.") );
+                            tutorial.execBelowTitleBar("asrRatio", qsTr("According to the strongest opinion, the time of '%1' However if you want to use Imam Abu Hanifa's (rahimahullah), use can use the option for the other school of thought.").arg(shafiRatio.description) );
+                            tutorial.exec("ishaNight", qsTr("The strongest opinion is that the day ends (thus the night begins) at the time of Maghrib. However, some scholars such as Shaykh Muhsin al-Abbad holds the opinion that the night begins at the time of Isha. If this is the fiqh opinion you take, enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, ui.du(29) );
+                            tutorial.exec("skipJumuah", qsTr("If you don't want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1) );
+                            tutorial.exec("skipProfiles", qsTr("Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in 'Silent' mode, make sure you enable the 'Silent' profile checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center );
+                            tutorial.exec("athanVolume", qsTr("If the athan volume is too loud, use the slider to control its output."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(20), undefined, "r" );
                         }
                     }
                     
@@ -130,6 +138,7 @@ Page
                     topMargin: 20
                     
                     Option {
+                        id: shafiRatio
                         text: qsTr("Shafii, Maliki, Hanbali") + Retranslate.onLanguageChanged
                         description: qsTr("Asr begins when the height of an object is equal to the height of its shadow.") + Retranslate.onLanguageChanged
                         imageSource: "images/dropdown/ic_asr_shafii.png"

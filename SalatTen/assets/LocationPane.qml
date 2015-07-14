@@ -8,6 +8,7 @@ Page
     
     function cleanUp() {
         navigationPane.peekEnabled = true;
+        notification.locationsFound.disconnect(locations.onLocationsFound);
     }
     
     actions: [
@@ -107,7 +108,7 @@ Page
             textField.input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
             textField.input.onSubmitted: {
                 busy.running = true;
-                var query = searchField.text.trim();
+                var query = tftk.textField.text.trim();
                 notification.geoLookup(query);
             }
             
@@ -149,8 +150,9 @@ Page
                         }
                         
                         locations.title = qsTr("%n locations found", "", n);
-                        tb.kindProperties.expandableArea.expanded = true;
                         locations.expanded = true;
+                        
+                        tutorial.execBelowTitleBar("pickGeoLocation", qsTr("These are the locations that were found based on your query. Pick the one that is closest to you to get the most accurate results.") );
                     } else {
                         persist.showToast( qsTr("Could not fetch geolocation results. Please either use the 'Choose Location' from the bottom, tap on the 'Refresh' button use your GPS or please try again later."), "", "asset:///images/ic_location_failed.png" );
                     }
@@ -262,6 +264,11 @@ Page
                                 
                                 offloader.renderMap(mapView, current.latitude, current.longitude, name, rendered);
                             }
+                            
+                            tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5) );
+                            tutorial.execActionBar("nativeLocationPicker", qsTr("Tap here to pick an existing location from your device.") );
+                            tutorial.execActionBar("geoRefresh", qsTr("Tap here to use your device's GPS to obtain your location (this may take a while)."), "r" );
+                            tutorial.execCentered("ummahPinch", qsTr("This page shows you all the other Salat10 users across the world! You can do a pinch gesture on this map to zoom in on specific cities to see them in more detail."), "images/tutorial/pinch.png");
                         }
                         
                         onCreationCompleted: {

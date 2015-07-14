@@ -87,9 +87,9 @@ NavigationPane
                         tutorial.exec("nextEvent", qsTr("This displays the next event that is coming up."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(10), 0, 0, ui.du(1) );
                         tutorial.exec("toggleNextEvent", qsTr("Tapping on the icon will toggle the athan and notification settings for that next event. So if you want to turn on or turn off the athan and notifications tap on the icon."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(2), 0, 0, ui.du(1) );
                         tutorial.exec("footerTap", qsTr("Tap anywhere on this strip to expand it and see the details for today."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(8), 0, ui.du(1) );
+                        tutorial.exec("expandFooter", qsTr("You can also expand this strip by swiping-up on it and see the details."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(2), "images/menu/ic_top.png", "u");
+                        tutorial.exec("openAppMenu", qsTr("Swipe down from the top-bezel to display the Settings and Help and file bugs!"), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, 0, ui.du(2), "images/menu/ic_bottom.png", "d");
                     }
-                    
-                    
                     
                     if ( !persist.containsFlag("athanPicked") && boundary.atLeastOneAthanScheduled ) {
                         var picker = definition.init("AthanPreviewSheet.qml");
@@ -99,6 +99,12 @@ NavigationPane
                         var picker = definition.init("MuteAthanTutorial.qml");
                         picker.open();
                     }
+                }
+                
+                onFooterGone: {
+                    tutorial.execBelowTitleBar( "selectiveAthan", qsTr("Do you want to enable some athans but disable other ones?\n\nYou can do this by tapping on the prayers that you want to play the athan for (ie: Fajr, Maghrib) so they become highlighted. Then from the menu choose 'Enable Alarams/Athans'.") );
+                    tutorial.execBelowTitleBar( "editTimings", qsTr("Are your timings off by a few minutes from your local masjid?\n\nThat's easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose 'Edit'. You will then be able to adjust the results by up to 10 minutes."), 10 );
+                    tutorial.execBelowTitleBar( "setIqamah", qsTr("You can also set iqamah times for when they pray at your local masjid/musalla by pressing-and-holding on the event and choosing 'Set Iqamah'."), 20 );
                 }
                 
                 function onExportReady(daysToExport, result, accountId)
@@ -179,7 +185,7 @@ NavigationPane
                 opacity: timings.lssh.firstVisibleItem.length == 1 && !timings.lssh.scrolling ? 1 : 0
                 textStyle.textAlign: TextAlign.Center
                 horizontalAlignment: HorizontalAlignment.Center
-                topMargin: 0;bottomMargin: 0
+                topMargin: 0; bottomMargin: 0
                 
                 function onDataLoaded(id, data)
                 {
