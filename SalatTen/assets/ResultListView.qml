@@ -1,4 +1,4 @@
-import bb.cascades 1.2
+import bb.cascades 1.3
 
 ListView
 {
@@ -11,8 +11,8 @@ ListView
     property alias lssh: scrollStateHandler
     property alias anim: showAnim
     signal footerShown()
+    signal footerGone()
     flickMode: FlickMode.SingleItem
-    objectName: "listView"
     scrollIndicatorMode: ScrollIndicatorMode.None
     snapMode: SnapMode.LeadingEdge
     stickToEdgePolicy: ListViewStickToEdgePolicy.Beginning
@@ -69,6 +69,15 @@ ListView
     
     multiSelectHandler
     {
+        onActiveChanged: {
+            if (active) {
+                tutorial.execActionBar("enableAlarms", qsTr("Use the '%1' action to enable the athan and notifications for the selected events.").arg(enableAthaan.title), "l" );
+                tutorial.execActionBar("muteAlarms", qsTr("Use the '%1' action to disable the athan from sounding for all of the selected events in the future. Note that once you mute it, the app will prompt you if you want to still receive notifications in the BlackBerry Hub (instead of hearing the audio athan).").arg(muteAthaans.title) );
+                tutorial.execActionBar("copyEvents", qsTr("Use the '%1' action to copy the timings to your device clipboard.").arg(copyAction.title), "r");
+                tutorial.exec("openMultiEventMenu", qsTr("Tap here to expand the menu to show more options."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(1), 0, ui.du(1));
+            }
+        }
+        
         actions: [
             ActionItem {
                 id: enableAthaan
@@ -84,7 +93,6 @@ ListView
             
             ActionItem {
                 id: muteAthaans
-                objectName: "endMultiChats"
                 title: qsTr("Mute Alarms/Athans") + Retranslate.onLanguageChanged
                 imageSource: "images/list/ic_athaan_mute.png"
                 
@@ -126,7 +134,8 @@ ListView
                 }
             },
             
-            ActionItem {
+            ActionItem
+            {
                 id: customSoundAction
                 title: qsTr("Change Sound") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_athaan_custom.png"
@@ -141,7 +150,8 @@ ListView
                 }
             },
             
-            DeleteActionItem {
+            DeleteActionItem
+            {
                 id: resetSoundAction
                 title: qsTr("Reset Sound") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_reset_athaan.png"
@@ -216,6 +226,8 @@ ListView
                 {
                     footerShown();
                     lastVisible = firstVisibleItem;
+                } else if (firstVisibleItem[0] == 1 && firstVisibleItem[1] == 2) {
+                    footerGone();
                 }
             }
             
