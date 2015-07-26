@@ -1,4 +1,4 @@
-import bb.cascades 1.0
+import bb.cascades 1.3
 import com.canadainc.data 1.0
 
 Page
@@ -45,12 +45,26 @@ Page
                         if (numAccounts == 0) {
                             persist.showToast( qsTr("Did not find any accounts. Maybe the app does not have the permissions it needs..."), "", "asset:///images/toast/ic_calendar_empty.png" );
                         } else {
-                            persist.showToast( qsTr("You can export the salat times to your device calendar so that a reminder can scheduled when it is time for salat even when this app is not running.\n\nPlease choose the number of days to export using the circular slider."), qsTr("OK"), "file:///usr/share/icons/ic_add_event.png" );
+                            tutorial.execCentered( "calcIntro", qsTr("You can export the salat times to your device calendar so that a reminder can scheduled when it is time for salat even when this app is not running.") );
                             
-                            if (selectedOption == null) {
+                            if (selectedOption == null)
+                            {
                                 selectedOption = options[0];
                                 expanded = true;
+                                
+                                tutorial.execBelowTitleBar( "chosenAccount", qsTr("Choose the account you want to sync the calendar events with.") );
                             }
+                        }
+                    }
+                    
+                    onExpandedChanged: {
+                        if (!expanded)
+                        {
+                            tutorial.exec( "calDaysCount", qsTr("Use the circular slider to select how many days to export to the calendar."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(30) );
+                            tutorial.exec( "calEventSelection", qsTr("Select the events that you want to export and the ones you don't want to to sync with the calendar by using the checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(25) );
+                            tutorial.exec("calEventAdjust", qsTr("Use the slider to adjust how long before or after the event to remind you about it."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(20), 0, 0, undefined, "r" );
+                            tutorial.execActionBar( "calcExport", qsTr("Once you are ready to export the events to the calendar, tap here to finalize it.").arg(exportAction.title) );
+                            tutorial.execActionBar("calcBack", qsTr("Tap here to close this page."), "b" );
                         }
                     }
                     
@@ -144,7 +158,8 @@ Page
             }
         }
         
-        Label {
+        Label
+        {
             id: infoText
             multiline: true
             horizontalAlignment: HorizontalAlignment.Fill

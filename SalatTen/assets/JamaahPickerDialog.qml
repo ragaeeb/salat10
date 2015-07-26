@@ -42,7 +42,7 @@ FullScreenDialog
                 
                 onEnded: {
                     dtp.expanded = true;
-                    persist.tutorial( "tutorialJamaah", qsTr("Please set the time the congregational prayer for %1 at the masjid/musalla. Then tap anywhere outside the picker to save and dismiss it.").arg( translator.render(key) ), "asset:///images/menu/ic_set_jamaah.png" );
+                    tutorial.execCentered( "jamaah", qsTr("Please set the time the congregational prayer for %1 at the masjid/musalla. Then tap anywhere outside the picker to save and dismiss it.").arg( translator.render(key) ) );
                 }
             }
         ]
