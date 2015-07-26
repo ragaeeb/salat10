@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import bb.multimedia 1.0
 
 Sheet
 {
@@ -8,21 +9,8 @@ Sheet
     {
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         
-        titleBar: TitleBar
-        {
-            title: qsTr("Athan Canceling") + Retranslate.onLanguageChanged
-            
-            dismissAction: ActionItem
-            {
-                enabled: checkBox.checked
-                title: qsTr("Back") + Retranslate.onLanguageChanged
-                imageSource: "images/tabs/ic_clock.png"
-                
-                onTriggered: {
-                    console.log("UserEvent: MuteAthanBack");
-                    root.close();
-                }
-            }
+        titleBar: TitleBar {
+            title: qsTr("Muting the Athan") + Retranslate.onLanguageChanged
         }
         
         ScrollView
@@ -65,7 +53,7 @@ Sheet
                                 {
                                     fromOpacity: 0
                                     toOpacity: 1
-                                    duration: 1200
+                                    duration: 800
                                     easingCurve: StockCurve.QuarticOut
                                 }
                                 
@@ -73,7 +61,7 @@ Sheet
                                 {
                                     fromOpacity: 1
                                     toOpacity: 0
-                                    duration: 1200
+                                    duration: 800
                                     easingCurve: StockCurve.QuarticIn
                                 }
                             }
@@ -88,7 +76,7 @@ Sheet
                     textStyle.textAlign: TextAlign.Center
                     content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
                     multiline: true
-                    text: qsTr("\n\nTo mute the athan while it is playing, simply press the volume down button to cancel it.") + Retranslate.onLanguageChanged
+                    text: qsTr("\n\nTo mute the athan while it is playing, simply press the volume down button to cancel it.\n\nTry it now to close this screen.") + Retranslate.onLanguageChanged
                     opacity: 0
                     bottomMargin: 40
                     
@@ -112,7 +100,19 @@ Sheet
     }
     
     onClosed: {
-        persist.saveValueFor("tutorialMuteAthan", 1, false);
+        persist.setFlag("tutorialMuteAthan", 1);
         destroy();
     }
+    
+    attachedObjects: [
+        MediaKeyWatcher
+        {
+            key: MediaKey.VolumeDown
+            
+            onShortPress: {
+                reporter.record("MuteAthanBack");
+                root.close();
+            }
+        }
+    ]
 }
