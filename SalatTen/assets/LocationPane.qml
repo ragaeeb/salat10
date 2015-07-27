@@ -9,26 +9,31 @@ Page
     function cleanUp() {
         navigationPane.peekEnabled = true;
         notification.locationsFound.disconnect(locations.onLocationsFound);
+        geoFinder.finished.disconnect(refresh.onFound);
     }
     
     actions: [
         ActionItem {
+            id: refresh
             title: qsTr("Refresh") + Retranslate.onLanguageChanged
             imageSource: "images/menu/ic_reset.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             
-            function onFound(l,p) {
+            function onFound(l,p)
+            {
                 busy.running = false;
+                geoFinder.finished.disconnect(onFound);
             }
             
             onTriggered: {
                 console.log("UserEvent: RefreshLocation");
+                reporter.record("RefreshLocation");
                 
                 var geoFinder = app.refreshLocation();
                 
                 if (geoFinder) {
                     busy.running = true;
-                    geoFinder.finished.connect(onFound)
+                    geoFinder.finished.connect(onFound);
                 }
             }
         },
@@ -72,7 +77,7 @@ Page
             ]
             
             onTriggered: {
-                console.log("UserEvent: LocationPickerTriggered");
+                console.log("UserEvent: PickLocation");
                 
                 var picker = pickerDefinition.createObject();
                 var place = picker.show();
@@ -87,6 +92,9 @@ Page
                     locationAction.title = place.name;
                     
                     persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/tabs/ic_map.png" );
+                    reporter.record( "LocationPicked", JSON.stringify(place) );
+                } else {
+                    reporter.record("LocationFailedPick");
                 }
                 
                 picker.destroy();
@@ -109,6 +117,7 @@ Page
             textField.input.onSubmitted: {
                 busy.running = true;
                 var query = tftk.textField.text.trim();
+                reporter.record("LocationQuery", query);
                 notification.geoLookup(query);
             }
             
@@ -181,19 +190,23 @@ Page
                     mapViewDelegate.delegateActive = true;
                     mapViewDelegate.control.animateToLocation(latitude, longitude, 50000);
                     
+                    var analytics = {'latitude': latitude, 'longitude': longitude, 'location': selectedValue.formatted_address};
                     persist.saveValueFor("location", selectedValue.formatted_address);
                     persist.saveValueFor("latitude", latitude, true);
                     persist.saveValueFor("longitude", longitude, true);
                     
                     if (city.length > 0) {
                         persist.saveValueFor("city", place.city, false);
+                        analytics.city = city;
                     }
                     
                     if (country.length > 0) {
                         persist.saveValueFor("country", place.country, false);
+                        analytics.country = country;
                     }
                     
                     locationAction.title = selectedValue.formatted_address;
+                    reporter.record("LocationGeoPicked", JSON.stringify(analytics));
                 }
                 
                 onCreationCompleted: {

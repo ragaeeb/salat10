@@ -1,6 +1,5 @@
 import bb.cascades 1.0
 import bb.device 1.0
-import bb.system 1.0
 import com.canadainc.data 1.0
 
 Page
@@ -46,7 +45,8 @@ Page
             onCreationCompleted: {
                 if ( !compass.connected() ) {
                     text = qsTr("Compass backend failed to connect! Either your device does not support Qibla detection or it is in a bad state and you should reset your device or the app and try again!") + Retranslate.onLanguageChanged
-                }                
+                    reporter.record("CompassFailure");
+                }
             }
         }
         

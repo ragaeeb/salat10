@@ -17,6 +17,7 @@ FullScreenDialog
     }
     
     onClosing: {
+        reporter.record( "SaveIqamah", key+"="+dtp.value.toString() );
         app.saveIqamah(key, dtp.value);
         persist.showToast( qsTr("Iqamah time set to: %1").arg( offloader.renderStandardTime(dtp.value) ), "", "asset:///images/menu/ic_set_jamaah.png" );
     }
