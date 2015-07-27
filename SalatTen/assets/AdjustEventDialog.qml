@@ -19,6 +19,8 @@ FullScreenDialog
         var adjustments = persist.getValueFor("adjustments");
         adjustments[key] = Math.floor(slider.value);
         persist.saveValueFor("adjustments", adjustments);
+        
+        reporter.record( "SaveAdjustment", key+"="+slide.value.toString() );
     }
     
     dialogContent: Container

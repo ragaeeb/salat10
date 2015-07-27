@@ -27,6 +27,8 @@ Page
             title: qsTr("Compass") + Retranslate.onLanguageChanged
             
             onTriggered: {
+                console.log("UserEvent: OpenCompass");
+                reporter.record("OpenCompass");
                 var c = definition.init("CompassPane.qml");
                 navigationPane.push(c);
             }
@@ -80,16 +82,13 @@ Page
             bottomMargin: 0
             input.onSubmitted: {
                 var query = searchField.text.trim();
+                reporter.record( "ArticleSearch", query);
                 
                 if (query.length == 0) {
                     reload();
                 } else {
                     sql.searchArticles(root, query);
                 }
-            }
-            
-            onCreationCompleted: {
-                input["keyLayout"] = 7;
             }
         }
         
@@ -143,8 +142,10 @@ Page
 
                         if (d.type == "internal") {
                             webView.urlValue = d.uri;
+                            reporter.record( "ArticleTapped", d.uri);
                         } else {
                             persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), global );
+                            reporter.record( "ArticleOpen", d.id.toString() );
                         }
                     }
                 }

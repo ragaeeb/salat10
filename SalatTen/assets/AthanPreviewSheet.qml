@@ -38,6 +38,7 @@ Sheet
                 
                 onTriggered: {
                     console.log("UserEvent: AcceptAthan");
+                    reporter.record("AcceptAthan", selected);
                     var customAthans = {};
                     
                     for (var i = all.length-1; i >= 0; i--) {
@@ -92,8 +93,10 @@ Sheet
                     
                     if (uri) {
                         accept.selected = uri;
+                        reporter.record("AthanPreview", uri);
                     } else {
                         picker.open();
+                        reporter.record("AthanPreviewPick");
                     }
                 }
                 
@@ -173,11 +176,13 @@ Sheet
                         
                         onFileSelected : {
                             console.log("UserEvent: AthanFileSelected", selectedFiles[0]);
+                            reporter.record("AthanCustomPicked", selectedFiles[0]);
                             accept.selected = "file://"+selectedFiles[0];
                         }
                         
                         onCanceled: {
                             console.log("UserEvent: AthanFileCanceled");
+                            reporter.record("AthanFileCanceled");
                             accept.selected = "";
                             listView.clearSelection();
                         }

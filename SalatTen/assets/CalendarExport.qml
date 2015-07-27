@@ -33,6 +33,10 @@ Page
                 
                 onExpandedChanged: {
                     console.log("UserEvent: CalendarTitleExpanded", expanded);
+                    
+                    if (!expanded) {
+                        reporter.record("CalendarAccountSuppressed");
+                    }
                 }
                 
                 content: AccountsDropDown
@@ -73,6 +77,7 @@ Page
                         
                         if (changed) {
                             console.log("UserEvent: CalendarAccountChosen", selectedValue);
+                            reporter.record("CalendarAccountChanged");
                         }
                     }
                 }
@@ -106,6 +111,9 @@ Page
                 
                 var daysToExport = Math.floor(slider.value);
                 exportingReady(daysToExport, result, accountChoice.selectedValue);
+                
+                result.push( {'key': "daysToExport", 'value': daysToExport} );
+                reporter.record( "ExportCalendar", JSON.stringify(result) );
             }
         }
     ]
@@ -133,9 +141,9 @@ Page
                 
                 onTouch: {
                     if ( event.isDown() ) {
-                        root.peekEnabled = false;
+                        navigationPane.peekEnabled = false;
                     } else if ( event.isUp() || event.isCancel() ) {
-                        root.peekEnabled = true;
+                        navigationPane.peekEnabled = true;
                     }
                 }
                 

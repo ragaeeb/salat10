@@ -88,6 +88,7 @@ ListView
                     console.log("UserEvent: EnableAthans");
                     listUtil.active = true;
                     listUtil.object.toggleAthaans(true);
+                    reporter.record("EnableAthans");
                 }
             },
             
@@ -100,6 +101,7 @@ ListView
                     console.log("UserEvent: MuteAthans");
                     listUtil.active = true;
                     listUtil.object.toggleAthaans(false);
+                    reporter.record("MuteAthans");
                 }
             },
             
@@ -113,6 +115,7 @@ ListView
                     console.log("UserEvent: CopyMultiToClipboard");
                     listUtil.active = true;
                     persist.copyToClipboard( listUtil.object.textualizeSelected() );
+                    reporter.record("CopyMultiToClipboard");
                 }
             },
             
@@ -131,6 +134,7 @@ ListView
                     console.log("UserEvent: ShareMultiResults");
                     listUtil.active = true;
                     data = persist.convertToUtf8( listUtil.object.textualizeSelected() );
+                    reporter.record("ShareMultiResults");
                 }
             },
             
@@ -147,6 +151,8 @@ ListView
                     
                     picker.all = listUtil.object.getSelectedKeys();
                     picker.open();
+                    
+                    reporter.record("ChangeSound");
                 }
             },
             
@@ -160,6 +166,7 @@ ListView
                     console.log("UserEvent: ResetCustomAthan");
                     listUtil.active = true;
                     listUtil.object.resetSound( listUtil.object.getSelectedKeys() );
+                    reporter.record("ResetCustomAthan");
                 }
             }
         ]

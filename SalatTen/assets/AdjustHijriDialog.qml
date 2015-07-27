@@ -3,7 +3,10 @@ import bb.cascades 1.0
 FullScreenDialog
 {
     onClosing: {
-        persist.saveValueFor( "hijri", Math.floor(slider.value) );
+        var result = Math.floor(slider.value);
+        
+        persist.saveValueFor( "hijri", result );
+        reporter.record( "HijriAdjust", result.toString() );
     }
     
     dialogContent: Container
