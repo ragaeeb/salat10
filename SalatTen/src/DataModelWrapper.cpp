@@ -286,7 +286,17 @@ bool DataModelWrapper::calculationFeasible() const {
 
 
 bool Cache::feasible() const {
-    return latitude != 0 && longitude != 0 && angles.fajrTwilightAngle != 0;
+    return latitude != 0 && longitude != 0 && anglesSet();
+}
+
+
+bool DataModelWrapper::anglesSaved() const {
+    return m_cache.anglesSet();
+}
+
+
+bool Cache::anglesSet() const {
+    return angles.fajrTwilightAngle != 0;
 }
 
 
