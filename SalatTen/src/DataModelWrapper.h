@@ -31,6 +31,7 @@ struct Cache
     bool nightStartsIsha;
 
     bool feasible() const;
+    bool anglesSet() const;
 
     Cache() : asrRatio(0), latitude(0), longitude(0), nightStartsIsha(false)
     {
@@ -41,6 +42,7 @@ class DataModelWrapper : public QObject
 {
 	Q_OBJECT
     Q_PROPERTY(bool calculationFeasible READ calculationFeasible NOTIFY recalculationNeeded)
+	Q_PROPERTY(bool anglesSaved READ anglesSaved NOTIFY recalculationNeeded)
     Q_PROPERTY(bool atLeastOneAthanScheduled READ atLeastOneAthanScheduled)
 
 	Persistance* m_persistance;
@@ -82,6 +84,7 @@ public:
 	Translator* getTranslator();
 
     bool calculationFeasible() const;
+    bool anglesSaved() const;
     bool atLeastOneAthanScheduled();
 };
 

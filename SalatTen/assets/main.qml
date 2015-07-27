@@ -38,10 +38,21 @@ NavigationPane
             
             gestureHandlers: [
                 TapHandler {
+                    id: tapHandler
+                    
                     onTapped: {
-                        if (!boundary.calculationFeasible) {
-                            recorder.record("NoLocationsSetTapped");
-                            menuDef.settings.triggered();
+                        if (!boundary.calculationFeasible)
+                        {
+                            if (!boundary.anglesSaved) {
+                                menuDef.settings.triggered();
+                            } else {
+                                var x = definition.init("LocationPane.qml");
+                                navigationPane.push(x);
+                            }
+
+                            if (event) {
+                                reporter.record("NoLocationsSetTapped");
+                            }
                         }
                     }
                 }
@@ -116,14 +127,14 @@ NavigationPane
                             }
                         }
                     } else {
-                        quoteLabel.text = qsTr("No location has been set...");
+                        if (!boundary.anglesSaved) {
+                            quoteLabel.text = qsTr("No angles have been set\n\nTap here to choose the appropriate calculation angles...");
+                        } else {
+                            quoteLabel.text = qsTr("No location has been set\n\nTap here to choose your location...");
+                        }
+                        
+                        tapHandler.tapped(undefined);
                     }
-                }
-                
-                onFooterGone: {
-                    tutorial.execBelowTitleBar( "selectiveAthan", qsTr("Do you want to enable some athans but disable other ones?\n\nYou can do this by tapping on the prayers that you want to play the athan for (ie: Fajr, Maghrib) so they become highlighted. Then from the menu choose 'Enable Alarams/Athans'.") );
-                    tutorial.execBelowTitleBar( "editTimings", qsTr("Are your timings off by a few minutes from your local masjid?\n\nThat's easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose 'Edit'. You will then be able to adjust the results by up to 10 minutes."), 10 );
-                    tutorial.execBelowTitleBar( "setIqamah", qsTr("You can also set iqamah times for when they pray at your local masjid/musalla by pressing-and-holding on the event and choosing 'Set Iqamah'."), 20 );
                 }
                 
                 function onExportReady(daysToExport, result, accountId)
@@ -197,96 +208,12 @@ NavigationPane
                 }
             }
             
-            TextArea
-            {
+            QuoteLabel {
                 id: quoteLabel
-                backgroundVisible: false
-                editable: false
-                textStyle.fontSize: FontSize.XXSmall
                 opacity: ( timings.lssh.firstVisibleItem.length == 1 && !timings.lssh.scrolling ) || !boundary.calculationFeasible ? 1 : 0
-                textStyle.textAlign: TextAlign.Center
-                horizontalAlignment: HorizontalAlignment.Center
-                topMargin: 0; bottomMargin: 0
-                
-                function onDataLoaded(id, data)
-                {
-                    if (id == QueryId.GetRandomBenefit)
-                    {
-                        var quote = data[0];
-                        text = "<html><i>\n“%1”</i>\n\n- <b><a href=\"%5\">%2</a>%4</b>\n\n[%3]\n</html>".arg( quote.body.replace(/&/g,"&amp;") ).arg(quote.author).arg( quote.reference.replace(/&/g,"&amp;") ).arg( global.getSuffix(quote.birth, quote.death, quote.is_companion == 1, quote.female == 1) ).arg( quote.id.toString() );
-                    }
-                }
-                
-                activeTextHandler: ActiveTextHandler
-                {
-                    id: ath
-                    
-                    onTriggered: {
-                        var link = event.href.toString();
-                        
-                        if ( link.match("\\d+") ) {
-                            persist.invoke("com.canadainc.Quran10.bio.previewer", "", "", "", link, global);
-                            reporter.record("OpenAuthorLink", link);
-                        }
-                        
-                        event.abort();
-                    }
-                }
             }
             
-            ControlDelegate
-            {
-                id: progressDelegate
-                horizontalAlignment: HorizontalAlignment.Center
-                verticalAlignment: VerticalAlignment.Center
-                delegateActive: false;
-                visible: delegateActive
-                
-                function onProgressChanged(current, total)
-                {
-                    control.showBusy = false;
-                    control.value = current;
-                    control.toValue = total;
-                }
-                
-                function onComplete(message, icon)
-                {
-                    delegateActive = false;
-                    persist.showToast(message, icon);
-                }
-                
-                onCreationCompleted: {
-                    offloader.operationProgress.connect(onProgressChanged);
-                    offloader.operationComplete.connect(onComplete);
-                }
-                
-                sourceComponent: ComponentDefinition
-                {
-                    Container
-                    {
-                        property alias value: progress.value
-                        property alias toValue: progress.toValue
-                        property alias showBusy: busy.running
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        
-                        ActivityIndicator
-                        {
-                            id: busy
-                            horizontalAlignment: HorizontalAlignment.Center
-                            preferredHeight: 100; preferredWidth: 100
-                            running: true
-                        }
-                        
-                        ProgressIndicator
-                        {
-                            id: progress
-                            fromValue: 0;
-                            horizontalAlignment: HorizontalAlignment.Center
-                            state: ProgressIndicatorState.Progress
-                        }
-                    }
-                }
-            }
+            OperationProgressBar {}
             
             PermissionToast
             {

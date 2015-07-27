@@ -19,6 +19,8 @@ Page
 
                 var x = definition.init("LocationPane.qml");
                 navigationPane.push(x);
+                
+                reporter.record("OpenMap");
             }
         }
     ]
@@ -129,7 +131,7 @@ Page
                         var anglesSaved = persist.saveValueFor("angles", parameters);
                         
                         if (strategySaved && anglesSaved) {
-                            persist.showToast( qsTr("Salat10 will use %1 angles to calculate the prayer times.").arg(selectedOption.text), "", "asset:///images/ic_angles.png" );
+                            reporter.record("NewAngles", selectedOption.value);
                         }
                     }
                 }
@@ -155,6 +157,10 @@ Page
                         imageSource: "images/dropdown/ic_asr_hanafi.png"
                         value: 2
                     }
+                    
+                    onValueChanged: {
+                        reporter.record( "AsrRatioChanged", asrRatio.selectedValue.toString() );
+                    }
                 }
                 
                 PersistCheckBox
@@ -162,6 +168,10 @@ Page
                     id: nightStartsIsha
                     key: "nightStartsIsha"
                     text: qsTr("Night Starts at Isha") + Retranslate.onLanguageChanged
+                    
+                    onValueChanged: {
+                        reporter.record( "NightStartsAtIshaChanged", checked.toString() );
+                    }
                 }
             }
 	        
@@ -181,6 +191,10 @@ Page
                     id: skipJumuah
                     key: "skipJumahAthaan"
                     text: qsTr("Skip Athan on Jumuah") + Retranslate.onLanguageChanged
+                    
+                    onValueChanged: {
+                        reporter.record( "SkipJumuahChanged", checked.toString() );
+                    }
                 }
             }
             
@@ -201,6 +215,7 @@ Page
                     
                     if (changed) {
                         console.log("UserEvent: AthanVolumeChanged", value);
+                        reporter.record( "AthanVolumeChanged", value.toString() );
                     }
                 }
                 
@@ -248,7 +263,11 @@ Page
                         onCheckedChanged: {
                             var profiles = persist.getValueFor("profiles");
                             profiles[value] = checked;
-                            persist.saveValueFor("profiles", profiles, false);
+                            var changed = persist.saveValueFor("profiles", profiles, false);
+                            
+                            if (changed) {
+                                reporter.record( "ProfileChanged_%1".arg(value), checked.toString() );
+                            }
                         }
                     }
                 }
