@@ -5,6 +5,8 @@ import com.canadainc.data 1.0
 Page
 {
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+    
+    function cleanUp() {}
 
     actions: [
         ActionItem

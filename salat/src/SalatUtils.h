@@ -20,6 +20,7 @@
 #define KEY_ISHA_NIGHT "nightStartsIsha"
 #define KEY_IQAMAH "iqamah"
 #define KEY_IQAMAHS "iqamahs"
+#define KEY_LOCATION "location"
 #define KEY_PROFILES "profiles"
 #define KEY_SKIP_JUMUAH "skipJumahAthaan"
 #define KEY_SORT_DATE "dateValue"
