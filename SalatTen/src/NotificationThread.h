@@ -40,8 +40,9 @@ public:
 	NotificationThread(DataModelWrapper* model, QObject* parent=NULL);
 	virtual ~NotificationThread();
 
-    Q_INVOKABLE void fetchCheckins();
+	Q_SLOT void fetchCheckins();
     Q_INVOKABLE void geoLookup(QString const& location);
+    void ipLookup();
 };
 
 } /* namespace salat */
