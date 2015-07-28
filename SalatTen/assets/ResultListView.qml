@@ -29,6 +29,12 @@ ListView
         var current = boundary.getCurrent( new Date() );
         listView.scrollToItem(current.index, ScrollAnimation.Default);
     }
+    
+    function showHijriConverter()
+    {
+        var dialog = definition.init("HijriConverterDialog.qml");
+        dialog.open();
+    }
 
     function edit(indexPath)
     {

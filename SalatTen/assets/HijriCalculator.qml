@@ -6,8 +6,12 @@ QtObject
         return ((n%m)+m)%m;
     }
     
-    function kuwaiticalendar(adjust){
-        var today = new Date();
+    function kuwaiticalendar(adjust, today)
+    {
+        if (!today) {
+            today = new Date();
+        }
+
         if(adjust) {
             var adjustmili = 1000*60*60*24*adjust; 
             var todaymili = today.getTime()+adjustmili;
@@ -90,13 +94,13 @@ QtObject
         return myRes;
     }
 
-    function writeIslamicDate(adjustment)
+    function writeIslamicDate(adjustment, today)
     {
         var wdNames = new Array( qsTr("Ahad"), qsTr("Ithnin"), qsTr("Thulatha"), qsTr("Arbaa"), qsTr("Khams"), qsTr("Jumuah"), qsTr("Sabt") );
         var iMonthNames = new Array( qsTr("Muharram"), qsTr("Safar"), qsTr("Rabi'ul Awwal"), qsTr("Rabi'ul Akhir"),
         qsTr("Jumadal Ula"), qsTr("Jumadal Akhira"), qsTr("Rajab"), qsTr("Sha'ban"),
         qsTr("Ramadan"), qsTr("Shawwal"), qsTr("Dhul Qa'ada"), qsTr("Dhul Hijja") );
-        var iDate = kuwaiticalendar(adjustment);
+        var iDate = kuwaiticalendar(adjustment, today);
         var outputIslamicDate = wdNames[iDate[4]] + ", " + iDate[5] + " " + iMonthNames[iDate[6]] + " " + iDate[7] + " AH";
         return outputIslamicDate;
     }
