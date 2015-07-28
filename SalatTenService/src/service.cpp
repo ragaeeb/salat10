@@ -11,11 +11,11 @@
 
 namespace {
 
-QList<QDateTime> adjust(QList<QDateTime> list, QStringList const& allEvents, QVariantMap const& adjustments)
+QList<QDateTime> adjust(QList<QDateTime> list, QStringList const& allEvents, QVariantMap const& adjustments, int dstAdjust)
 {
     for (int i = list.size()-1; i >= 0; i--) {
         int adjust = adjustments.value( allEvents[i] ).toInt();
-        list[i] = list[i].addSecs(adjust*60);
+        list[i] = list[i].addSecs(adjust*60).addSecs(dstAdjust*3600);
     }
 
     return list;
@@ -100,9 +100,9 @@ void Service::timeout(bool init)
     QStringList allEvents = Translator::eventKeys();
 
     Calculator calculator;
-    QList<QDateTime> result = adjust( calculator.calculate( now.date().addDays(-1), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments );
-    result.append( adjust( calculator.calculate( now.date(), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments ) );
-    result.append( adjust( calculator.calculate( now.date().addDays(1), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments ) );
+    QList<QDateTime> result = adjust( calculator.calculate( now.date().addDays(-1), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments, m_params.dstAdjust );
+    result.append( adjust( calculator.calculate( now.date(), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments, m_params.dstAdjust ) );
+    result.append( adjust( calculator.calculate( now.date().addDays(1), m_params.geo, m_params.angles, m_params.asrRatio, m_params.nightStartsIsha ), allEvents, m_params.adjustments, m_params.dstAdjust ) );
 
     allEvents.append( Translator::eventKeys() );
     allEvents.append( Translator::eventKeys() );
@@ -211,6 +211,8 @@ void Service::recalculate(QString const& path)
         m_params.angles = Calculator::createParams( m_settings.value(KEY_CALC_ANGLES).toMap() );
         m_params.asrRatio = m_settings.value(KEY_CALC_ASR_RATIO).toReal();
         m_params.adjustments = m_settings.value(KEY_CALC_ADJUSTMENTS).toMap();
+        m_params.nightStartsIsha = m_settings.value(KEY_ISHA_NIGHT).toInt() == 1;
+        m_params.dstAdjust = m_settings.value(KEY_DST_ADJUST).toInt();
 
         m_athan.athaans = m_settings.value(KEY_ATHANS).toMap();
         m_athan.notifications = m_settings.value(KEY_NOTIFICATIONS).toMap();

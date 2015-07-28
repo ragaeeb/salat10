@@ -16,6 +16,7 @@
 #define KEY_CITY "city"
 #define KEY_COUNTRY "country"
 #define KEY_CUSTOM_ATHANS "customAthaans"
+#define KEY_DST_ADJUST "dstAdjust"
 #define KEY_NOTIFICATIONS "notifications"
 #define KEY_ISHA_NIGHT "nightStartsIsha"
 #define KEY_IQAMAH "iqamah"

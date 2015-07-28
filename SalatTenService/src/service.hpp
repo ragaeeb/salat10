@@ -32,6 +32,7 @@ struct Params
     qreal asrRatio;
     QVariantMap adjustments;
     bool nightStartsIsha;
+    int dstAdjust;
 };
 
 struct AthanHelpers
