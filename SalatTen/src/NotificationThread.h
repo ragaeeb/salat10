@@ -24,6 +24,7 @@ class NotificationThread : public QObject
     NetworkProcessor m_network;
 
 	void scheduleCallback(qint64 t, qint64 now);
+	void saveLocation(QString const& country, QString city, qreal latitude, qreal longitude, QString const& region=QString());
 
 signals:
 	void currentEventChanged();
@@ -42,7 +43,7 @@ public:
 
 	Q_SLOT void fetchCheckins();
     Q_INVOKABLE void geoLookup(QString const& location);
-    void ipLookup();
+    Q_SLOT void ipLookup();
 };
 
 } /* namespace salat */

@@ -5,17 +5,21 @@ import bb.cascades.maps 1.0
 Page
 {
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+    property variant geoFinder
     
     function cleanUp() {
         navigationPane.peekEnabled = true;
         notification.locationsFound.disconnect(locations.onLocationsFound);
-        geoFinder.finished.disconnect(refresh.onFound);
+        
+        if (geoFinder) {
+            geoFinder.finished.disconnect(refresh.onFound);
+        }
     }
     
     actions: [
         ActionItem {
             id: refresh
-            title: qsTr("Refresh") + Retranslate.onLanguageChanged
+            title: qsTr("GPS Refresh") + Retranslate.onLanguageChanged
             imageSource: "images/menu/ic_reset.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             
@@ -29,7 +33,7 @@ Page
                 console.log("UserEvent: RefreshLocation");
                 reporter.record("RefreshLocation");
                 
-                var geoFinder = app.refreshLocation();
+                geoFinder = app.refreshLocation();
                 
                 if (geoFinder) {
                     busy.running = true;
@@ -278,9 +282,6 @@ Page
                                 offloader.renderMap(mapView, current.latitude, current.longitude, name, rendered);
                             }
                             
-                            tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5) );
-                            tutorial.execActionBar("nativeLocationPicker", qsTr("Tap here to pick an existing location from your device.") );
-                            tutorial.execActionBar("geoRefresh", qsTr("Tap here to use your device's GPS to obtain your location (this may take a while)."), "r" );
                             tutorial.execCentered("ummahPinch", qsTr("This page shows you all the other Salat10 users across the world! You can do a pinch gesture on this map to zoom in on specific cities to see them in more detail."), "images/tutorial/pinch.png");
                         }
                         
@@ -303,5 +304,12 @@ Page
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
         }
+    }
+    
+    onCreationCompleted: {
+        tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5) );
+        tutorial.execActionBar("nativeLocationPicker", qsTr("Tap here to pick an existing location from your device.") );
+        tutorial.execActionBar("geoRefresh", qsTr("Tap here to use your device's GPS to obtain your location (this may take a while)."), "r" );
+        tutorial.execActionBar("returnToSettings", qsTr("Tap here to go back to the Settings page."), "b" );
     }
 }

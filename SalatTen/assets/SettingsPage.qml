@@ -14,12 +14,13 @@ Page
             id: locationAction
             imageSource: "images/tabs/ic_map.png"
             ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
-            title: qsTr("Map") + Retranslate.onLanguageChanged
+            title: qsTr("Set Location") + Retranslate.onLanguageChanged
             
             onTriggered: {
                 console.log("UserEvent: OpenMap");
 
-                var x = definition.init("LocationPane.qml");
+                definition.source = "LocationPane.qml";
+                var x = definition.createObject();
                 navigationPane.push(x);
                 
                 reporter.record("OpenMap");
@@ -70,7 +71,8 @@ Page
                     ]
 
                     onExpandedChanged: {
-                        if (!expanded) {
+                        if (!expanded)
+                        {
                             tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
                             tutorial.execBelowTitleBar("calcAngles", qsTr("Different regions of the world use different conventions to calculate the prayer timings. Use the '%1' dropdown to set the appropriate one for your region for most accurate results.") );
                             tutorial.execBelowTitleBar("asrRatio", qsTr("According to the strongest opinion, the time of '%1' However if you want to use Imam Abu Hanifa's (rahimahullah), use can use the option for the other school of thought.").arg(shafiRatio.description) );
@@ -78,6 +80,14 @@ Page
                             tutorial.exec("skipJumuah", qsTr("If you don't want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1) );
                             tutorial.exec("skipProfiles", qsTr("Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in 'Silent' mode, make sure you enable the 'Silent' profile checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center );
                             tutorial.exec("athanVolume", qsTr("If the athan volume is too loud, use the slider to control its output."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(20), undefined, "r" );
+                            
+                            if ( boundary.anglesSaved && !boundary.calculationFeasible ) // location still not set
+                            {
+                                notification.ipLookup();
+                                locationAction.triggered();
+                                
+                                persist.showToast( qsTr("Your location was not yet detected, please set your location for accurate timings."), "images/tabs/ic_map.png" );
+                            }
                         }
                     }
 
@@ -276,4 +286,10 @@ Page
             ]
 	    }
     }
+    
+    attachedObjects: [
+        ComponentDefinition {
+            id: definition
+        }
+    ]
 }
