@@ -49,6 +49,7 @@ Page
             {
                 data.unshift({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("How To Pray"), 'uri': "local:///assets/html/tutorial.html", 'imageSource': "images/menu/ic_help.png"});
                 data.unshift({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("Sujud as Sahw"), 'uri': "local:///assets/html/sujud_as_sahw.html"});
+                data.unshift({'type': 'internal', 'author': qsTr("Shaykh Muhammad Bazmool"), 'title': qsTr("Description of the Prophet's Prayer (With Illustrations)"), 'uri': "https://phaven-prod.s3.amazonaws.com/files/document_part/asset/922451/OwE0QrMeXdq3nKopmSM03VzEgiM/Salat_One.pdf", 'imageSource': "images/menu/ic_help.png"});
                 
                 tutorial.execCentered("openArticle", qsTr("Tap on any of the articles to open it. Note that you need to have the Quran10 app installed for this to function properly.") );
                 tutorial.execBelowTitleBar("searchArticle", qsTr("You can search for any keywords in the article title to quickly find it by typing it here and pressing the Enter key.") );
@@ -140,8 +141,14 @@ Page
                         console.log("UserEvent: ArticleTapped");
                         var d = dataModel.data(indexPath);
 
-                        if (d.type == "internal") {
-                            webView.urlValue = d.uri;
+                        if (d.type == "internal")
+                        {
+                            if ( d.uri.indexOf("http") == 0 ) {
+                                persist.openUri(d.uri);
+                            } else {
+                                webView.urlValue = d.uri;
+                            }
+
                             reporter.record( "ArticleTapped", d.uri);
                         } else {
                             persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), global );

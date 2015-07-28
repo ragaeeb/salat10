@@ -255,8 +255,6 @@ void DataModelWrapper::updateCache(QStringList const& keys)
         }
     }
 
-    LOGGER("*** NEEDS REF");
-
     if (needsRefresh) {
         refreshNeeded();
     }
