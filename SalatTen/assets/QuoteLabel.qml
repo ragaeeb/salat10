@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import com.canadainc.data 1.0
 
 TextArea
 {
