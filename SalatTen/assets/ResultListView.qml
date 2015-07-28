@@ -16,6 +16,7 @@ ListView
     scrollIndicatorMode: ScrollIndicatorMode.None
     snapMode: SnapMode.LeadingEdge
     stickToEdgePolicy: ListViewStickToEdgePolicy.Beginning
+    scrollRole: ScrollRole.Main
 
     function showAthanPrompt()
     {

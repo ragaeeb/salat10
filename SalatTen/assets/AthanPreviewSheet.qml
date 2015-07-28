@@ -76,6 +76,7 @@ Sheet
             ListView
             {
                 id: listView
+                scrollRole: ScrollRole.Main
                 
                 dataModel: ArrayDataModel {
                     id: adm

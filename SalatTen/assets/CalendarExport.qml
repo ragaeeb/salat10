@@ -180,6 +180,7 @@ Page
         {
             id: listView
             property variant translation: translator
+            scrollRole: ScrollRole.Main
             
             leadingVisual: CalendarListItem
             {
