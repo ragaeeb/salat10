@@ -28,8 +28,35 @@ Page
         }
     ]
     
-    titleBar: TitleBar {
-        title: qsTr("Settings") + Retranslate.onLanguageChanged
+    titleBar: TitleBar
+    {
+        kind: TitleBarKind.Segmented
+        selectedIndex: boundary.dstAdjustment == 0 ? 1 : boundary.dstAdjustment == 1 ? 2 : 0
+        
+        options: [
+            Option {
+                text: qsTr("Adjust -1") + Retranslate.onLanguageChanged
+                value: -1
+            },
+            
+            Option {
+                text: qsTr("No Daylight Savings") + Retranslate.onLanguageChanged
+                value: 0
+            },
+            
+            Option {
+                text: qsTr("Adjust +1") + Retranslate.onLanguageChanged
+                value: 1
+            }
+        ]
+        
+        onSelectedOptionChanged: {
+            var changed = persist.saveValueFor("dstAdjust", selectedOption.value);
+            
+            if (changed) {
+                reporter.record("DstAdjust", selectedOption.value);
+            }
+        }
     }
     
     ScrollView

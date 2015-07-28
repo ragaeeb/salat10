@@ -26,7 +26,7 @@ DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
 
 void DataModelWrapper::lazyInit()
 {
-    updateCache( QStringList() << KEY_CALC_ANGLES << KEY_CALC_ASR_RATIO << KEY_CALC_ADJUSTMENTS << KEY_ATHANS << KEY_NOTIFICATIONS << KEY_IQAMAHS << KEY_CALC_LATITUDE << KEY_CALC_LONGITUDE << KEY_ISHA_NIGHT );
+    updateCache( QStringList() << KEY_CALC_ANGLES << KEY_CALC_ASR_RATIO << KEY_CALC_ADJUSTMENTS << KEY_ATHANS << KEY_NOTIFICATIONS << KEY_IQAMAHS << KEY_CALC_LATITUDE << KEY_CALC_LONGITUDE << KEY_ISHA_NIGHT << KEY_DST_ADJUST );
 }
 
 
@@ -52,7 +52,7 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 
 			QVariantMap map;
 			map[PRAYER_KEY] = key;
-			map[PRAYER_TIME_VALUE] = result[j].addSecs(adjust*60);
+			map[PRAYER_TIME_VALUE] = result[j].addSecs(adjust*60).addSecs(m_cache.dstAdjust*3600);
 			map[KEY_SORT_DATE] = result[j].date();
 			map["isSalat"] = salatMap.contains(key);
 
@@ -234,6 +234,9 @@ void DataModelWrapper::updateCache(QStringList const& keys)
         } else if (key == KEY_NOTIFICATIONS) {
             m_cache.notifications = m_persistance->getValueFor(KEY_NOTIFICATIONS).toMap();
             applyDiff(key, KEY_ALARM_NOTIFICATION);
+        } else if (key == KEY_DST_ADJUST) {
+            m_cache.dstAdjust = m_persistance->getValueFor(KEY_DST_ADJUST).toInt();
+            needsRefresh = true;
         } else if (key == KEY_IQAMAHS) {
             QVariantMap iqamahs = m_persistance->getValueFor(KEY_IQAMAHS).toMap();
             m_cache.iqamahs.clear();
@@ -250,7 +253,7 @@ void DataModelWrapper::updateCache(QStringList const& keys)
             m_cache.longitude = m_persistance->getValueFor(KEY_CALC_LONGITUDE).toReal();
             needsRefresh = true;
         } else if (key == KEY_ISHA_NIGHT) {
-            m_cache.nightStartsIsha = m_persistance->getValueFor(KEY_ISHA_NIGHT).toBool();
+            m_cache.nightStartsIsha = m_persistance->getValueFor(KEY_ISHA_NIGHT).toInt() == 1;
             needsRefresh = true;
         }
     }
@@ -297,6 +300,11 @@ bool DataModelWrapper::anglesSaved() const {
 
 bool Cache::anglesSet() const {
     return angles.fajrTwilightAngle != 0;
+}
+
+
+int DataModelWrapper::dstAdjustment() const {
+    return m_cache.dstAdjust;
 }
 
 

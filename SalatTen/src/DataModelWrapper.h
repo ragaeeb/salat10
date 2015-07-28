@@ -29,11 +29,12 @@ struct Cache
     QVariantMap notifications;
     QMap<QString, QTime> iqamahs;
     bool nightStartsIsha;
+    int dstAdjust;
 
     bool feasible() const;
     bool anglesSet() const;
 
-    Cache() : asrRatio(0), latitude(0), longitude(0), nightStartsIsha(false)
+    Cache() : asrRatio(0), latitude(0), longitude(0), nightStartsIsha(false), dstAdjust(0)
     {
     }
 };
@@ -44,6 +45,7 @@ class DataModelWrapper : public QObject
     Q_PROPERTY(bool calculationFeasible READ calculationFeasible NOTIFY recalculationNeeded)
 	Q_PROPERTY(bool anglesSaved READ anglesSaved NOTIFY recalculationNeeded)
     Q_PROPERTY(bool atLeastOneAthanScheduled READ atLeastOneAthanScheduled)
+    Q_PROPERTY(int dstAdjustment READ dstAdjustment NOTIFY recalculationNeeded)
 
 	Persistance* m_persistance;
 	Calculator m_calculator;
@@ -86,6 +88,7 @@ public:
     bool calculationFeasible() const;
     bool anglesSaved() const;
     bool atLeastOneAthanScheduled();
+    int dstAdjustment() const;
 };
 
 } /* namespace salat */
