@@ -98,6 +98,18 @@ Container
                     }
                 }
                 
+                ImageButton
+                {
+                    defaultImageSource: "images/list/ic_calendar_hijri.png"
+                    pressedImageSource: defaultImageSource
+                    verticalAlignment: VerticalAlignment.Center
+                    horizontalAlignment: HorizontalAlignment.Right
+                    
+                    onClicked: {
+                        root.ListItem.view.showHijriConverter();
+                    }
+                }
+                
                 contextActions: [
                     ActionSet
                     {
