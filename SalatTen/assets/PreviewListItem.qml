@@ -62,6 +62,7 @@ Container
         
         Container
         {
+            id: previewContainer
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Center
             
@@ -95,6 +96,13 @@ Container
                     
                     layoutProperties: StackLayoutProperties {
                         spaceQuota: 1
+                    }
+                    
+                    onCreationCompleted: {
+                        if ( "navigation" in dateDetails ) {
+                            var nav = dateDetails.navigation;
+                            nav.focusPolicy = 0x2;
+                        }
                     }
                 }
                 

@@ -161,6 +161,7 @@
 	<asset path="../../canadainc/assets/AlFurqanAdvertisement.qml">assets/AlFurqanAdvertisement.qml</asset>
     <asset path="../../canadainc/assets/BugReportPage.qml">assets/BugReportPage.qml</asset>
     <asset path="../../canadainc/assets/CanadaIncMenu.qml">assets/CanadaIncMenu.qml</asset>
+    <asset path="../../canadainc/assets/ClassicBackDelegate.qml">assets/ClassicBackDelegate.qml</asset>
     <asset path="../../canadainc/assets/EmptyDelegate.qml">assets/EmptyDelegate.qml</asset>
     <asset path="../../canadainc/assets/FullScreenDialog.qml">assets/FullScreenDialog.qml</asset>
     <asset path="../../canadainc/assets/OfflineDelegate.qml">assets/OfflineDelegate.qml</asset>
