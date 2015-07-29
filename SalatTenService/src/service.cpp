@@ -148,7 +148,7 @@ void Service::timeout(bool init)
 
                 LOGGER("okToPlay" << okToPlay);
 
-                if (okToPlay && false)
+                if (okToPlay)
                 {
                     LOGGER("PlayingAthanMode" << mode);
                     QString destinationFile = currentEventKey == Translator::key_fajr ? audio_fajr_athaan : audio_athaan;
