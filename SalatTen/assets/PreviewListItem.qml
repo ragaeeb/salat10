@@ -2,6 +2,12 @@ import bb.cascades 1.2
 
 Container
 {
+    attachedObjects: [
+        HijriCalculator {
+            id: hijriCalc
+        }
+    ]
+    
     id: root
     horizontalAlignment: HorizontalAlignment.Fill
     
@@ -9,7 +15,7 @@ Container
     {
         var now = new Date();
         var adjust = persist.getValueFor("hijri");
-        var hijriDate = root.ListItem.view.hijriCalc.writeIslamicDate(adjust);
+        var hijriDate = hijriCalc.writeIslamicDate(adjust);
         
         hijriActionSet.title = hijriDate;
         hijriActionSet.subtitle = adjust == 0 ? qsTr("No adjustments") : adjust > 0 ? "+"+adjust.toString() : adjust.toString();
@@ -26,18 +32,12 @@ Container
         dialog.open();
     }
     
-    ListItem.onInitializedChanged: {
-        if (initialized)
-        {
-            persist.registerForSetting(root, "hijri", false, false);
-            persist.registerForSetting(root, "athaans", false, false);
-            persist.registerForSetting(root, "notifications", false, false);
-            onSettingChanged();
-        }
-    }
-    
     onCreationCompleted: {
-        topPadding = ListItem.view.maxHeight - contentContainer.preferredHeight
+        //topPadding = ListItem.view.maxHeight - contentContainer.preferredHeight
+        persist.registerForSetting(root, "hijri", false, false);
+        persist.registerForSetting(root, "athaans", false, false);
+        persist.registerForSetting(root, "notifications", false, false);
+        onSettingChanged();
     }
     
     layout: StackLayout {
