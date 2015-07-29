@@ -3,7 +3,6 @@ import bb.cascades 1.3
 ListView
 {
     id: listView
-    property bool draggingStarted: false
     property alias hijriCalc: hijri
     property alias fontStyle: tsd.style
     property variant localization: offloader
@@ -17,13 +16,71 @@ ListView
     snapMode: SnapMode.LeadingEdge
     stickToEdgePolicy: ListViewStickToEdgePolicy.Beginning
     scrollRole: ScrollRole.Main
-
+    
     function showAthanPrompt()
     {
         listUtil.active = true;
         listUtil.object.athanDialog.show();
     }
-
+    
+    function onExportReady(daysToExport, result, accountId)
+    {
+        progressDelegate.delegateActive = true;
+        offloader.exportToCalendar(daysToExport, result, accountId);
+        
+        navigationPane.pop();
+    }
+    
+    function hasCalendar()
+    {
+        if ( offloader.hasCalendarAccess() ) {
+            return true;
+        } else {
+            var allMessages = [];
+            var allIcons = [];
+            allMessages.push("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.");
+            allIcons.push("images/toast/ic_calendar_empty.png");
+            permissions.messages = allMessages;
+            permissions.icons = allIcons;
+            permissions.delegateActive = true;
+        }
+        
+        return false;
+    }
+    
+    function exportToCalendar()
+    {
+        if ( hasCalendar() )
+        {
+            definition.source = "CalendarExport.qml";
+            
+            var exporter = definition.createObject();
+            exporter.exportingReady.connect(onExportReady);
+            
+            navigationPane.push(exporter);
+        }
+    }
+    
+    function onFinished(confirmed)
+    {
+        if (confirmed) {
+            console.log("UserEvent: ClearCalendarPromptYes");
+            progressDelegate.delegateActive = true;
+            offloader.cleanupCalendarEvents();
+        } else {
+            console.log("UserEvent: ClearCalendarPromptNo");
+        }
+        
+        reporter.record("ClearCalendarResult", confirmed.toString());
+    }
+    
+    function clearCalendar()
+    {
+        if ( hasCalendar() ) {
+            persist.showDialog( timings, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
+        }
+    }
+    
     function refresh()
     {
         var current = boundary.getCurrent( new Date() );
@@ -35,7 +92,7 @@ ListView
         var dialog = definition.init("HijriConverterDialog.qml");
         dialog.open();
     }
-
+    
     function edit(indexPath)
     {
         var key = dataModel.data(indexPath).key;
@@ -63,13 +120,11 @@ ListView
     
     function itemType(data, indexPath)
     {
-        if (!draggingStarted && indexPath == 0) {
-            return "preview";
-        } else if (indexPath.length == 1) {
+        if (indexPath.length == 1) {
             return "header";
-        } else {
-            return "item";
-        }
+         } else {
+             return "item";
+         }
     }
     
     dataModel: boundary.getModel()
@@ -216,9 +271,7 @@ ListView
     ]
     
     onTriggered: {
-        if (!draggingStarted && indexPath == 0) {
-            scrollToItem([0,0], ScrollAnimation.Smooth);
-        } else if (indexPath.length > 1) {
+        if (indexPath.length > 1) {
             multiSelectHandler.active = true;
             toggleSelection(indexPath);
         }
@@ -246,14 +299,6 @@ ListView
                     tutorial.execBelowTitleBar( "selectiveAthan", qsTr("Do you want to enable some athans but disable other ones?\n\nYou can do this by tapping on the prayers that you want to play the athan for (ie: Fajr, Maghrib) so they become highlighted. Then from the menu choose 'Enable Alarams/Athans'.") );
                     tutorial.execBelowTitleBar( "editTimings", qsTr("Are your timings off by a few minutes from your local masjid?\n\nThat's easy to fix, simply press-and-hold on the time that is off (ie: Maghrib), and from the menu on the right side choose 'Edit'. You will then be able to adjust the results by up to 10 minutes."), 10 );
                     tutorial.execBelowTitleBar( "setIqamah", qsTr("You can also set iqamah times for when they pray at your local masjid/musalla by pressing-and-holding on the event and choosing 'Set Iqamah'."), 20 );
-                }
-            }
-            
-            onScrollingChanged: {
-                if (scrolling) {
-                    draggingStarted = true;
-                } else if (atBeginning) {
-                    draggingStarted = false;
                 }
             }
             
