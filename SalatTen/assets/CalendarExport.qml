@@ -43,7 +43,7 @@ Page
                 {
                     id: accountChoice
                     controller: offloader
-                    selectedAccountId: persist.getValueFor("accountId")
+                    selectedAccountId: persist.getFlag("accountId")
                     
                     onAccountsLoaded: {
                         if (numAccounts == 0) {
@@ -73,7 +73,7 @@ Page
                     }
                     
                     onSelectedValueChanged: {
-                        var changed = persist.saveValueFor("accountId", selectedValue, false);
+                        var changed = persist.setFlag("accountId", selectedValue);
                         
                         if (changed) {
                             console.log("UserEvent: CalendarAccountChosen", selectedValue);
