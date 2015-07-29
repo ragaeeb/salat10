@@ -20,7 +20,7 @@ FullScreenDialog
         adjustments[key] = Math.floor(slider.value);
         persist.saveValueFor("adjustments", adjustments);
         
-        reporter.record( "SaveAdjustment", key+"="+slide.value.toString() );
+        reporter.record( "SaveAdjustment", key+"="+slider.value.toString() );
     }
     
     dialogContent: Container

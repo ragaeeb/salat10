@@ -100,7 +100,7 @@ short smonth[14]={31,30,30,30,30,30,29,31,31,31,31,31,31,30}; /* makes it circul
 	 void dailyPrayer(double latud, int daylight, int user_month, int startDay_daylight, int startMonth_daylight, int endDay_daylight, int endMonth_daylight, double lst[], double param[], double Zonh, int dg0, int mg0, int yg0, double dhuhrInterval, double maghribInterval, int hour_format);
 	 void monthlyPrayer(double latud, int daylight, int user_month, int startDay_daylight, int startMonth_daylight, int endDay_daylight, int endMonth_daylight, double lst[], double param[], double Zonh, int dg0, int mg0, int yg0, double dhuhrInterval, double maghribInterval, int hour_format);
 
-int xyz()
+void xyz(double lat, double lon, double tz)
 {
    double lst[14],param[12],Zonh;
    double longtud,latud;
@@ -121,11 +121,11 @@ int hour_format;
 
 
 
-   	latud   = 0;
-	longtud   = 0;
-	Zonh     = 0; // timezone
+   	latud   = lat;
+	longtud   = lon;
+	Zonh     = tz; // timezone
 	aser     = 1; // Asr ratio, 1 for Standard (Shafi) and 2 for Hanafi
-	pmethod  = 5; //prayer method, 1 for Muslim World League, 2 for Eyption Method, 3 for Karachi method, 4 for Ummal Qura and 5 for ISNA.
+	pmethod  = 3; //prayer method, 1 for Muslim World League, 2 for Eyption Method, 3 for Karachi method, 4 for Ummal Qura and 5 for ISNA.
 
 	/*if pmethod == 6*/
 	fajrTwilight1  = 3;
@@ -141,18 +141,18 @@ int hour_format;
 
 	daily_monthly  = 1; // 1 for daily and 2 for monthly
 
-	user_year = 2015;
-	user_month = 2;
-	user_day = 3;
+	user_year = 2014;
+	user_month = 10;
+	user_day = 12;
 
 	hour_format = 1; // 0 for no daylight and 1 for yes daylight.
 
 	daylight = 0; // 0 for no daylight and 1 for yes daylight.
 
-	startDay_daylight = 1; //starting date of daylight savings
-	startMonth_daylight = 2; //starting month of daylight savings
-	endDay_daylight = 3; //end date of daylight savings
-	endMonth_daylight = 4; // end month of daylight savings
+	startDay_daylight = 0; //starting date of daylight savings
+	startMonth_daylight = 0; //starting month of daylight savings
+	endDay_daylight = 0; //end date of daylight savings
+	endMonth_daylight = 0; // end month of daylight savings
 
 
 //qDebug() << "latitide= "<<latud<<",";
