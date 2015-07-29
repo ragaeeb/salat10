@@ -82,9 +82,7 @@ namespace salat {
 void ThreadUtils::compressFiles(QSet<QString>& attachments)
 {
     canadainc::AppLogFetcher::removeInvalid(attachments);
-
-    QStringList x = attachments.toList();
-    //JlCompress::compressFile( ZIP_FILE_PATH, "sadfasd", NULL );
+    JlCompress::compressFiles( ZIP_FILE_PATH, attachments.toList() );
 }
 
 
