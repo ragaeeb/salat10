@@ -152,7 +152,7 @@ Page
 
                             reporter.record( "ArticleTapped", d.uri);
                         } else {
-                            persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), global );
+                            persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), "", global );
                             reporter.record( "ArticleOpen", d.id.toString() );
                         }
                     }
