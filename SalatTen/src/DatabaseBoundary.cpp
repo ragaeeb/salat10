@@ -44,6 +44,11 @@ void DatabaseBoundary::searchArticles(QObject* caller, QString const& searchTerm
 }
 
 
+QObject* DatabaseBoundary::getSource() {
+    return &m_sql;
+}
+
+
 DatabaseBoundary::~DatabaseBoundary()
 {
 }
