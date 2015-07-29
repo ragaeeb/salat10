@@ -13,7 +13,7 @@ TextArea
     
     function onDataLoaded(id, data)
     {
-        if (id == QueryId.GetRandomBenefit)
+        if (id == QueryId.GetRandomBenefit && data.length > 0)
         {
             var quote = data[0];
             text = "<html><i>\n“%1”</i>\n\n- <b><a href=\"%5\">%2</a>%4</b>\n\n[%3]\n</html>".arg( quote.body.replace(/&/g,"&amp;") ).arg(quote.author).arg( quote.reference.replace(/&/g,"&amp;") ).arg( global.getSuffix(quote.birth, quote.death, quote.is_companion == 1, quote.female == 1) ).arg( quote.id.toString() );

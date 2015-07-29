@@ -15,6 +15,14 @@ Container
         }
     ]
     
+    onCreationCompleted: {
+        if ( "navigation" in root ) {
+            var nav = root.navigation;
+            nav.focusPolicy = 0x1;
+            nav.defaultHighlightEnabled = false;
+        }
+    }
+    
     ListItem.onInitializedChanged: {
         if (initialized) {
             topPadding = ListItem.view.maxHeight - contentContainer.preferredHeight
