@@ -2,6 +2,8 @@ import bb.cascades 1.0
 
 FullScreenDialog
 {
+    id: root
+    
     onOpened: {
         tt.play();
         dtp.expanded = true;
@@ -9,6 +11,7 @@ FullScreenDialog
     
     dialogContent: Container
     {
+        id: dialogContainer
         bottomPadding: 30
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Center
