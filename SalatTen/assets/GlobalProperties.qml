@@ -2,6 +2,8 @@ import bb.cascades 1.0
 
 QtObject
 {
+    id: root
+    
     function onFinished(result, cookie)
     {
         if (result)
