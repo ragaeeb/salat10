@@ -5,7 +5,6 @@ FullScreenDialog
     id: root
     
     onOpened: {
-        tt.play();
         dtp.expanded = true;
     }
     
