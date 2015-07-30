@@ -1,3 +1,4 @@
+import QtQuick 1.0
 import bb.cascades 1.3
 import bb.cascades.places 1.0
 import bb.cascades.maps 1.0
@@ -7,9 +8,11 @@ Page
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     property variant geoFinder
     
-    function cleanUp() {
+    function cleanUp()
+    {
         navigationPane.peekEnabled = true;
         notification.locationsFound.disconnect(locations.onLocationsFound);
+        Application.aboutToQuit.disconnect(onAboutToQuit);
         
         if (geoFinder) {
             geoFinder.finished.disconnect(refresh.onFound);
@@ -306,10 +309,28 @@ Page
         }
     }
     
+    function onAboutToQuit()
+    {
+        mapViewDelegate.delegateActive = false;
+    }
+    
     onCreationCompleted: {
         tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5) );
         tutorial.execActionBar("nativeLocationPicker", qsTr("Tap here to pick an existing location from your device.") );
         tutorial.execActionBar("geoRefresh", qsTr("Tap here to use your device's GPS to obtain your location (this may take a while)."), "r" );
         tutorial.execActionBar("returnToSettings", qsTr("Tap here to go back to the Settings page."), "b" );
+        Application.aboutToQuit.connect(onAboutToQuit);
     }
+    
+    attachedObjects: [
+        Timer {
+            interval: 100
+            repeat: false
+            running: true
+            
+            onTriggered: {
+                tftk.textField.requestFocus();
+            }
+        }
+    ]
 }

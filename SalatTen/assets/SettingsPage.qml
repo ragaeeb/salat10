@@ -312,10 +312,4 @@ Page
             ]
 	    }
     }
-    
-    attachedObjects: [
-        ComponentDefinition {
-            id: definition
-        }
-    ]
 }
