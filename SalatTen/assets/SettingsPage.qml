@@ -19,8 +19,7 @@ Page
             onTriggered: {
                 console.log("UserEvent: OpenMap");
 
-                definition.source = "LocationPane.qml";
-                var x = definition.createObject();
+                var x = definition.init("LocationPane.qml");
                 navigationPane.push(x);
                 
                 reporter.record("OpenMap");

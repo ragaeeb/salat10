@@ -16,6 +16,10 @@ QtObject
         reporter.record(cookie, result);
     }
     
+    function getRandomReal(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    
     function onTargetLookupFinished(target, success)
     {
         if (!success) {
