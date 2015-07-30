@@ -1,3 +1,4 @@
+import QtQuick 1.0
 import bb.cascades 1.0
 import com.canadainc.data 1.0
 
@@ -105,6 +106,7 @@ Page
                 {
                     control.dataModel.clear();
                     control.dataModel.append(articleData);
+                    control.refreshState();
                 }
             }
             
@@ -116,44 +118,68 @@ Page
             
             sourceComponent: ComponentDefinition
             {
-                ListView
+                Container
                 {
-                    id: listView
-                    scrollRole: ScrollRole.Main
+                    layout: DockLayout {}
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
+                    property alias dataModel: listView.dataModel
                     
-                    dataModel: ArrayDataModel {
-                        id: adm
+                    function refreshState() {
+                        noElements.delegateActive = adm.isEmpty();
                     }
                     
-                    listItemComponents:
-                    [
-                        ListItemComponent
-                        {
-                            StandardListItem
+                    ListView
+                    {
+                        id: listView
+                        scrollRole: ScrollRole.Main
+                        
+                        dataModel: ArrayDataModel {
+                            id: adm
+                        }
+                        
+                        listItemComponents:
+                        [
+                            ListItemComponent
                             {
-                                imageSource: ListItemData.imageSource ? ListItemData.imageSource : "images/tabs/ic_article.png"
-                                title: ListItemData.author
-                                description: ListItemData.title
+                                StandardListItem
+                                {
+                                    imageSource: ListItemData.imageSource ? ListItemData.imageSource : "images/tabs/ic_article.png"
+                                    title: ListItemData.author
+                                    description: ListItemData.title
+                                }
+                            }
+                        ]
+                        
+                        onTriggered: {
+                            console.log("UserEvent: ArticleTapped");
+                            var d = dataModel.data(indexPath);
+                            
+                            if (d.type == "internal")
+                            {
+                                if ( d.uri.indexOf("http") == 0 ) {
+                                    persist.openUri(d.uri);
+                                } else {
+                                    webView.urlValue = d.uri;
+                                }
+                                
+                                reporter.record( "ArticleTapped", d.uri);
+                            } else {
+                                persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), "", global );
+                                reporter.record( "ArticleOpen", d.id.toString() );
                             }
                         }
-                    ]
+                    }
                     
-                    onTriggered: {
-                        console.log("UserEvent: ArticleTapped");
-                        var d = dataModel.data(indexPath);
-
-                        if (d.type == "internal")
-                        {
-                            if ( d.uri.indexOf("http") == 0 ) {
-                                persist.openUri(d.uri);
-                            } else {
-                                webView.urlValue = d.uri;
-                            }
-
-                            reporter.record( "ArticleTapped", d.uri);
-                        } else {
-                            persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), "", global );
-                            reporter.record( "ArticleOpen", d.id.toString() );
+                    EmptyDelegate
+                    {
+                        id: noElements
+                        graphic: "images/empty/ic_no_articles.png"
+                        labelText: qsTr("No articles matched your search criteria. Please try a different search term.") + Retranslate.onLanguageChanged
+                        
+                        onImageTapped: {
+                            console.log("UserEvent: NoArticlesTapped");
+                            searchField.requestFocus();
                         }
                     }
                 }
@@ -228,4 +254,18 @@ Page
             }
         }        
     }
+    
+    attachedObjects: [
+        Timer {
+            interval: 100
+            repeat: false
+            running: true
+            
+            onTriggered: {
+                if (deviceUtils.isPhysicalKeyboardDevice) {
+                    searchField.requestFocus();
+                }
+            }
+        }
+    ]
 }
