@@ -37,8 +37,15 @@ void DatabaseBoundary::searchArticles(QObject* caller, QString const& searchTerm
 {
     LOGGER(searchTerm);
 
-    QString query = "SELECT suite_pages.id AS id,COALESCE(i.displayName, i.name) AS author,COALESCE(heading,title) AS title FROM suites LEFT JOIN individuals i ON i.id=suites.author INNER JOIN suite_pages ON suite_pages.suite_id=suites.id WHERE (title LIKE '%' || ? || '%') OR (heading LIKE '%' || ? || '%')";
-    QVariantList args = QVariantList() << searchTerm << searchTerm;
+    QStringList fields = QStringList() << "title" << "heading" << "i.displayName" << "i.name";
+    QVariantList args;
+
+    for (int i = fields.size()-1; i >= 0; i--) {
+        fields[i] = QString("(%1 LIKE '%' || ? || '%')").arg(fields[i]);
+        args << searchTerm;
+    }
+
+    QString query = QString("SELECT suite_pages.id AS id,COALESCE(i.displayName, i.name) AS author,COALESCE(heading,title) AS title FROM suites LEFT JOIN individuals i ON i.id=suites.author INNER JOIN suite_pages ON suite_pages.suite_id=suites.id WHERE %1").arg( fields.join(" OR ") );
 
     m_sql.executeQuery(caller, query, QueryId::SearchArticles, args);
 }
