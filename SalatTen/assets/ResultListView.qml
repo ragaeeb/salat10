@@ -3,8 +3,6 @@ import bb.cascades 1.3
 ListView
 {
     id: listView
-    property alias hijriCalc: hijri
-    property alias fontStyle: tsd.style
     property variant localization: offloader
     property variant translation: translator
     property alias lssh: scrollStateHandler
@@ -23,74 +21,10 @@ ListView
         listUtil.object.athanDialog.show();
     }
     
-    function onExportReady(daysToExport, result, accountId)
-    {
-        progressDelegate.delegateActive = true;
-        offloader.exportToCalendar(daysToExport, result, accountId);
-        
-        navigationPane.pop();
-    }
-    
-    function hasCalendar()
-    {
-        if ( offloader.hasCalendarAccess() ) {
-            return true;
-        } else {
-            var allMessages = [];
-            var allIcons = [];
-            allMessages.push("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.");
-            allIcons.push("images/toast/ic_calendar_empty.png");
-            permissions.messages = allMessages;
-            permissions.icons = allIcons;
-            permissions.delegateActive = true;
-        }
-        
-        return false;
-    }
-    
-    function exportToCalendar()
-    {
-        if ( hasCalendar() )
-        {
-            definition.source = "CalendarExport.qml";
-            
-            var exporter = definition.createObject();
-            exporter.exportingReady.connect(onExportReady);
-            
-            navigationPane.push(exporter);
-        }
-    }
-    
-    function onFinished(confirmed)
-    {
-        if (confirmed) {
-            console.log("UserEvent: ClearCalendarPromptYes");
-            progressDelegate.delegateActive = true;
-            offloader.cleanupCalendarEvents();
-        } else {
-            console.log("UserEvent: ClearCalendarPromptNo");
-        }
-        
-        reporter.record("ClearCalendarResult", confirmed.toString());
-    }
-    
-    function clearCalendar()
-    {
-        if ( hasCalendar() ) {
-            persist.showDialog( timings, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
-        }
-    }
-    
     function refresh()
     {
         var current = boundary.getCurrent( new Date() );
         listView.scrollToItem(current.index, ScrollAnimation.Default);
-    }
-    
-    function showHijriConverter()
-    {
-        var dialog = definition.init("HijriConverterDialog.qml");
-        dialog.open();
     }
     
     function edit(indexPath)
@@ -116,15 +50,6 @@ ListView
     {
         app.removeIqamah( dataModel.data(indexPath).key );
         persist.showToast( qsTr("Iqamah time removed"), "", "asset:///images/menu/ic_remove_jamaah.png" );
-    }
-    
-    function itemType(data, indexPath)
-    {
-        if (indexPath.length == 1) {
-            return "header";
-         } else {
-             return "item";
-         }
     }
     
     dataModel: boundary.getModel()
@@ -261,12 +186,6 @@ ListView
             EventListItem {
                 id: eli
             }
-        },
-        
-        ListItemComponent
-        {
-            type: "preview"
-            PreviewListItem {}
         }
     ]
     
@@ -313,16 +232,6 @@ ListView
             id: listUtil
             active: false
             source: "ResultListUtil.qml"
-        },
-        
-        HijriCalculator {
-            id: hijri
-        },
-        
-        TextStyleDefinition {
-            id: tsd
-            fontFamily: "sans-serif"
-            fontSize: FontSize.Large
         }
     ]
     

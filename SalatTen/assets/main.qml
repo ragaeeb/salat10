@@ -265,4 +265,16 @@ NavigationPane
             bg.imageSource = "images/graphics/background.png";
         }
     }
+    
+    attachedObjects: [
+        ComponentDefinition {
+            id: definition
+            
+            function init(qml)
+            {
+                source = qml;
+                return createObject();
+            }
+        }
+    ]
 }
