@@ -203,12 +203,12 @@ Page
                     persist.saveValueFor("longitude", longitude, true);
                     
                     if (city.length > 0) {
-                        persist.saveValueFor("city", place.city, false);
+                        persist.saveValueFor("city", city, false);
                         analytics.city = city;
                     }
                     
                     if (country.length > 0) {
-                        persist.saveValueFor("country", place.country, false);
+                        persist.saveValueFor("country", country, false);
                         analytics.country = country;
                     }
                     

@@ -47,6 +47,7 @@ Container
         persist.registerForSetting(root, "hijri", false, false);
         persist.registerForSetting(root, "athaans", false, false);
         persist.registerForSetting(root, "notifications", false, false);
+        persist.registerForSetting(root, "adjustments", false, false);
         onSettingChanged();
     }
     
