@@ -34,16 +34,19 @@ Page
         
         options: [
             Option {
+                imageSource: "images/dropdown/dst_minus.png"
                 text: qsTr("Adjust -1") + Retranslate.onLanguageChanged
                 value: -1
             },
             
             Option {
+                imageSource: "images/dropdown/dst_none.png"
                 text: qsTr("No Daylight Savings") + Retranslate.onLanguageChanged
                 value: 0
             },
             
             Option {
+                imageSource: "images/dropdown/dst_add.png"
                 text: qsTr("Adjust +1") + Retranslate.onLanguageChanged
                 value: 1
             }

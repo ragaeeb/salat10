@@ -22,7 +22,7 @@ Container
         return false;
     }
     
-    function onSettingChanged(newValue, key)
+    function refresh()
     {
         var now = new Date();
         var adjust = persist.getValueFor("hijri");
@@ -36,6 +36,10 @@ Container
         nextEvent.current = boundary.getNext(now);
     }
     
+    function onSettingChanged(newValue, key) {
+        refresh();
+    }
+    
     function editTiming(key)
     {
         var dialog = definition.init("AdjustEventDialog.qml");
@@ -44,11 +48,10 @@ Container
     }
     
     onCreationCompleted: {
-        persist.registerForSetting(root, "hijri", false, false);
+        boundary.recalculationNeeded.connect(refresh);
         persist.registerForSetting(root, "athaans", false, false);
-        persist.registerForSetting(root, "notifications", false, false);
-        persist.registerForSetting(root, "adjustments", false, false);
-        onSettingChanged();
+        persist.registerForSetting(root, "notifications");
+        persist.registerForSetting(root, "hijri", false, false);
     }
     
     layout: DockLayout {}
