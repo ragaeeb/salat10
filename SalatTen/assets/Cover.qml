@@ -20,6 +20,11 @@ Container
 	    horizontalAlignment: HorizontalAlignment.Fill
 	    verticalAlignment: VerticalAlignment.Center
         
+        ImageView {
+            horizontalAlignment: HorizontalAlignment.Center
+            imageSource: "images/tabs/ic_clock.png"
+        }
+        
         Label {
             id: currentLabel
             text: qsTr("Salat10")

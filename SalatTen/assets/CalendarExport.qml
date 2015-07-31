@@ -47,7 +47,7 @@ Page
                     
                     onAccountsLoaded: {
                         if (numAccounts == 0) {
-                            persist.showToast( qsTr("Did not find any accounts. Maybe the app does not have the permissions it needs..."), "", "asset:///images/toast/ic_calendar_empty.png" );
+                            persist.showToast( qsTr("Did not find any accounts. Maybe the app does not have the permissions it needs..."), "images/dropdown/ic_mistakes.png" );
                         } else {
                             tutorial.execCentered( "calcIntro", qsTr("You can export the salat times to your device calendar so that a reminder can scheduled when it is time for salat even when this app is not running.") );
                             

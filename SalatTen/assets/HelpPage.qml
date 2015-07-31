@@ -48,12 +48,19 @@ Page
             
             if (id == QueryId.GetArticles)
             {
-                data.unshift({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("How To Pray"), 'uri': "local:///assets/html/tutorial.html", 'imageSource': "images/menu/ic_help.png"});
-                data.unshift({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("Sujud as Sahw"), 'uri': "local:///assets/html/sujud_as_sahw.html"});
-                data.unshift({'type': 'internal', 'author': qsTr("Shaykh Muhammad Bazmool"), 'title': qsTr("Description of the Prophet's Prayer (With Illustrations)"), 'uri': "https://phaven-prod.s3.amazonaws.com/files/document_part/asset/922451/OwE0QrMeXdq3nKopmSM03VzEgiM/Salat_One.pdf", 'imageSource': "images/menu/ic_help.png"});
+                data.unshift({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("How To Pray"), 'uri': "local:///assets/html/tutorial.html", 'imageSource': "images/dropdown/ic_article_filter.png"});
+                data.unshift({'type': 'internal', 'author': qsTr("Dr. Saleh as-Saleh"), 'title': qsTr("Sujud as Sahw"), 'uri': "local:///assets/html/sujud_as_sahw.html", 'imageSource': "images/dropdown/ic_fard.png"});
+                data.unshift({'type': 'internal', 'author': qsTr("Shaykh Muhammad Bazmool"), 'title': qsTr("Description of the Prophet's Prayer (With Illustrations)"), 'uri': "https://phaven-prod.s3.amazonaws.com/files/document_part/asset/922451/OwE0QrMeXdq3nKopmSM03VzEgiM/Salat_One.pdf", 'imageSource': "images/dropdown/ic_fiqh.png"});
                 
                 tutorial.execCentered("openArticle", qsTr("Tap on any of the articles to open it. Note that you need to have the Quran10 app installed for this to function properly.") );
                 tutorial.execBelowTitleBar("searchArticle", qsTr("You can search for any keywords in the article title to quickly find it by typing it here and pressing the Enter key.") );
+            } else {
+                for (var i = data.length-1; i >= 0; i--)
+                {
+                    var x = data[i];
+                    x["imageSource"] = "images/tabs/ic_articles.png";
+                    data[i] = x;
+                }
             }
 
             articles.articleData = data;
@@ -73,6 +80,13 @@ Page
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         background: webView.delegateActive ? Color.White : SystemDefaults.Paints.ContainerBackground
+        
+        attachedObjects: [
+            ImagePaintDefinition {
+                id: tbg
+                imageSource: "images/graphics/title_bg.png"
+            }
+        ]
         
         TextField
         {

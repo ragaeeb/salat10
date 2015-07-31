@@ -105,17 +105,17 @@ Page
                             tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
                             tutorial.execBelowTitleBar("calcAngles", qsTr("Different regions of the world use different conventions to calculate the prayer timings. Use the '%1' dropdown to set the appropriate one for your region for most accurate results.") );
                             tutorial.execBelowTitleBar("asrRatio", qsTr("According to the strongest opinion, the time of '%1' However if you want to use Imam Abu Hanifa's (rahimahullah), use can use the option for the other school of thought.").arg(shafiRatio.description) );
-                            tutorial.exec("ishaNight", qsTr("The strongest opinion is that the day ends (thus the night begins) at the time of Maghrib. However, some scholars such as Shaykh Muhsin al-Abbad holds the opinion that the night begins at the time of Isha. If this is the fiqh opinion you take, enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, ui.du(29) );
-                            tutorial.exec("skipJumuah", qsTr("If you don't want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1) );
+                            tutorial.exec("ishaNight", qsTr("The strongest opinion is that the day ends (thus the night begins) at the time of Maghrib. However, some scholars such as Shaykh Muhsin al-Abbad holds the opinion that the night begins at the time of Isha. If this is the fiqh opinion you take, enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, ui.du(29), "images/tabs/ic_tutorial.png" );
+                            tutorial.exec("skipJumuah", qsTr("If you don't want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, 0, "images/tabs/ic_tutorial.png" );
                             tutorial.exec("skipProfiles", qsTr("Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in 'Silent' mode, make sure you enable the 'Silent' profile checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center );
-                            tutorial.exec("athanVolume", qsTr("If the athan volume is too loud, use the slider to control its output."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(20), undefined, "r" );
+                            tutorial.exec("athanVolume", qsTr("If the athan volume is too loud, use the slider to control its output."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(20), "images/list/ic_next.png", "r" );
                             
                             if ( boundary.anglesSaved && !boundary.calculationFeasible ) // location still not set
                             {
                                 notification.ipLookup();
                                 locationAction.triggered();
                                 
-                                persist.showToast( qsTr("Your location was not yet detected, please set your location for accurate timings."), "images/tabs/ic_map.png" );
+                                persist.showToast( qsTr("Your location was not yet detected, please set your location for accurate timings."), "images/dropdown/ic_masjid.png" );
                             }
                         }
                     }
@@ -140,6 +140,18 @@ Page
                                 def.dhuhrInterval = current.dhuhr_interval;
                                 def.maghribInterval = current.maghrib_inteval;
                                 def.ishaInterval = current.isha_interval;
+                                
+                                if (i == 0) {
+                                    def.imageSource = "images/menu/ic_table.png";
+                                } else if (i == 1) {
+                                    def.imageSource = "images/dropdown/ic_sutrah.png";
+                                } else if (i == 2) {
+                                    def.imageSource = "images/dropdown/ic_moon.png";
+                                } else if (i == 3) {
+                                    def.imageSource = "images/dropdown/ic_gold.png";
+                                } else if (i == 4) {
+                                    def.imageSource = "images/dropdown/ic_eid.png";
+                                }
                                 
                                 if (def.value == strategy) {
                                     def.selected = true;

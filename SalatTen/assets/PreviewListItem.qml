@@ -224,7 +224,7 @@ Container
                                 console.log("UserEvent: ClearExportedEvents");
 
                                 if ( hasCalendar() ) {
-                                    persist.showDialog( timings, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
+                                    persist.showDialog( clearAction, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
                                 }
 
                                 reporter.record("ClearExportedEvents");
