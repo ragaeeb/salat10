@@ -1,43 +1,55 @@
 import bb.cascades 1.0
 
-Container
+ControlDelegate
 {
-    property alias value: progress.value
-    property alias toValue: progress.toValue
-    property alias showBusy: busy.running
-    horizontalAlignment: HorizontalAlignment.Fill
+    id: progressDelegate
+    horizontalAlignment: HorizontalAlignment.Center
+    verticalAlignment: VerticalAlignment.Center
+    delegateActive: false;
+    visible: delegateActive
     
-    ActivityIndicator
+    sourceComponent: ComponentDefinition
     {
-        id: busy
-        horizontalAlignment: HorizontalAlignment.Center
-        preferredHeight: 100; preferredWidth: 100
-        running: true
-    }
-    
-    ProgressIndicator
-    {
-        id: progress
-        fromValue: 0;
-        horizontalAlignment: HorizontalAlignment.Center
-        state: ProgressIndicatorState.Progress
-    }
-    
-    function onProgressChanged(current, total)
-    {
-        showBusy = false;
-        value = current;
-        toValue = total;
-    }
-    
-    function onComplete(message, icon)
-    {
-        delegateActive = false;
-        persist.showToast(message, icon);
-    }
-    
-    onCreationCompleted: {
-        offloader.operationProgress.connect(onProgressChanged);
-        offloader.operationComplete.connect(onComplete);
+        Container
+        {
+            property alias value: progress.value
+            property alias toValue: progress.toValue
+            horizontalAlignment: HorizontalAlignment.Fill
+            
+            ProgressControl
+            {
+                id: busy
+                asset: "images/loading/loading_calendar.png"
+                preferredHeight: 100; preferredWidth: 100
+                verticalAlignment: VerticalAlignment.Top
+                delegateActive: true
+            }
+            
+            ProgressIndicator
+            {
+                id: progress
+                fromValue: 0;
+                horizontalAlignment: HorizontalAlignment.Center
+                state: ProgressIndicatorState.Progress
+            }
+            
+            function onProgressChanged(current, total)
+            {
+                busy.delegateActive = true;
+                value = current;
+                toValue = total;
+            }
+            
+            function onComplete(message, icon)
+            {
+                delegateActive = false;
+                persist.showToast(message, icon);
+            }
+            
+            onCreationCompleted: {
+                offloader.operationProgress.connect(onProgressChanged);
+                offloader.operationComplete.connect(onComplete);
+            }
+        }
     }
 }

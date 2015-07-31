@@ -28,7 +28,7 @@ Page
             
             function onFound(l,p)
             {
-                busy.running = false;
+                busy.delegateActive = false;
                 geoFinder.finished.disconnect(onFound);
             }
             
@@ -39,7 +39,7 @@ Page
                 geoFinder = app.refreshLocation();
                 
                 if (geoFinder) {
-                    busy.running = true;
+                    busy.delegateActive = true;
                     geoFinder.finished.connect(onFound);
                 }
             }
@@ -54,7 +54,7 @@ Page
             
             function onSettingChanged(key)
             {
-                if (key == "longitude" && boundary.calculationFeasible)
+                if (key == "longitude" && boundary.calculationFeasible && reporter.online)
                 {
                     mapViewDelegate.delegateActive = true;
                     
@@ -122,7 +122,7 @@ Page
             textField.input.flags: TextInputFlag.SpellCheck | TextInputFlag.WordSubstitution | TextInputFlag.AutoPeriodOff | TextInputFlag.AutoCorrection
             textField.input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
             textField.input.onSubmitted: {
-                busy.running = true;
+                busy.delegateActive = true;
                 var query = tftk.textField.text.trim();
                 reporter.record("LocationQuery", query);
                 notification.geoLookup(query);
@@ -173,7 +173,7 @@ Page
                         persist.showToast( qsTr("Could not fetch geolocation results. Please either use the 'Choose Location' from the bottom, tap on the 'Refresh' button use your GPS or please try again later."), "", "asset:///images/ic_location_failed.png" );
                     }
                     
-                    busy.running = false;
+                    busy.delegateActive = false;
                 }
                 
                 onSelectedValueChanged: {
@@ -297,20 +297,24 @@ Page
             }
         }
         
-        ActivityIndicator
+        ProgressControl
         {
             id: busy
-            running: false
-            visible: running
-            preferredHeight: 200
-            preferredWidth: 200
-            horizontalAlignment: HorizontalAlignment.Center
-            verticalAlignment: VerticalAlignment.Center
+            asset: "images/loading/loading_location.png"
+        }
+        
+        OfflineDelegate
+        {
+            id: offliner
+            graphic: "images/toast/ic_offline.png"
+            
+            onImageTapped: {
+                persist.launchSettingsApp("networkconnections");
+            }
         }
     }
     
-    function onAboutToQuit()
-    {
+    function onAboutToQuit() {
         mapViewDelegate.delegateActive = false;
     }
     

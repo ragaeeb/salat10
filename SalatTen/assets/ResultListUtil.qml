@@ -37,7 +37,7 @@ QtObject
     function resetSound(keys)
     {
         app.setCustomAthaans(keys,"");
-        persist.showToast( qsTr("Successfully reset athans to default sound"), "", "asset:///images/menu/ic_reset_athaan.png" );
+        persist.showToast( qsTr("Successfully reset athans to default sound"), "", "asset:///images/menu/ic_refresh.png" );
     }
     
     function textualize(data)
@@ -98,7 +98,7 @@ QtObject
             toastMessage = qsTr("Successfully muted alarms/athans.");
         }
 
-        persist.showToast(toastMessage, "", icon);
+        persist.showToast(toastMessage, icon);
     }
     
     

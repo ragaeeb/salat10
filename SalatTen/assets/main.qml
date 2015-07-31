@@ -182,14 +182,8 @@ NavigationPane
                 opacity: previewer.delegateActive || ( timings.control && timings.control.lssh.firstVisibleItem.length == 1 && !timings.control.lssh.scrolling ) || !boundary.calculationFeasible ? 1 : 0
             }
             
-            ControlDelegate
-            {
+            OperationProgressBar {
                 id: progressDelegate
-                horizontalAlignment: HorizontalAlignment.Center
-                verticalAlignment: VerticalAlignment.Center
-                delegateActive: false;
-                visible: delegateActive
-                source: "OperationProgressBar.qml"
             }
             
             PermissionToast
