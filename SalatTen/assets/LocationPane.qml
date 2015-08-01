@@ -2,6 +2,7 @@ import QtQuick 1.0
 import bb.cascades 1.3
 import bb.cascades.places 1.0
 import bb.cascades.maps 1.0
+import com.canadainc.data 1.0
 
 Page
 {
@@ -253,8 +254,32 @@ Page
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
                         
+                        onCaptionButtonClicked: {
+                            console.log("UserEvent: CaptionClicked", focusedId);
+                            
+                            if (focusedId.match("\\d+$") > 0)
+                            {
+                                persist.invoke( "com.canadainc.Quran10.bio.previewer", "", "", "", focusedId );
+                                reporter.record("OpenMapIndividual", focusedId);
+                            } else {
+                                reporter.record("LocationPinTapped");
+                            }
+                        }
+                        
+                        function onDataLoaded(id, data)
+                        {
+                            if (id == QueryId.FetchAllOrigins)
+                            {
+                                for (var i = data.length-1; i >= 0; i--) {
+                                    offloader.renderSalaf(mapView, data[i]);
+                                }
+                            }
+                        }
+                        
                         function onMapDataLoaded(data)
                         {
+                            notification.mapDataLoaded.disconnect(onMapDataLoaded);
+                            
                             var allKeys = translator.eventKeys();
                             var max = 1000*60*30;
                             navigationPane.peekEnabled = false;
@@ -291,6 +316,8 @@ Page
                         onCreationCompleted: {
                             notification.mapDataLoaded.connect(onMapDataLoaded);
                             notification.fetchCheckins();
+                            
+                            sql.fetchAllOrigins(mapView);
                         }
                     }
                 }

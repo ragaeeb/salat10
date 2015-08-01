@@ -5,6 +5,14 @@
 #include <bb/cascades/ImageView>
 #include <bb/system/LocaleHandler>
 
+namespace bb {
+    namespace cascades {
+        namespace maps {
+            class MapView;
+        }
+    }
+}
+
 namespace salat {
 
 class CleanupEvents;
@@ -45,6 +53,7 @@ public:
     Q_INVOKABLE void renderMap(bb::cascades::maps::MapView* mapView, qreal latitude, qreal longitude, QString const& name, QString const& event, bool focus=false);
     Q_INVOKABLE QString renderStandardTime(QDateTime const& theTime);
     Q_INVOKABLE static bool isServiceRunning();
+    Q_INVOKABLE void renderSalaf(bb::cascades::maps::MapView* mapControl, QVariantMap const& data);
 };
 
 } /* namespace quran */
