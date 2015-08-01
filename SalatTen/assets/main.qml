@@ -57,15 +57,21 @@ NavigationPane
     {
         id: tabsPage
 
-        Container
+        SwipeDetector
         {
             layout: DockLayout {}
+            
+            onSwipedUp: {
+                tapper.activateList();
+                reporter.record("SwipedUpPreview");
+            }
             
             gestureHandlers: [
                 TapHandler {
                     id: tapHandler
                     
-                    onTapped: {
+                    function rootTapped()
+                    {
                         if (!boundary.calculationFeasible)
                         {
                             if (!boundary.anglesSaved) {
@@ -74,11 +80,12 @@ NavigationPane
                                 var x = definition.init("LocationPane.qml");
                                 navigationPane.push(x);
                             }
-
-                            if (event) {
-                                reporter.record("NoLocationsSetTapped");
-                            }
                         }
+                    }
+                    
+                    onTapped: {
+                        reporter.record("NoLocationsSetTapped");
+                        rootTapped();
                     }
                 }
             ]
@@ -165,13 +172,22 @@ NavigationPane
                 }
 
                 gestureHandlers: [
-                    TapHandler {
-                        onTapped: {
+                    TapHandler
+                    {
+                        id: tapper
+                        
+                        function activateList()
+                        {
                             if (previewer.delegateActive)
                             {
                                 timings.delegateActive = true;
                                 previewer.delegateActive = false;
                             }
+                        }
+                        
+                        onTapped: {
+                            reporter.record("PreviewTapped");
+                            activateList();
                         }
                     }
                 ]
