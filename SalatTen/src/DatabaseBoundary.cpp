@@ -5,6 +5,8 @@
 #include "Logger.h"
 #include "QueryId.h"
 
+#define NAME_FIELD(var) QString("coalesce(%1.displayName, TRIM( replace( coalesce(%1.kunya,'') || ' ' || (coalesce(%1.prefix,'') || ' ' || %1.name), '  ', ' ' ) ) )").arg(var)
+
 namespace salat {
 
 using namespace canadainc;
@@ -13,6 +15,12 @@ using namespace bb::data;
 DatabaseBoundary::DatabaseBoundary() :
         m_sql( QString("%1/assets/dbase/salat10.db").arg( QCoreApplication::applicationDirPath() ) )
 {
+}
+
+
+void DatabaseBoundary::fetchAllOrigins(QObject* caller)
+{
+    m_sql.executeQuery(caller, QString("SELECT %1 AS name,i.id,i.is_companion,latitude+((RANDOM()%10)*0.0001) AS latitude,longitude+((RANDOM()%10)*0.0001) AS longitude FROM individuals i INNER JOIN locations ON i.location=locations.id").arg( NAME_FIELD("i") ), QueryId::FetchAllOrigins);
 }
 
 
@@ -26,10 +34,8 @@ void DatabaseBoundary::fetchArticles(QObject* caller) {
 }
 
 
-void DatabaseBoundary::fetchRandomBenefit(QObject* caller)
-{
-    QString query = QString("SELECT %1 AS author,i.id,body,TRIM( COALESCE(suites.title,'') || ' ' || COALESCE(quotes.reference,'') ) AS reference,birth,death,female,is_companion FROM quotes INNER JOIN individuals i ON i.id=quotes.author LEFT JOIN suites ON quotes.suite_id=suites.id WHERE quotes.id=( ABS( RANDOM() % (SELECT COUNT() AS total_quotes FROM quotes) )+1 )").arg( "coalesce(%1.displayName, TRIM((coalesce(%1.prefix,'') || ' ' || %1.name || ' ' || coalesce(%1.kunya,''))))").arg("i");
-    m_sql.executeQuery(caller, query, QueryId::GetRandomBenefit);
+void DatabaseBoundary::fetchRandomBenefit(QObject* caller) {
+    m_sql.executeQuery(caller, QString("SELECT %1 AS author,body,TRIM( COALESCE(suites.title,'') || ' ' || COALESCE(quotes.reference,'') ) AS reference,i.id,birth,death,female,is_companion FROM quotes INNER JOIN individuals i ON i.id=quotes.author LEFT JOIN suites ON quotes.suite_id=suites.id WHERE quotes.id=( ABS( RANDOM() % (SELECT COUNT() AS total_quotes FROM quotes) )+1 )").arg( NAME_FIELD("i") ), QueryId::GetRandomBenefit);
 }
 
 
