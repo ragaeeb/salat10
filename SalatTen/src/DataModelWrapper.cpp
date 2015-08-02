@@ -27,6 +27,9 @@ DataModelWrapper::DataModelWrapper(Persistance* p, QObject* parent) :
 void DataModelWrapper::lazyInit()
 {
     updateCache( QStringList() << KEY_CALC_ANGLES << KEY_CALC_ASR_RATIO << KEY_CALC_ADJUSTMENTS << KEY_ATHANS << KEY_NOTIFICATIONS << KEY_IQAMAHS << KEY_CALC_LATITUDE << KEY_CALC_LONGITUDE << KEY_ISHA_NIGHT << KEY_DST_ADJUST );
+
+    Coordinates geo = Calculator::createCoordinates( QDateTime::currentDateTime(), m_cache.latitude, m_cache.longitude );
+    LOGGER(geo.name << geo.position << geo.timeZone);
 }
 
 
@@ -43,7 +46,7 @@ QVariantList DataModelWrapper::calculate(QDateTime local, int numDays)
 		QList<QDateTime> result = m_calculator.calculate( local.date(), geo, m_cache.angles, m_cache.asrRatio, m_cache.nightStartsIsha );
 		//	result << local.addSecs(30) << local.addSecs(60) << local.addSecs(90) << local.addSecs(120) << local.addSecs(150) << local.addSecs(180) << local.addSecs(210) << local.addSecs(240) << local.addSecs(270);
 
-		//LOGGER(result);
+		LOGGER(result);
 
 		for (int j = 0; j < result.size(); j++)
 		{

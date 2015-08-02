@@ -7,13 +7,13 @@ namespace {
 
 using namespace salat;
 
-const qreal total_hours_in_day = 24;
+#define total_hours_in_day 24
+
+/** The maximum CH value. */
+#define max_ch_value 1
 
 /** The solar elevation angle. */
 const qreal sunrise_arc_angle = SolarCalculator::degreesToRadians(-5.0/6.0);
-
-/** The maximum CH value. */
-const qreal max_ch_value = 1;
 
 
 /**

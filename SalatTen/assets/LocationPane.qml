@@ -1,11 +1,11 @@
-import QtQuick 1.0
 import bb.cascades 1.3
 import bb.cascades.places 1.0
-import bb.cascades.maps 1.0
+import bb.cascades.maps 1.3
 import com.canadainc.data 1.0
 
 Page
 {
+    id: locationPage
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     property variant geoFinder
     
@@ -20,18 +20,73 @@ Page
         }
     }
     
+    function onLocationsFound(result)
+    {
+        if (result.status == "OK")
+        {
+            locations.removeAll();
+            var n = result.results.length;
+            
+            for (var i = 0; i < n; i++) {
+                var option = optionDef.createObject();
+                option.value = result.results[i];
+                
+                locations.add(option);
+            }
+            
+            locations.title = qsTr("%n locations found", "", n);
+            locations.expanded = true;
+            
+            tutorial.execBelowTitleBar("pickGeoLocation", qsTr("These are the locations that were found based on your query. Pick the one that is closest to you to get the most accurate results.") );
+        } else {
+            persist.showToast( qsTr("Could not fetch geolocation results. Please either use the '%1' from the bottom, tap on the 'Refresh' button use your GPS or please try again later.").arg(locationAction.title), "images/toast/ic_location_failed.png" );
+        }
+        
+        busy.delegateActive = false;
+    }
+    
+    function onAboutToQuit() {
+        mapViewDelegate.delegateActive = false;
+    }
+    
+    function onFound(l,p)
+    {
+        busy.delegateActive = false;
+        geoFinder.finished.disconnect(onFound);
+    }
+    
+    function onSettingChanged(value, key)
+    {
+        if (key == "longitude" && boundary.calculationFeasible)
+        {
+            var location = persist.getValueFor("location");
+            location = location ? location : qsTr("Choose Location");
+            locationAction.title = location;
+
+            if (!mapViewDelegate.delegateActive) {
+                mapViewDelegate.delegateActive = true;
+                var current = boundary.getCurrent( new Date() );
+                offloader.renderMap(mapViewDelegate.control, persist.getValueFor("latitude"), persist.getValueFor("longitude"), location, translator.render(current.key), true);
+            }
+        } else if (!boundary.calculationFeasible) {
+            persist.showToast( qsTr("Your location was not yet detected, please set your location for accurate timings."), "images/dropdown/ic_masjid.png" );
+            notification.ipLookup();
+        }
+    }
+    
+    onCreationCompleted: {
+        notification.locationsFound.connect(locations.onLocationsFound);
+        Application.aboutToQuit.connect(onAboutToQuit);
+        
+        locationAnim.play();
+    }
+    
     actions: [
         ActionItem {
             id: refresh
             title: qsTr("GPS Refresh") + Retranslate.onLanguageChanged
             imageSource: "images/menu/ic_reset.png"
             ActionBar.placement: ActionBarPlacement.OnBar
-            
-            function onFound(l,p)
-            {
-                busy.delegateActive = false;
-                geoFinder.finished.disconnect(onFound);
-            }
             
             onTriggered: {
                 console.log("UserEvent: RefreshLocation");
@@ -42,6 +97,8 @@ Page
                 if (geoFinder) {
                     busy.delegateActive = true;
                     geoFinder.finished.connect(onFound);
+                } else {
+                    global.showLocationServices();
                 }
             }
         },
@@ -49,33 +106,9 @@ Page
         ActionItem
         {
             id: locationAction
-            imageSource: "file:///usr/share/icons/ic_map_all.png"
+            imageSource: "images/menu/ic_map.png"
             ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             title: qsTr("Choose Location") + Retranslate.onLanguageChanged
-            
-            function onSettingChanged(key)
-            {
-                if (key == "longitude" && boundary.calculationFeasible && reporter.online)
-                {
-                    mapViewDelegate.delegateActive = true;
-                    
-                    var location = persist.getValueFor("location");
-                    location = location ? location : qsTr("Choose Location");
-                    locationAction.title = location;
-                    var current = boundary.getCurrent( new Date() );
-                    
-                    offloader.renderMap(mapViewDelegate.control, persist.getValueFor("latitude"), persist.getValueFor("longitude"), location, translator.render(current.key), true);
-                }
-            }
-            
-            onCreationCompleted: {
-                persist.settingChanged.connect(onSettingChanged);
-                onSettingChanged("longitude");
-                
-                if ( !persist.contains("longitude") ) {
-                    tftk.textField.requestFocus();
-                }
-            }
             
             attachedObjects: [
                 ComponentDefinition {
@@ -94,14 +127,14 @@ Page
                 {
                     persist.saveValueFor("city", place.city, false);
                     persist.saveValueFor("location", place.name, false);
+                    persist.saveValueFor("country", place.country, false);
                     persist.saveValueFor("latitude", place.latitude, true);
                     persist.saveValueFor("longitude", place.longitude, true);
-                    persist.saveValueFor("country", place.country, false);
-                    locationAction.title = place.name;
-                    
-                    persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "", "asset:///images/tabs/ic_map.png" );
+                    persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "images/tabs/ic_map.png" );
+
                     reporter.record( "LocationPicked", JSON.stringify(place) );
                 } else {
+                    console.log("LocationFailedPick");
                     reporter.record("LocationFailedPick");
                 }
                 
@@ -151,31 +184,28 @@ Page
                 id: locations
                 title: qsTr("No Locations Found") + Retranslate.onLanguageChanged
                 bottomMargin: 0
+                translationY: -100
                 
-                function onLocationsFound(result)
-                {
-                    if (result.status == "OK")
+                animations: [
+                    TranslateTransition
                     {
-                        locations.removeAll();
-                        var n = result.results.length;
+                        id: locationAnim
+                        fromY: -100
+                        toY: 0
+                        easingCurve: StockCurve.ExponentialOut
+                        duration: 1000
+                        delay: 250
                         
-                        for (var i = 0; i < n; i++) {
-                            var option = optionDef.createObject();
-                            option.value = result.results[i];
-                            
-                            locations.add(option);
+                        onEnded: {
+                            tftk.textField.requestFocus();
+                            persist.registerForSetting(locationPage, "longitude");
+                            tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5) );
+                            tutorial.execActionBar("nativeLocationPicker", qsTr("Tap here to pick an existing location from your device.") );
+                            tutorial.execActionBar("geoRefresh", qsTr("Tap here to use your device's GPS to obtain your location (this may take a while)."), "r" );
+                            tutorial.execActionBar("returnToSettings", qsTr("Tap here to go back to the Settings page."), "b" );
                         }
-                        
-                        locations.title = qsTr("%n locations found", "", n);
-                        locations.expanded = true;
-                        
-                        tutorial.execBelowTitleBar("pickGeoLocation", qsTr("These are the locations that were found based on your query. Pick the one that is closest to you to get the most accurate results.") );
-                    } else {
-                        persist.showToast( qsTr("Could not fetch geolocation results. Please either use the 'Choose Location' from the bottom, tap on the 'Refresh' button use your GPS or please try again later."), "", "asset:///images/ic_location_failed.png" );
                     }
-                    
-                    busy.delegateActive = false;
-                }
+                ]
                 
                 onSelectedValueChanged: {
                     var parts = selectedValue.address_components;
@@ -217,10 +247,6 @@ Page
                     reporter.record("LocationGeoPicked", JSON.stringify(analytics));
                 }
                 
-                onCreationCompleted: {
-                    notification.locationsFound.connect(onLocationsFound);
-                }
-                
                 attachedObjects: [
                     ComponentDefinition
                     {
@@ -228,7 +254,7 @@ Page
                         
                         Option
                         {
-                            imageSource: "file:///usr/share/icons/ic_map_all.png"
+                            imageSource: "images/dropdown/ic_map_result.png"
                             
                             onValueChanged: {
                                 text = value.formatted_address;
@@ -340,28 +366,4 @@ Page
             }
         }
     }
-    
-    function onAboutToQuit() {
-        mapViewDelegate.delegateActive = false;
-    }
-    
-    onCreationCompleted: {
-        tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5) );
-        tutorial.execActionBar("nativeLocationPicker", qsTr("Tap here to pick an existing location from your device.") );
-        tutorial.execActionBar("geoRefresh", qsTr("Tap here to use your device's GPS to obtain your location (this may take a while)."), "r" );
-        tutorial.execActionBar("returnToSettings", qsTr("Tap here to go back to the Settings page."), "b" );
-        Application.aboutToQuit.connect(onAboutToQuit);
-    }
-    
-    attachedObjects: [
-        Timer {
-            interval: 100
-            repeat: false
-            running: true
-            
-            onTriggered: {
-                tftk.textField.requestFocus();
-            }
-        }
-    ]
 }

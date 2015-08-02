@@ -4,6 +4,7 @@ import com.canadainc.data 1.0
 
 Page
 {
+    id: settingsPage
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
     function cleanUp() {}
@@ -19,7 +20,8 @@ Page
             onTriggered: {
                 console.log("UserEvent: OpenMap");
 
-                var x = definition.init("LocationPane.qml");
+                definition.source = "LocationPane.qml";
+                var x = definition.createObject();
                 navigationPane.push(x);
                 
                 reporter.record("OpenMap");
@@ -98,7 +100,7 @@ Page
                             }
                         }
                     ]
-
+                    
                     onExpandedChanged: {
                         if (!expanded)
                         {
@@ -109,14 +111,6 @@ Page
                             tutorial.exec("skipJumuah", qsTr("If you don't want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, 0, "images/tabs/ic_tutorial.png" );
                             tutorial.exec("skipProfiles", qsTr("Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in 'Silent' mode, make sure you enable the 'Silent' profile checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center );
                             tutorial.exec("athanVolume", qsTr("If the athan volume is too loud, use the slider to control its output."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(20), "images/list/ic_next.png", "r" );
-                            
-                            if ( boundary.anglesSaved && !boundary.calculationFeasible ) // location still not set
-                            {
-                                notification.ipLookup();
-                                locationAction.triggered();
-                                
-                                persist.showToast( qsTr("Your location was not yet detected, please set your location for accurate timings."), "images/dropdown/ic_masjid.png" );
-                            }
                         }
                     }
 
@@ -159,6 +153,32 @@ Page
                                 
                                 calcStrategy.add(def);
                             }
+                            
+                            var profiles = persist.getValueFor("profiles");
+                            
+                            var checkBox = checkerDef.createObject();
+                            profileContainer.insert(1, checkBox);
+                            checkBox.value = ""+NotificationMode.AlertsOff;
+                            checkBox.checked = profiles[checkBox.value];
+                            checkBox.text = qsTr("All Alerts Off");
+                            
+                            checkBox = checkerDef.createObject();
+                            profileContainer.insert(1, checkBox);
+                            checkBox.value = ""+NotificationMode.PhoneOnly;
+                            checkBox.checked = profiles[checkBox.value];
+                            checkBox.text = qsTr("Phone Only");
+                            
+                            checkBox = checkerDef.createObject();
+                            profileContainer.insert(1, checkBox);
+                            checkBox.value = ""+NotificationMode.Vibrate;
+                            checkBox.checked = profiles[checkBox.value];
+                            checkBox.text = qsTr("Vibrate");
+                            
+                            checkBox = checkerDef.createObject();
+                            profileContainer.insert(1, checkBox);
+                            checkBox.value = ""+NotificationMode.Silent;
+                            checkBox.checked = profiles[checkBox.value];
+                            checkBox.text = qsTr("Silent");
                             
                             if (firstTime) {
                                 calcStrategy.expanded = true;
@@ -277,34 +297,6 @@ Page
                 }
             }
             
-            onCreationCompleted: {
-                var profiles = persist.getValueFor("profiles");
-                
-                checkBox = checkerDef.createObject();
-                profileContainer.insert(1, checkBox);
-                checkBox.value = ""+NotificationMode.AlertsOff;
-                checkBox.checked = profiles[checkBox.value];
-                checkBox.text = qsTr("All Alerts Off");
-                
-                checkBox = checkerDef.createObject();
-                profileContainer.insert(1, checkBox);
-                checkBox.value = ""+NotificationMode.PhoneOnly;
-                checkBox.checked = profiles[checkBox.value];
-                checkBox.text = qsTr("Phone Only");
-                
-                checkBox = checkerDef.createObject();
-                profileContainer.insert(1, checkBox);
-                checkBox.value = ""+NotificationMode.Vibrate;
-                checkBox.checked = profiles[checkBox.value];
-                checkBox.text = qsTr("Vibrate");
-                
-                var checkBox = checkerDef.createObject();
-                profileContainer.insert(1, checkBox);
-                checkBox.value = ""+NotificationMode.Silent;
-                checkBox.checked = profiles[checkBox.value];
-                checkBox.text = qsTr("Silent");
-            }
-            
             attachedObjects: [
                 ComponentDefinition {
                     id: checkerDef
@@ -327,4 +319,10 @@ Page
             ]
 	    }
     }
+    
+    attachedObjects: [
+        ComponentDefinition {
+            id: definition
+        }
+    ]
 }
