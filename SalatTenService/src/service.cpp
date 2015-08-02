@@ -240,7 +240,6 @@ void Service::recalculate(QString const& path)
 void Service::handleInvoke(bb::system::InvokeRequest const& request)
 {
     QString action = request.action();
-    LOGGER("handleInvoke!" << action);
 
     if ( action.compare("com.canadainc.SalatTenService.RESET") == 0 && m_athan.atLeastOneEvent && !m_athan.timer.isActive() ) {
         recalculate();

@@ -293,12 +293,4 @@ Container
             }
         }
     ]
-    
-    onTouchExit: {
-        console.log("***** TOUCH EXIT");
-    }
-    
-    onTouch: {
-        //console.log("****", event.isDown(), event.isUp(), event.isMove(), event.isCancel(), event.target);
-    }
 }

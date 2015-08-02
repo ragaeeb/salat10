@@ -4,16 +4,24 @@ QtObject
 {
     id: root
     
-    function onFinished(result, cookie)
+    function onFinished(result, cookie, data)
     {
-        if (result)
+        if (data == "locationServices")
         {
-            if (cookie.app == "quran10") {
+            if (!result && cookie) {
+                persist.setFlag("hideLocationServicesWarning", 1);
+            }
+            
+            if (result) {
+                persist.launchSettingsApp("location");
+            }
+        } else {
+            if (result && cookie.app == "quran10") {
                 persist.openUri("http://quran10.canadainc.org");
             }
+            
+            reporter.record(cookie, result);
         }
-        
-        reporter.record(cookie, result);
     }
     
     function getRandomReal(min, max) {
@@ -43,6 +51,13 @@ QtObject
         }
         
         return "";
+    }
+    
+    function showLocationServices()
+    {
+        if ( !persist.containsFlag("hideLocationServicesWarning") ) {
+            persist.showDialog(root, "locationServices", qsTr("Location Services"), qsTr("Warning: It seems like the location services is not enabled on your BlackBerry 10 device so the app will not be able to fetch real-time data and map information.\n\nWould you like to launch the Location Services screen and enable the Location Services permission there?"), qsTr("Yes"), qsTr("No"), true, qsTr("Don't ask again"), false );
+        }
     }
     
     function renderAthanStatus(ListItemData)

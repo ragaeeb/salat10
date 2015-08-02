@@ -22,14 +22,13 @@ NavigationPane
         
         onFinished: {
             notification.currentEventChanged.connect(onCurrentEventChanged);
-            onCurrentEventChanged();
-            
-            previewer.delegateActive = true;
             
             permissions.process();
             
             if (boundary.calculationFeasible)
             {
+                previewer.delegateActive = true;
+                
                 if (boundary.atLeastOneAthanScheduled)
                 {
                     if ( !persist.containsFlag("athanPicked") ) {
@@ -41,14 +40,16 @@ NavigationPane
                         picker.open();
                     }
                 }
-            } else {
-                if (!boundary.anglesSaved) {
-                    quoteLabel.text = qsTr("No angles have been set\n\nTap here to choose the appropriate calculation angles...");
-                } else {
-                    quoteLabel.text = qsTr("No location has been set\n\nTap here to choose your location...");
+                
+                onCurrentEventChanged();
+            } else if (!boundary.anglesSet) {
+                var ok = app.refreshLocation();
+                
+                if (!ok) {
+                    global.showLocationServices();
                 }
                 
-                tapHandler.tapped(undefined);
+                menuDef.settings.triggered();
             }
         }
     }
@@ -62,33 +63,12 @@ NavigationPane
             layout: DockLayout {}
             
             onSwipedUp: {
-                tapper.activateList();
-                reporter.record("SwipedUpPreview");
-            }
-            
-            gestureHandlers: [
-                TapHandler {
-                    id: tapHandler
-                    
-                    function rootTapped()
-                    {
-                        if (!boundary.calculationFeasible)
-                        {
-                            if (!boundary.anglesSaved) {
-                                menuDef.settings.triggered();
-                            } else {
-                                var x = definition.init("LocationPane.qml");
-                                navigationPane.push(x);
-                            }
-                        }
-                    }
-                    
-                    onTapped: {
-                        reporter.record("NoLocationsSetTapped");
-                        rootTapped();
-                    }
+                if (previewer.delegateActive)
+                {
+                    tapper.activateList();
+                    reporter.record("SwipedUpPreview");
                 }
-            ]
+            }
             
             Container
             {
@@ -198,6 +178,10 @@ NavigationPane
                 opacity: previewer.delegateActive || ( timings.control && timings.control.lssh.firstVisibleItem.length == 1 && !timings.control.lssh.scrolling ) || !boundary.calculationFeasible ? 1 : 0
             }
             
+            MissingParametersControl {
+                id: missing
+            }
+            
             OperationProgressBar {
                 id: progressDelegate
             }
@@ -244,6 +228,8 @@ NavigationPane
     {
         if (boundary.calculationFeasible)
         {
+            previewer.delegateActive = true;
+            
             var current = boundary.getCurrent( new Date() );
             var k = current.key;
             
