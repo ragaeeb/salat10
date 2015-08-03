@@ -75,7 +75,7 @@ Page
     }
     
     onCreationCompleted: {
-        notification.locationsFound.connect(locations.onLocationsFound);
+        notification.locationsFound.connect(onLocationsFound);
         Application.aboutToQuit.connect(onAboutToQuit);
         
         locationAnim.play();
@@ -343,7 +343,7 @@ Page
                             notification.mapDataLoaded.connect(onMapDataLoaded);
                             notification.fetchCheckins();
                             
-                            sql.fetchAllOrigins(mapView);
+                            //sql.fetchAllOrigins(mapView);
                         }
                     }
                 }

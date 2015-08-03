@@ -41,11 +41,11 @@
  <splashScreens>
     <image>splash_n.png</image>
  </splashScreens>
-	<platformVersion>10.2.1</platformVersion>
+	<platformVersion>10.3.0</platformVersion>
 
 	<!-- Fourth digit segment of the package version. First three segments are
 		taken from the <versionNumber> element. Must be an integer from 0 to 2^16-1 -->
-	<buildId>0</buildId>
+	<buildId>1</buildId>
  <packageLocale>ar,fr-FR,fr,fr-CA</packageLocale>
 
 	<!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents
