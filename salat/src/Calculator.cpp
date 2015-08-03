@@ -104,7 +104,7 @@ Coordinates Calculator::createCoordinates(QDateTime local, qreal latitude, qreal
 	local.setTimeSpec(Qt::UTC);
 
 	Coordinates geo; // timezoneoffset returns -4 instead of -5 if daylight savings is in effect
-	geo.timeZone = -utc.secsTo(local) / 3600;
+	geo.timeZone = -utc.secsTo(local) / 3600.0;
 	geo.position.setX( SolarCalculator::degreesToRadians(latitude) );
 	geo.position.setY( SolarCalculator::degreesToRadians(longitude) );
 

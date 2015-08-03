@@ -7,6 +7,15 @@ NavigationPane
     
     onPopTransitionEnded: {
         deviceUtils.cleanUpAndDestroy(page);
+        
+        if ( reporter.deferredCheck("alFurqanAdvertised", 20) ) {
+            advertisement = definition.init("AlFurqanAdvertisement.qml");
+            advertisement.open();
+        } else if ( reporter.deferredCheck("alFurqanQuranAdvertised", 5) ) {
+            advertisement = definition.init("AlFurqanAdvertisement.qml");
+            advertisement.quran = true;
+            advertisement.open();
+        }
     }
     
     Menu.definition: CanadaIncMenu
@@ -51,6 +60,8 @@ NavigationPane
                 
                 menuDef.settings.triggered();
             }
+            
+            reporter.performCII();
         }
     }
     

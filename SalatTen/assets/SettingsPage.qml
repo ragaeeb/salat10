@@ -43,7 +43,7 @@ Page
             
             Option {
                 imageSource: "images/dropdown/dst_none.png"
-                text: qsTr("No Daylight Savings") + Retranslate.onLanguageChanged
+                text: qsTr("Auto Daylight Savings") + Retranslate.onLanguageChanged
                 value: 0
             },
             
