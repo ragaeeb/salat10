@@ -84,7 +84,7 @@ void Service::onAthanStateChanged()
 
     if ( mp && mp->mediaState() == MediaState::Stopped && m_athan.mkw )
     {
-        LOGGER("No longer playing, destroying!");
+        LOGGER("AthanDestroyed!");
         m_athan.mkw->deleteLater();
         m_athan.mkw = NULL;
     }
@@ -94,7 +94,6 @@ void Service::onAthanStateChanged()
 void Service::timeout(bool init)
 {
     QDateTime now = QDateTime::currentDateTime();
-    LOGGER(init << now);
 
     m_params.geo = Calculator::createCoordinates( now, m_settings.value(KEY_CALC_LATITUDE).toReal(), m_settings.value(KEY_CALC_LONGITUDE).toReal() );
     QStringList allEvents = Translator::eventKeys();
@@ -121,12 +120,12 @@ void Service::timeout(bool init)
         }
     }
 
-    LOGGER("Current" << currentEventKey << currentEventTime << now << nextEventTime);
+    LOGGER("Current" << init << currentEventKey << currentEventTime << now << nextEventTime);
 
     qint64 diff = nextEventTime.toMSecsSinceEpoch() - now.toMSecsSinceEpoch() + 1000; // 1 second lee way in case the OS pre-empts us too early
     m_athan.timer.start(diff);
 
-    LOGGER("Started timer for " << diff);
+    LOGGER("StartedTimerFor" << diff);
 
     if (!init)
     {
@@ -139,8 +138,8 @@ void Service::timeout(bool init)
 
         if ( playAthaan && (m_athan.prevKey != currentEventKey) && salatMap.contains(currentEventKey) )
         {
-            if ( currentEventKey == Translator::key_dhuhr && now.date().dayOfWeek() == Qt::Friday && m_athan.skipJumuah ) {
-                LOGGER("Skipping athaan because it is Friday and user chose not to play it on Ju'muah.");
+            if ( currentEventKey == key_dhuhr && now.date().dayOfWeek() == Qt::Friday && m_athan.skipJumuah ) {
+                LOGGER("SkipJumuahAthanByRequest");
             } else {
                 NotificationGlobalSettings g;
                 NotificationMode::Type mode = g.mode();
@@ -151,7 +150,7 @@ void Service::timeout(bool init)
                 if (okToPlay)
                 {
                     LOGGER("PlayingAthanMode" << mode);
-                    QString destinationFile = currentEventKey == Translator::key_fajr ? audio_fajr_athaan : audio_athaan;
+                    QString destinationFile = currentEventKey == key_fajr ? audio_fajr_athaan : audio_athaan;
 
                     QString customFile = m_athan.customAthaans.value(currentEventKey).toString();
 
@@ -171,7 +170,7 @@ void Service::timeout(bool init)
 
                     m_athan.player.play(destinationFile);
                 } else {
-                    LOGGER("Skipping athaan mode" << mode);
+                    LOGGER("SkipAthanMode" << mode);
                 }
             }
         } else if (playNotification) {
@@ -192,7 +191,7 @@ void Service::onShortPress(bb::multimedia::MediaKey::Type key)
 
     if ( m_athan.player.playing() && key == MediaKey::VolumeDown )
     {
-        LOGGER("STOPPING");
+        LOGGER("StoppingAthan");
         m_athan.player.stop();
         Notification::clearEffectsForAll();
         Notification::deleteAllFromInbox();
@@ -225,25 +224,20 @@ void Service::recalculate(QString const& path)
         values.append( m_athan.notifications.values() );
 
         m_athan.atLeastOneEvent = values.contains(true);
-        m_athan.prevKey = QString();
+        m_athan.prevKey.clear();
 
         if (m_athan.atLeastOneEvent) { // if there exists at least one notification or athan, then let's do it
             timeout(true);
         } else {
             m_athan.timer.stop();
-            LOGGER("User chose not to have any athans or notifications");
+            LOGGER("UserChoseNoAthansOrNotifications");
         }
     }
 }
 
 
-void Service::handleInvoke(bb::system::InvokeRequest const& request)
-{
-    QString action = request.action();
-
-    if ( action.compare("com.canadainc.SalatTenService.RESET") == 0 && m_athan.atLeastOneEvent && !m_athan.timer.isActive() ) {
-        recalculate();
-    }
+void Service::handleInvoke(bb::system::InvokeRequest const& request) {
+    Q_UNUSED(request);
 }
 
 

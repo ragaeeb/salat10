@@ -3,7 +3,18 @@ import bb.cascades 1.2
 Container
 {
     id: root
+    background: Color.create("#66000000")
+    leftPadding: 30
+    rightPadding: 30
+    bottomPadding: 30
+    topPadding: 30
     horizontalAlignment: HorizontalAlignment.Fill
+    preferredHeight: 376
+    layout: DockLayout {}
+    
+    function cleanUp() {
+        boundary.recalculationNeeded.disconnect(refresh);
+    }
     
     function hasCalendar()
     {
@@ -54,201 +65,182 @@ Container
         persist.registerForSetting(root, "hijri", false, false);
     }
     
-    layout: DockLayout {}
-    
     Container
     {
-        id: contentContainer
-        background: Color.create("#66000000")
-        leftPadding: 30
-        rightPadding: 30
-        bottomPadding: 30
-        topPadding: 30
+        id: previewContainer
         horizontalAlignment: HorizontalAlignment.Fill
-        preferredHeight: 376
-        layout: DockLayout {}
-        
-        layoutProperties: StackLayoutProperties {
-            spaceQuota: 1
-        }
+        verticalAlignment: VerticalAlignment.Center
         
         Container
         {
-            id: previewContainer
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Center
+            bottomPadding: 20
             
-            Container
+            layout: StackLayout {
+                orientation: LayoutOrientation.LeftToRight
+            }
+            
+            ImageButton
             {
-                horizontalAlignment: HorizontalAlignment.Fill
+                id: convertHijri
+                defaultImageSource: "images/list/ic_calendar_hijri.png"
+                pressedImageSource: defaultImageSource
                 verticalAlignment: VerticalAlignment.Center
-                bottomPadding: 20
+                translationX: -150
                 
-                layout: StackLayout {
-                    orientation: LayoutOrientation.LeftToRight
+                onClicked: {
+                    var dialog = definition.init("HijriConverterDialog.qml");
+                    dialog.open();
+                }
+            }
+            
+            Label
+            {
+                id: dateDetails
+                textStyle.fontSize: FontSize.Large
+                verticalAlignment: VerticalAlignment.Center
+                multiline: true
+                opacity: 0
+                
+                layoutProperties: StackLayoutProperties {
+                    spaceQuota: 1
                 }
                 
-                ImageButton
+                onCreationCompleted: {
+                    if ( "navigation" in dateDetails ) {
+                        var nav = dateDetails.navigation;
+                        nav.focusPolicy = 0x2;
+                    }
+                }
+            }
+            
+            ImageButton
+            {
+                id: editDate
+                defaultImageSource: "images/menu/ic_edit.png"
+                pressedImageSource: defaultImageSource
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Right
+                translationX: 150
+                
+                onClicked: {
+                    console.log("UserEvent: EditHijriDate");
+                    
+                    var dialog = definition.init("AdjustHijriDialog.qml");
+                    dialog.open();
+                }
+            }
+            
+            contextActions: [
+                ActionSet
                 {
-                    id: convertHijri
-                    defaultImageSource: "images/list/ic_calendar_hijri.png"
-                    pressedImageSource: defaultImageSource
-                    verticalAlignment: VerticalAlignment.Center
-                    translationX: -150
+                    id: hijriActionSet
                     
-                    onClicked: {
-                        var dialog = definition.init("HijriConverterDialog.qml");
-                        dialog.open();
-                    }
-                }
-                
-                Label
-                {
-                    id: dateDetails
-                    textStyle.fontSize: FontSize.XLarge
-                    verticalAlignment: VerticalAlignment.Center
-                    multiline: true
-                    opacity: 0
-                    
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 1
-                    }
-                    
-                    onCreationCompleted: {
-                        if ( "navigation" in dateDetails ) {
-                            var nav = dateDetails.navigation;
-                            nav.focusPolicy = 0x2;
-                        }
-                    }
-                }
-                
-                ImageButton
-                {
-                    id: editDate
-                    defaultImageSource: "images/menu/ic_edit.png"
-                    pressedImageSource: defaultImageSource
-                    verticalAlignment: VerticalAlignment.Center
-                    horizontalAlignment: HorizontalAlignment.Right
-                    translationX: 150
-                    
-                    onClicked: {
-                        console.log("UserEvent: EditHijriDate");
-                        
-                        var dialog = definition.init("AdjustHijriDialog.qml");
-                        dialog.open();
-                    }
-                }
-                
-                contextActions: [
-                    ActionSet
+                    ActionItem
                     {
-                        id: hijriActionSet
+                        title: qsTr("Export") + Retranslate.onLanguageChanged
+                        imageSource: "images/menu/ic_calendar_add.png"
                         
-                        ActionItem
+                        function onExportReady(daysToExport, result, accountId)
                         {
-                            title: qsTr("Export") + Retranslate.onLanguageChanged
-                            imageSource: "images/menu/ic_calendar_add.png"
+                            progressDelegate.delegateActive = true;
+                            offloader.exportToCalendar(daysToExport, result, accountId);
                             
-                            function onExportReady(daysToExport, result, accountId)
-                            {
-                                progressDelegate.delegateActive = true;
-                                offloader.exportToCalendar(daysToExport, result, accountId);
-                                
-                                navigationPane.pop();
-                            }
-                            
-                            onTriggered: {
-                                if ( hasCalendar() )
-                                {
-                                    var exporter = definition.init("CalendarExport.qml");
-                                    exporter.exportingReady.connect(onExportReady);
-                                    
-                                    navigationPane.push(exporter);
-                                }
-                            }
+                            navigationPane.pop();
                         }
                         
-                        InvokeActionItem
-                        {
-                            id: iai
-                            title: qsTr("Share") + Retranslate.onLanguageChanged
-                            imageSource: "images/menu/ic_share.png"
-                            
-                            query {
-                                mimeType: "text/plain"
-                                invokeActionId: "bb.action.SHARE"
-                            }
-                            
-                            onTriggered: {
-                                console.log("UserEvent: ShareTimes");
-                                var target = new Date();
-                                var today = boundary.calculate(target);
-                                var location = persist.getValueFor("location");
-                                
-                                var result = Qt.formatDate(target, Qt.SystemLocaleLongDate);
-                                
-                                if (location) {
-                                    result += ": "+location;
-                                }
-                                
-                                result += "\n\n";
-                                
-                                for (var i = 0; i < today.length; i++) {
-                                    result += translator.render(today[i].key)+": "+Qt.formatTime(today[i].value, Qt.SystemLocaleShortDate) + "\n";
-                                }
-                                
-                                iai.data = result.trim();
-                            }
-                        }
-                        
-                        DeleteActionItem
-                        {
-                            id: clearAction
-                            title: qsTr("Clear Exported Events") + Retranslate.onLanguageChanged
-                            imageSource: "images/menu/ic_calendar_delete.png"
-                            
-                            function onFinished(confirmed)
+                        onTriggered: {
+                            if ( hasCalendar() )
                             {
-                                if (confirmed) {
-                                    console.log("UserEvent: ClearCalendarPromptYes");
-                                    progressDelegate.delegateActive = true;
-                                    offloader.cleanupCalendarEvents();
-                                } else {
-                                    console.log("UserEvent: ClearCalendarPromptNo");
-                                }
+                                var exporter = definition.init("CalendarExport.qml");
+                                exporter.exportingReady.connect(onExportReady);
                                 
-                                reporter.record("ClearCalendarResult", confirmed.toString());
-                            }
-                            
-                            onTriggered: {
-                                console.log("UserEvent: ClearExportedEvents");
-
-                                if ( hasCalendar() ) {
-                                    persist.showDialog( clearAction, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
-                                }
-
-                                reporter.record("ClearExportedEvents");
+                                navigationPane.push(exporter);
                             }
                         }
                     }
-                ]
-            }
-            
-            Divider {}
-            
-            PreviewEvent
-            {
-                id: currentEvent
-                style.fontWeight: FontWeight.Bold
-                bottomPadding: 20
-            }
-            
-            PreviewEvent
-            {
-                id: nextEvent
-                style.fontSize: FontSize.Medium
-                topPadding: 10
-            }
+                    
+                    InvokeActionItem
+                    {
+                        id: iai
+                        title: qsTr("Share") + Retranslate.onLanguageChanged
+                        imageSource: "images/menu/ic_share.png"
+                        
+                        query {
+                            mimeType: "text/plain"
+                            invokeActionId: "bb.action.SHARE"
+                        }
+                        
+                        onTriggered: {
+                            console.log("UserEvent: ShareTimes");
+                            var target = new Date();
+                            var today = boundary.calculate(target);
+                            var location = persist.getValueFor("location");
+                            
+                            var result = Qt.formatDate(target, Qt.SystemLocaleLongDate);
+                            
+                            if (location) {
+                                result += ": "+location;
+                            }
+                            
+                            result += "\n\n";
+                            
+                            for (var i = 0; i < today.length; i++) {
+                                result += translator.render(today[i].key)+": "+Qt.formatTime(today[i].value, Qt.SystemLocaleShortDate) + "\n";
+                            }
+                            
+                            iai.data = result.trim();
+                        }
+                    }
+                    
+                    DeleteActionItem
+                    {
+                        id: clearAction
+                        title: qsTr("Clear Exported Events") + Retranslate.onLanguageChanged
+                        imageSource: "images/menu/ic_calendar_delete.png"
+                        
+                        function onFinished(confirmed)
+                        {
+                            if (confirmed) {
+                                console.log("UserEvent: ClearCalendarPromptYes");
+                                progressDelegate.delegateActive = true;
+                                offloader.cleanupCalendarEvents();
+                            } else {
+                                console.log("UserEvent: ClearCalendarPromptNo");
+                            }
+                            
+                            reporter.record("ClearCalendarResult", confirmed.toString());
+                        }
+                        
+                        onTriggered: {
+                            console.log("UserEvent: ClearExportedEvents");
+                            
+                            if ( hasCalendar() ) {
+                                persist.showDialog( clearAction, qsTr("Confirmation"), qsTr("Are you sure you want to clear all favourites?") );
+                            }
+                            
+                            reporter.record("ClearExportedEvents");
+                        }
+                    }
+                }
+            ]
+        }
+        
+        Divider {}
+        
+        PreviewEvent
+        {
+            id: currentEvent
+            style.fontWeight: FontWeight.Bold
+            bottomPadding: 20
+        }
+        
+        PreviewEvent
+        {
+            id: nextEvent
+            style.fontSize: FontSize.Medium
+            topPadding: 10
         }
     }
     

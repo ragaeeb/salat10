@@ -9,6 +9,12 @@ FullScreenDialog
         reporter.record( "HijriAdjust", result.toString() );
     }
     
+    onOpened: {
+        tutorial.execSwipe("hijriEditLeft", qsTr("Drag the slider to the left if the actual date is supposed to be before what it is currently being calculated as."), HorizontalAlignment.Center, VerticalAlignment.Center, "l");
+        tutorial.execSwipe("hijriEditRight", qsTr("Drag the slider to the right if the actual date is supposed to after what it is currently being calculated as."), HorizontalAlignment.Center, VerticalAlignment.Center, "r");
+        tutorial.exec("hijriExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(4));
+    }
+    
     dialogContent: Container
     {
         bottomPadding: 30

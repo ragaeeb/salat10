@@ -18,6 +18,10 @@ TextArea
             toOpacity: 1
             easingCurve: StockCurve.CubicOut
             duration: 2000
+            
+            onEnded: {
+                permissions.process();
+            }
         }
     ]
     
