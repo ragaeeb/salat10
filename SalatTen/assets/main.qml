@@ -9,10 +9,10 @@ NavigationPane
         deviceUtils.cleanUpAndDestroy(page);
         
         if ( reporter.deferredCheck("alFurqanAdvertised", 20) ) {
-            advertisement = definition.init("AlFurqanAdvertisement.qml");
+            var advertisement = definition.init("AlFurqanAdvertisement.qml");
             advertisement.open();
         } else if ( reporter.deferredCheck("alFurqanQuranAdvertised", 5) ) {
-            advertisement = definition.init("AlFurqanAdvertisement.qml");
+            var advertisement = definition.init("AlFurqanAdvertisement.qml");
             advertisement.quran = true;
             advertisement.open();
         }
@@ -32,11 +32,24 @@ NavigationPane
         onFinished: {
             notification.currentEventChanged.connect(onCurrentEventChanged);
             
-            permissions.process();
-            
             if (boundary.calculationFeasible)
             {
                 previewer.delegateActive = true;
+                
+                tutorial.execCentered("randomBenefit", qsTr("You can tap on the author's name to find out more information about them (you need to have the Quran10 app installed).") );
+                tutorial.exec("todaysHijriDate", qsTr("This is today's Hijri date."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(17) );
+                tutorial.exec("exportToCalendar", qsTr("You can press-and-hold on this section to export the timings right to your calendar so that you can get prayer time reminders to show up directly on your device's calendar. This will also allow reminders to be shown even while the app is closed!"), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(17) );
+                tutorial.exec("hijriConverter", qsTr("You can tap on this calendar icon to convert between Hijri and Gregorian calendar dates!"), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(2), 0, 0, ui.du(17) );
+                tutorial.exec("editDate", qsTr("You can tap on this edit icon to adjust the calculated hijri date as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(2), 0, ui.du(17) );
+                tutorial.exec("currentEvent", qsTr("This displays the current event that is already in progress."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(10), 0, 0, ui.du(8) );
+                tutorial.exec("editCurrent", qsTr("You can tap on this edit icon to adjust the current event as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(2), 0, ui.du(8) );
+                tutorial.exec("toggleCurrentEvent", qsTr("Tapping on the icon will toggle the athan and notification settings for that specific event. So if you want to turn on or turn off the athan and notifications tap on the icon."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(2), 0, 0, ui.du(8) );
+                tutorial.exec("nextEvent", qsTr("This displays the next event that is coming up."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(10), 0, 0, ui.du(1) );
+                tutorial.exec("toggleNextEvent", qsTr("Tapping on the icon will toggle the athan and notification settings for that next event. So if you want to turn on or turn off the athan and notifications tap on the icon."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(2), 0, 0, ui.du(1) );
+                tutorial.exec("editNextEvent", qsTr("You can tap on this edit icon to adjust the next event's timing as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(2), 0, ui.du(1) );
+                tutorial.exec("footerTap", qsTr("Tap anywhere on this strip to expand it and see the details for today."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(8), 0, ui.du(1) );
+                tutorial.execSwipe("expandFooter", qsTr("You can also expand this strip by swiping-up on it and see the details."), HorizontalAlignment.Center, VerticalAlignment.Bottom, "u");
+                tutorial.execSwipe("openAppMenu", qsTr("Swipe down from the top-bezel to display the Settings and Help and file bugs!"), HorizontalAlignment.Center, VerticalAlignment.Top, "d");
                 
                 if (boundary.atLeastOneAthanScheduled)
                 {
@@ -156,6 +169,12 @@ NavigationPane
                 source: "PreviewListItem.qml"
                 visible: delegateActive
                 
+                onDelegateActiveChanged: {
+                    if (!delegateActive && control) {
+                        control.cleanUp();
+                    }
+                }
+                
                 onControlChanged: {
                     if (control) {
                         sql.fetchRandomBenefit(quoteLabel);
@@ -239,7 +258,9 @@ NavigationPane
     {
         if (boundary.calculationFeasible)
         {
-            previewer.delegateActive = true;
+            if (!timings.delegateActive) {
+                previewer.delegateActive = true;
+            }
             
             var current = boundary.getCurrent( new Date() );
             var k = current.key;

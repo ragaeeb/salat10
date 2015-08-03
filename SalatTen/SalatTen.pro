@@ -27,6 +27,7 @@ CONFIG(debug, debug|release) {
     DESTDIR = o-g
     LIBS += -Bstatic -L../../../canadainc/x86/o-g/ -lcanadainc -Bdynamic
     LIBS += -Bstatic -L../../salat/x86/o-g/ -lsalat -Bdynamic
+    LIBS += -Bstatic -L../../../quazip/x86/o-g/ -lquazip -Bdynamic
 }
 
 }

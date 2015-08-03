@@ -19,7 +19,7 @@ FullScreenDialog
     onClosing: {
         reporter.record( "SaveIqamah", key+"="+dtp.value.toString() );
         app.saveIqamah(key, dtp.value);
-        persist.showToast( qsTr("Iqamah time set to: %1").arg( offloader.renderStandardTime(dtp.value) ), "", "asset:///images/empty/ic_no_coordinates.png" );
+        persist.showToast( qsTr("Iqamah time set to: %1").arg( offloader.renderStandardTime(dtp.value) ), "images/empty/ic_no_coordinates.png" );
     }
     
     onOpened: {

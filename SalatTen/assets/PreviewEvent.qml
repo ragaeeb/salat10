@@ -43,7 +43,7 @@ Container
     Label
     {
         id: detailsLabel
-        textStyle.fontSize: FontSize.XLarge
+        textStyle.fontSize: FontSize.Large
         verticalAlignment: VerticalAlignment.Center
         multiline: true
         opacity: 0

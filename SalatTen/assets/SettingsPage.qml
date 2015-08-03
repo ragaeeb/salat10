@@ -36,20 +36,23 @@ Page
         
         options: [
             Option {
+                id: adjustMinusDST
                 imageSource: "images/dropdown/dst_minus.png"
-                text: qsTr("Adjust -1") + Retranslate.onLanguageChanged
+                text: qsTr("DST -1") + Retranslate.onLanguageChanged
                 value: -1
             },
             
             Option {
+                id: autoDST
                 imageSource: "images/dropdown/dst_none.png"
-                text: qsTr("Auto Daylight Savings") + Retranslate.onLanguageChanged
+                text: qsTr("Auto DST") + Retranslate.onLanguageChanged
                 value: 0
             },
             
             Option {
+                id: adjustPlusDST
                 imageSource: "images/dropdown/dst_add.png"
-                text: qsTr("Adjust +1") + Retranslate.onLanguageChanged
+                text: qsTr("DST +1") + Retranslate.onLanguageChanged
                 value: 1
             }
         ]
@@ -85,6 +88,32 @@ Page
                     id: calcStrategy
                     title: qsTr("Calculation Angles") + Retranslate.onLanguageChanged
                     horizontalAlignment: HorizontalAlignment.Fill
+                    translationY: -100
+                    
+                    animations: [
+                        TranslateTransition {
+                            id: anglesAnim
+                            fromY: -100
+                            toY: 0
+                            easingCurve: StockCurve.ElasticOut
+                            delay: 150
+                            duration: 500
+                            
+                            onEnded: {
+                                tutorial.exec("dstAuto", qsTr("To let the calculations use your device settings for daylight savings rules, choose '%1'.").arg(autoDST.text), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5));
+                                tutorial.exec("dstMinus", qsTr("If the calculations seem to be 1 hour ahead of the actual time, choose '%1' to manually adjust the time to be an hour backward.").arg(adjustMinusDST.text), HorizontalAlignment.Left, VerticalAlignment.Top, ui.du(2), 0, ui.du(5) );
+                                tutorial.exec("dstPlus", qsTr("If the calculations seem to be 1 hour before its actual time, choose '%1' to manually adjust the time to be an hour forward.").arg(adjustPlusDST.text), HorizontalAlignment.Right, VerticalAlignment.Top, 0, ui.du(2), ui.du(5) );
+                                tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
+                                tutorial.execBelowTitleBar("calcAngles", qsTr("Different regions of the world use different conventions to calculate the prayer timings. Use the '%1' dropdown to set the appropriate one for your region for most accurate results.").arg(calcStrategy.title) );
+                                tutorial.execBelowTitleBar("asrRatio", qsTr("According to the correct opinion, the time of %1 However if you want to use Imam Abu Hanifa's (rahimahullah), use can use the option for the other school of thought.").arg(shafiRatio.description) );
+                                tutorial.exec("ishaNight", qsTr("The strongest opinion is that the day ends (thus the night begins) at the time of Maghrib. However, some scholars such as Shaykh Muhsin al-Abbad holds the opinion that the night begins at the time of Isha. If this is the fiqh opinion you take, enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, ui.du(29), "images/tabs/ic_tutorial.png" );
+                                tutorial.exec("skipJumuah", qsTr("If you don't want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, 0, "images/tabs/ic_tutorial.png" );
+                                tutorial.exec("skipProfiles", qsTr("Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in 'Silent' mode, make sure you enable the 'Silent' profile checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center );
+                                tutorial.exec("athanVolume", qsTr("If the athan volume is too loud, use the slider to control its output."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(20), "images/tutorial/ic_next.png", "r" );
+                                tutorial.execActionBar("settingsBack", qsTr("To return to the main timings page tap on the Back button here.").arg(locationAction.title), "b" );
+                            }
+                        }
+                    ]
 
                     attachedObjects: [
                         ComponentDefinition {
@@ -100,19 +129,6 @@ Page
                             }
                         }
                     ]
-                    
-                    onExpandedChanged: {
-                        if (!expanded)
-                        {
-                            tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
-                            tutorial.execBelowTitleBar("calcAngles", qsTr("Different regions of the world use different conventions to calculate the prayer timings. Use the '%1' dropdown to set the appropriate one for your region for most accurate results.") );
-                            tutorial.execBelowTitleBar("asrRatio", qsTr("According to the strongest opinion, the time of '%1' However if you want to use Imam Abu Hanifa's (rahimahullah), use can use the option for the other school of thought.").arg(shafiRatio.description) );
-                            tutorial.exec("ishaNight", qsTr("The strongest opinion is that the day ends (thus the night begins) at the time of Maghrib. However, some scholars such as Shaykh Muhsin al-Abbad holds the opinion that the night begins at the time of Isha. If this is the fiqh opinion you take, enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, ui.du(29), "images/tabs/ic_tutorial.png" );
-                            tutorial.exec("skipJumuah", qsTr("If you don't want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, 0, "images/tabs/ic_tutorial.png" );
-                            tutorial.exec("skipProfiles", qsTr("Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in 'Silent' mode, make sure you enable the 'Silent' profile checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center );
-                            tutorial.exec("athanVolume", qsTr("If the athan volume is too loud, use the slider to control its output."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(20), "images/list/ic_next.png", "r" );
-                        }
-                    }
 
                     function onDataLoaded(id, data)
                     {
@@ -183,6 +199,8 @@ Page
                             if (firstTime) {
                                 calcStrategy.expanded = true;
                             }
+                            
+                            anglesAnim.play();
                         }
                     }
                     
