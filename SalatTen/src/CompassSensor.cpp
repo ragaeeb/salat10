@@ -88,7 +88,7 @@ CompassSensor::CompassSensor(QObject* parent) : QObject(parent), m_azimuth(0), m
     OrientationSupport::instance()->setSupportedDisplayOrientation(SupportedDisplayOrientation::CurrentLocked);
 
     if ( !m_compassSensor.connectToBackend() ) {
-        LOGGER("Cannot connect to compass sensor backend!");
+        LOGGER("CannotConnectSensorBackend!");
     }
 
     m_compassSensor.addFilter(this);
