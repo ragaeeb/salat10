@@ -196,6 +196,12 @@ Page
                             checkBox.checked = profiles[checkBox.value];
                             checkBox.text = qsTr("Silent");
                             
+                            checkBox = checkerDef.createObject();
+                            profileContainer.insert(1, checkBox);
+                            checkBox.value = ""+NotificationMode.Unknown;
+                            checkBox.checked = profiles[checkBox.value];
+                            checkBox.text = qsTr("All Custom Profiles");
+                            
                             if (firstTime) {
                                 calcStrategy.expanded = true;
                             }
