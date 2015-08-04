@@ -34,7 +34,6 @@ QString InvokeHelper::invoked(bb::system::InvokeRequest const& request)
     QString target = request.target();
 
     QMap<QString,QString> targetToQML;
-    //targetToQML[TARGET_EDIT_INDIVIDUAL] = "CreateIndividualPage.qml";
 
     QString qml = targetToQML.value(target);
 

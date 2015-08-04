@@ -20,7 +20,7 @@ void CleanupEvents::cancel() {
 
 void CleanupEvents::run()
 {
-	LOGGER("CleanupEvents::run() executing");
+	LOGGER("Executing");
 
 	CalendarService calendarService;
 
@@ -46,7 +46,7 @@ void CleanupEvents::run()
 
 	emit progress(total, total);
 
-	LOGGER("CleanupEvents::run() finished after running " << total);
+	LOGGER("FinishedAfterRunning" << total);
 }
 
 
