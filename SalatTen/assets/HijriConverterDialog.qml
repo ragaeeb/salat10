@@ -7,6 +7,9 @@ FullScreenDialog
     
     onOpened: {
         dtp.expanded = true;
+        
+        tutorial.execCentered("convertInfo", qsTr("This utility can be used to convert any Gregorian date (from the disbeliever's calendar) to the Hijri (Islamic) Calendar.\n\nSimply use the dropdown to select the Julian date and you will see the Hijri date being displayed.") );
+        tutorial.exec("convertExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(4));
     }
     
     dialogContent: Container
@@ -21,6 +24,24 @@ FullScreenDialog
             horizontalAlignment: HorizontalAlignment.Fill
             textStyle.textAlign: TextAlign.Center
             textStyle.fontSize: FontSize.Large
+            
+            contextActions: [
+                ActionSet
+                {
+                    title: hijriLabel.text
+                    
+                    ActionItem
+                    {
+                        imageSource: "images/menu/ic_copy.png"
+                        title: qsTr("Copy") + Retranslate.onLanguageChanged
+                        
+                        onTriggered: {
+                            console.log("UserEvent: CopyHijriDate");
+                            persist.copyToClipboard(hijriLabel.text);
+                        }
+                    }
+                }
+            ]
             
             animations: [
                 FadeTransition {

@@ -142,14 +142,34 @@ Page
                                 var current = data[i];
                                 
                                 var def = optionDefinition.createObject();
-                                def.text = current.name;
-                                def.description = current.description;
                                 def.value = current.strategy_key;
                                 def.fajrTwilight = current.fajr_twilight;
                                 def.ishaTwilight = current.isha_twilight;
                                 def.dhuhrInterval = current.dhuhr_interval;
-                                def.maghribInterval = current.maghrib_inteval;
+                                def.maghribInterval = current.maghrib_interval;
                                 def.ishaInterval = current.isha_interval;
+                                
+                                var strategyKey = current.strategy_key;
+                                
+                                if (strategyKey == "egas") {
+                                    def.text = qsTr("Egyptian General Authority of Survey");
+                                    def.description = qsTr("Africa, Iraq, Lebanon, Syria, Malaysia");
+                                } else if (strategyKey == "isna") {
+                                    def.text = qsTr("North American");
+                                    def.description = qsTr("Parts of USA, Canada, parts of UK");
+                                } else if (strategyKey == "mwl") {
+                                    def.text = qsTr("Muslim World League");
+                                    def.description = qsTr("Europe, the far east");
+                                } else if (strategyKey == "uisk") {
+                                    def.text = qsTr("University of Islamic Sciences, Karachi");
+                                    def.description = qsTr("Afghanistan, Bangladesh, India, Pakistan, Europe");
+                                } else if (strategyKey == "uaq") {
+                                    def.text = qsTr("Umm Al-Qura");
+                                    def.description = qsTr("The Arabian Peninsula");
+                                } else {
+                                    def.text = qsTr("Unknown");
+                                    def.description = "?";
+                                }
                                 
                                 if (i == 0) {
                                     def.imageSource = "images/menu/ic_table.png";
