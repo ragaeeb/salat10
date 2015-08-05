@@ -194,6 +194,17 @@ Container
                         }
                     }
                     
+                    ActionItem
+                    {
+                        imageSource: "images/menu/ic_copy.png"
+                        title: qsTr("Copy Date") + Retranslate.onLanguageChanged
+                        
+                        onTriggered: {
+                            console.log("UserEvent: CopyTodayHijri");
+                            persist.copyToClipboard(dateDetails.text);
+                        }
+                    }
+                    
                     DeleteActionItem
                     {
                         id: clearAction
