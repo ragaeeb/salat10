@@ -16,6 +16,14 @@ Container
         boundary.recalculationNeeded.disconnect(refresh);
     }
     
+    onTouch: {
+        if ( event.isDown() ) {
+            background = Color.create("#99000000");
+        } else if ( event.isUp() || event.isCancel() ) {
+            background = Color.create("#66000000");
+        }
+    }
+    
     function hasCalendar()
     {
         if ( offloader.hasCalendarAccess() ) {
