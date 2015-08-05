@@ -94,6 +94,22 @@ NavigationPane
                 }
             }
             
+            onSwipedUpRight: {
+                if (previewer.delegateActive)
+                {
+                    tapper.activateList();
+                    reporter.record("SwipedUpRightPreview");
+                }
+            }
+            
+            onSwipedUpLeft: {
+                if (previewer.delegateActive)
+                {
+                    tapper.activateList();
+                    reporter.record("SwipedUpLeftPreview");
+                }
+            }
+            
             Container
             {
                 horizontalAlignment: HorizontalAlignment.Fill
