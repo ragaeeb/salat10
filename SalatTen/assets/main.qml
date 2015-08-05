@@ -18,6 +18,15 @@ NavigationPane
         }
     }
     
+    function onFinished(result, data)
+    {
+        if (data.cookie == "prayerSchedulesArticle") {
+            persist.openUri("http://www.troid.ca/index.php/comprehensive/salaah/810-prayer-schedules-important-rulings-guidelines-and-cautions");
+        } else if (data.cookie == "prayerSchedulesVideo") {
+            persist.openUri("https://www.youtube.com/watch?v=UpzkRvWSIoc");
+        }
+    }
+    
     Menu.definition: CanadaIncMenu
     {
         id: menuDef
@@ -50,6 +59,12 @@ NavigationPane
                 tutorial.exec("footerTap", qsTr("Tap anywhere on this strip to expand it and see the details for today."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(8), 0, ui.du(1) );
                 tutorial.execSwipe("expandFooter", qsTr("You can also expand this strip by swiping-up on it and see the details."), HorizontalAlignment.Center, VerticalAlignment.Bottom, "u");
                 tutorial.execSwipe("openAppMenu", qsTr("Swipe down from the top-bezel to display the Settings and Help and file bugs!"), HorizontalAlignment.Center, VerticalAlignment.Top, "d");
+                
+                if ( reporter.deferredCheck("prayerSchedulesArticle", 3) ) {
+                    persist.showDialog( navigationPane, {'cookie': 'prayerSchedulesArticle'}, qsTr("Prayer Schedule Rulings"), qsTr("Note that prayer schedule apps can sometimes give you incorrect timings! Would youl ike to learn more?"), qsTr("Yes"), qsTr("No") );
+                } else if ( reporter.deferredCheck("prayerSchedulesVideo", 21) ) {
+                    persist.showDialog( navigationPane, {'cookie': 'prayerSchedulesVideo'}, qsTr("Prayer Schedules"), qsTr("Would you like to learn what the scholars said about prayer schedules?"), qsTr("Yes"), qsTr("No") );
+                }
                 
                 if (boundary.atLeastOneAthanScheduled)
                 {
@@ -170,8 +185,6 @@ NavigationPane
                         control.anim.play();
                         control.scrollToItem([0,0], ScrollAnimation.Smooth);
                         control.footerShown.connect(onFooterShown);
-                        
-                        quoteLabel.maxWidth = control.maxWidth-100;
                     }
                 }
             }
@@ -193,6 +206,7 @@ NavigationPane
                 
                 onControlChanged: {
                     if (control) {
+                        quoteLabel.maxHeight = deviceUtils.pixelSize.height-control.preferredHeight;
                         sql.fetchRandomBenefit(quoteLabel);
                     }
                 }

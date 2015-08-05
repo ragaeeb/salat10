@@ -81,17 +81,10 @@ Page
         verticalAlignment: VerticalAlignment.Fill
         background: webView.delegateActive ? Color.White : SystemDefaults.Paints.ContainerBackground
         
-        attachedObjects: [
-            ImagePaintDefinition {
-                id: tbg
-                imageSource: "images/graphics/title_bg.png"
-            }
-        ]
-        
         TextField
         {
             id: searchField
-            hintText: qsTr("Enter article title to search...") + Retranslate.onLanguageChanged
+            hintText: qsTr("Enter article title or author to search...") + Retranslate.onLanguageChanged
             input.submitKey: SubmitKey.Search
             input.flags: TextInputFlag.AutoCapitalizationOff | TextInputFlag.SpellCheck | TextInputFlag.WordSubstitution | TextInputFlag.AutoPeriodOff | TextInputFlag.AutoCorrection
             input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose

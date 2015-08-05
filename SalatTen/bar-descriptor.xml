@@ -45,8 +45,8 @@
 
 	<!-- Fourth digit segment of the package version. First three segments are
 		taken from the <versionNumber> element. Must be an integer from 0 to 2^16-1 -->
-	<buildId>1</buildId>
- <packageLocale>ar,fr-FR,fr,fr-CA</packageLocale>
+	<buildId>3</buildId>
+ <packageLocale>ar,fr,id,ru,tr,es</packageLocale>
 
 	<!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents
 		the version of the application, as it should be shown to users. Optional. -->
@@ -154,6 +154,12 @@
 	<asset path="translations" dest="qm">
 		<include name="*.qm" />
 	</asset>
+    <asset path="../salat/translations" dest="qm">
+        <include name="*.qm"/>
+    </asset>
+    <asset path="../../canadainc/translations" dest="qm">
+        <include name="*.qm"/>
+    </asset>
 
 	<asset path="splash_n.png">splash_n.png</asset>
 	<asset path="../../canadainc/assets/AboutTitleBar.qml">assets/AboutTitleBar.qml</asset>
