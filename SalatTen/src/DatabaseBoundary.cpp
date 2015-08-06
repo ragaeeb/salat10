@@ -25,7 +25,7 @@ void DatabaseBoundary::fetchAllOrigins(QObject* caller)
 
 
 void DatabaseBoundary::fetchAngles(QObject* caller) {
-    m_sql.executeQuery(caller, "SELECT * FROM angles ORDER BY name", QueryId::GetAllAngles);
+    m_sql.executeQuery(caller, "SELECT * FROM angles ORDER BY strategy_key", QueryId::GetAllAngles);
 }
 
 
