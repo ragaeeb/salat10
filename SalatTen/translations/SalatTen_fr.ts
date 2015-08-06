@@ -93,7 +93,7 @@
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="138"/>
         <source>Shaykh Muhammad Nasir-ud-Din al-Albani (رحمه الله)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cheikh Muhammad Nassiruddine al-Albâni</translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="204"/>
@@ -118,7 +118,7 @@
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="136"/>
         <source>Anonymous</source>
-        <translation type="unfinished"></translation>
+        <translation>Anonyme</translation>
     </message>
 </context>
 <context>
@@ -271,54 +271,24 @@ Si vous voyez une icône tourné en haut, cela signifie que la boussole doit enc
 <context>
     <name>EventListItem</name>
     <message>
-        <location filename="../assets/EventListItem.qml" line="44"/>
-        <source>Edit</source>
-        <translation>Editer</translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="54"/>
-        <source>Set Iqamah</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="65"/>
-        <source>Remove Iqamah</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="101"/>
+        <location filename="../assets/EventListItem.qml" line="9"/>
         <source>Iqamah: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="105"/>
-        <source>Iqamah: %1 minutes</source>
+        <location filename="../assets/EventListItem.qml" line="27"/>
+        <source>Edit</source>
+        <translation>Editer</translation>
+    </message>
+    <message>
+        <location filename="../assets/EventListItem.qml" line="37"/>
+        <source>Set Iqamah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EventListItem.qml" line="108"/>
-        <source>Iqamah: %1 minutes %2 seconds</source>
+        <location filename="../assets/EventListItem.qml" line="48"/>
+        <source>Remove Iqamah</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="111"/>
-        <source>Iqamah: %1 seconds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="138"/>
-        <source>%1 minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="141"/>
-        <source>%1 minutes %2 seconds</source>
-        <translation>%1 minutes %2 secondes</translation>
-    </message>
-    <message>
-        <location filename="../assets/EventListItem.qml" line="144"/>
-        <source>%1 seconds</source>
-        <translation>%1 secondes</translation>
     </message>
 </context>
 <context>
@@ -368,14 +338,14 @@ Si vous voyez une icône tourné en haut, cela signifie que la boussole doit enc
     <message>
         <location filename="../assets/GlobalProperties.qml" line="59"/>
         <source>Location Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Services de localisation</translation>
     </message>
     <message>
         <location filename="../assets/GlobalProperties.qml" line="59"/>
         <source>Warning: It seems like the location services is not enabled on your BlackBerry 10 device so the app will not be able to fetch real-time data and map information.
 
 Would you like to launch the Location Services screen and enable the Location Services permission there?</source>
-        <translation type="unfinished">Avertissement: Il semble que le service de location n&apos;est pas activé sur votre appareil BB10 donc l&apos;application ne sera pas capable de rapporter les donnés et les informations de la carte en temps réel.
+        <translation>Avertissement: Il semble que le service de location n&apos;est pas activé sur votre appareil BB10 donc l&apos;application ne sera pas capable de rapporter les donnés et les informations de la carte en temps réel.
 
 Voulez-vous lancer la page du services locations et activer la permission du service de location?</translation>
     </message>
@@ -607,39 +577,89 @@ Try it now to close this screen.</source>
     </message>
 </context>
 <context>
+    <name>PreviewEvent</name>
+    <message>
+        <location filename="../assets/PreviewEvent.qml" line="176"/>
+        <source>%2 Iqamah: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../assets/PreviewEvent.qml" line="180"/>
+        <source>%1 Iqamah in %n minutes</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../assets/PreviewEvent.qml" line="183"/>
+        <source>%3 Iqamah in %1 minutes %2 seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../assets/PreviewEvent.qml" line="186"/>
+        <source>%1 Iqamah in %n seconds</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../assets/PreviewEvent.qml" line="215"/>
+        <source>%1 %n minutes</source>
+        <translation>
+            <numerusform>%1 %n minute</numerusform>
+            <numerusform>%1 %n minutes</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../assets/PreviewEvent.qml" line="218"/>
+        <source>%3 %1 minutes %2 seconds</source>
+        <translation type="unfinished">%1 minutes %2 secondes {3 %1 ?} {2 ?}</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../assets/PreviewEvent.qml" line="221"/>
+        <source>%1 %n seconds</source>
+        <translation>
+            <numerusform>%1 %n seconde</numerusform>
+            <numerusform>%1 %n secondes</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>PreviewListItem</name>
     <message>
-        <location filename="../assets/PreviewListItem.qml" line="51"/>
+        <location filename="../assets/PreviewListItem.qml" line="55"/>
         <source>No adjustments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PreviewListItem.qml" line="150"/>
+        <location filename="../assets/PreviewListItem.qml" line="155"/>
         <source>Export</source>
-        <translation type="unfinished">Exporter</translation>
+        <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../assets/PreviewListItem.qml" line="208"/>
+        <location filename="../assets/PreviewListItem.qml" line="213"/>
         <source>Copy Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PreviewListItem.qml" line="239"/>
+        <location filename="../assets/PreviewListItem.qml" line="244"/>
         <source>Confirmation</source>
         <translation>Confirmer</translation>
     </message>
     <message>
-        <location filename="../assets/PreviewListItem.qml" line="239"/>
+        <location filename="../assets/PreviewListItem.qml" line="244"/>
         <source>Are you sure you want to clear all the calendar events?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PreviewListItem.qml" line="175"/>
+        <location filename="../assets/PreviewListItem.qml" line="180"/>
         <source>Share</source>
         <translation>Partager</translation>
     </message>
     <message>
-        <location filename="../assets/PreviewListItem.qml" line="219"/>
+        <location filename="../assets/PreviewListItem.qml" line="224"/>
         <source>Clear Exported Events</source>
         <translation type="unfinished">Effacer Les événement Exportés</translation>
     </message>
@@ -647,54 +667,54 @@ Try it now to close this screen.</source>
 <context>
     <name>ResultListUtil</name>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="9"/>
+        <location filename="../assets/ResultListUtil.qml" line="11"/>
         <source>Enable Athan?</source>
         <translation>Activer L&apos;Athan?</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="10"/>
+        <location filename="../assets/ResultListUtil.qml" line="12"/>
         <source>Do you want to enable athans to automatically play when it is time for salah?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="11"/>
+        <location filename="../assets/ResultListUtil.qml" line="13"/>
         <source>Display notifications in the BlackBerry Hub</source>
         <translation>Afficher les notifications dans le BlackBerry Hub</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="40"/>
+        <location filename="../assets/ResultListUtil.qml" line="42"/>
         <source>Successfully reset athans to default sound</source>
         <translation>La mise par defaults des sons de l&apos;athan est un succès.</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="66"/>
+        <location filename="../assets/ResultListUtil.qml" line="115"/>
         <source>Mute Athan</source>
         <translation>Muter l&apos;athan</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="66"/>
+        <location filename="../assets/ResultListUtil.qml" line="115"/>
         <source>Do you want notifications to show up in BlackBerry Hub?</source>
         <translation>Voulez vous que les notifications apparaissent dans le blackberry Hub?</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="13"/>
-        <location filename="../assets/ResultListUtil.qml" line="66"/>
+        <location filename="../assets/ResultListUtil.qml" line="15"/>
+        <location filename="../assets/ResultListUtil.qml" line="115"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="12"/>
-        <location filename="../assets/ResultListUtil.qml" line="66"/>
+        <location filename="../assets/ResultListUtil.qml" line="14"/>
+        <location filename="../assets/ResultListUtil.qml" line="115"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="95"/>
+        <location filename="../assets/ResultListUtil.qml" line="101"/>
         <source>Successfully enabled alarms/athans.</source>
         <translation>Les alarmes/athans ont été activé avec succès.</translation>
     </message>
     <message>
-        <location filename="../assets/ResultListUtil.qml" line="98"/>
+        <location filename="../assets/ResultListUtil.qml" line="104"/>
         <source>Successfully muted alarms/athans.</source>
         <translation>Les alarmes / athans ont été muté avec succès.</translation>
     </message>
@@ -981,7 +1001,7 @@ C&apos;est simple à régler, pressez et maintenant simplement le temps qui est 
     <message>
         <location filename="../assets/SettingsPage.qml" line="170"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Inconnu</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="205"/>
@@ -1007,114 +1027,114 @@ C&apos;est simple à régler, pressez et maintenant simplement le temps qui est 
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="37"/>
+        <location filename="../assets/main.qml" line="43"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="39"/>
+        <location filename="../assets/main.qml" line="45"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="48"/>
+        <location filename="../assets/main.qml" line="54"/>
         <source>You can tap on the author&apos;s name to find out more information about them (you need to have the Quran10 app installed).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="49"/>
+        <location filename="../assets/main.qml" line="55"/>
         <source>This is today&apos;s Hijri date.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="51"/>
+        <location filename="../assets/main.qml" line="57"/>
         <source>You can tap on this calendar icon to convert between Hijri and Gregorian calendar dates!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="50"/>
+        <location filename="../assets/main.qml" line="56"/>
         <source>You can press-and-hold on this section to export the timings right to your calendar so that you can get prayer time reminders to show up directly on your device&apos;s calendar. This will also allow reminders to be shown even while the app is closed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="52"/>
+        <location filename="../assets/main.qml" line="58"/>
         <source>You can tap on this edit icon to adjust the calculated hijri date as necessary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="53"/>
+        <location filename="../assets/main.qml" line="59"/>
         <source>This displays the current event that is already in progress.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="54"/>
+        <location filename="../assets/main.qml" line="60"/>
         <source>You can tap on this edit icon to adjust the current event as necessary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="55"/>
+        <location filename="../assets/main.qml" line="61"/>
         <source>Tapping on the icon will toggle the athan and notification settings for that specific event. So if you want to turn on or turn off the athan and notifications tap on the icon.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="56"/>
+        <location filename="../assets/main.qml" line="62"/>
         <source>This displays the next event that is coming up.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="57"/>
+        <location filename="../assets/main.qml" line="63"/>
         <source>Tapping on the icon will toggle the athan and notification settings for that next event. So if you want to turn on or turn off the athan and notifications tap on the icon.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="58"/>
+        <location filename="../assets/main.qml" line="64"/>
         <source>You can tap on this edit icon to adjust the next event&apos;s timing as necessary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="59"/>
+        <location filename="../assets/main.qml" line="65"/>
         <source>Tap anywhere on this strip to expand it and see the details for today.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="60"/>
+        <location filename="../assets/main.qml" line="66"/>
         <source>You can also expand this strip by swiping-up on it and see the details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="61"/>
+        <location filename="../assets/main.qml" line="67"/>
         <source>Swipe down from the top-bezel to display the Settings and Help and file bugs!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="64"/>
+        <location filename="../assets/main.qml" line="70"/>
         <source>Prayer Schedule Rulings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="64"/>
-        <source>Note that prayer schedule apps can sometimes give you incorrect timings! Would youl ike to learn more?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="64"/>
-        <location filename="../assets/main.qml" line="66"/>
+        <location filename="../assets/main.qml" line="70"/>
+        <location filename="../assets/main.qml" line="72"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="64"/>
-        <location filename="../assets/main.qml" line="66"/>
+        <location filename="../assets/main.qml" line="70"/>
+        <location filename="../assets/main.qml" line="72"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="66"/>
+        <location filename="../assets/main.qml" line="70"/>
+        <source>Note that prayer schedule apps can sometimes give you incorrect timings! Would you like to learn more?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="72"/>
         <source>Prayer Schedules</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="66"/>
+        <location filename="../assets/main.qml" line="72"/>
         <source>Would you like to learn what the scholars said about prayer schedules?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1142,7 +1162,7 @@ C&apos;est simple à régler, pressez et maintenant simplement le temps qui est 
     <message>
         <location filename="../src/Offloader.cpp" line="126"/>
         <source>Export complete!</source>
-        <translation type="unfinished">Exportation Fini!</translation>
+        <translation>Exportation Fini!</translation>
     </message>
 </context>
 <context>

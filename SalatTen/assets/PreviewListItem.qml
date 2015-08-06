@@ -12,8 +12,12 @@ Container
     preferredHeight: 376
     layout: DockLayout {}
     
-    function cleanUp() {
+    function cleanUp()
+    {
         boundary.recalculationNeeded.disconnect(refresh);
+        notification.currentEventChanged.disconnect(refresh);
+        currentEvent.cleanUp();
+        nextEvent.cleanUp();
     }
     
     onTouch: {
@@ -68,6 +72,7 @@ Container
     
     onCreationCompleted: {
         boundary.recalculationNeeded.connect(refresh);
+        notification.currentEventChanged.connect(refresh);
         persist.registerForSetting(root, "athaans", false, false);
         persist.registerForSetting(root, "notifications");
         persist.registerForSetting(root, "hijri", false, false);

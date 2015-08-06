@@ -4,6 +4,8 @@ import com.canadainc.data 1.0
 
 QtObject
 {
+    id: rlu
+    
     property variant athanDialog: SystemDialog
     {
         title: qsTr("Enable Athan?") + Retranslate.onLanguageChanged
@@ -58,31 +60,35 @@ QtObject
         return persist.convertToUtf8( textualize(data) );
     }
     
-    function toggleAthaans(turnOn)
+    function onFinished(confirmed, data)
     {
         var keepNotifications = true;
-
+        var turnOn = data.turnOn;
+        var selected = data.selected;
+        console.log("**** TURNON", turnOn);
+        
         if (!turnOn) {
-            keepNotifications = persist.showBlockingDialog( qsTr("Mute Athan"), qsTr("Do you want notifications to show up in BlackBerry Hub?"), qsTr("Yes"), qsTr("No") );
+            keepNotifications = confirmed;
         }
-
-        var selected = parent.parent.selectionList();
+        
+        console.log("**** TURNON33", turnOn);
         var athaans = persist.getValueFor("athaans");
         var notifications = persist.getValueFor("notifications");
         var dm = parent.parent.dataModel;
-
+        console.log("**** TURNON44", turnOn);
         for (var i = 0; i < selected.length; i++)
         {
             var indexPath = selected[i];
             var current = dm.data(indexPath);
             var key = current.key;
-
+            
             current.athaan = turnOn;
             current.notification = keepNotifications;
             athaans[key] = turnOn;
             notifications[key] = keepNotifications;
             dm.updateItem(indexPath, current);
         }
+        console.log("**** TURNON55", turnOn);
         
         persist.saveValueFor("athaans", athaans);
         persist.saveValueFor("notifications", notifications);
@@ -94,13 +100,23 @@ QtObject
             icon = "asset:///images/list/ic_athaan_enable.png";
             toastMessage = qsTr("Successfully enabled alarms/athans.");
         } else {
-            icon = "asset:///images/list/ic_athaan_enable.png";
+            icon = "asset:///images/list/ic_athaan_mute.png";
             toastMessage = qsTr("Successfully muted alarms/athans.");
         }
-
+        
         persist.showToast(toastMessage, icon);
     }
     
+    function toggleAthaans(turnOn)
+    {
+        var data = {'turnOn': turnOn, 'selected': parent.parent.selectionList()};
+        
+        if (!turnOn) {
+            persist.showDialog( rlu, data, qsTr("Mute Athan"), qsTr("Do you want notifications to show up in BlackBerry Hub?"), qsTr("Yes"), qsTr("No") );
+        } else {
+            onFinished(true, data);
+        }
+    }
     
     function getSelectedKeys()
     {
