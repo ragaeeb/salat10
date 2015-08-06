@@ -20,11 +20,17 @@ NavigationPane
     
     function onFinished(result, data)
     {
-        if (data.cookie == "prayerSchedulesArticle") {
-            persist.openUri("http://www.troid.ca/index.php/comprehensive/salaah/810-prayer-schedules-important-rulings-guidelines-and-cautions");
-        } else if (data.cookie == "prayerSchedulesVideo") {
-            persist.openUri("https://www.youtube.com/watch?v=UpzkRvWSIoc");
+        if (result)
+        {
+            if (data.cookie == "prayerSchedulesArticle") {
+                persist.openUri("http://www.troid.ca/index.php/comprehensive/salaah/810-prayer-schedules-important-rulings-guidelines-and-cautions");
+            } else if (data.cookie == "prayerSchedulesVideo") {
+                persist.openUri("https://www.youtube.com/watch?v=UpzkRvWSIoc");
+            }
         }
+        
+        persist.setFlag(data.cookie, 1);
+        reporter.record(data.cookie, result);
     }
     
     Menu.definition: CanadaIncMenu
@@ -61,7 +67,7 @@ NavigationPane
                 tutorial.execSwipe("openAppMenu", qsTr("Swipe down from the top-bezel to display the Settings and Help and file bugs!"), HorizontalAlignment.Center, VerticalAlignment.Top, "d");
                 
                 if ( reporter.deferredCheck("prayerSchedulesArticle", 3) ) {
-                    persist.showDialog( navigationPane, {'cookie': 'prayerSchedulesArticle'}, qsTr("Prayer Schedule Rulings"), qsTr("Note that prayer schedule apps can sometimes give you incorrect timings! Would youl ike to learn more?"), qsTr("Yes"), qsTr("No") );
+                    persist.showDialog( navigationPane, {'cookie': 'prayerSchedulesArticle'}, qsTr("Prayer Schedule Rulings"), qsTr("Note that prayer schedule apps can sometimes give you incorrect timings! Would you like to learn more?"), qsTr("Yes"), qsTr("No") );
                 } else if ( reporter.deferredCheck("prayerSchedulesVideo", 21) ) {
                     persist.showDialog( navigationPane, {'cookie': 'prayerSchedulesVideo'}, qsTr("Prayer Schedules"), qsTr("Would you like to learn what the scholars said about prayer schedules?"), qsTr("Yes"), qsTr("No") );
                 }
