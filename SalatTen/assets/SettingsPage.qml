@@ -110,7 +110,7 @@ Page
                                 tutorial.exec("skipJumuah", qsTr("If you don't want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(1), 0, 0, "images/tabs/ic_tutorial.png" );
                                 tutorial.exec("skipProfiles", qsTr("Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in 'Silent' mode, make sure you enable the 'Silent' profile checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center );
                                 tutorial.exec("athanVolume", qsTr("If the athan volume is too loud, use the slider to control its output."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(20), "images/tutorial/ic_next.png", "r" );
-                                tutorial.execActionBar("settingsBack", qsTr("To return to the main timings page tap on the Back button here.").arg(locationAction.title), "b" );
+                                tutorial.execActionBar("settingsBack", qsTr("To return to the main timings page tap on the Back button here."), "b" );
                             }
                         }
                     ]

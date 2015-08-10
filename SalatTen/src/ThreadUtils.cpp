@@ -3,6 +3,7 @@
 #include "ThreadUtils.h"
 #include "AppLogFetcher.h"
 #include "JlCompress.h"
+#include "Report.h"
 #include "SalatUtils.h"
 
 namespace {
@@ -79,10 +80,10 @@ QImage blurred(const QImage& image, const QRect& rect, int radius, bool alphaOnl
 
 namespace salat {
 
-void ThreadUtils::compressFiles(QSet<QString>& attachments)
-{
-    canadainc::AppLogFetcher::removeInvalid(attachments);
-    JlCompress::compressFiles( ZIP_FILE_PATH, attachments.toList() );
+using namespace canadainc;
+
+void ThreadUtils::compressFiles(Report& r, QString const& zipPath) {
+    JlCompress::compressFiles(zipPath, r.attachments);
 }
 
 

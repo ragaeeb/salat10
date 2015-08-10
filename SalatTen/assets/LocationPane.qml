@@ -128,8 +128,8 @@ Page
                     persist.saveValueFor("city", place.city, false);
                     persist.saveValueFor("location", place.name, false);
                     persist.saveValueFor("country", place.country, false);
-                    persist.saveValueFor("latitude", place.latitude, true);
-                    persist.saveValueFor("longitude", place.longitude, true);
+                    persist.saveValueFor("latitude", place.latitude);
+                    persist.saveValueFor("longitude", place.longitude);
                     persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "images/tabs/ic_map.png" );
 
                     reporter.record( "LocationPicked", JSON.stringify(place) );
