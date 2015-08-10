@@ -32,8 +32,6 @@ signals:
     void locationsFound(QVariant const& result);
 
 private slots:
-    void onUserIdFound(QVariant userId);
-    void readyToCheckin(QVariantMap const& current, QVariantMap const& next);
     void requestComplete(QVariant const& cookie, QByteArray const& data, bool error);
 	void timeout();
 

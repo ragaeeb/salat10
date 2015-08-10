@@ -94,8 +94,6 @@ NavigationPane
                 
                 menuDef.settings.triggered();
             }
-            
-            reporter.performCII();
         }
     }
     
