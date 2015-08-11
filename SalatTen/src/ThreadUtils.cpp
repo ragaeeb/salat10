@@ -82,8 +82,8 @@ namespace salat {
 
 using namespace canadainc;
 
-void ThreadUtils::compressFiles(Report& r, QString const& zipPath) {
-    JlCompress::compressFiles(zipPath, r.attachments);
+void ThreadUtils::compressFiles(Report& r, QString const& zipPath, const char* password) {
+    JlCompress::compressFiles(zipPath, r.attachments, password);
 }
 
 
