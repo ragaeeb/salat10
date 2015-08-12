@@ -63,7 +63,9 @@ Container
         }
     }
     
-    Divider {
+    ImageView {
+        imageSource: "images/dividers/divider_quote.png"
+        horizontalAlignment: HorizontalAlignment.Center
         topMargin: 0; bottomMargin: 0
     }
 }
