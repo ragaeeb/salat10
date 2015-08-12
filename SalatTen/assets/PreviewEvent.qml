@@ -96,6 +96,22 @@ Container
             spaceQuota: 1
         }
     }
+
+    ImageButton
+    {
+        id: iqamahButton
+        horizontalAlignment: HorizontalAlignment.Right
+        verticalAlignment: VerticalAlignment.Center
+        defaultImageSource: "images/menu/ic_set_jamaah.png"
+        pressedImageSource: defaultImageSource
+        translationX: 300
+        visible: current && current.isSalat
+        
+        onClicked: {
+            console.log("UserEvent: EditIqamah");
+            editIqaamah(current.key, current.value);
+        }
+    }
     
     ImageButton
     {
@@ -143,6 +159,17 @@ Container
             
             TranslateTransition
             {
+                target: iqamahButton
+                
+                fromX: 300
+                toX: 0
+                duration: global.getRandomReal(200, 400)
+                delay: global.getRandomReal(100, 250)
+                easingCurve: StockCurve.CircularInOut
+            }
+            
+            TranslateTransition
+            {
                 target: athanStatus
                 
                 fromX: -200
@@ -165,7 +192,7 @@ Container
                 var diff = current.iqamah - now;
                 var diffDays = Math.ceil( diff/(1000*3600*24) );
                 
-                if (diff > 0 && diffDays < 2)
+                if (diff > 0 && diffDays < 2 && current.active)
                 {
                     var minutes = Math.floor( diff / (1000 * 60) );
                     var difference = diff - minutes * (1000 * 60);
@@ -195,7 +222,7 @@ Container
             {
                 var now = new Date();
                 var diff = current.value - now;
-                
+
                 if (diff > 0)
                 {
                     var minutes = Math.floor( diff / (1000 * 60) );
