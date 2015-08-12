@@ -69,7 +69,10 @@ Sheet
                 textStyle.textAlign: TextAlign.Center
             }
             
-            Divider {
+            ImageView
+            {
+                imageSource: "images/dividers/divider_athan_preview.png"
+                horizontalAlignment: HorizontalAlignment.Center
                 bottomMargin: 0
             }
             
