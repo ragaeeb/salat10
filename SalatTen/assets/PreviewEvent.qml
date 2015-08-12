@@ -1,4 +1,4 @@
-import bb.cascades 1.0
+import bb.cascades 1.3
 import com.canadainc.data 1.0
 
 Container
@@ -177,6 +177,12 @@ Container
                 duration: global.getRandomReal(200, 400)
                 delay: global.getRandomReal(100, 250)
                 easingCurve: StockCurve.ExponentialOut
+            }
+            
+            onEnded: {
+                if (iqamahButton.visible) {
+                    tutorial.exec("iqamahShortcut", qsTr("Tap on the iqamah clock icon to set the time that the congregational prayer begins at your local musalla or masjid."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(8), 0, ui.du(1) );
+                }
             }
         }
     ]
