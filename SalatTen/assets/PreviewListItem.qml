@@ -49,7 +49,7 @@ Container
     {
         var now = new Date();
         var adjust = persist.getValueFor("hijri");
-        var hijriDate = hijriCalc.writeIslamicDate(adjust);
+        var hijriDate = hijriCalc.writeIslamicDate(adjust, now);
         
         hijriActionSet.title = hijriDate;
         hijriActionSet.subtitle = adjust == 0 ? qsTr("No adjustments") : adjust > 0 ? "+"+adjust.toString() : adjust.toString();

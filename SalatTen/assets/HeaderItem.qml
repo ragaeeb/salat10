@@ -30,7 +30,7 @@ Container
     }
     
     ListItem.onDataChanged: {
-        dateDetails.text = hijriCalc.writeIslamicDate( persist.getValueFor("hijri") );
+        dateDetails.text = hijriCalc.writeIslamicDate( persist.getValueFor("hijri"), ListItemData );
         gregDate.text = Qt.formatDate(ListItemData, Qt.SystemLocaleLongDate);
     }
     
