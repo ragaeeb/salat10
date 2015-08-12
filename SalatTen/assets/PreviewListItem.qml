@@ -55,7 +55,10 @@ Container
         hijriActionSet.subtitle = adjust == 0 ? qsTr("No adjustments") : adjust > 0 ? "+"+adjust.toString() : adjust.toString();
         dateDetails.text = hijriDate;
         
-        currentEvent.current = boundary.getCurrent(now);
+        var currentOne = boundary.getCurrent(now);
+        currentOne.active = true;
+        
+        currentEvent.current = currentOne;
         nextEvent.current = boundary.getNext(now);
     }
     
@@ -67,6 +70,14 @@ Container
     {
         var dialog = definition.init("AdjustEventDialog.qml");
         dialog.key = key;
+        dialog.open();
+    }
+    
+    function editIqaamah(key, value)
+    {
+        var dialog = definition.init("JamaahPickerDialog.qml");
+        dialog.key = key;
+        dialog.base = value;
         dialog.open();
     }
     

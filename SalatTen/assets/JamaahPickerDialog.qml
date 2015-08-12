@@ -55,7 +55,7 @@ FullScreenDialog
             mode: DateTimePickerMode.Time
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            title: qsTr("Jamaah Time") + Retranslate.onLanguageChanged
+            title: qsTr("%1 Jamaah Time").arg( translator.render(key) ) + Retranslate.onLanguageChanged
         }
     }
 }
