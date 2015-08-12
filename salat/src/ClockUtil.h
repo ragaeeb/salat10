@@ -11,6 +11,8 @@ class ClockUtil :  public QObject, public bb::AbstractBpsEventHandler
 {
 	Q_OBJECT
 
+	bool m_initialized;
+
 signals:
 	void clockSettingsChanged();
 

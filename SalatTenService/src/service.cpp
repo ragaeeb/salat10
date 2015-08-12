@@ -134,7 +134,7 @@ void Service::timeout(bool init)
         Translator t;
         QMap<QString, bool> salatMap = t.salatMap();
 
-        LOGGER("Athaans" << m_athan.athaans << playAthaan << m_athan.notifications << playNotification);
+        LOGGER("Athaans" << playAthaan << playNotification);
 
         if ( playAthaan && (m_athan.prevKey != currentEventKey) && salatMap.contains(currentEventKey) )
         {

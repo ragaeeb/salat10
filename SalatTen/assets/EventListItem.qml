@@ -10,6 +10,7 @@ StandardListItem
     
     imageSource: {
         if (ListItemData) {
+            vdd.show();
             return global.renderAthanStatus(ListItemData);
         } else {
             return undefined;
