@@ -7,17 +7,13 @@ Page
 {
     id: locationPage
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
-    property variant geoFinder
     
     function cleanUp()
     {
         navigationPane.peekEnabled = true;
         notification.locationsFound.disconnect(locations.onLocationsFound);
         Application.aboutToQuit.disconnect(onAboutToQuit);
-        
-        if (geoFinder) {
-            geoFinder.finished.disconnect(refresh.onFound);
-        }
+        app.gpsReadyChanged.disconnect(onGpsReadyChanged);
     }
     
     function onLocationsFound(result)
@@ -49,12 +45,6 @@ Page
         mapViewDelegate.delegateActive = false;
     }
     
-    function onFound(l,p)
-    {
-        busy.delegateActive = false;
-        geoFinder.finished.disconnect(onFound);
-    }
-    
     function onSettingChanged(value, key)
     {
         if (key == "longitude" && boundary.calculationFeasible)
@@ -74,29 +64,38 @@ Page
         }
     }
     
+    function onGpsReadyChanged()
+    {
+        if (app.gpsReady) {
+            busy.delegateActive = false;
+        }
+    }
+    
     onCreationCompleted: {
         notification.locationsFound.connect(onLocationsFound);
         Application.aboutToQuit.connect(onAboutToQuit);
+        app.gpsReadyChanged.connect(onGpsReadyChanged);
         
         locationAnim.play();
     }
     
     actions: [
-        ActionItem {
+        ActionItem
+        {
             id: refresh
             title: qsTr("GPS Refresh") + Retranslate.onLanguageChanged
             imageSource: "images/menu/ic_reset.png"
             ActionBar.placement: ActionBarPlacement.OnBar
+            enabled: app.gpsReady
             
             onTriggered: {
                 console.log("UserEvent: RefreshLocation");
                 reporter.record("RefreshLocation");
                 
-                geoFinder = app.refreshLocation();
+                var ok = app.refreshLocation();
                 
-                if (geoFinder) {
+                if (ok) {
                     busy.delegateActive = true;
-                    geoFinder.finished.connect(onFound);
                 } else {
                     global.showLocationServices();
                 }

@@ -33,6 +33,7 @@ using namespace bb::system;
 class ApplicationUI : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool gpsReady READ gpsReady NOTIFY gpsReadyChanged)
 
     LocaleUtil m_locale;
 	Persistance m_persistance;
@@ -43,13 +44,16 @@ class ApplicationUI : public QObject
     DeviceUtils m_device;
     Offloader m_offloader;
     InvokeHelper m_invoke;
+    bool m_gpsReady;
 
+    bool gpsReady() const;
     void init(QString const& qml);
     void initDefaultValues();
 
 signals:
 	void initialize();
 	void lazyInitComplete();
+	void gpsReadyChanged();
 
 private slots:
     void childCardDone(bb::system::CardDoneMessage const& message=bb::system::CardDoneMessage());
@@ -62,7 +66,7 @@ public:
     ApplicationUI(InvokeManager* i);
     virtual ~ApplicationUI();
 
-    Q_INVOKABLE QObject* refreshLocation();
+    Q_INVOKABLE bool refreshLocation();
     Q_INVOKABLE void setCustomAthaans(QStringList const& keys, QString const& uri=QString());
     Q_INVOKABLE void saveIqamah(QString const& key, QDateTime const& time);
     Q_INVOKABLE void removeIqamah(QString const& key);
