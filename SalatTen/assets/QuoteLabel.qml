@@ -16,9 +16,6 @@ Container
             }
             
             quoteLabel.text = "<html><i>\n“%1”</i>\n\n- <b><a href=\"%5\">%2</a>%4</b>\n\n[%3]</html>".arg( quote.body.replace(/&/g,"&amp;") ).arg(quote.author).arg( quote.reference.replace(/&/g,"&amp;") ).arg( global.getSuffix(quote.birth, quote.death, quote.is_companion == 1, quote.female == 1) ).arg( quote.id.toString() );
-            
-            //if ( tutorial.promptReview() ) {}
-            //else if ( tutorial.promptDonation() ) {}
         }
     }
     
