@@ -39,7 +39,7 @@ QtObject
     function resetSound(keys)
     {
         app.setCustomAthaans(keys,"");
-        persist.showToast( qsTr("Successfully reset athans to default sound"), "", "asset:///images/menu/ic_refresh.png" );
+        persist.showToast( qsTr("Successfully reset athans to default sound"), "images/menu/ic_refresh.png" );
     }
     
     function textualize(data)
