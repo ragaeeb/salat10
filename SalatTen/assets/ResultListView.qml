@@ -55,7 +55,7 @@ ListView
     function removeJamaah(indexPath)
     {
         app.removeIqamah( dataModel.data(indexPath).key );
-        persist.showToast( qsTr("Iqamah time removed"), "", "asset:///images/menu/ic_remove_jamaah.png" );
+        persist.showToast( qsTr("Iqamah time removed"), "images/menu/ic_remove_jamaah.png" );
     }
     
     dataModel: boundary.getModel()
