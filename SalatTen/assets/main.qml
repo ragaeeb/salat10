@@ -45,6 +45,10 @@ NavigationPane
         settings.title: qsTr("Settings") + Retranslate.onLanguageChanged
         
         onFinished: {
+            if (clean) {
+                tutorial.promptVideo("https://youtu.be/Y4QjODg6SR4");
+            }
+            
             notification.currentEventChanged.connect(onCurrentEventChanged);
             
             if (boundary.calculationFeasible)
@@ -78,7 +82,7 @@ NavigationPane
                         var picker = definition.init("AthanPreviewSheet.qml");
                         picker.all = ["dhuhr", "asr", "maghrib", "isha"];
                         picker.open();
-                    } else if ( !persist.containsFlag("tutorialMuteAthan") ) {
+                    } else if ( !tutorial.suppressTutorials && !persist.containsFlag("tutorialMuteAthan") ) {
                         var picker = definition.init("MuteAthanTutorial.qml");
                         picker.open();
                     }

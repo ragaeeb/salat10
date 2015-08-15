@@ -10,7 +10,7 @@ Page
     titleBar: AboutTitleBar
     {
         id: atb
-        videoTutorialUri: "http://www.youtube.com/watch?v=AbHZLmWSKts"
+        videoTutorialUri: "http://youtu.be/Y4QjODg6SR4"
         
         onInitializedChanged: {
             if (initialized) {
@@ -174,6 +174,8 @@ Page
                             } else {
                                 persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), "", global );
                                 reporter.record( "ArticleOpen", d.id.toString() );
+                                
+                                tutorial.execCentered("englishTranslation", qsTr("Note that for you to be able to open the articles properly, your Quran10 translation must be set to 'English'!") );
                             }
                         }
                     }

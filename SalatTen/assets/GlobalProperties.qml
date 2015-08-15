@@ -4,24 +4,29 @@ QtObject
 {
     id: root
     
-    function onFinished(result, cookie, data)
+    function onFinished(result, rememberMe, cookie)
     {
-        if (data == "locationServices")
+        if (cookie == "locationServices")
         {
-            if (!result && cookie) {
+            if (!result && rememberMe) {
                 persist.setFlag("hideLocationServicesWarning", 1);
             }
             
             if (result) {
                 persist.launchSettingsApp("location");
             }
-        } else {
-            if (result && cookie.app == "quran10") {
-                persist.openUri("http://quran10.canadainc.org");
-            }
             
-            reporter.record(cookie, result);
+            reporter.record( cookie, result.toString()+"_"+rememberMe.toString() );
         }
+    }
+    
+    function onPromptFinished(result, cookie)
+    {
+        if (result && cookie.app == "quran10") {
+            persist.openUri("http://quran10.canadainc.org");
+        }
+        
+        reporter.record(cookie.app, result);
     }
     
     function getRandomReal(min, max) {
@@ -31,7 +36,7 @@ QtObject
     function onTargetLookupFinished(target, success)
     {
         if (!success) {
-            persist.showDialog(root, {'app': "quran10"}, qsTr("Quran10"), qsTr("This feature requires the app Quran10 v4.0.0.0 or greater to be installed on your device. Would you like to download and install it now?"), qsTr("Yes"), qsTr("No") );
+            persist.showDialog(root, {'app': "quran10"}, qsTr("Quran10"), qsTr("This feature requires the app Quran10 v4.0.0.0 or greater to be installed on your device. Would you like to download and install it now?"), qsTr("Yes"), qsTr("No"), true, "", false, "onPromptFinished" );
         }
     }
     
