@@ -18,12 +18,6 @@ DatabaseBoundary::DatabaseBoundary() :
 }
 
 
-void DatabaseBoundary::fetchAllOrigins(QObject* caller)
-{
-    m_sql.executeQuery(caller, QString("SELECT %1 AS name,i.id,i.is_companion,latitude+((RANDOM()%10)*0.0001) AS latitude,longitude+((RANDOM()%10)*0.0001) AS longitude FROM individuals i INNER JOIN locations ON i.location=locations.id").arg( NAME_FIELD("i") ), QueryId::FetchAllOrigins);
-}
-
-
 void DatabaseBoundary::fetchAngles(QObject* caller) {
     m_sql.executeQuery(caller, "SELECT * FROM angles ORDER BY strategy_key", QueryId::GetAllAngles);
 }

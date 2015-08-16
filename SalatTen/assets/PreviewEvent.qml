@@ -180,7 +180,7 @@ Container
             }
             
             onEnded: {
-                if (iqamahButton.visible) {
+                if ( iqamahButton.visible && tutorial.isTopPane(navigationPane, timingsPage) ) {
                     tutorial.exec("iqamahShortcut", qsTr("Tap on the iqamah clock icon to set the time that the congregational prayer begins at your local musalla or masjid."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(8), 0, ui.du(1) );
                 }
             }
