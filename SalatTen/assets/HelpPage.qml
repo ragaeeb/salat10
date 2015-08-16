@@ -169,12 +169,12 @@ Page
                                 } else {
                                     webView.urlValue = d.uri;
                                 }
-                                
+
                                 reporter.record( "ArticleTapped", d.uri);
                             } else {
                                 persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), "", global );
                                 reporter.record( "ArticleOpen", d.id.toString() );
-                                
+
                                 tutorial.execCentered("englishTranslation", qsTr("Note that for you to be able to open the articles properly, your Quran10 translation must be set to 'English'!") );
                             }
                         }

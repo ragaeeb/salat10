@@ -103,7 +103,7 @@ NavigationPane
     
     Page
     {
-        id: tabsPage
+        id: timingsPage
 
         SwipeDetector
         {

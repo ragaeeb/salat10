@@ -6,6 +6,8 @@ Page
     signal exportingReady(int daysToExport, variant result, variant accountId)
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
+    function cleanUp() {}
+    
     titleBar: TitleBar
     {
         id: titleControl

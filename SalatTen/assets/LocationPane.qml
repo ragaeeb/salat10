@@ -14,6 +14,10 @@ Page
         notification.locationsFound.disconnect(locations.onLocationsFound);
         Application.aboutToQuit.disconnect(onAboutToQuit);
         app.gpsReadyChanged.disconnect(onGpsReadyChanged);
+        
+        if (mapViewDelegate.delegateActive) {
+            mapViewDelegate.control.cleanUp();
+        }
     }
     
     function onLocationsFound(result)
@@ -131,7 +135,11 @@ Page
                     persist.saveValueFor("longitude", place.longitude);
                     persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "images/tabs/ic_map.png" );
 
-                    reporter.record( "LocationPicked", JSON.stringify(place) );
+                    reporter.record( "latitude", place.latitude.toString() );
+                    reporter.record( "longitude", place.longitude.toString() );
+                    reporter.record("location", place.name);
+                    reporter.record("city", place.city);
+                    reporter.record("country", place.country);
                 } else {
                     console.log("LocationFailedPick");
                     reporter.record("LocationFailedPick");
@@ -207,43 +215,48 @@ Page
                 ]
                 
                 onSelectedValueChanged: {
-                    var parts = selectedValue.address_components;
-                    var city = "";
-                    var country = "";
-                    var latitude = selectedValue.geometry.location.lat;
-                    var longitude = selectedValue.geometry.location.lng;
-                    
-                    for (var i = parts.length-1; i >= 0; i--)
+                    if (selectedValue)
                     {
-                        var types = parts[i].types;
+                        var parts = selectedValue.address_components;
+                        var city = "";
+                        var country = "";
+                        var latitude = selectedValue.geometry.location.lat;
+                        var longitude = selectedValue.geometry.location.lng;
                         
-                        if ( types.indexOf("country") != -1 ) {
-                            country = parts[i].long_name;
-                        } else if ( types.indexOf("locality") != -1 ) {
-                            city = parts[i].long_name;
+                        for (var i = parts.length-1; i >= 0; i--)
+                        {
+                            var types = parts[i].types;
+                            
+                            if ( types.indexOf("country") != -1 ) {
+                                country = parts[i].long_name;
+                            } else if ( types.indexOf("locality") != -1 ) {
+                                city = parts[i].long_name;
+                            }
                         }
+                        
+                        mapViewDelegate.delegateActive = true;
+                        mapViewDelegate.control.animateToLocation(latitude, longitude, 50000);
+                        
+                        persist.saveValueFor("location", selectedValue.formatted_address);
+                        persist.saveValueFor("latitude", latitude, true);
+                        persist.saveValueFor("longitude", longitude, true);
+                        
+                        if (city.length > 0) {
+                            persist.saveValueFor("city", city, false);
+                            reporter.record("city", city);
+                        }
+                        
+                        if (country.length > 0) {
+                            persist.saveValueFor("country", country, false);
+                            reporter.record( "country", country );
+                        }
+                        
+                        locationAction.title = selectedValue.formatted_address;
+                        
+                        reporter.record( "latitude", latitude.toString() );
+                        reporter.record( "longitude", longitude.toString() );
+                        reporter.record( "location", selectedValue.formatted_address );
                     }
-                    
-                    mapViewDelegate.delegateActive = true;
-                    mapViewDelegate.control.animateToLocation(latitude, longitude, 50000);
-                    
-                    var analytics = {'latitude': latitude, 'longitude': longitude, 'location': selectedValue.formatted_address};
-                    persist.saveValueFor("location", selectedValue.formatted_address);
-                    persist.saveValueFor("latitude", latitude, true);
-                    persist.saveValueFor("longitude", longitude, true);
-                    
-                    if (city.length > 0) {
-                        persist.saveValueFor("city", city, false);
-                        analytics.city = city;
-                    }
-                    
-                    if (country.length > 0) {
-                        persist.saveValueFor("country", country, false);
-                        analytics.country = country;
-                    }
-                    
-                    locationAction.title = selectedValue.formatted_address;
-                    reporter.record("LocationGeoPicked", JSON.stringify(analytics));
                 }
                 
                 attachedObjects: [
@@ -289,6 +302,10 @@ Page
                             } else {
                                 reporter.record("LocationPinTapped");
                             }
+                        }
+                        
+                        function cleanUp() {
+                            notification.mapDataLoaded.connect(onMapDataLoaded);
                         }
                         
                         function onDataLoaded(id, data)
@@ -341,8 +358,6 @@ Page
                         onCreationCompleted: {
                             notification.mapDataLoaded.connect(onMapDataLoaded);
                             notification.fetchCheckins();
-                            
-                            //sql.fetchAllOrigins(mapView);
                         }
                     }
                 }

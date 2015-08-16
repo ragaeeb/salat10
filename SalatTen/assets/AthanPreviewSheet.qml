@@ -203,12 +203,6 @@ Sheet
         }
     }
     
-    onOpened: {
-        tutorial.execBelowTitleBar( "previewAthan", qsTr("Tap on an item in the list to preview the athan sound."), ui.du(2) );
-        tutorial.execCentered( "previewCustom", qsTr("To use your own custom athan sound, tap on the Custom list element and choose the audio file.") );
-        tutorial.exec("acceptAthan", qsTr("When you are happy with your selection, tap the '%1' button.").arg(accept.title), HorizontalAlignment.Right, VerticalAlignment.Top, 0, ui.du(2), ui.du(4), 0, "images/tabs/ic_tutorial.png" );
-    }
-    
     onClosed: {
         player.stop();
         destroy();
