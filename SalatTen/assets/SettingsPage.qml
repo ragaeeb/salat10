@@ -8,7 +8,7 @@ Page
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
     function cleanUp() {}
-
+    
     actions: [
         ActionItem
         {
@@ -95,173 +95,232 @@ Page
                 verticalAlignment: VerticalAlignment.Fill
                 leftPadding: 10; rightPadding: 10; topPadding: 10; bottomPadding: 10
 
-                DropDown
+                Container
                 {
-                    id: calcStrategy
-                    title: qsTr("Calculation Angles") + Retranslate.onLanguageChanged
                     horizontalAlignment: HorizontalAlignment.Fill
-                    translationY: -100
                     
-                    onExpandedChanged: {
-                        showTutorials();
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.LeftToRight
                     }
                     
-                    animations: [
-                        TranslateTransition
-                        {
-                            id: anglesAnim
-                            fromY: -100
-                            toY: 0
-                            easingCurve: StockCurve.ElasticOut
-                            delay: 150
-                            duration: 500
-                            
-                            onEnded: {
-                                tutorial.exec("dstAuto", qsTr("To let the calculations use your device settings for daylight savings rules, choose '%1'.").arg(autoDST.text), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5));
-                                tutorial.exec("dstMinus", qsTr("If the calculations seem to be 1 hour ahead of the actual time, choose '%1' to manually adjust the time to be an hour backward.").arg(adjustMinusDST.text), HorizontalAlignment.Left, VerticalAlignment.Top, ui.du(2), 0, ui.du(5) );
-                                tutorial.exec("dstPlus", qsTr("If the calculations seem to be 1 hour before its actual time, choose '%1' to manually adjust the time to be an hour forward.").arg(adjustPlusDST.text), HorizontalAlignment.Right, VerticalAlignment.Top, 0, ui.du(2), ui.du(5) );
-                                tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
-                                tutorial.execBelowTitleBar("calcAngles", qsTr("Different regions of the world use different conventions to calculate the prayer timings. Use the '%1' dropdown to set the appropriate one for your region for most accurate results.").arg(calcStrategy.title) );
-                                tutorial.execActionBar("settingsBack", qsTr("To return to the main timings page tap on the Back button here."), "b" );
-                                showTutorials();
-                            }
-                        }
-                    ]
-
-                    attachedObjects: [
-                        ComponentDefinition {
-                            id: optionDefinition
-                            
-                            Option {
-                                property real fajrTwilight
-                                property real ishaTwilight
-                                property real dhuhrInterval: 1
-                                property real maghribInterval: 1 // The number of minutes to add to the sunset time for the Maghrib prayer time.
-                                property real ishaInterval: 0 // The difference of Isha time from Maghrib.
-                                imageSource: "images/dropdown/ic_angles.png"
-                            }
-                        }
-                    ]
-
-                    function onDataLoaded(id, data)
+                    DropDown
                     {
-                        if (id == QueryId.GetAllAngles)
-                        {
-                            var strategy = persist.getValueFor("strategy");
-                            var firstTime = !persist.contains("angles");
-                            
-                            for (var i = 0; i < data.length; i++)
+                        id: calcStrategy
+                        title: qsTr("Calculation Angles") + Retranslate.onLanguageChanged
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        translationY: -100
+                        
+                        layoutProperties: StackLayoutProperties {
+                            spaceQuota: 1
+                        }
+                        
+                        onExpandedChanged: {
+                            showTutorials();
+                        }
+                        
+                        animations: [
+                            TranslateTransition
                             {
-                                var current = data[i];
+                                id: anglesAnim
+                                fromY: -100
+                                toY: 0
+                                easingCurve: StockCurve.ElasticOut
+                                delay: 150
+                                duration: 500
                                 
-                                var def = optionDefinition.createObject();
-                                def.value = current.strategy_key;
-                                def.fajrTwilight = current.fajr_twilight;
-                                def.ishaTwilight = current.isha_twilight;
-                                def.dhuhrInterval = current.dhuhr_interval;
-                                def.maghribInterval = current.maghrib_interval;
-                                def.ishaInterval = current.isha_interval;
-                                
-                                var strategyKey = current.strategy_key;
-                                
-                                if (strategyKey == "egas") {
-                                    def.text = qsTr("Egyptian General Authority of Survey");
-                                    def.description = qsTr("Africa, Iraq, Lebanon, Syria, Malaysia");
-                                } else if (strategyKey == "isna") {
-                                    def.text = qsTr("North American");
-                                    def.description = qsTr("Parts of USA, Canada, parts of UK");
-                                } else if (strategyKey == "mwl") {
-                                    def.text = qsTr("Muslim World League");
-                                    def.description = qsTr("Europe, the far east");
-                                } else if (strategyKey == "uisk") {
-                                    def.text = qsTr("University of Islamic Sciences, Karachi");
-                                    def.description = qsTr("Afghanistan, Bangladesh, India, Pakistan, Europe");
-                                } else if (strategyKey == "uaq") {
-                                    def.text = qsTr("Umm Al-Qura");
-                                    def.description = qsTr("The Arabian Peninsula");
-                                } else {
-                                    def.text = qsTr("Unknown");
-                                    def.description = "?";
+                                onEnded: {
+                                    tutorial.exec("dstAuto", qsTr("To let the calculations use your device settings for daylight savings rules, choose '%1'.").arg(autoDST.text), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5));
+                                    tutorial.exec("dstMinus", qsTr("If the calculations seem to be 1 hour ahead of the actual time, choose '%1' to manually adjust the time to be an hour backward.").arg(adjustMinusDST.text), HorizontalAlignment.Left, VerticalAlignment.Top, ui.du(2), 0, ui.du(5) );
+                                    tutorial.exec("dstPlus", qsTr("If the calculations seem to be 1 hour before its actual time, choose '%1' to manually adjust the time to be an hour forward.").arg(adjustPlusDST.text), HorizontalAlignment.Right, VerticalAlignment.Top, 0, ui.du(2), ui.du(5) );
+                                    tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
+                                    tutorial.execBelowTitleBar("calcAngles", qsTr("Different regions of the world use different conventions to calculate the prayer timings. Use the '%1' dropdown to set the appropriate one for your region for most accurate results.").arg(calcStrategy.title) );
+                                    tutorial.execActionBar("settingsBack", qsTr("To return to the main timings page tap on the Back button here."), "b" );
+                                    showTutorials();
                                 }
-                                
-                                if (i == 0) {
-                                    def.imageSource = "images/menu/ic_table.png";
-                                } else if (i == 1) {
-                                    def.imageSource = "images/dropdown/ic_sutrah.png";
-                                } else if (i == 2) {
-                                    def.imageSource = "images/dropdown/ic_moon.png";
-                                } else if (i == 3) {
-                                    def.imageSource = "images/dropdown/ic_gold.png";
-                                } else if (i == 4) {
-                                    def.imageSource = "images/dropdown/ic_eid.png";
-                                }
-                                
-                                if (def.value == strategy) {
-                                    def.selected = true;
-                                }
-                                
-                                calcStrategy.add(def);
                             }
-                            
-                            var profiles = persist.getValueFor("profiles");
-                            
-                            var checkBox = checkerDef.createObject();
-                            profileContainer.insert(1, checkBox);
-                            checkBox.value = ""+NotificationMode.AlertsOff;
-                            checkBox.checked = profiles[checkBox.value];
-                            checkBox.text = qsTr("All Alerts Off");
-                            
-                            checkBox = checkerDef.createObject();
-                            profileContainer.insert(1, checkBox);
-                            checkBox.value = ""+NotificationMode.PhoneOnly;
-                            checkBox.checked = profiles[checkBox.value];
-                            checkBox.text = qsTr("Phone Only");
-                            
-                            checkBox = checkerDef.createObject();
-                            profileContainer.insert(1, checkBox);
-                            checkBox.value = ""+NotificationMode.Vibrate;
-                            checkBox.checked = profiles[checkBox.value];
-                            checkBox.text = qsTr("Vibrate");
-                            
-                            checkBox = checkerDef.createObject();
-                            profileContainer.insert(1, checkBox);
-                            checkBox.value = ""+NotificationMode.Silent;
-                            checkBox.checked = profiles[checkBox.value];
-                            checkBox.text = qsTr("Silent");
-                            
-                            checkBox = checkerDef.createObject();
-                            profileContainer.insert(1, checkBox);
-                            checkBox.value = ""+NotificationMode.Unknown;
-                            checkBox.checked = profiles[checkBox.value];
-                            checkBox.text = qsTr("All Custom Profiles");
-                            
-                            if (firstTime) {
-                                calcStrategy.expanded = true;
+                        ]
+                        
+                        attachedObjects: [
+                            ComponentDefinition {
+                                id: optionDefinition
+                                
+                                Option {
+                                    property real fajrTwilight
+                                    property real ishaTwilight
+                                    property real dhuhrInterval: 1
+                                    property real maghribInterval: 1 // The number of minutes to add to the sunset time for the Maghrib prayer time.
+                                    property real ishaInterval: 0 // The difference of Isha time from Maghrib.
+                                    imageSource: "images/dropdown/ic_angles.png"
+                                }
                             }
+                        ]
+                        
+                        function onDataLoaded(id, data)
+                        {
+                            if (id == QueryId.GetAllAngles)
+                            {
+                                var strategy = persist.getValueFor("strategy");
+                                var angles = persist.getValueFor("angles");
+                                
+                                data.push({'strategy_key': "custom", 'fajr_twilight': angles ? angles.fajrTwilightAngle : 15, 'isha_twilight': angles ? angles.ishaTwilightAngle : 15, 'dhuhr_interval': 1.0, 'maghrib_interval': 1.0, 'isha_interval': 0});
+                                
+                                for (var i = 0; i < data.length; i++)
+                                {
+                                    var current = data[i];
+                                    
+                                    var def = optionDefinition.createObject();
+                                    def.value = current.strategy_key;
+                                    def.fajrTwilight = current.fajr_twilight;
+                                    def.ishaTwilight = current.isha_twilight;
+                                    def.dhuhrInterval = current.dhuhr_interval;
+                                    def.maghribInterval = current.maghrib_interval;
+                                    def.ishaInterval = current.isha_interval;
+                                    
+                                    var strategyKey = current.strategy_key;
+                                    
+                                    if (strategyKey == "egas") {
+                                        def.text = qsTr("Egyptian General Authority of Survey");
+                                        def.description = qsTr("Africa, Iraq, Lebanon, Syria, Malaysia");
+                                    } else if (strategyKey == "isna") {
+                                        def.text = qsTr("North American");
+                                        def.description = qsTr("Parts of USA, Canada, parts of UK");
+                                    } else if (strategyKey == "mwl") {
+                                        def.text = qsTr("Muslim World League");
+                                        def.description = qsTr("Europe, the far east");
+                                    } else if (strategyKey == "uisk") {
+                                        def.text = qsTr("University of Islamic Sciences, Karachi");
+                                        def.description = qsTr("Afghanistan, Bangladesh, India, Pakistan, Europe");
+                                    } else if (strategyKey == "uaq") {
+                                        def.text = qsTr("Umm Al-Qura");
+                                        def.description = qsTr("The Arabian Peninsula");
+                                    } else {
+                                        def.text = qsTr("Custom");
+                                        def.description = qsTr("Manual calculation angles");
+                                    }
+                                    
+                                    if (i == 0) {
+                                        def.imageSource = "images/menu/ic_table.png";
+                                    } else if (i == 1) {
+                                        def.imageSource = "images/dropdown/ic_sutrah.png";
+                                    } else if (i == 2) {
+                                        def.imageSource = "images/dropdown/ic_moon.png";
+                                    } else if (i == 3) {
+                                        def.imageSource = "images/dropdown/ic_gold.png";
+                                    } else if (i == 4) {
+                                        def.imageSource = "images/dropdown/ic_eid.png";
+                                    } else {
+                                        def.imageSource = "images/dropdown/ic_angles.png";
+                                    }
+                                    
+                                    if (def.value == strategy) {
+                                        def.selected = true;
+                                    }
+                                    
+                                    calcStrategy.add(def);
+                                }
+                                
+                                var profiles = persist.getValueFor("profiles");
+                                
+                                var checkBox = checkerDef.createObject();
+                                profileContainer.insert(1, checkBox);
+                                checkBox.value = ""+NotificationMode.AlertsOff;
+                                checkBox.checked = profiles[checkBox.value];
+                                checkBox.text = qsTr("All Alerts Off");
+                                
+                                checkBox = checkerDef.createObject();
+                                profileContainer.insert(1, checkBox);
+                                checkBox.value = ""+NotificationMode.PhoneOnly;
+                                checkBox.checked = profiles[checkBox.value];
+                                checkBox.text = qsTr("Phone Only");
+                                
+                                checkBox = checkerDef.createObject();
+                                profileContainer.insert(1, checkBox);
+                                checkBox.value = ""+NotificationMode.Vibrate;
+                                checkBox.checked = profiles[checkBox.value];
+                                checkBox.text = qsTr("Vibrate");
+                                
+                                checkBox = checkerDef.createObject();
+                                profileContainer.insert(1, checkBox);
+                                checkBox.value = ""+NotificationMode.Silent;
+                                checkBox.checked = profiles[checkBox.value];
+                                checkBox.text = qsTr("Silent");
+                                
+                                checkBox = checkerDef.createObject();
+                                profileContainer.insert(1, checkBox);
+                                checkBox.value = ""+NotificationMode.Unknown;
+                                checkBox.checked = profiles[checkBox.value];
+                                checkBox.text = qsTr("All Custom Profiles");
+                                
+                                if (!angles) {
+                                    calcStrategy.expanded = true;
+                                }
+                                
+                                anglesAnim.play();
+                            }
+                        }
+                        
+                        onCreationCompleted: {
+                            sql.fetchAngles(calcStrategy);
+                        }
+                        
+                        function saveAngles()
+                        {
+                            var parameters = {
+                                "fajrTwilightAngle": selectedValue == "custom" ? parseFloat( customFajr.text.trim() ) : selectedOption.fajrTwilight,
+                                "ishaTwilightAngle": selectedValue == "custom" ? parseFloat( customIsha.text.trim() ) : selectedOption.ishaTwilight,
+                                "dhuhrInterval": selectedOption.dhuhrInterval,
+                                "ishaInterval": selectedOption.ishaInterval,
+                                "maghribInterval": selectedOption.maghribInterval
+                            };
                             
-                            anglesAnim.play();
+                            var strategySaved = persist.saveValueFor("strategy", selectedOption.value, false);
+                            var anglesSaved = persist.saveValueFor("angles", parameters);
+                            
+                            if (strategySaved && anglesSaved) {
+                                reporter.record("NewAngles", selectedOption.value);
+                            }
+                        }
+                        
+                        onSelectedOptionChanged: {
+                            saveAngles();
                         }
                     }
                     
-                    onCreationCompleted: {
-                        sql.fetchAngles(calcStrategy);
+                    TextField
+                    {
+                        id: customFajr
+                        hintText: qsTr("%1 Twilight Angle").arg( translator.render("fajr") ) + Retranslate.onLanguageChanged
+                        text: calcStrategy.selectedOption.fajrTwilight.toString()
+                        inputMode: TextFieldInputMode.NumbersAndPunctuation
+                        clearButtonVisible: false
+                        enabled: calcStrategy.selectedValue == "custom"
+                        
+                        layoutProperties: StackLayoutProperties {
+                            spaceQuota: 0.1
+                        }
+                        
+                        onTextChanged: {
+                            console.log("UserEvent: CustomFajrAngle", text.trim() );
+                            calcStrategy.saveAngles();
+                        }
                     }
                     
-                    onSelectedOptionChanged:
+                    TextField
                     {
-                        var parameters = {
-                            "fajrTwilightAngle": selectedOption.fajrTwilight,
-                            "ishaTwilightAngle": selectedOption.ishaTwilight,
-                            "dhuhrInterval": selectedOption.dhuhrInterval,
-                            "ishaInterval": selectedOption.ishaInterval,
-                            "maghribInterval": selectedOption.maghribInterval
-                        };
+                        id: customIsha
+                        hintText: qsTr("%1 Twilight Angle").arg( translator.render("isha") ) + Retranslate.onLanguageChanged
+                        text: calcStrategy.selectedOption.ishaTwilight.toString()
+                        inputMode: customFajr.inputMode
+                        enabled: customFajr.enabled
+                        clearButtonVisible: customFajr.clearButtonVisible
                         
-                        var strategySaved = persist.saveValueFor("strategy", selectedOption.value, false);
-                        var anglesSaved = persist.saveValueFor("angles", parameters);
+                        layoutProperties: StackLayoutProperties {
+                            spaceQuota: customFajr.layoutProperties.spaceQuota
+                        }
                         
-                        if (strategySaved && anglesSaved) {
-                            reporter.record("NewAngles", selectedOption.value);
+                        onTextChanged: {
+                            console.log("UserEvent: CustomIshaAngle", text.trim() );
+                            calcStrategy.saveAngles();
                         }
                     }
                 }
@@ -297,7 +356,7 @@ Page
                 {
                     id: nightStartsIsha
                     key: "nightStartsIsha"
-                    text: qsTr("Night Starts at Isha") + Retranslate.onLanguageChanged
+                    text: qsTr("Night Starts at %1").arg( translator.render("isha") ) + Retranslate.onLanguageChanged
                     
                     onValueChanged: {
                         reporter.record( "NightStartsAtIshaChanged", checked.toString() );
