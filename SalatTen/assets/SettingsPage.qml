@@ -106,6 +106,7 @@ Page
                     DropDown
                     {
                         id: calcStrategy
+                        property bool isCustom: selectedValue == "custom"
                         title: qsTr("Calculation Angles") + Retranslate.onLanguageChanged
                         horizontalAlignment: HorizontalAlignment.Fill
                         translationY: -100
@@ -265,9 +266,16 @@ Page
                         
                         function saveAngles()
                         {
+                            if (isCustom) {
+                                fajrValidator.validate();
+                                ishaValidator.validate();
+                            }
+                            
+                            var valid = isCustom && fajrValidator.valid && ishaValidator.valid;
+                            
                             var parameters = {
-                                "fajrTwilightAngle": selectedValue == "custom" ? parseFloat( customFajr.text.trim() ) : selectedOption.fajrTwilight,
-                                "ishaTwilightAngle": selectedValue == "custom" ? parseFloat( customIsha.text.trim() ) : selectedOption.ishaTwilight,
+                                "fajrTwilightAngle": valid ? parseFloat( customFajr.text.trim() ) : selectedOption.fajrTwilight,
+                                "ishaTwilightAngle": valid ? parseFloat( customIsha.text.trim() ) : selectedOption.ishaTwilight,
                                 "dhuhrInterval": selectedOption.dhuhrInterval,
                                 "ishaInterval": selectedOption.ishaInterval,
                                 "maghribInterval": selectedOption.maghribInterval
@@ -290,13 +298,24 @@ Page
                     {
                         id: customFajr
                         hintText: qsTr("%1 Twilight Angle").arg( translator.render("fajr") ) + Retranslate.onLanguageChanged
-                        text: calcStrategy.selectedOption.fajrTwilight.toString()
+                        text: calcStrategy.selectedOption ? calcStrategy.selectedOption.fajrTwilight.toString() : ""
                         inputMode: TextFieldInputMode.NumbersAndPunctuation
                         clearButtonVisible: false
-                        enabled: calcStrategy.selectedValue == "custom"
+                        enabled: calcStrategy.isCustom
                         
                         layoutProperties: StackLayoutProperties {
-                            spaceQuota: 0.1
+                            spaceQuota: 0.15
+                        }
+                        
+                        validator: Validator
+                        {
+                            id: fajrValidator
+                            errorMessage: qsTr("Invalid angle") + Retranslate.onLanguageChanged
+                            mode: ValidationMode.FocusLost
+                            
+                            onValidate: {
+                                valid = !isNaN( parseFloat( customFajr.text.trim() ) );
+                            }
                         }
                         
                         onTextChanged: {
@@ -309,13 +328,24 @@ Page
                     {
                         id: customIsha
                         hintText: qsTr("%1 Twilight Angle").arg( translator.render("isha") ) + Retranslate.onLanguageChanged
-                        text: calcStrategy.selectedOption.ishaTwilight.toString()
+                        text: calcStrategy.selectedOption ? calcStrategy.selectedOption.ishaTwilight.toString() : ""
                         inputMode: customFajr.inputMode
                         enabled: customFajr.enabled
                         clearButtonVisible: customFajr.clearButtonVisible
                         
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: customFajr.layoutProperties.spaceQuota
+                        }
+                        
+                        validator: Validator
+                        {
+                            id: ishaValidator
+                            errorMessage: qsTr("Invalid angle") + Retranslate.onLanguageChanged
+                            mode: ValidationMode.FocusLost
+                            
+                            onValidate: {
+                                valid = !isNaN( parseFloat( customFajr.text.trim() ) );
+                            }
                         }
                         
                         onTextChanged: {
