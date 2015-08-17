@@ -7,7 +7,20 @@ Page
     id: settingsPage
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
-    function cleanUp() {}
+    function onTutorialStarted(key)
+    {
+        if (key == "athanVolume") {
+            scrollView.scrollToPoint(0, 1400);
+        }
+    }
+
+    onCreationCompleted: {
+        tutorial.tutorialStarted.connect(onTutorialStarted);
+    }
+    
+    function cleanUp() {
+        tutorial.tutorialStarted.disconnect(onTutorialStarted);
+    }
     
     actions: [
         ActionItem
@@ -80,6 +93,7 @@ Page
     
     ScrollView
     {
+        id: scrollView
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         
