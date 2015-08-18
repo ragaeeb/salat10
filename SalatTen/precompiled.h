@@ -1,5 +1,4 @@
 #include <bb/cascades/AbsoluteLayout>
-#include <bb/cascades/AbstractPane>
 #include <bb/cascades/Application>
 #include <bb/cascades/Container>
 #include <bb/cascades/DockLayout>
@@ -21,8 +20,6 @@
 #include <bb/pim/calendar/CalendarService>
 #include <bb/pim/calendar/CalendarSettings>
 #include <bb/pim/calendar/EventSearchParameters>
-
-#include <bb/device/DisplayInfo>
 
 #include <bb/platform/Notification>
 #include <bb/platform/NotificationMode>
