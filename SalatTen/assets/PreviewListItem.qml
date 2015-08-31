@@ -141,6 +141,24 @@ Container
             
             ImageButton
             {
+                id: compassButton
+                horizontalAlignment: HorizontalAlignment.Right
+                verticalAlignment: VerticalAlignment.Center
+                defaultImageSource: "images/compass/ic_compass.png"
+                pressedImageSource: defaultImageSource
+                translationX: 300
+                
+                onClicked: {
+                    console.log("UserEvent: OpenCompass");
+                    var c = definition.init("CompassPane.qml");
+                    //navigationPane.open(c);
+                    c.open();
+                    reporter.record("OpenCompass");
+                }
+            }
+            
+            ImageButton
+            {
                 id: editDate
                 defaultImageSource: "images/menu/ic_edit.png"
                 pressedImageSource: defaultImageSource
@@ -306,6 +324,17 @@ Container
                 duration: global.getRandomReal(200, 400)
                 delay: global.getRandomReal(100, 250)
                 easingCurve: StockCurve.SineOut
+            }
+            
+            TranslateTransition
+            {
+                target: compassButton
+                
+                fromX: 300
+                toX: 0
+                duration: global.getRandomReal(200, 400)
+                delay: global.getRandomReal(100, 250)
+                easingCurve: StockCurve.QuadraticInOut
             }
             
             TranslateTransition

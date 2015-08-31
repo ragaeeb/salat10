@@ -11,30 +11,7 @@ Page
     {
         id: atb
         videoTutorialUri: "http://youtu.be/Y4QjODg6SR4"
-        
-        onInitializedChanged: {
-            if (initialized) {
-                tutorial.execActionBar("openCompass", qsTr("You can locate the direction of the Qibla using this '%1' action.").arg(compass.title), "l");
-            }
-        }
     }
-    
-    actions: [
-        ActionItem
-        {
-            id: compass
-            ActionBar.placement: ActionBarPlacement.OnBar
-            imageSource: "images/compass/ic_compass.png"
-            title: qsTr("Compass") + Retranslate.onLanguageChanged
-            
-            onTriggered: {
-                console.log("UserEvent: OpenCompass");
-                reporter.record("OpenCompass");
-                var c = definition.init("CompassPane.qml");
-                navigationPane.push(c);
-            }
-        }
-    ]
     
     function cleanUp()
     {
