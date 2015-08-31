@@ -65,17 +65,15 @@ QtObject
         var keepNotifications = true;
         var turnOn = data.turnOn;
         var selected = data.selected;
-        console.log("**** TURNON", turnOn);
         
         if (!turnOn) {
             keepNotifications = confirmed;
         }
         
-        console.log("**** TURNON33", turnOn);
         var athaans = persist.getValueFor("athaans");
         var notifications = persist.getValueFor("notifications");
         var dm = parent.parent.dataModel;
-        console.log("**** TURNON44", turnOn);
+
         for (var i = 0; i < selected.length; i++)
         {
             var indexPath = selected[i];
@@ -88,7 +86,6 @@ QtObject
             notifications[key] = keepNotifications;
             dm.updateItem(indexPath, current);
         }
-        console.log("**** TURNON55", turnOn);
         
         persist.saveValueFor("athaans", athaans);
         persist.saveValueFor("notifications", notifications);

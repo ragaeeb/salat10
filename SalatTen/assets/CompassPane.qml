@@ -2,31 +2,39 @@ import bb.cascades 1.0
 import bb.device 1.0
 import com.canadainc.data 1.0
 
-Page
+FullScreenDialog
 {
-    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
-    
-    onCreationCompleted: {
-        tutorial.execCentered( undefined, qsTr("Move away from metal and try to match the value on the compass to the Qibla azimuth value at the top. When you are pointing in the correct direction your device will vibrate.\n\nIf you see a spinning icon at the top it means the compass readings are still being adjusted. If you see this, keep rotating and moving until it goes away."), "images/dropdown/ic_janaza.png" );
+    onOpened: {
+        if ( compass.connected() )
+        {
+            tutorial.exec("compassAzimuth", qsTr("This is the calculated angle of the direction of the Qibla. Once properly calibrated, rotate the device until the needle points to this angle (in the centre of the compass)."), HorizontalAlignment.Center, VerticalAlignment.Top);
+            tutorial.execCentered("compassSuccess", qsTr("When you are successfully pointing to the Qibla direction, your device will vibrate and the angle in the centre of the compass needle will turn green."));
+            tutorial.exec("compassExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(4));
+        }
     }
     
-    function cleanUp() {}
-    
-    Container
+    dialogContent: Container
     {
+        horizontalAlignment: HorizontalAlignment.Fill
+        verticalAlignment: VerticalAlignment.Center
+        
         attachedObjects: [
-            ImagePaintDefinition {
-                id: back
-                imageSource: "images/graphics/background.png"
-            },
-            
             CompassSensor {
                 id: compass
             }
         ]
         
+        gestureHandlers: [
+            TapHandler {
+                onTapped: {
+                    if (event.propagationPhase == PropagationPhase.AtTarget && canClose) {
+                        dismiss();
+                    }
+                }
+            }
+        ]
+        
         topPadding: 20; leftPadding: 20; rightPadding: 20
-        background: back.imagePaint
         
         ProgressControl
         {
@@ -34,6 +42,12 @@ Page
             asset: "images/loading/loading_compass.png"
             delegateActive: compass.calibration < 1
             loadingText: qsTr("Calibrating...") + Retranslate.onLanguageChanged
+            
+            onDelegateActiveChanged: {
+                if (delegateActive) {
+                    tutorial.exec("compassAzimuth", qsTr("When the '%1' text is being displayed it means the app is still adjusting and the result may not be correct. When you see this, keep tilting the device up and down over and over and move away from metal until it disappears."), HorizontalAlignment.Center, VerticalAlignment.Top);
+                }
+            }
         }
         
         Label {
@@ -42,7 +56,7 @@ Page
             textStyle.base: SystemDefaults.TextStyles.SmallText
             textStyle.fontStyle: FontStyle.Italic
             textStyle.textAlign: TextAlign.Center
-            horizontalAlignment: HorizontalAlignment.Fill
+            horizontalAlignment: HorizontalAlignment.Center
             
             onCreationCompleted: {
                 if ( !compass.connected() ) {
@@ -69,7 +83,6 @@ Page
             
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            
             layout: DockLayout {}
             
             ImageView {
