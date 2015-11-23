@@ -160,7 +160,6 @@ void Service::timeout(bool init)
                         destinationFile = customFile;
                     }
 
-                    m_athan.prevKey = currentEventKey;
                     LOGGER( "PlayingWithVol" << m_athan.player.volume() );
 
                     if (m_athan.mkw == NULL) {
@@ -181,6 +180,10 @@ void Service::timeout(bool init)
             n.setIconUrl( QString("file:///usr/share/icons/clock_alarm.png") );
             n.notify();
         }
+
+        LOGGER("PrevKey" << m_athan.prevKey);
+        m_athan.prevKey = currentEventKey;
+        LOGGER("CurrentPrevKey" << m_athan.prevKey);
     }
 }
 

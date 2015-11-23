@@ -27,9 +27,9 @@ FullScreenDialog
         gestureHandlers: [
             TapHandler {
                 onTapped: {
-                    if (event.propagationPhase == PropagationPhase.AtTarget && canClose) {
-                        dismiss();
-                    }
+                    console.log("UserEvent: CloseCompass");
+                    reporter.record("CloseCompass");
+                    dismiss();
                 }
             }
         ]
