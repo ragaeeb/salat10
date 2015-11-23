@@ -102,7 +102,7 @@ ListView
             {
                 id: copyAction
                 title: qsTr("Copy") + Retranslate.onLanguageChanged
-                imageSource: "images/menu/ic_copy.png"
+                imageSource: "images/common/ic_copy.png"
                 
                 onTriggered: {
                     console.log("UserEvent: CopyMultiToClipboard");

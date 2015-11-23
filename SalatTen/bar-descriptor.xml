@@ -167,10 +167,10 @@
 	<asset path="../../canadainc/assets/AlFurqanAdvertisement.qml">assets/AlFurqanAdvertisement.qml</asset>
     <asset path="../../canadainc/assets/BugReportPage.qml">assets/BugReportPage.qml</asset>
     <asset path="../../canadainc/assets/CanadaIncMenu.qml">assets/CanadaIncMenu.qml</asset>
+    <asset path="../../canadainc/assets/CanadaIncUtils.qml">assets/CanadaIncUtils.qml</asset>
     <asset path="../../canadainc/assets/ClassicBackDelegate.qml">assets/ClassicBackDelegate.qml</asset>
     <asset path="../../canadainc/assets/EmptyDelegate.qml">assets/EmptyDelegate.qml</asset>
     <asset path="../../canadainc/assets/FullScreenDialog.qml">assets/FullScreenDialog.qml</asset>
-    <asset path="../../canadainc/assets/HijriCalculator.qml">assets/HijriCalculator.qml</asset>
     <asset path="../../canadainc/assets/OfflineDelegate.qml">assets/OfflineDelegate.qml</asset>
     <asset path="../../canadainc/assets/PermissionToast.qml">assets/PermissionToast.qml</asset>
     <asset path="../../canadainc/assets/PersistCheckBox.qml">assets/PersistCheckBox.qml</asset>

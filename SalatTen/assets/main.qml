@@ -40,10 +40,6 @@ NavigationPane
         projectName: "salat10"
         allowDonations: true
         bbWorldID: "21198062"
-        help.imageSource: "images/menu/ic_help.png"
-        help.title: qsTr("Help") + Retranslate.onLanguageChanged
-        settings.imageSource: "images/menu/ic_settings.png"
-        settings.title: qsTr("Settings") + Retranslate.onLanguageChanged
         
         onFinished: {
             if (clean) {
