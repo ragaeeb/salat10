@@ -40,6 +40,7 @@ NavigationPane
         projectName: "salat10"
         allowDonations: true
         bbWorldID: "21198062"
+        helpPageQml: "SalatHelp.qml"
         
         onFinished: {
             if (clean) {
@@ -53,18 +54,18 @@ NavigationPane
                 previewer.delegateActive = true;
                 
                 tutorial.execCentered("randomBenefit", qsTr("You can tap on the author's name to find out more information about them (you need to have the Quran10 app installed).") );
-                tutorial.exec("todaysHijriDate", qsTr("This is today's Hijri date."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(Paddings.previewLine1VPadding) );
-                tutorial.exec("exportToCalendar", qsTr("You can press-and-hold on this section to export the timings right to your calendar so that you can get prayer time reminders to show up directly on your device's calendar. This will also allow reminders to be shown even while the app is closed!"), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(Paddings.previewLine1VPadding) );
-                tutorial.exec("hijriConverter", qsTr("You can tap on this calendar icon to convert between Hijri and Gregorian calendar dates!"), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(2), 0, 0, ui.du(Paddings.previewLine1VPadding) );
-                tutorial.exec("editDate", qsTr("You can tap on this edit icon to adjust the calculated hijri date as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(2), 0, ui.du(Paddings.previewLine1VPadding) );
-                tutorial.exec("compass", qsTr("You can locate the direction of the Qibla using this button."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(8), 0, ui.du(Paddings.previewLine1VPadding) );
-                tutorial.exec("currentEvent", qsTr("This displays the current event that is already in progress."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(13), 0, 0, ui.du(Paddings.previewLine2VPadding) );
-                tutorial.exec("editCurrent", qsTr("You can tap on this edit icon to adjust the current event as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(2), 0, ui.du(Paddings.previewLine2VPadding) );
-                tutorial.exec("toggleCurrentEvent", qsTr("Tapping on the icon will toggle the athan and notification settings for that specific event. So if you want to turn on or turn off the athan and notifications tap on the icon."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(5), 0, 0, ui.du(Paddings.previewLine2VPadding) );
-                tutorial.exec("nextEvent", qsTr("This displays the next event that is coming up."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(13), 0, 0, ui.du(1) );
-                tutorial.exec("toggleNextEvent", qsTr("Tapping on the icon will toggle the athan and notification settings for that next event. So if you want to turn on or turn off the athan and notifications tap on the icon."), HorizontalAlignment.Left, VerticalAlignment.Bottom, ui.du(2), 0, 0, ui.du(1) );
-                tutorial.exec("editNextEvent", qsTr("You can tap on this edit icon to adjust the next event's timing as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(2), 0, ui.du(1) );
-                tutorial.exec("footerTap", qsTr("Tap anywhere on this strip to expand it and see the details for today."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(1) );
+                tutorial.exec("todaysHijriDate", qsTr("This is today's Hijri date."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, tutorial.du(Paddings.previewLine1VPadding) );
+                tutorial.exec("exportToCalendar", qsTr("You can press-and-hold on this section to export the timings right to your calendar so that you can get prayer time reminders to show up directly on your device's calendar. This will also allow reminders to be shown even while the app is closed!"), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, tutorial.du(Paddings.previewLine1VPadding) );
+                tutorial.exec("hijriConverter", qsTr("You can tap on this calendar icon to convert between Hijri and Gregorian calendar dates!"), HorizontalAlignment.Left, VerticalAlignment.Bottom, tutorial.du(2), 0, 0, tutorial.du(Paddings.previewLine1VPadding) );
+                tutorial.exec("editDate", qsTr("You can tap on this edit icon to adjust the calculated hijri date as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, tutorial.du(2), 0, tutorial.du(Paddings.previewLine1VPadding) );
+                tutorial.exec("compass", qsTr("You can locate the direction of the Qibla using this button."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, tutorial.du(8), 0, tutorial.du(Paddings.previewLine1VPadding) );
+                tutorial.exec("currentEvent", qsTr("This displays the current event that is already in progress."), HorizontalAlignment.Left, VerticalAlignment.Bottom, tutorial.du(13), 0, 0, tutorial.du(Paddings.previewLine2VPadding) );
+                tutorial.exec("editCurrent", qsTr("You can tap on this edit icon to adjust the current event as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, tutorial.du(2), 0, tutorial.du(Paddings.previewLine2VPadding) );
+                tutorial.exec("toggleCurrentEvent", qsTr("Tapping on the icon will toggle the athan and notification settings for that specific event. So if you want to turn on or turn off the athan and notifications tap on the icon."), HorizontalAlignment.Left, VerticalAlignment.Bottom, tutorial.du(5), 0, 0, tutorial.du(Paddings.previewLine2VPadding) );
+                tutorial.exec("nextEvent", qsTr("This displays the next event that is coming up."), HorizontalAlignment.Left, VerticalAlignment.Bottom, tutorial.du(13), 0, 0, tutorial.du(1) );
+                tutorial.exec("toggleNextEvent", qsTr("Tapping on the icon will toggle the athan and notification settings for that next event. So if you want to turn on or turn off the athan and notifications tap on the icon."), HorizontalAlignment.Left, VerticalAlignment.Bottom, tutorial.du(2), 0, 0, tutorial.du(1) );
+                tutorial.exec("editNextEvent", qsTr("You can tap on this edit icon to adjust the next event's timing as necessary."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, tutorial.du(2), 0, tutorial.du(1) );
+                tutorial.exec("footerTap", qsTr("Tap anywhere on this strip to expand it and see the details for today."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, tutorial.du(1) );
                 tutorial.execSwipe("expandFooter", qsTr("You can also expand this strip by swiping-up on it and see the details."), HorizontalAlignment.Center, VerticalAlignment.Bottom, "u");
                 tutorial.execSwipe("openAppMenu", qsTr("Swipe down from the top-bezel to display the Settings and Help and file bugs!"), HorizontalAlignment.Center, VerticalAlignment.Top, "d");
                 
@@ -239,7 +240,8 @@ NavigationPane
                 ]
             }
             
-            QuoteLabel {
+            QuoteLabel
+            {
                 id: quoteLabel
                 opacity: previewer.delegateActive || ( timings.control && timings.control.lssh.firstVisibleItem.length == 1 && !timings.control.lssh.scrolling ) || !boundary.calculationFeasible ? 1 : 0
             }
@@ -314,7 +316,8 @@ NavigationPane
     }
     
     attachedObjects: [
-        ComponentDefinition {
+        ComponentDefinition
+        {
             id: definition
             
             function init(qml)

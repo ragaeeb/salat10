@@ -3,6 +3,7 @@ import com.canadainc.data 1.0
 
 Container
 {
+    id: quoteRoot
     horizontalAlignment: HorizontalAlignment.Center
     
     function onDataLoaded(id, data)
@@ -16,6 +17,7 @@ Container
             }
             
             quoteLabel.text = "<html><i>\n“%1”</i>\n\n- <b><a href=\"%5\">%2</a>%4</b>\n\n[%3]</html>".arg( quote.body.replace(/&/g,"&amp;") ).arg(quote.author).arg( quote.reference.replace(/&/g,"&amp;") ).arg( global.getSuffix(quote.birth, quote.death, quote.is_companion == 1, quote.female == 1) ).arg( quote.id.toString() );
+            divider.visible = true;
         }
     }
     
@@ -60,9 +62,20 @@ Container
         }
     }
     
-    ImageView {
+    ImageView
+    {
+        id: divider
         imageSource: "images/dividers/divider_quote.png"
         horizontalAlignment: HorizontalAlignment.Center
         topMargin: 0; bottomMargin: 0
+        visible: false
+    }
+    
+    function onUpdated() {
+        sql.fetchRandomBenefit(quoteRoot);
+    }
+    
+    onCreationCompleted: {
+        app.refreshNeeded.connect(onUpdated);
     }
 }

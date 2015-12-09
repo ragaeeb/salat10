@@ -9,7 +9,7 @@ FullScreenDialog
         dtp.expanded = true;
         
         tutorial.execCentered("convertInfo", qsTr("This utility can be used to convert any Gregorian date (from the disbeliever's calendar) to the Hijri (Islamic) Calendar.\n\nSimply use the dropdown to select the Julian date and you will see the Hijri date being displayed.") );
-        tutorial.exec("convertExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(4));
+        tutorial.exec("convertExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, tutorial.du(4));
         
         hijriLabel.text = hijri.writeIslamicDate( persist.getValueFor("hijri"), dtp.value );
     }

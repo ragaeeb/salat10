@@ -66,9 +66,9 @@ Page
                     onExpandedChanged: {
                         if (!expanded)
                         {
-                            tutorial.exec( "calDaysCount", qsTr("Use the circular slider to select how many days to export to the calendar."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(30) );
-                            tutorial.exec( "calEventSelection", qsTr("Select the events that you want to export and the ones you don't want to to sync with the calendar by using the checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(25) );
-                            tutorial.exec("calEventAdjust", qsTr("Use the slider to adjust how long before or after the event to remind you about it."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(20), 0, 0, undefined, "r" );
+                            tutorial.exec( "calDaysCount", qsTr("Use the circular slider to select how many days to export to the calendar."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, tutorial.du(30) );
+                            tutorial.exec( "calEventSelection", qsTr("Select the events that you want to export and the ones you don't want to to sync with the calendar by using the checkbox."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, tutorial.du(25) );
+                            tutorial.exec("calEventAdjust", qsTr("Use the slider to adjust how long before or after the event to remind you about it."), HorizontalAlignment.Right, VerticalAlignment.Center, 0, tutorial.du(20), 0, 0, undefined, "r" );
                             tutorial.execActionBar( "calcExport", qsTr("Once you are ready to export the events to the calendar, tap here to finalize it.").arg(exportAction.title) );
                             tutorial.execActionBar("calcBack", qsTr("Tap here to close this page."), "b" );
                         }

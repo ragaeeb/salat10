@@ -2,20 +2,11 @@ import QtQuick 1.0
 import bb.cascades 1.0
 import com.canadainc.data 1.0
 
-Page
+HelpPage
 {
     id: root
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
-    
-    titleBar: AboutTitleBar
-    {
-        id: atb
-        videoTutorialUri: "http://youtu.be/Y4QjODg6SR4"
-    }
-    
-    function cleanUp()
-    {
-    }
+    videoTutorialUri: "http://youtu.be/Y4QjODg6SR4"
     
     function onDataLoaded(id, data)
     {
@@ -46,10 +37,6 @@ Page
     
     function reload() {
         sql.fetchArticles(root);
-    }
-    
-    onCreationCompleted: {
-        reload();
     }
     
     Container
@@ -251,6 +238,8 @@ Page
                 if (deviceUtils.isPhysicalKeyboardDevice) {
                     searchField.requestFocus();
                 }
+                
+                reload();
             }
         }
     ]

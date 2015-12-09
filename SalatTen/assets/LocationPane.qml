@@ -206,7 +206,7 @@ Page
                         onEnded: {
                             tftk.textField.requestFocus();
                             persist.registerForSetting(locationPage, "longitude");
-                            tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(5) );
+                            tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, tutorial.du(5) );
                             tutorial.execActionBar("nativeLocationPicker", qsTr("Tap here to pick an existing location from your device.") );
                             tutorial.execActionBar("geoRefresh", qsTr("Tap here to use your device's GPS to obtain your location (this may take a while)."), "r" );
                             tutorial.execActionBar("returnToSettings", qsTr("Tap here to go back to the Settings page."), "b" );

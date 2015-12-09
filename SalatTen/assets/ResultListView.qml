@@ -67,7 +67,7 @@ ListView
                 tutorial.execActionBar("enableAlarms", qsTr("Use the '%1' action to enable the athan and notifications for the selected events.").arg(enableAthaan.title), "l" );
                 tutorial.execActionBar("muteAlarms", qsTr("Use the '%1' action to disable the athan from sounding for all of the selected events in the future. Note that once you mute it, the app will prompt you if you want to still receive notifications in the BlackBerry Hub (instead of hearing the audio athan).").arg(muteAthaans.title) );
                 tutorial.execActionBar("copyEvents", qsTr("Use the '%1' action to copy the timings to your device clipboard.").arg(copyAction.title), "r");
-                tutorial.exec("openMultiEventMenu", qsTr("Tap here to expand the menu to show more options."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, ui.du(1), 0, ui.du(1));
+                tutorial.exec("openMultiEventMenu", qsTr("Tap here to expand the menu to show more options."), HorizontalAlignment.Right, VerticalAlignment.Bottom, 0, tutorial.du(1), 0, tutorial.du(1));
             }
         }
         

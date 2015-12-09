@@ -18,7 +18,7 @@ FullScreenDialog
     onOpened: {
         tutorial.execSwipe("eventEditLeft", qsTr("Drag the slider to the left if the actual time is supposed to be before what it is currently being calculated as."), HorizontalAlignment.Center, VerticalAlignment.Center, "l");
         tutorial.execSwipe("eventEditRight", qsTr("Drag the slider to the right if the actual time is supposed to after what it is currently being calculated as."), HorizontalAlignment.Center, VerticalAlignment.Center, "r");
-        tutorial.exec("eventExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(4));
+        tutorial.exec("eventExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, tutorial.du(4));
     }
     
     onClosing: {

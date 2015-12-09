@@ -44,7 +44,7 @@ FullScreenDialog
                 onEnded: {
                     dtp.expanded = true;
                     tutorial.execCentered( "jamaah", qsTr("Please set the time the congregational prayer for %1 at the masjid/musalla.").arg( translator.render(key) ) );
-                    tutorial.exec("jamaahExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(4));
+                    tutorial.exec("jamaahExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, tutorial.du(4));
                 }
             }
         ]
