@@ -27,6 +27,8 @@ public:
     Q_INVOKABLE void searchArticles(QObject* caller, QString const& searchTerm);
 
     QObject* getSource();
+    Q_SLOT void reloadPlugins();
+    bool pluginsExist();
 };
 
 }

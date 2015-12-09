@@ -11,6 +11,7 @@
 #include "NotificationThread.h"
 #include "Offloader.h"
 #include "Persistance.h"
+#include "TextUtils.h"
 
 #include <bb/system/CardDoneMessage>
 
@@ -45,6 +46,7 @@ class ApplicationUI : public QObject
     Offloader m_offloader;
     InvokeHelper m_invoke;
     bool m_gpsReady;
+    TextUtils m_textUtils;
 
     bool gpsReady() const;
     void init(QString const& qml);
@@ -54,11 +56,13 @@ signals:
 	void initialize();
 	void lazyInitComplete();
 	void gpsReadyChanged();
+	void refreshNeeded();
 
 private slots:
     void childCardDone(bb::system::CardDoneMessage const& message=bb::system::CardDoneMessage());
     void invoked(bb::system::InvokeRequest const& request);
     void lazyInit();
+    void onDatabaseUpdated();
     void onFullScreen();
     void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);
 

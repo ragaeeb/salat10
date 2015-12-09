@@ -9,7 +9,7 @@ FullScreenDialog
         {
             tutorial.exec("compassAzimuth", qsTr("This is the calculated angle of the direction of the Qibla. Once properly calibrated, rotate the device until the needle points to this angle (in the centre of the compass)."), HorizontalAlignment.Center, VerticalAlignment.Top);
             tutorial.execCentered("compassSuccess", qsTr("When you are successfully pointing to the Qibla direction, your device will vibrate and the angle in the centre of the compass needle will turn green."));
-            tutorial.exec("compassExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, ui.du(4));
+            tutorial.exec("compassExit", qsTr("Tap anywhere outside the controls to dismiss this dialog."), HorizontalAlignment.Center, VerticalAlignment.Bottom, 0, 0, 0, tutorial.du(4));
         }
     }
     

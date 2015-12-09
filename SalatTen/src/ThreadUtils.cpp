@@ -1,8 +1,9 @@
 #include "precompiled.h"
 
 #include "ThreadUtils.h"
-#include "AppLogFetcher.h"
+#include "CommonConstants.h"
 #include "JlCompress.h"
+#include "IOUtils.h"
 #include "Report.h"
 #include "SalatUtils.h"
 
@@ -136,6 +137,29 @@ void ThreadUtils::diffIqamahs(GroupDataModel* model, QMap<QString, QTime> const&
             model->updateItem(indexPath, current);
         }
     }
+}
+
+
+QVariantMap ThreadUtils::processDownload(QVariantMap const& cookie, QByteArray const& data)
+{
+    QVariantMap q = cookie;
+    QString target = QString("%1/%2.zip").arg( QDir::tempPath() ).arg(DB_NAME);
+    QString expectedMd5 = q.value("db_md5").toString();
+
+    bool valid = canadainc::IOUtils::writeIfValidMd5(target, expectedMd5, data);
+
+    if (valid)
+    {
+        QStringList files = JlCompress::extractDir( target, QDir::homePath(), "19FQ@@I_6BqKk@" );
+
+        if ( !files.isEmpty() ) {
+            return q;
+        }
+    }
+
+    q[KEY_ERROR] = QObject::tr("Corrupted archive downloaded. Please re-try the download again.");
+
+    return q;
 }
 
 } /* namespace salat */
