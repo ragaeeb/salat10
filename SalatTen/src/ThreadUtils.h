@@ -4,6 +4,8 @@
 #include <QSet>
 #include <QString>
 
+#include "SalatParameters.h"
+
 namespace bb {
     namespace cascades {
         class GroupDataModel;
@@ -25,6 +27,7 @@ struct ThreadUtils
     static void compressFiles(canadainc::Report& r, QString const& zipPath, const char* password);
     static void diffIqamahs(GroupDataModel* model, QMap<QString, QTime> const& iqamahs);
     static QVariantMap processDownload(QVariantMap const& cookie, QByteArray const& data);
+    static QString renderHTML(qreal latitude, qreal longitude, SalatParameters const& sp, qreal asrRatio, bool nightStartsAtIsha, int dstAdjust, QMap<QString, int> const& adjustments, QString const& location);
 };
 
 } /* namespace quran */

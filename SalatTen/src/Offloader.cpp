@@ -154,7 +154,6 @@ QString Offloader::renderStandardTime(QDateTime const& theTime)
 
 void Offloader::renderCenter(bb::cascades::maps::MapView* mapControl, QVariantMap const& data)
 {
-    LOGGER("**** dlksjf" << data);
     GeoLocation* home = new GeoLocation( data.value("latitude").toReal(), data.value("longitude").toReal() );
     home->setName( data.value("name").toString() );
     home->setDescription( data.value("location").toString() );

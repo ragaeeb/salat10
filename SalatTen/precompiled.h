@@ -29,6 +29,7 @@
 #include <bb/system/InvokeManager>
 #include <bb/system/InvokeReplyError>
 #include <bb/system/InvokeTargetReply>
+#include <bb/system/LocaleHandler>
 
 #include <QtLocationSubset/QGeoAddress>
 

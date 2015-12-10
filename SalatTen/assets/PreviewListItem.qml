@@ -151,7 +151,6 @@ Container
                 onClicked: {
                     console.log("UserEvent: OpenCompass");
                     var c = definition.init("CompassPane.qml");
-                    //navigationPane.open(c);
                     c.open();
                     reporter.record("OpenCompass");
                 }
@@ -232,7 +231,7 @@ Container
                                 result += translator.render(today[i].key)+": "+Qt.formatTime(today[i].value, Qt.SystemLocaleShortDate) + "\n";
                             }
                             
-                            iai.data = result.trim();
+                            iai.data = result.trim()+"\n\n[Shared from Salat10]";
                         }
                     }
                     
