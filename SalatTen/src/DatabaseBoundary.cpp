@@ -32,6 +32,14 @@ void DatabaseBoundary::fetchArticles(QObject* caller)
 }
 
 
+void DatabaseBoundary::fetchCenters(QObject* caller)
+{
+    if ( pluginsExist() ) {
+        m_sql.executeQuery(caller, "SELECT name,website,latitude,longitude,city AS location FROM masjids INNER JOIN locations ON masjids.location=locations.id", QueryId::FetchCenters);
+    }
+}
+
+
 void DatabaseBoundary::fetchRandomBenefit(QObject* caller)
 {
     if ( pluginsExist() ) {

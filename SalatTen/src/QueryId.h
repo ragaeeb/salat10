@@ -12,7 +12,7 @@ class QueryId
 
 public:
     enum Type {
-        FetchAllOrigins,
+        FetchCenters,
     	GetArticles,
     	GetAllAngles,
     	GetAnglesForStrategy,

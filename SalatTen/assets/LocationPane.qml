@@ -295,10 +295,10 @@ Page
                         onCaptionButtonClicked: {
                             console.log("UserEvent: CaptionClicked", focusedId);
                             
-                            if (focusedId.match("\\d+$") > 0)
+                            if ( focusedId.indexOf("http") == 0 )
                             {
-                                persist.invoke( "com.canadainc.Quran10.bio.previewer", "", "", "", focusedId );
-                                reporter.record("OpenMapIndividual", focusedId);
+                                persist.openUri(focusedId);
+                                reporter.record("OpenUrl", focusedId);
                             } else {
                                 reporter.record("LocationPinTapped");
                             }
@@ -310,10 +310,14 @@ Page
                         
                         function onDataLoaded(id, data)
                         {
-                            if (id == QueryId.FetchAllOrigins)
+                            console.log("*** DSFLSDKFJ", id);
+                            console.log("*** xxx", QueryId.FetchCenters);
+                            if (id == QueryId.FetchCenters)
                             {
+                                console.log("*** DSFLSDKF333J", id);
                                 for (var i = data.length-1; i >= 0; i--) {
-                                    offloader.renderSalaf(mapView, data[i]);
+                                    console.log("*** DSFLSDKF333Jxxxx", id);
+                                    offloader.renderCenter(mapView, data[i]);
                                 }
                             }
                         }
@@ -358,6 +362,8 @@ Page
                         onCreationCompleted: {
                             notification.mapDataLoaded.connect(onMapDataLoaded);
                             notification.fetchCheckins();
+                            
+                            sql.fetchCenters(mapView);
                         }
                     }
                 }
@@ -370,14 +376,8 @@ Page
             asset: "images/loading/loading_location.png"
         }
         
-        OfflineDelegate
-        {
+        OfflineDelegate {
             id: offliner
-            graphic: "images/toast/ic_offline.png"
-            
-            onImageTapped: {
-                persist.launchSettingsApp("networkconnections");
-            }
         }
     }
 }

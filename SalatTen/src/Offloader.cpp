@@ -152,14 +152,15 @@ QString Offloader::renderStandardTime(QDateTime const& theTime)
 }
 
 
-void Offloader::renderSalaf(bb::cascades::maps::MapView* mapControl, QVariantMap const& data)
+void Offloader::renderCenter(bb::cascades::maps::MapView* mapControl, QVariantMap const& data)
 {
+    LOGGER("**** dlksjf" << data);
     GeoLocation* home = new GeoLocation( data.value("latitude").toReal(), data.value("longitude").toReal() );
     home->setName( data.value("name").toString() );
-    home->setDescription( data.value("city").toString() );
-    home->setGeoId( QString::number( data.value("id").toLongLong() ) );
+    home->setDescription( data.value("location").toString() );
+    home->setGeoId( data.value("website").toString() );
     Marker m = home->marker();
-    m.setIconUri( data.value("is_companion").toInt() == 1 ? "asset:///images/ic_map_companion.png" : "asset:///images/ic_map_rijaal.png");
+    m.setIconUri("asset:///images/ic_masjid.png");
     home->setMarker(m);
     mapControl->mapData()->add(home);
 }
