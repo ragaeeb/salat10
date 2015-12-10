@@ -1,11 +1,14 @@
 #include "precompiled.h"
 
 #include "ThreadUtils.h"
+#include "Calculator.h"
+#include "Coordinates.h"
 #include "CommonConstants.h"
 #include "JlCompress.h"
 #include "IOUtils.h"
 #include "Report.h"
 #include "SalatUtils.h"
+#include "Translator.h"
 
 namespace {
 
@@ -161,5 +164,62 @@ QVariantMap ThreadUtils::processDownload(QVariantMap const& cookie, QByteArray c
 
     return q;
 }
+
+
+QString ThreadUtils::renderHTML(qreal latitude, qreal longitude, SalatParameters const& angles, qreal asrRatio, bool nightStartsAtIsha, int dstAdjust, QMap<QString, int> const& adjustments, QString const& location)
+{
+    QDateTime now = QDateTime::currentDateTime();
+    QDate today = now.date();
+    today.setDate( today.year(), today.month(), 1 );
+    Coordinates geo = Calculator::createCoordinates(now, latitude, longitude);
+    Calculator c;
+    Translator t;
+    QString format = bb::utility::i18n::timeFormat(bb::utility::i18n::DateFormat::Short);
+    bb::system::LocaleHandler l(bb::system::LocaleType::Region);
+    int daysInMonth = today.daysInMonth();
+    QStringList html = QStringList() << QString("<html><body><h1>Salat10<br>%1, %2: %3</h1><br><br><table border=1>").arg( QDate::longMonthName( today.month() ) ).arg( today.year() ).arg(location);
+    {
+        QStringList tableRow = QStringList() << "<tr>";
+        QStringList keys = Translator::eventKeys();
+
+        for (int i = keys.size()-1; i >= 0; i--) {
+            keys[i] = t.render(keys[i]);
+        }
+
+        QStringList headerList = QStringList() << QObject::tr("Date") << keys;
+
+        foreach (QString const& header, headerList) {
+            tableRow << QString("<td style='width: 100px; color: red; text-align: center;'>%1</td>").arg(header);
+        }
+
+        tableRow << "</tr>";
+        html << tableRow.join("");
+    }
+
+    for (int i = 0; i < daysInMonth; i++)
+    {
+        QStringList tableRow = QStringList() << "<tr>";
+        QStringList rowData = QStringList() << today.toString(Qt::SystemLocaleShortDate);
+        QList<QDateTime> current = c.calculate(today, geo, angles, asrRatio, nightStartsAtIsha);
+
+        for (int j = 0; j < current.size(); j++) {
+            rowData << l.locale().toString(current[j], format);
+        }
+
+        foreach (QString const& element, rowData) {
+            tableRow << QString("<td style='width: 100px; text-align: center;'>%1</td>").arg(element);
+        }
+
+        tableRow << "</tr>";
+        html << tableRow.join("");
+
+        today = today.addDays(1);
+    }
+
+    html << "</table></body></html>";
+
+    return html.join("\n");
+}
+
 
 } /* namespace salat */

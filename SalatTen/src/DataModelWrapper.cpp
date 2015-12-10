@@ -311,6 +311,12 @@ int DataModelWrapper::dstAdjustment() const {
 }
 
 
+QString DataModelWrapper::renderPlainText()
+{
+    return ThreadUtils::renderHTML(m_cache.latitude, m_cache.longitude, m_cache.angles, m_cache.asrRatio, m_cache.nightStartsIsha, m_cache.dstAdjust, m_cache.adjustments, m_persistance->getValueFor("location").toString());
+}
+
+
 DataModelWrapper::~DataModelWrapper() {
 	m_model.setParent(NULL);
 }

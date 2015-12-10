@@ -22,8 +22,8 @@ void Translator::reload()
 	m_map[key_asr] = tr("Asr");
 	m_map[key_maghrib] = tr("Maghrib");
 	m_map[key_isha] = tr("Isha");
-	m_map[key_half_night] = tr("1/2 Night Begins");
-	m_map[key_last_third_night] = tr("Last 1/3 Night Begins");
+	m_map[key_half_night] = tr("1/2 Night");
+	m_map[key_last_third_night] = tr("Last 1/3 Night");
 }
 
 

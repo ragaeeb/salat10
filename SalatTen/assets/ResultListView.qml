@@ -126,7 +126,7 @@ ListView
                 onTriggered: {
                     console.log("UserEvent: ShareMultiResults");
                     listUtil.active = true;
-                    data = persist.convertToUtf8( listUtil.object.textualizeSelected() );
+                    data = persist.convertToUtf8( listUtil.object.textualizeSelected()+"\n\n[Shared from Salat10]" );
                     reporter.record("ShareMultiResults");
                 }
             },

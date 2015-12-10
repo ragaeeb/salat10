@@ -80,6 +80,7 @@ public:
 	 */
 	Q_INVOKABLE QVariantMap getCurrent(QDateTime const& reference);
 	Q_INVOKABLE QVariantMap getNext(QDateTime const& reference);
+	Q_INVOKABLE QString renderPlainText();
 
 	Persistance* getPersist();
 	Calculator* getCalculator();
