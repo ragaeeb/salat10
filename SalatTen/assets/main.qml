@@ -173,6 +173,10 @@ NavigationPane
                 visible: delegateActive
                 property bool firstTime: false
                 
+                function onHeaderShown() {
+                    tutorial.exec("monthlySchedule", qsTr("To generate a monthly schedule with all the appropriate prayer times, tap on this icon.\n\nOnce the schedule is generated you can save it as an HTML file and print it at your convenience."), HorizontalAlignment.Left, VerticalAlignment.Bottom, tutorial.du(3), 0, 0, tutorial.du(12) );
+                }
+                
                 function onFooterShown()
                 {
                     if (!firstTime) { // this is needed because for some reason the first time the list view initializes the footerShown() signal is emitted
@@ -192,6 +196,7 @@ NavigationPane
                         control.anim.play();
                         control.scrollToItem([0,0], ScrollAnimation.Smooth);
                         control.footerShown.connect(onFooterShown);
+                        control.headerShown.connect(onHeaderShown);
                     }
                 }
             }

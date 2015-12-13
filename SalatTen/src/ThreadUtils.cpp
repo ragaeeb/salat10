@@ -166,21 +166,20 @@ QVariantMap ThreadUtils::processDownload(QVariantMap const& cookie, QByteArray c
 }
 
 
-QString ThreadUtils::renderHTML(qreal latitude, qreal longitude, SalatParameters const& angles, qreal asrRatio, bool nightStartsAtIsha, int dstAdjust, QMap<QString, int> const& adjustments, QString const& location)
+QString ThreadUtils::renderHTML(HtmlParams const& hp)
 {
-    QDateTime now = QDateTime::currentDateTime();
-    QDate today = now.date();
+    QDate today = hp.now.date();
     today.setDate( today.year(), today.month(), 1 );
-    Coordinates geo = Calculator::createCoordinates(now, latitude, longitude);
+    Coordinates geo = Calculator::createCoordinates(hp.now, hp.latitude, hp.longitude);
     Calculator c;
     Translator t;
     QString format = bb::utility::i18n::timeFormat(bb::utility::i18n::DateFormat::Short);
     bb::system::LocaleHandler l(bb::system::LocaleType::Region);
     int daysInMonth = today.daysInMonth();
-    QStringList html = QStringList() << QString("<html><body><h1>Salat10<br>%1, %2: %3</h1><br><br><table border=1>").arg( QDate::longMonthName( today.month() ) ).arg( today.year() ).arg(location);
+    QStringList keys = Translator::eventKeys();
+    QStringList html = QStringList() << QString("<html><body><h1>Salat10<br>%1, %2: %3</h1><br><br><table border=1>").arg( QDate::longMonthName( today.month() ) ).arg( today.year() ).arg(hp.location);
     {
         QStringList tableRow = QStringList() << "<tr>";
-        QStringList keys = Translator::eventKeys();
 
         for (int i = keys.size()-1; i >= 0; i--) {
             keys[i] = t.render(keys[i]);
@@ -200,10 +199,10 @@ QString ThreadUtils::renderHTML(qreal latitude, qreal longitude, SalatParameters
     {
         QStringList tableRow = QStringList() << "<tr>";
         QStringList rowData = QStringList() << today.toString(Qt::SystemLocaleShortDate);
-        QList<QDateTime> current = c.calculate(today, geo, angles, asrRatio, nightStartsAtIsha);
+        QList<QDateTime> current = c.calculate(today, geo, hp.angles, hp.asrRatio, hp.nightStartsIsha);
 
         for (int j = 0; j < current.size(); j++) {
-            rowData << l.locale().toString(current[j], format);
+            rowData << l.locale().toString( current[j].addSecs(hp.dstAdjust*3600).addSecs( hp.adjustments.value(keys[j]) ), format );
         }
 
         foreach (QString const& element, rowData) {
@@ -218,7 +217,10 @@ QString ThreadUtils::renderHTML(qreal latitude, qreal longitude, SalatParameters
 
     html << "</table></body></html>";
 
-    return html.join("\n");
+    QString path = QString("%1/schedule.html").arg( QDir::tempPath() );
+    bool written = IOUtils::writeTextFile( path, html.join("\n"), true, false, true );
+
+    return written ? path : "";
 }
 
 

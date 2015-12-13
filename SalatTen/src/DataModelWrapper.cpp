@@ -2,6 +2,7 @@
 
 #include "DataModelWrapper.h"
 #include "Coordinates.h"
+#include "IOUtils.h"
 #include "Logger.h"
 #include "Persistance.h"
 #include "SalatUtils.h"
@@ -311,9 +312,42 @@ int DataModelWrapper::dstAdjustment() const {
 }
 
 
-QString DataModelWrapper::renderPlainText()
+void DataModelWrapper::renderHTMLText(QDateTime const& reference)
 {
-    return ThreadUtils::renderHTML(m_cache.latitude, m_cache.longitude, m_cache.angles, m_cache.asrRatio, m_cache.nightStartsIsha, m_cache.dstAdjust, m_cache.adjustments, m_persistance->getValueFor("location").toString());
+    LOGGER(reference);
+
+    HtmlParams hp;
+    hp.latitude = m_cache.latitude;
+    hp.longitude = m_cache.longitude;
+    hp.asrRatio = m_cache.asrRatio;
+    hp.adjustments = m_cache.adjustments;
+    hp.dstAdjust = m_cache.dstAdjust;
+    hp.now = reference;
+    hp.angles = m_cache.angles;
+    hp.nightStartsIsha = m_cache.nightStartsIsha;
+    hp.location = m_persistance->getValueFor("location").toString();
+
+    QFutureWatcher<QString>* qfw = new QFutureWatcher<QString>(this);
+    connect( qfw, SIGNAL( finished() ), this, SLOT( onHtmlWritten() ) );
+    QFuture<QString> future = QtConcurrent::run(&ThreadUtils::renderHTML, hp);
+    qfw->setFuture(future);
+}
+
+
+void DataModelWrapper::onHtmlWritten()
+{
+    QFutureWatcher<QString>* qfw = static_cast< QFutureWatcher<QString>* >( sender() );
+    QString path = qfw->result();
+
+    LOGGER(path);
+
+    if ( !path.isEmpty() ) {
+        m_persistance->openUri( QUrl::fromLocalFile(path).toString() );
+    } else {
+        m_persistance->showToast( tr("Could not generate monthly schedule. Please file a bug-report."), "images/toast/ic_monthly_failed.png" );
+    }
+
+    qfw->deleteLater();
 }
 
 

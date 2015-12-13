@@ -69,10 +69,17 @@ Container
                     orientation: LayoutOrientation.LeftToRight
                 }
                 
-                ImageView
+                ImageButton
                 {
-                    imageSource: "images/list/ic_calendar_hijri.png"
+                    defaultImageSource: "images/list/ic_calendar_hijri.png"
+                    pressedImageSource: defaultImageSource
                     verticalAlignment: VerticalAlignment.Center
+                    
+                    onClicked: {
+                        console.log("UserEvent: MonthlySchedule");
+                        boundary.renderHTMLText(ListItemData);
+                        reporter.record("MonthlySchedule");
+                    }
                 }
                 
                 Label
@@ -98,10 +105,17 @@ Container
                     orientation: LayoutOrientation.LeftToRight
                 }
                 
-                ImageView
+                ImageButton
                 {
-                    imageSource: "images/list/ic_calendar.png"
+                    defaultImageSource: "images/list/ic_calendar.png"
+                    pressedImageSource: defaultImageSource
                     verticalAlignment: VerticalAlignment.Center
+                    
+                    onClicked: {
+                        console.log("UserEvent: GregExportClick");
+                        boundary.renderHTMLText(ListItemData);
+                        reporter.record("GregExportClick");
+                    }
                 }
                 
                 Label
