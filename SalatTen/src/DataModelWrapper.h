@@ -60,6 +60,7 @@ class DataModelWrapper : public QObject
 	void updateCache(QStringList const& keys);
 
 private slots:
+    void onHtmlWritten();
     void settingChanged(QString const& key);
 
 signals:
@@ -80,7 +81,7 @@ public:
 	 */
 	Q_INVOKABLE QVariantMap getCurrent(QDateTime const& reference);
 	Q_INVOKABLE QVariantMap getNext(QDateTime const& reference);
-	Q_INVOKABLE QString renderPlainText();
+	Q_INVOKABLE void renderHTMLText(QDateTime const& reference);
 
 	Persistance* getPersist();
 	Calculator* getCalculator();
