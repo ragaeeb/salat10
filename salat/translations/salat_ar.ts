@@ -35,13 +35,13 @@
     </message>
     <message>
         <location filename="../src/Translator.cpp" line="25"/>
-        <source>1/2 Night Begins</source>
-        <translation>دخل نصف الليل</translation>
+        <source>1/2 Night</source>
+        <translation>نصف الليل</translation>
     </message>
     <message>
         <location filename="../src/Translator.cpp" line="26"/>
-        <source>Last 1/3 Night Begins</source>
-        <translation>دخل آخر ثلث الليل</translation>
+        <source>Last 1/3 Night</source>
+        <translation>آخر ثلث الليل</translation>
     </message>
 </context>
 </TS>
