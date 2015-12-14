@@ -1,4 +1,4 @@
-import bb.cascades 1.3
+import bb.cascades 1.2
 import bb.platform 1.0
 import com.canadainc.data 1.0
 
@@ -46,6 +46,7 @@ Page
     {
         kind: TitleBarKind.Segmented
         selectedIndex: boundary.dstAdjustment == 0 ? 1 : boundary.dstAdjustment == 1 ? 2 : 0
+        scrollBehavior: TitleBarScrollBehavior.NonSticky
         
         options: [
             Option {
@@ -144,13 +145,17 @@ Page
                                 duration: 500
                                 
                                 onEnded: {
-                                    tutorial.exec("dstAuto", qsTr("To let the calculations use your device settings for daylight savings rules, choose '%1'.").arg(autoDST.text), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, tutorial.du(5));
-                                    tutorial.exec("dstMinus", qsTr("If the calculations seem to be 1 hour ahead of the actual time, choose '%1' to manually adjust the time to be an hour backward.").arg(adjustMinusDST.text), HorizontalAlignment.Left, VerticalAlignment.Top, tutorial.du(2), 0, tutorial.du(5) );
-                                    tutorial.exec("dstPlus", qsTr("If the calculations seem to be 1 hour before its actual time, choose '%1' to manually adjust the time to be an hour forward.").arg(adjustPlusDST.text), HorizontalAlignment.Right, VerticalAlignment.Top, 0, tutorial.du(2), tutorial.du(5) );
-                                    tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
+                                    var newInstall = tutorial.execActionBar("map", qsTr("To open the Map page to set your location as well as see where other Salat10 users are, tap on the '%1' action at the bottom.").arg(locationAction.title) );
                                     tutorial.execBelowTitleBar("calcAngles", qsTr("Different regions of the world use different conventions to calculate the prayer timings. Use the '%1' dropdown to set the appropriate one for your region for most accurate results.").arg(calcStrategy.title) );
                                     tutorial.execActionBar("settingsBack", qsTr("To return to the main timings page tap on the Back button here."), "b" );
                                     showTutorials();
+                                    
+                                    if (!newInstall)
+                                    {
+                                        tutorial.exec("dstAuto", qsTr("To let the calculations use your device settings for daylight savings rules, choose '%1'.").arg(autoDST.text), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, tutorial.du(5));
+                                        tutorial.exec("dstMinus", qsTr("If the calculations seem to be 1 hour ahead of the actual time, choose '%1' to manually adjust the time to be an hour backward.").arg(adjustMinusDST.text), HorizontalAlignment.Left, VerticalAlignment.Top, tutorial.du(2), 0, tutorial.du(5) );
+                                        tutorial.exec("dstPlus", qsTr("If the calculations seem to be 1 hour before its actual time, choose '%1' to manually adjust the time to be an hour forward.").arg(adjustPlusDST.text), HorizontalAlignment.Right, VerticalAlignment.Top, 0, tutorial.du(2), tutorial.du(5) );
+                                    }
                                 }
                             }
                         ]
@@ -316,9 +321,10 @@ Page
                         inputMode: TextFieldInputMode.NumbersAndPunctuation
                         clearButtonVisible: false
                         enabled: calcStrategy.isCustom
+                        visible: !calcStrategy.expanded
                         
                         layoutProperties: StackLayoutProperties {
-                            spaceQuota: 0.15
+                            spaceQuota: 0.2
                         }
                         
                         validator: Validator
@@ -346,6 +352,7 @@ Page
                         inputMode: customFajr.inputMode
                         enabled: customFajr.enabled
                         clearButtonVisible: customFajr.clearButtonVisible
+                        visible: !calcStrategy.expanded
                         
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: customFajr.layoutProperties.spaceQuota

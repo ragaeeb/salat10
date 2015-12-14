@@ -45,7 +45,7 @@ FullScreenDialog
             
             onDelegateActiveChanged: {
                 if (delegateActive) {
-                    tutorial.exec("compassAzimuth", qsTr("When the '%1' text is being displayed it means the app is still adjusting and the result may not be correct. When you see this, keep tilting the device up and down over and over and move away from metal until it disappears."), HorizontalAlignment.Center, VerticalAlignment.Top);
+                    tutorial.exec("compassAzimuth", qsTr("When the '%1' text is being displayed it means the app is still adjusting and the result may not be correct. When you see this, keep tilting the device up and down over and over and move away from metal until it disappears.").arg(busy.loadingText), HorizontalAlignment.Center, VerticalAlignment.Top);
                 }
             }
         }

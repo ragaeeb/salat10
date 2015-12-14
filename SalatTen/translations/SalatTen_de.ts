@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.0" language="de_DE">
 <context>
     <name>AdjustEventDialog</name>
     <message>
@@ -78,7 +78,7 @@
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="23"/>
         <source>Accept</source>
-        <translation>Принять</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="50"/>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="139"/>
         <source>Anonymous</source>
-        <translation>Анонимный</translation>
+        <translation>Unterdrückte</translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="140"/>
@@ -103,7 +103,7 @@
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="141"/>
         <source>Shaykh Muhammad Nasir-ud-Din al-Albani (رحمه الله)</source>
-        <translation>Әбу Абдуррахман Мұхаммед Насыруддин ибн әл-Хадж Нух ибн Нәджәти ибн Адам әл-Албани әл-Арнаути</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="142"/>
@@ -116,7 +116,7 @@
     <message>
         <location filename="../assets/CalendarExport.qml" line="25"/>
         <source>Export Events</source>
-        <translation>Экспорт</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CalendarExport.qml" line="52"/>
@@ -161,13 +161,12 @@
     <message>
         <location filename="../assets/CalendarExport.qml" line="95"/>
         <source>Export</source>
-        <translation>Экспорт</translation>
+        <translation>Exportieren</translation>
     </message>
     <message numerus="yes">
         <location filename="../assets/CalendarExport.qml" line="153"/>
         <source>Export %n days</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
@@ -193,7 +192,6 @@
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -215,7 +213,6 @@
         <location filename="../assets/CalendarExport.qml" line="268"/>
         <source>%n events will be exported.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
@@ -282,7 +279,7 @@
     <message>
         <location filename="../assets/EventListItem.qml" line="19"/>
         <source>Edit</source>
-        <translation>Редактировать</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <location filename="../assets/EventListItem.qml" line="29"/>
@@ -312,14 +309,14 @@
         <location filename="../assets/GlobalProperties.qml" line="64"/>
         <location filename="../assets/GlobalProperties.qml" line="100"/>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../assets/GlobalProperties.qml" line="39"/>
         <location filename="../assets/GlobalProperties.qml" line="64"/>
         <location filename="../assets/GlobalProperties.qml" line="100"/>
         <source>No</source>
-        <translation>Нет</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <location filename="../assets/GlobalProperties.qml" line="48"/>
@@ -344,19 +341,19 @@
     <message>
         <location filename="../assets/GlobalProperties.qml" line="64"/>
         <source>Location Services</source>
-        <translation>Службы местопол.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/GlobalProperties.qml" line="64"/>
         <source>Warning: It seems like the location services is not enabled on your BlackBerry 10 device so the app will not be able to fetch real-time data and map information.
 
 Would you like to launch the Location Services screen and enable the Location Services permission there?</source>
-        <translation>Для использования этой функции необходимо включить службы определения местоположения.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/GlobalProperties.qml" line="64"/>
         <source>Don&apos;t ask again</source>
-        <translation>Больше не показывать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/GlobalProperties.qml" line="100"/>
@@ -386,7 +383,7 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
     <message>
         <location filename="../assets/HijriConverterDialog.qml" line="38"/>
         <source>Copy</source>
-        <translation>Копировать</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../assets/HijriConverterDialog.qml" line="88"/>
@@ -425,7 +422,6 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -442,7 +438,7 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
         <location filename="../assets/LocationPane.qml" line="58"/>
         <location filename="../assets/LocationPane.qml" line="115"/>
         <source>Choose Location</source>
-        <translation>Выбрать расположение</translation>
+        <translation>Ort wählen</translation>
     </message>
     <message>
         <location filename="../assets/LocationPane.qml" line="67"/>
@@ -452,7 +448,7 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
     <message>
         <location filename="../assets/LocationPane.qml" line="91"/>
         <source>GPS Refresh</source>
-        <translation>Поиск GPS</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/LocationPane.qml" line="137"/>
@@ -467,7 +463,7 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
     <message>
         <location filename="../assets/LocationPane.qml" line="188"/>
         <source>No Locations Found</source>
-        <translation>Местоположение не найдено</translation>
+        <translation>Keine Standorte gefunden</translation>
     </message>
     <message>
         <location filename="../assets/LocationPane.qml" line="205"/>
@@ -550,7 +546,6 @@ Try it now to close this screen.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -564,16 +559,14 @@ Try it now to close this screen.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../assets/PreviewEvent.qml" line="248"/>
         <source>%1 %n minutes</source>
-        <translation>
-            <numerusform>%1 %n минута</numerusform>
-            <numerusform>%1 %n минуты</numerusform>
-            <numerusform>%1 %n минут</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -584,10 +577,9 @@ Try it now to close this screen.</source>
     <message numerus="yes">
         <location filename="../assets/PreviewEvent.qml" line="254"/>
         <source>%1 %n seconds</source>
-        <translation>
-            <numerusform>%1 %n секунда</numerusform>
-            <numerusform>%1 %n секунды</numerusform>
-            <numerusform>%1 %n секунд</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -601,27 +593,27 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="183"/>
         <source>Export</source>
-        <translation>Экспорт</translation>
+        <translation>Exportieren</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="208"/>
         <source>Share</source>
-        <translation>Поделиться</translation>
+        <translation>Freigabe</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="241"/>
         <source>Copy Date</source>
-        <translation>Копировать</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="252"/>
         <source>Clear Exported Events</source>
-        <translation>Очистить</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="272"/>
         <source>Confirmation</source>
-        <translation>Подтвердить</translation>
+        <translation>Bestätigen</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="272"/>
@@ -634,12 +626,12 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../src/ThreadUtils.cpp" line="163"/>
         <source>Corrupted archive downloaded. Please re-try the download again.</source>
-        <translation>Сбой загрузки</translation>
+        <translation>Herunterladen fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/ThreadUtils.cpp" line="188"/>
         <source>Date</source>
-        <translation>Дата</translation>
+        <translation>Datum</translation>
     </message>
 </context>
 <context>
@@ -647,7 +639,7 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="11"/>
         <source>Enable Athan?</source>
-        <translation>Включить</translation>
+        <translation>Aktivieren</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="12"/>
@@ -663,38 +655,38 @@ Try it now to close this screen.</source>
         <location filename="../assets/ResultListUtil.qml" line="14"/>
         <location filename="../assets/ResultListUtil.qml" line="112"/>
         <source>No</source>
-        <translation>Нет</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="15"/>
         <location filename="../assets/ResultListUtil.qml" line="112"/>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="42"/>
         <source>Successfully reset athans to default sound</source>
-        <translation>Успешно</translation>
+        <translation>Erfolg</translation>
+    </message>
+    <message>
+        <location filename="../assets/ResultListUtil.qml" line="98"/>
+        <source>Successfully enabled alarms/athans.</source>
+        <translation>Erfolg</translation>
+    </message>
+    <message>
+        <location filename="../assets/ResultListUtil.qml" line="101"/>
+        <source>Successfully muted alarms/athans.</source>
+        <translation>Erfolg</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="112"/>
         <source>Mute Athan</source>
-        <translation>Без звука</translation>
+        <translation>Stumm</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="112"/>
         <source>Do you want notifications to show up in BlackBerry Hub?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/ResultListUtil.qml" line="98"/>
-        <source>Successfully enabled alarms/athans.</source>
-        <translation>Успешно</translation>
-    </message>
-    <message>
-        <location filename="../assets/ResultListUtil.qml" line="101"/>
-        <source>Successfully muted alarms/athans.</source>
-        <translation>Успешно</translation>
     </message>
 </context>
 <context>
@@ -702,7 +694,7 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../assets/ResultListView.qml" line="59"/>
         <source>Iqamah time removed</source>
-        <translation>Успешно</translation>
+        <translation>Erfolg</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="68"/>
@@ -727,22 +719,22 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../assets/ResultListView.qml" line="78"/>
         <source>Enable Alarms/Athans</source>
-        <translation>Включить</translation>
+        <translation>Aktivieren</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="91"/>
         <source>Mute Alarms/Athans</source>
-        <translation>Без звука</translation>
+        <translation>Stumm</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="105"/>
         <source>Copy</source>
-        <translation>Копировать</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="120"/>
         <source>Share</source>
-        <translation>Поделиться</translation>
+        <translation>Freigabe</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="138"/>
@@ -752,18 +744,17 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../assets/ResultListView.qml" line="156"/>
         <source>Reset Sound</source>
-        <translation>Сброс</translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="168"/>
         <source>None selected</source>
-        <translation>Не выбрано</translation>
+        <translation>Nichts ausgewählt</translation>
     </message>
     <message numerus="yes">
         <location filename="../assets/ResultListView.qml" line="178"/>
         <source>+%n Events Selected</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
@@ -839,7 +830,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SalatHelp.qml" line="151"/>
         <source>No articles matched your search criteria. Please try a different search term.</source>
-        <translation>Ничего не найдено</translation>
+        <translation>Keine Ergebnisse gefunden</translation>
     </message>
     <message>
         <location filename="../assets/SalatHelp.qml" line="204"/>
@@ -852,7 +843,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="31"/>
         <source>Set Location</source>
-        <translation>Выбрать расположение</translation>
+        <translation>Ort wählen</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="55"/>
@@ -870,9 +861,34 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/SettingsPage.qml" line="87"/>
+        <source>According to the correct opinion, the time of %1 Aboo Haneefah (رحمه الله) considered the time of &apos;Asr to begin some time considerably after this point, however, &apos;He has opposed the narrations and the rest of the scholars, and thus his own students opposed him in this.&apos; as Ibn &apos;Abdil-Barr said.  Refer to al-Mughnee (2/14). However if you want to use the Hanafi school of thought, use can use the option for the other school of thought.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="88"/>
+        <source>The strongest opinion is that the day ends (thus the night begins) at the time of Maghrib. However, some scholars such as Shaykh Muhsin al-Abbad (حفظه الله) holds the opinion that the night begins at the time of Isha. If this is the fiqh opinion you take, enable this option.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="89"/>
+        <source>If you don&apos;t want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="90"/>
+        <source>Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in &apos;Silent&apos; mode, make sure you enable the &apos;Silent&apos; profile checkbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="91"/>
+        <source>If the athan volume is too loud, use the slider to control its output.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/SettingsPage.qml" line="104"/>
         <source>General Settings</source>
-        <translation>Общие настройки</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="125"/>
@@ -905,31 +921,6 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="87"/>
-        <source>According to the correct opinion, the time of %1 Aboo Haneefah (رحمه الله) considered the time of &apos;Asr to begin some time considerably after this point, however, &apos;He has opposed the narrations and the rest of the scholars, and thus his own students opposed him in this.&apos; as Ibn &apos;Abdil-Barr said.  Refer to al-Mughnee (2/14). However if you want to use the Hanafi school of thought, use can use the option for the other school of thought.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="88"/>
-        <source>The strongest opinion is that the day ends (thus the night begins) at the time of Maghrib. However, some scholars such as Shaykh Muhsin al-Abbad (حفظه الله) holds the opinion that the night begins at the time of Isha. If this is the fiqh opinion you take, enable this option.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="89"/>
-        <source>If you don&apos;t want the athan to sound on Fridays at Dhuhr time for Jumuah (to disturb the khateeb), enable this option.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="90"/>
-        <source>Choose the device profiles that you want the athan to sound off in. For example, if you want the athan to sound off even when the device is in &apos;Silent&apos; mode, make sure you enable the &apos;Silent&apos; profile checkbox.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="91"/>
-        <source>If the athan volume is too loud, use the slider to control its output.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/SettingsPage.qml" line="150"/>
         <source>To return to the main timings page tap on the Back button here.</source>
         <translation type="unfinished"></translation>
@@ -937,17 +928,17 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="202"/>
         <source>Egyptian General Authority of Survey</source>
-        <translation>Египетская ген. админист. по обслед</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="203"/>
         <source>Africa, Iraq, Lebanon, Syria, Malaysia</source>
-        <translation>Африка, Ирак, Ливан, Сирия, Малайзия</translation>
+        <translation>Afrika, Irak, Libanon, Syrien, Malaysia</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="205"/>
         <source>North American</source>
-        <translation>Исламское общество Сев. Амер</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="206"/>
@@ -957,7 +948,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="208"/>
         <source>Muslim World League</source>
-        <translation>Всемирная мусульманская лига</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="209"/>
@@ -967,17 +958,17 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="211"/>
         <source>University of Islamic Sciences, Karachi</source>
-        <translation>Унив. Карачи</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="212"/>
         <source>Afghanistan, Bangladesh, India, Pakistan, Europe</source>
-        <translation>Афганистан, Бангладеш, Индия, Пакистан, Европа</translation>
+        <translation>Afghanistan, Bangladesch, Indien, Pakistan, Europa</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="214"/>
         <source>Umm Al-Qura</source>
-        <translation>Умм-Аль-Курра, Сауд. Аравия</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="215"/>
@@ -985,8 +976,38 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/SettingsPage.qml" line="217"/>
+        <source>Custom</source>
+        <translation>Benutzerdefiniert</translation>
+    </message>
+    <message>
         <location filename="../assets/SettingsPage.qml" line="218"/>
         <source>Manual calculation angles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="248"/>
+        <source>All Alerts Off</source>
+        <translation>Alle Aus</translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="254"/>
+        <source>Phone Only</source>
+        <translation>Nur Telefonanrufe</translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="260"/>
+        <source>Vibrate</source>
+        <translation>Vibrieren</translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="266"/>
+        <source>Silent</source>
+        <translation>Stumm</translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="272"/>
+        <source>All Custom Profiles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1002,41 +1023,6 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="410"/>
-        <source>Night Starts at %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="217"/>
-        <source>Custom</source>
-        <translation>Пользовательский</translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="248"/>
-        <source>All Alerts Off</source>
-        <translation>Все сигналы отключены</translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="254"/>
-        <source>Phone Only</source>
-        <translation>Только вызовы</translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="260"/>
-        <source>Vibrate</source>
-        <translation>Вибрация</translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="266"/>
-        <source>Silent</source>
-        <translation>Без звука</translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="272"/>
-        <source>All Custom Profiles</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/SettingsPage.qml" line="382"/>
         <source>Asr Ratio</source>
         <translation type="unfinished"></translation>
@@ -1044,7 +1030,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="388"/>
         <source>Shafii, Maliki, Hanbali</source>
-        <translation>Шафиитский</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="389"/>
@@ -1054,11 +1040,16 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="395"/>
         <source>Hanafi</source>
-        <translation>Ханифитский</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="396"/>
         <source>Asr begins when the height of the shadow of an object is twice the height of the object.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="410"/>
+        <source>Night Starts at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1161,20 +1152,20 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     </message>
     <message>
         <location filename="../assets/main.qml" line="73"/>
+        <source>Note that prayer schedule apps can sometimes give you incorrect timings! Would you like to learn more?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="73"/>
         <location filename="../assets/main.qml" line="75"/>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="73"/>
         <location filename="../assets/main.qml" line="75"/>
         <source>No</source>
-        <translation>Нет</translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="73"/>
-        <source>Note that prayer schedule apps can sometimes give you incorrect timings! Would you like to learn more?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="75"/>
@@ -1228,12 +1219,12 @@ Once the schedule is generated you can save it as an HTML file and print it at y
     <message>
         <location filename="../src/Offloader.cpp" line="117"/>
         <source>Scheduled events cleared!</source>
-        <translation>Успешно</translation>
+        <translation>Erfolg</translation>
     </message>
     <message>
         <location filename="../src/Offloader.cpp" line="126"/>
         <source>Export complete!</source>
-        <translation>Успешно</translation>
+        <translation>Erfolg</translation>
     </message>
 </context>
 <context>

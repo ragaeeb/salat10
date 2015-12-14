@@ -37,9 +37,12 @@ suredelete.depends = distclean
 QMAKE_EXTRA_TARGETS += suredelete
 
 TRANSLATIONS = $$quote($${TARGET}_ar.ts) \
+	$$quote($${TARGET}_de.ts) \
 	$$quote($${TARGET}_es.ts) \
     $$quote($${TARGET}_fr.ts) \
     $$quote($${TARGET}_id.ts) \
     $$quote($${TARGET}_ru.ts) \
+    $$quote($${TARGET}_ru.ts) \
+    $$quote($${TARGET}_th.ts) \
     $$quote($${TARGET}_tr.ts) \
     $$quote($${TARGET}.ts)

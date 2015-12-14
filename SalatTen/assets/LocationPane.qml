@@ -1,6 +1,6 @@
-import bb.cascades 1.3
+import bb.cascades 1.2
 import bb.cascades.places 1.0
-import bb.cascades.maps 1.3
+import bb.cascades.maps 1.2
 import com.canadainc.data 1.0
 
 Page
@@ -15,7 +15,7 @@ Page
         Application.aboutToQuit.disconnect(onAboutToQuit);
         app.gpsReadyChanged.disconnect(onGpsReadyChanged);
         
-        if (mapViewDelegate.delegateActive) {
+        if (mapViewDelegate.control) {
             mapViewDelegate.control.cleanUp();
         }
     }
@@ -27,10 +27,11 @@ Page
             locations.removeAll();
             var n = result.results.length;
             
-            for (var i = 0; i < n; i++) {
+            for (var i = 0; i < n; i++)
+            {
                 var option = optionDef.createObject();
                 option.value = result.results[i];
-                
+
                 locations.add(option);
             }
             
@@ -150,31 +151,6 @@ Page
         }
     ]
     
-    titleBar: TitleBar
-    {
-        id: tb
-        kind: TitleBarKind.TextField
-        
-        kindProperties: TextFieldTitleBarKindProperties
-        {
-            id: tftk
-            textField.hintText: qsTr("Enter location to search...") + Retranslate.onLanguageChanged
-            textField.input.submitKey: SubmitKey.Search
-            textField.input.flags: TextInputFlag.SpellCheck | TextInputFlag.WordSubstitution | TextInputFlag.AutoPeriodOff | TextInputFlag.AutoCorrection
-            textField.input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
-            textField.input.onSubmitted: {
-                busy.delegateActive = true;
-                var query = tftk.textField.text.trim();
-                reporter.record("LocationQuery", query);
-                notification.geoLookup(query);
-            }
-            
-            textField.onCreationCompleted: {
-                input["keyLayout"] = 7;
-            }
-        }
-    }
-    
     Container
     {
         horizontalAlignment: HorizontalAlignment.Fill
@@ -185,6 +161,26 @@ Page
         {
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
+            
+            TextField
+            {
+                id: tftk
+                hintText: qsTr("Enter location to search...") + Retranslate.onLanguageChanged
+                input.submitKey: SubmitKey.Search
+                input.flags: TextInputFlag.SpellCheck | TextInputFlag.WordSubstitution | TextInputFlag.AutoPeriodOff | TextInputFlag.AutoCorrection
+                input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
+                topMargin: 0; bottomMargin: 0
+                input.onSubmitted: {
+                    busy.delegateActive = true;
+                    var query = tftk.text.trim();
+                    reporter.record("LocationQuery", query);
+                    notification.geoLookup(query);
+                }
+                
+                onCreationCompleted: {
+                    input["keyLayout"] = 7;
+                }
+            }
             
             DropDown
             {
@@ -204,9 +200,9 @@ Page
                         delay: 250
                         
                         onEnded: {
-                            tftk.textField.requestFocus();
+                            tftk.requestFocus();
                             persist.registerForSetting(locationPage, "longitude");
-                            tutorial.exec("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be."), HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, tutorial.du(5) );
+                            tutorial.execTitle("searchLocation", qsTr("Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be.") );
                             tutorial.execActionBar("nativeLocationPicker", qsTr("Tap here to pick an existing location from your device.") );
                             tutorial.execActionBar("geoRefresh", qsTr("Tap here to use your device's GPS to obtain your location (this may take a while)."), "r" );
                             tutorial.execActionBar("returnToSettings", qsTr("Tap here to go back to the Settings page."), "b" );
@@ -310,15 +306,13 @@ Page
                         
                         function onDataLoaded(id, data)
                         {
-                            console.log("*** DSFLSDKFJ", id);
-                            console.log("*** xxx", QueryId.FetchCenters);
                             if (id == QueryId.FetchCenters)
                             {
-                                console.log("*** DSFLSDKF333J", id);
                                 for (var i = data.length-1; i >= 0; i--) {
-                                    console.log("*** DSFLSDKF333Jxxxx", id);
                                     offloader.renderCenter(mapView, data[i]);
                                 }
+                                
+                                tutorial.execCentered("salafiCenters", qsTr("The house icons are locations of Islamic centers in different areas of the world upon the methodology of Ahlus Sunnah wa Jamaah. This is not an exhaustive list, and it may grow in the future in shaa Allah."), "images/ic_masjid.png");
                             }
                         }
                         

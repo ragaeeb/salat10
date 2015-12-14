@@ -35,12 +35,12 @@
     </message>
     <message>
         <location filename="../src/Translator.cpp" line="25"/>
-        <source>1/2 Night Begins</source>
+        <source>1/2 Night</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Translator.cpp" line="26"/>
-        <source>Last 1/3 Night Begins</source>
+        <source>Last 1/3 Night</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
