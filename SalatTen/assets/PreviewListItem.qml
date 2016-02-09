@@ -30,9 +30,8 @@ Container
     
     function hasCalendar()
     {
-        if ( offloader.hasCalendarAccess() ) {
-            return true;
-        } else {
+        if ( offloader.noCalendarAccess() )
+        {
             var allMessages = [];
             var allIcons = [];
             allMessages.push("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly. Tap OK to enable the permissions in the Application Permissions page.");
@@ -40,9 +39,9 @@ Container
             permissions.messages = allMessages;
             permissions.icons = allIcons;
             permissions.delegateActive = true;
+        } else {
+            return true;
         }
-        
-        return false;
     }
     
     function refresh()

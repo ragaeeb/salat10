@@ -7,6 +7,7 @@
 #include "Logger.h"
 #include "SalatUtils.h"
 #include "ScheduleEvents.h"
+#include "SharedConstants.h"
 #include "ThreadUtils.h"
 
 namespace salat {
@@ -43,10 +44,8 @@ void Offloader::onBlurred()
 }
 
 
-bool Offloader::hasCalendarAccess()
-{
-    bb::pim::calendar::CalendarSettings cs = bb::pim::calendar::CalendarService().settings();
-    return cs.isValid();
+bool Offloader::noCalendarAccess() {
+    return NO_CALENDAR_ACCESS;
 }
 
 
