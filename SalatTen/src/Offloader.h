@@ -48,7 +48,7 @@ public:
     Q_INVOKABLE void blur(bb::cascades::ImageView* i, QString const& imageSrc);
     Q_INVOKABLE void cleanupCalendarEvents();
     Q_INVOKABLE void exportToCalendar(int numDays, QVariantList const& events, qint64 accountId);
-    Q_INVOKABLE bool hasCalendarAccess();
+    Q_INVOKABLE bool noCalendarAccess();
     Q_INVOKABLE void loadAccounts();
     Q_INVOKABLE void renderMap(bb::cascades::maps::MapView* mapView, qreal latitude, qreal longitude, QString const& name, QString const& event, bool focus=false);
     Q_INVOKABLE QString renderStandardTime(QDateTime const& theTime);
