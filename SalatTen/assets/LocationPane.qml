@@ -136,8 +136,6 @@ Page
                     persist.saveValueFor("longitude", place.longitude);
                     persist.showToast( qsTr("Location successfully set to %1!").arg(place.name), "images/tabs/ic_map.png" );
 
-                    reporter.record( "latitude", place.latitude.toString() );
-                    reporter.record( "longitude", place.longitude.toString() );
                     reporter.record("location", place.name);
                     reporter.record("city", place.city);
                     reporter.record("country", place.country);
@@ -249,8 +247,6 @@ Page
                         
                         locationAction.title = selectedValue.formatted_address;
                         
-                        reporter.record( "latitude", latitude.toString() );
-                        reporter.record( "longitude", longitude.toString() );
                         reporter.record( "location", selectedValue.formatted_address );
                     }
                 }
@@ -355,7 +351,7 @@ Page
                         
                         onCreationCompleted: {
                             notification.mapDataLoaded.connect(onMapDataLoaded);
-                            notification.fetchCheckins();
+                            //notification.fetchCheckins();
                             
                             sql.fetchCenters(mapView);
                         }

@@ -37,7 +37,7 @@
 		can also be 1-part or 2-part. It is not necessary to have a 3-part value.
 		An updated version of application must have a versionNumber value higher
 		than the previous version. Required. -->
-	<versionNumber>4.2.0</versionNumber>
+	<versionNumber>4.4.0</versionNumber>
  <splashScreens>
     <image>splash_n.png</image>
  </splashScreens>
@@ -163,10 +163,8 @@
 
 	<asset path="splash_n.png">splash_n.png</asset>
 	<asset path="../../canadainc/assets/AccountsDropDown.qml">assets/AccountsDropDown.qml</asset>
-	<asset path="../../canadainc/assets/AlFurqanAdvertisement.qml">assets/AlFurqanAdvertisement.qml</asset>
     <asset path="../../canadainc/assets/BugReportPage.qml">assets/BugReportPage.qml</asset>
     <asset path="../../canadainc/assets/CanadaIncMenu.qml">assets/CanadaIncMenu.qml</asset>
-    <asset path="../../canadainc/assets/CanadaIncUtils.qml">assets/CanadaIncUtils.qml</asset>
     <asset path="../../canadainc/assets/ClassicBackDelegate.qml">assets/ClassicBackDelegate.qml</asset>
     <asset path="../../canadainc/assets/EmptyDelegate.qml">assets/EmptyDelegate.qml</asset>
     <asset path="../../canadainc/assets/FullScreenDialog.qml">assets/FullScreenDialog.qml</asset>
@@ -176,7 +174,6 @@
     <asset path="../../canadainc/assets/PersistCheckBox.qml">assets/PersistCheckBox.qml</asset>
 	<asset path="../../canadainc/assets/PersistDropDown.qml">assets/PersistDropDown.qml</asset>
 	<asset path="../../canadainc/assets/ProgressControl.qml">assets/ProgressControl.qml</asset>
-	<asset path="../../canadainc/assets/SwipeDetector.qml">assets/SwipeDetector.qml</asset>
 	<asset path="../../canadainc/assets/TutorialTip.qml">assets/TutorialTip.qml</asset>
 
 	<!-- Request permission to run a backend headless process and post notification. -->

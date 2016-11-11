@@ -194,7 +194,7 @@ NavigationPane
                         control.maxWidth = deviceUtils.pixelSize.width
                         control.maxHeight = deviceUtils.pixelSize.height
                         control.anim.play();
-                        control.scrollToItem([0,0], ScrollAnimation.Smooth);
+                        control.scrollToItem([1,0], ScrollAnimation.Smooth);
                         control.footerShown.connect(onFooterShown);
                         control.headerShown.connect(onHeaderShown);
                     }
