@@ -56,13 +56,11 @@ signals:
 	void initialize();
 	void lazyInitComplete();
 	void gpsReadyChanged();
-	void refreshNeeded();
 
 private slots:
     void childCardDone(bb::system::CardDoneMessage const& message=bb::system::CardDoneMessage());
     void invoked(bb::system::InvokeRequest const& request);
     void lazyInit();
-    void onDatabaseUpdated();
     void onFullScreen();
     void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);
 

@@ -23,7 +23,7 @@ QtObject
     function onPromptFinished(result, cookie)
     {
         if (result && cookie.app == "quran10") {
-            persist.openUri("http://quran10.canadainc.org");
+            persist.downloadApp("27022877");
         }
         
         reporter.record(cookie.app, result);
@@ -74,35 +74,5 @@ QtObject
         } else {
             return "images/list/ic_athaan_mute.png";
         }
-    }
-    
-    function onConfirmedDownload(result, data)
-    {
-        if (data.cookie == "dbUpdate")
-        {
-            reporter.record( "UpdateDBResult", result.toString() );
-            
-            if (result) {
-                notification.downloadPlugins();
-            } else {
-                notification.clearPendingCheckin();
-            }
-        }
-    }
-    
-    function onUpdateAvailable(size, version, forced)
-    {
-        if (boundary.calculationFeasible)
-        {
-            if (forced) {
-                onConfirmedDownload(true, {'cookie': "dbUpdate"});
-            } else {
-                persist.showDialog( root, {'cookie': "dbUpdate"}, qsTr("Updates"), qsTr("An updated database of articles and quotes was posted on %1. The total download size is %2. Would you like to download it now?").arg( Qt.formatDate( new Date(version), "MMM d, yyyy").toString() ).arg( textUtils.bytesToSize(size) ), qsTr("Yes"), qsTr("No"), true, "", false, "onConfirmedDownload" );
-            }
-        }
-    }
-    
-    onCreationCompleted: {
-        notification.dbUpdateAvailable.connect(onUpdateAvailable);
     }
 }

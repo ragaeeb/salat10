@@ -70,12 +70,4 @@ Container
         topMargin: 0; bottomMargin: 0
         visible: false
     }
-    
-    function onUpdated() {
-        sql.fetchRandomBenefit(quoteRoot);
-    }
-    
-    onCreationCompleted: {
-        app.refreshNeeded.connect(onUpdated);
-    }
 }

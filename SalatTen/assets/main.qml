@@ -8,15 +8,6 @@ NavigationPane
     
     onPopTransitionEnded: {
         deviceUtils.cleanUpAndDestroy(page);
-        
-        if ( reporter.deferredCheck("alFurqanAdvertised", 20) ) {
-            var advertisement = definition.init("AlFurqanAdvertisement.qml");
-            advertisement.open();
-        } else if ( reporter.deferredCheck("alFurqanQuranAdvertised", 5) ) {
-            var advertisement = definition.init("AlFurqanAdvertisement.qml");
-            advertisement.quran = true;
-            advertisement.open();
-        }
     }
     
     function onFinished(result, data)
@@ -24,7 +15,7 @@ NavigationPane
         if (result)
         {
             if (data.cookie == "prayerSchedulesArticle") {
-                persist.openUri("http://www.troid.ca/index.php/comprehensive/salaah/810-prayer-schedules-important-rulings-guidelines-and-cautions");
+                persist.openUri("https://www.troid.ca/authors/western-speakers-english-lecturers/36-musa-richardson/810-prayer-schedules-important-rulings-guidelines-and-cautions");
             } else if (data.cookie == "prayerSchedulesVideo") {
                 persist.openUri("https://www.youtube.com/watch?v=UpzkRvWSIoc");
             }
