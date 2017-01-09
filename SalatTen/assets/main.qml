@@ -240,6 +240,10 @@ NavigationPane
             {
                 id: quoteLabel
                 opacity: previewer.delegateActive || ( timings.control && timings.control.lssh.firstVisibleItem.length == 1 && !timings.control.lssh.scrolling ) || !boundary.calculationFeasible ? 1 : 0
+                
+                onCreationCompleted: {
+                    sql.fetchRandomBenefit(quoteLabel);
+                }
             }
             
             MissingParametersControl {

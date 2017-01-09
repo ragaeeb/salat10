@@ -16,13 +16,13 @@ Container
                 ft.play();
             }
             
-            var partQuote = "<i>\n“%1”</i>".arg( app.escapeHtml(quote.body) );
+            var partQuote = "<i>“%1”</i>".arg( app.escapeHtml(quote.body) );
             var partAuthor = "<b>%1%2</b>".arg( app.escapeHtml(quote.author) ).arg( global.getSuffix(quote.birth, quote.death, quote.is_companion == 1, quote.female == 1) );
             var partSource = "[%1]".arg( app.escapeHtml(quote.reference) );
             var parts = "%1\n\n- %2\n\n%3".arg(partQuote).arg(partAuthor).arg(partSource);
             
             if (quote.translator) {
-                parts += "<i>%1 (حفظه الله)</i>".arg( app.escapeHtml(quote.translator) );
+                parts += "\n\nTranslated by <i>%1%2</i>".arg( app.escapeHtml(quote.translator) ).arg( global.getSuffix(quote.translator_birth, quote.translator_death, quote.translator_companion == 1, quote.translator_female == 1) );
             }
             
             quoteLabel.text = "<html>"+parts+"</html>";
