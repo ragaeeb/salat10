@@ -35,7 +35,8 @@ void DatabaseBoundary::fetchCenters(QObject* caller) {
 
 
 void DatabaseBoundary::fetchRandomBenefit(QObject* caller) {
-    m_sql.executeQuery(caller, QString("SELECT %1 AS author,body,TRIM( COALESCE(suites.title,'') || ' ' || COALESCE(quotes.reference,'') ) AS reference,i.id,birth,death,female,is_companion FROM quotes INNER JOIN individuals i ON i.id=quotes.author LEFT JOIN suites ON quotes.suite_id=suites.id WHERE quotes.id=( ABS( RANDOM() % (SELECT COUNT() AS total_quotes FROM quotes) )+1 )").arg( NAME_FIELD("i") ), QueryId::GetRandomBenefit);
+    LOGGER("***" << QDateTime::currentDateTime());
+    m_sql.executeQuery(caller, QString("SELECT %1 AS author,%2 AS translator,body,TRIM( COALESCE(suites.title,'') || ' ' || COALESCE(quotes.reference,'') ) AS reference,i.birth,i.death,i.female,i.is_companion,j.birth AS translator_birth,j.death AS translator_death,j.female AS translator_female,j.is_companion AS translator_companion FROM quotes INNER JOIN individuals i ON i.id=quotes.author LEFT JOIN individuals j ON j.id=quotes.translator LEFT JOIN suites ON quotes.suite_id=suites.id WHERE quotes.id=( ABS( RANDOM() % (SELECT COUNT() AS total_quotes FROM quotes) )+1 )").arg( NAME_FIELD("i") ).arg( NAME_FIELD("j") ), QueryId::GetRandomBenefit);
 }
 
 
