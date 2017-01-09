@@ -59,6 +59,7 @@ Container
         
         currentEvent.current = currentOne;
         nextEvent.current = boundary.getNext(now);
+        timings.onFooterShown();
     }
     
     function onSettingChanged(newValue, key) {
