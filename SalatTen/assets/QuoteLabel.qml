@@ -16,7 +16,16 @@ Container
                 ft.play();
             }
             
-            quoteLabel.text = "<html><i>\n“%1”</i>\n\n- <b><a href=\"%5\">%2</a>%4</b>\n\n[%3]</html>".arg( quote.body.replace(/&/g,"&amp;") ).arg(quote.author).arg( quote.reference.replace(/&/g,"&amp;") ).arg( global.getSuffix(quote.birth, quote.death, quote.is_companion == 1, quote.female == 1) ).arg( quote.id.toString() );
+            var partQuote = "<i>\n“%1”</i>".arg( app.escapeHtml(quote.body) );
+            var partAuthor = "<b>%1%2</b>".arg( app.escapeHtml(quote.author) ).arg( global.getSuffix(quote.birth, quote.death, quote.is_companion == 1, quote.female == 1) );
+            var partSource = "[%1]".arg( app.escapeHtml(quote.reference) );
+            var parts = "%1\n\n- %2\n\n%3".arg(partQuote).arg(partAuthor).arg(partSource);
+            
+            if (quote.translator) {
+                parts += "<i>%1 (حفظه الله)</i>".arg( app.escapeHtml(quote.translator) );
+            }
+            
+            quoteLabel.text = "<html>"+parts+"</html>";
             divider.visible = true;
         }
     }
@@ -44,22 +53,6 @@ Container
                 }
             }
         ]
-        
-        activeTextHandler: ActiveTextHandler
-        {
-            id: ath
-            
-            onTriggered: {
-                var link = event.href.toString();
-                
-                if ( link.match("\\d+") ) {
-                    persist.invoke("com.canadainc.Quran10.bio.previewer", "", "", "", link, global);
-                    reporter.record("OpenAuthorLink", link);
-                }
-                
-                event.abort();
-            }
-        }
     }
     
     ImageView

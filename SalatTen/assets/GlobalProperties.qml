@@ -20,24 +20,8 @@ QtObject
         }
     }
     
-    function onPromptFinished(result, cookie)
-    {
-        if (result && cookie.app == "quran10") {
-            persist.downloadApp("27022877");
-        }
-        
-        reporter.record(cookie.app, result);
-    }
-    
     function getRandomReal(min, max) {
         return Math.random() * (max - min) + min;
-    }
-    
-    function onTargetLookupFinished(target, success)
-    {
-        if (!success) {
-            persist.showDialog(root, {'app': "quran10"}, qsTr("Quran10"), qsTr("This feature requires the app Quran10 v4.0.0.0 or greater to be installed on your device. Would you like to download and install it now?"), qsTr("Yes"), qsTr("No"), true, "", false, "onPromptFinished" );
-        }
     }
     
     function getSuffix(birth, death, isCompanion, female)
