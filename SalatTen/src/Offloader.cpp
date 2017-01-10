@@ -164,6 +164,13 @@ void Offloader::renderCenter(bb::cascades::maps::MapView* mapControl, QVariantMa
 }
 
 
+bool Offloader::isValidUrl(QString const& uri)
+{
+    QUrl url = QUrl::fromUserInput(uri);
+    return url.isValid();
+}
+
+
 Offloader::~Offloader()
 {
 }

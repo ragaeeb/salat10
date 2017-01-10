@@ -54,6 +54,7 @@ public:
     Q_INVOKABLE QString renderStandardTime(QDateTime const& theTime);
     Q_INVOKABLE static bool isServiceRunning();
     Q_INVOKABLE void renderCenter(bb::cascades::maps::MapView* mapControl, QVariantMap const& data);
+    Q_INVOKABLE bool isValidUrl(QString const& url);
 };
 
 } /* namespace quran */
