@@ -3,6 +3,7 @@
 #include "DatabaseBoundary.h"
 #include "CommonConstants.h"
 #include "DatabaseHelper.h"
+#include "IOUtils.h"
 #include "Logger.h"
 #include "QueryId.h"
 
@@ -16,6 +17,7 @@ using namespace bb::data;
 DatabaseBoundary::DatabaseBoundary() :
         m_sql( QString("%1/assets/dbase/salat10.db").arg( QCoreApplication::applicationDirPath() ) )
 {
+    m_sql.setVerboseLogging();
 }
 
 
@@ -25,7 +27,7 @@ void DatabaseBoundary::fetchAngles(QObject* caller) {
 
 
 void DatabaseBoundary::fetchArticles(QObject* caller) {
-    m_sql.executeQuery(caller, "SELECT suite_pages.id AS id,COALESCE(i.displayName, i.name) AS author,COALESCE(heading,title) AS title FROM suites LEFT JOIN individuals i ON i.id=suites.author INNER JOIN suite_pages ON suite_pages.suite_id=suites.id", QueryId::GetArticles);
+    m_sql.executeQuery(caller, "SELECT suite_pages.id AS id,COALESCE(i.displayName, i.name) AS author,COALESCE(heading,title) AS title,suites.reference,suite_pages.reference AS suite_page_reference,body FROM suites LEFT JOIN individuals i ON i.id=suites.author INNER JOIN suite_pages ON suite_pages.suite_id=suites.id", QueryId::GetArticles);
 }
 
 
@@ -35,7 +37,6 @@ void DatabaseBoundary::fetchCenters(QObject* caller) {
 
 
 void DatabaseBoundary::fetchRandomBenefit(QObject* caller) {
-    LOGGER("***" << QDateTime::currentDateTime());
     m_sql.executeQuery(caller, QString("SELECT %1 AS author,%2 AS translator,body,TRIM( COALESCE(suites.title,'') || ' ' || COALESCE(quotes.reference,'') ) AS reference,i.birth,i.death,i.female,i.is_companion,j.birth AS translator_birth,j.death AS translator_death,j.female AS translator_female,j.is_companion AS translator_companion FROM quotes INNER JOIN individuals i ON i.id=quotes.author LEFT JOIN individuals j ON j.id=quotes.translator LEFT JOIN suites ON quotes.suite_id=suites.id WHERE quotes.id=( ABS( RANDOM() % (SELECT COUNT() AS total_quotes FROM quotes) )+1 )").arg( NAME_FIELD("i") ).arg( NAME_FIELD("j") ), QueryId::GetRandomBenefit);
 }
 
@@ -52,7 +53,7 @@ void DatabaseBoundary::searchArticles(QObject* caller, QString const& searchTerm
         args << searchTerm;
     }
 
-    QString query = QString("SELECT suite_pages.id AS id,COALESCE(i.displayName, i.name) AS author,COALESCE(heading,title) AS title FROM suites LEFT JOIN individuals i ON i.id=suites.author INNER JOIN suite_pages ON suite_pages.suite_id=suites.id WHERE %1").arg( fields.join(" OR ") );
+    QString query = QString("SELECT suite_pages.id AS id,COALESCE(i.displayName, i.name) AS author,COALESCE(heading,title) AS title,suites.reference,suite_pages.reference AS suite_page_reference,body FROM suites LEFT JOIN individuals i ON i.id=suites.author INNER JOIN suite_pages ON suite_pages.suite_id=suites.id WHERE %1").arg( fields.join(" OR ") );
 
     m_sql.executeQuery(caller, query, QueryId::SearchArticles, args);
 }
@@ -60,6 +61,25 @@ void DatabaseBoundary::searchArticles(QObject* caller, QString const& searchTerm
 
 QObject* DatabaseBoundary::getSource() {
     return &m_sql;
+}
+
+
+QString DatabaseBoundary::writeArticle(QVariantMap const& qvm)
+{
+    QString path = QString("%1/article.txt").arg( QDir::tempPath() );
+    QString title = qvm.value("title").toString();
+    QString body = qvm.value("body").toString();
+    QString reference = qvm.value("reference").toString();
+
+    if ( !qvm.value("suite_page_reference").toString().isEmpty() ) {
+        reference = qvm.value("suite_page_reference").toString();
+    }
+
+    body = QString("%4: %1\n\n%2\n\n%3").arg(title).arg(body).arg(reference).arg( qvm.value("author").toString() );
+
+    IOUtils::writeTextFile( path, body, true, false );
+
+    return QUrl::fromLocalFile(path).toString();
 }
 
 

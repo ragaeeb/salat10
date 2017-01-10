@@ -26,6 +26,7 @@ public:
     Q_INVOKABLE void fetchCenters(QObject* caller);
     Q_INVOKABLE void fetchRandomBenefit(QObject* caller);
     Q_INVOKABLE void searchArticles(QObject* caller, QString const& searchTerm);
+    Q_INVOKABLE QString writeArticle(QVariantMap const& qvm);
 
     QObject* getSource();
 };
