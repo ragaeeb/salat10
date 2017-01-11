@@ -73,6 +73,7 @@ public:
     Q_INVOKABLE void saveIqamah(QString const& key, QDateTime const& time);
     Q_INVOKABLE void removeIqamah(QString const& key);
     Q_INVOKABLE QString escapeHtml(QString const& input);
+    Q_SLOT void resetAffectedToCanadaAngles();
 };
 
 } // salat

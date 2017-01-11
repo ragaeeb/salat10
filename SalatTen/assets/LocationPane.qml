@@ -245,6 +245,8 @@ Page
                             reporter.record( "country", country );
                         }
                         
+                        app.resetAffectedToCanadaAngles();
+                        
                         locationAction.title = selectedValue.formatted_address;
                         
                         reporter.record( "location", selectedValue.formatted_address );

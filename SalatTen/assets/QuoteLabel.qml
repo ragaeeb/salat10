@@ -39,6 +39,7 @@ Container
         textStyle.textAlign: TextAlign.Center
         horizontalAlignment: HorizontalAlignment.Center
         topMargin: 0; bottomMargin: 0
+        content.flags: TextContentFlag.ActiveTextOff | TextContentFlag.EmoticonsOff
         
         animations: [
             FadeTransition {

@@ -213,6 +213,9 @@ Page
                                     } else if (strategyKey == "uaq") {
                                         def.text = qsTr("Umm Al-Qura");
                                         def.description = qsTr("The Arabian Peninsula");
+                                    } else if (strategyKey == "seca") {
+                                        def.text = qsTr("South-East Canada");
+                                        def.description = qsTr("South-Eastern Canadian Cities");
                                     } else {
                                         def.text = qsTr("Custom");
                                         def.description = qsTr("Manual calculation angles");
