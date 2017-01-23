@@ -73,7 +73,7 @@ FullScreenDialog
                     }
                     
                     onEnded: {
-                        hijriLabel.text = hijri.writeIslamicDate( persist.getValueFor("hijri"), dtp.value );
+                        hijriLabel.text = hijriCalc.writeIslamicDate( persist.getValueFor("hijri"), dtp.value );
                     }
                 }
             ]
@@ -90,11 +90,33 @@ FullScreenDialog
             onValueChanged: {
                 if (hijriLabel.text.length == 0) {
                     ft.play();
-                    hijriLabel.text = hijri.writeIslamicDate( persist.getValueFor("hijri"), value );
+                    hijriLabel.text = hijriCalc.writeIslamicDate( persist.getValueFor("hijri"), value );
                 } else {
                     expander.play();
                 }
             }
+            
+            contextActions: [
+                ActionSet
+                {
+                    ActionItem
+                    {
+                        id: customDate
+                        imageSource: "images/toast/ic_calendar_empty.png"
+                        title: qsTr("Custom Date") + Retranslate.onLanguageChanged
+                        
+                        function onFinished(result)
+                        {
+                            var parsed = offloader.parseDate(result);
+                            hijriLabel.text = hijriCalc.writeIslamicDate( persist.getValueFor("hijri"), parsed );
+                        }
+                        
+                        onTriggered: {
+                            persist.showPrompt( customDate, title, qsTr("Please enter the date in the following format: YYYY-MM-DD"), Qt.formatDate( new Date(), Qt.ISODate), qsTr("YYYY-MM-DD"), 10, false, qsTr("Convert"), qsTr("Cancel"), 8 );
+                        }
+                    }
+                }
+            ]
         }
     }
 }
