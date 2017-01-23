@@ -171,6 +171,11 @@ bool Offloader::isValidUrl(QString const& uri)
 }
 
 
+QDateTime Offloader::parseDate(QString const& input) {
+    return QDateTime::fromString(input, Qt::ISODate);
+}
+
+
 Offloader::~Offloader()
 {
 }
