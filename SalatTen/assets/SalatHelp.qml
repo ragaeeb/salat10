@@ -127,9 +127,9 @@ HelpPage
                             var d = dataModel.data(indexPath);
                             var validRef = offloader.isValidUrl(d.reference);
                             var validSuitePageRef = offloader.isValidUrl(d.suite_page_reference);
-                            console.log("***SLDKJF", d.reference, d.suite_page_reference);
+                            var expired = d.reference.indexOf("daragharbi.wordpress.com") >= 0;
                             
-                            if ( d.type == "internal" || validRef || validSuitePageRef )
+                            if ( (d.type == "internal" || validRef || validSuitePageRef) && !expired )
                             {
                                 if ( d.uri && d.uri.indexOf("http") == 0 ) {
                                     persist.openUri(d.uri);
@@ -144,12 +144,7 @@ HelpPage
                                 reporter.record( "ArticleTapped", d.uri);
                             } else {
                                 var ax = sql.writeArticle(d);
-                                console.log("***LKJL", ax);
                                 webView.urlValue = ax;
-                                //persist.invoke( "com.canadainc.Quran10.tafsir.previewer", "", "", "quran://tafsir/"+d.id.toString(), "", global );
-                                //reporter.record( "ArticleOpen", d.id.toString() );
-
-                                //tutorial.execCentered("englishTranslation", qsTr("Note that for you to be able to open the articles properly, your Quran10 translation must be set to 'English'!") );
                             }
                         }
                     }
