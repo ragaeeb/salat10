@@ -195,7 +195,7 @@ QString ThreadUtils::renderHTML(HtmlParams const& hp)
     html << "</table></body></html>";
 
     QString path = QString("%1/schedule.html").arg( QDir::tempPath() );
-    bool written = IOUtils::writeTextFile( path, html.join("\n"), true, false, true );
+    bool written = IOUtils::writeTextFile( path, html.join("\n"), true, true, "" );
 
     return written ? path : "";
 }

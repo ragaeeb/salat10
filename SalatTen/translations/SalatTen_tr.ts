@@ -292,75 +292,149 @@
 <context>
     <name>GlobalProperties</name>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="39"/>
-        <source>Quran10</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/GlobalProperties.qml" line="39"/>
-        <source>This feature requires the app Quran10 v4.0.0.0 or greater to be installed on your device. Would you like to download and install it now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/GlobalProperties.qml" line="39"/>
-        <location filename="../assets/GlobalProperties.qml" line="64"/>
-        <location filename="../assets/GlobalProperties.qml" line="100"/>
+        <location filename="../assets/GlobalProperties.qml" line="48"/>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="39"/>
-        <location filename="../assets/GlobalProperties.qml" line="64"/>
-        <location filename="../assets/GlobalProperties.qml" line="100"/>
+        <location filename="../assets/GlobalProperties.qml" line="48"/>
         <source>No</source>
         <translation>Hayır</translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="48"/>
+        <location filename="../assets/GlobalProperties.qml" line="32"/>
         <source>رضي الله عنها</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="50"/>
+        <location filename="../assets/GlobalProperties.qml" line="34"/>
         <source>رضي الله عنه</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="53"/>
+        <location filename="../assets/GlobalProperties.qml" line="37"/>
         <source> (رحمه الله)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="55"/>
+        <location filename="../assets/GlobalProperties.qml" line="39"/>
         <source> (حفظه الله)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="64"/>
+        <location filename="../assets/GlobalProperties.qml" line="48"/>
         <source>Location Services</source>
         <translation>Konum Servisleri</translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="64"/>
+        <location filename="../assets/GlobalProperties.qml" line="48"/>
         <source>Warning: It seems like the location services is not enabled on your BlackBerry 10 device so the app will not be able to fetch real-time data and map information.
 
 Would you like to launch the Location Services screen and enable the Location Services permission there?</source>
         <translation>Bu özelliği kullanmak için konum hizmetlerini açın.</translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="64"/>
+        <location filename="../assets/GlobalProperties.qml" line="48"/>
         <source>Don&apos;t ask again</source>
         <translation>Tekrar gösterme</translation>
     </message>
+</context>
+<context>
+    <name>HijriCalculator</name>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="100"/>
-        <source>Updates</source>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Ahad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/GlobalProperties.qml" line="100"/>
-        <source>An updated database of articles and quotes was posted on %1. The total download size is %2. Would you like to download it now?</source>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Ithnin</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Thulatha</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Arbaa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Khams</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Jumuah</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Sabt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="100"/>
+        <source>Muharram</source>
+        <translation type="unfinished">Muharrem</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="100"/>
+        <source>Safar</source>
+        <translation type="unfinished">Safer</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="100"/>
+        <source>Rabi&apos;ul Awwal</source>
+        <translation type="unfinished">Rebiülevvel</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="100"/>
+        <source>Rabi&apos;ul Akhir</source>
+        <translation type="unfinished">Rebiülahir</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="101"/>
+        <source>Jumadal Ula</source>
+        <translation type="unfinished">Cemaziyelevvel</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="101"/>
+        <source>Jumadal Akhira</source>
+        <translation type="unfinished">Cemaziyelahir</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="101"/>
+        <source>Rajab</source>
+        <translation type="unfinished">Recep</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="101"/>
+        <source>Sha&apos;ban</source>
+        <translation type="unfinished">Şaban</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="102"/>
+        <source>Ramadan</source>
+        <translation type="unfinished">Ramazan</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="102"/>
+        <source>Shawwal</source>
+        <translation type="unfinished">Şevval</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="102"/>
+        <source>Dhul Qa&apos;ada</source>
+        <translation type="unfinished">Zilkade</translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="102"/>
+        <source>Dhul Hijja</source>
+        <translation type="unfinished">Zilhicce</translation>
     </message>
 </context>
 <context>
@@ -385,6 +459,31 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
     <message>
         <location filename="../assets/HijriConverterDialog.qml" line="88"/>
         <source>Gregorian Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriConverterDialog.qml" line="106"/>
+        <source>Custom Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriConverterDialog.qml" line="115"/>
+        <source>Please enter the date in the following format: YYYY-MM-DD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriConverterDialog.qml" line="115"/>
+        <source>Convert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriConverterDialog.qml" line="115"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriConverterDialog.qml" line="115"/>
+        <source>YYYY-MM-DD</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -452,47 +551,47 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="168"/>
+        <location filename="../assets/LocationPane.qml" line="166"/>
         <source>Enter location to search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="188"/>
+        <location filename="../assets/LocationPane.qml" line="186"/>
         <source>No Locations Found</source>
         <translation>Herhangi bir konum bulunamadı</translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="205"/>
+        <location filename="../assets/LocationPane.qml" line="203"/>
         <source>Type in your exact address to this text box. The more accurate of an address you give, the more accurate the timing results will be.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="206"/>
+        <location filename="../assets/LocationPane.qml" line="204"/>
         <source>Tap here to pick an existing location from your device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="207"/>
+        <location filename="../assets/LocationPane.qml" line="205"/>
         <source>Tap here to use your device&apos;s GPS to obtain your location (this may take a while).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="208"/>
+        <location filename="../assets/LocationPane.qml" line="206"/>
         <source>Tap here to go back to the Settings page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="315"/>
+        <location filename="../assets/LocationPane.qml" line="313"/>
         <source>The house icons are locations of Islamic centers in different areas of the world upon the methodology of Ahlus Sunnah wa Jamaah. This is not an exhaustive list, and it may grow in the future in shaa Allah.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="345"/>
+        <location filename="../assets/LocationPane.qml" line="343"/>
         <source>Almost %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LocationPane.qml" line="353"/>
+        <location filename="../assets/LocationPane.qml" line="351"/>
         <source>This page shows you all the other Salat10 users across the world! You can do a pinch gesture on this map to zoom in on specific cities to see them in more detail.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -578,7 +677,7 @@ Try it now to close this screen.</source>
 <context>
     <name>PreviewListItem</name>
     <message>
-        <location filename="../assets/PreviewListItem.qml" line="55"/>
+        <location filename="../assets/PreviewListItem.qml" line="54"/>
         <source>No adjustments</source>
         <translation type="unfinished"></translation>
     </message>
@@ -604,11 +703,6 @@ Try it now to close this screen.</source>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="272"/>
-        <source>Confirmation</source>
-        <translation>Onayla</translation>
-    </message>
-    <message>
-        <location filename="../assets/PreviewListItem.qml" line="272"/>
         <source>Are you sure you want to clear all the calendar events?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -616,12 +710,7 @@ Try it now to close this screen.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/ThreadUtils.cpp" line="163"/>
-        <source>Corrupted archive downloaded. Please re-try the download again.</source>
-        <translation>İndirme başarısız</translation>
-    </message>
-    <message>
-        <location filename="../src/ThreadUtils.cpp" line="188"/>
+        <location filename="../src/ThreadUtils.cpp" line="165"/>
         <source>Date</source>
         <translation>Tarih</translation>
     </message>
@@ -814,17 +903,12 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SalatHelp.qml" line="142"/>
-        <source>Note that for you to be able to open the articles properly, your Quran10 translation must be set to &apos;English&apos;!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SalatHelp.qml" line="151"/>
+        <location filename="../assets/SalatHelp.qml" line="156"/>
         <source>No articles matched your search criteria. Please try a different search term.</source>
         <translation>Sonuç Bulunamadı</translation>
     </message>
     <message>
-        <location filename="../assets/SalatHelp.qml" line="204"/>
+        <location filename="../assets/SalatHelp.qml" line="209"/>
         <source>To switch back to the articles list, simply leave this search field empty and press Enter on it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -967,94 +1051,104 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <translation>Suudi Arabistani</translation>
     </message>
     <message>
+        <location filename="../assets/SettingsPage.qml" line="217"/>
+        <source>South-East Canada</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/SettingsPage.qml" line="218"/>
+        <source>South-Eastern Canadian Cities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="221"/>
         <source>Manual calculation angles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="319"/>
-        <location filename="../assets/SettingsPage.qml" line="350"/>
+        <location filename="../assets/SettingsPage.qml" line="322"/>
+        <location filename="../assets/SettingsPage.qml" line="353"/>
         <source>%1 Twilight Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="333"/>
-        <location filename="../assets/SettingsPage.qml" line="364"/>
+        <location filename="../assets/SettingsPage.qml" line="336"/>
+        <location filename="../assets/SettingsPage.qml" line="367"/>
         <source>Invalid angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="410"/>
+        <location filename="../assets/SettingsPage.qml" line="413"/>
         <source>Night Starts at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="217"/>
+        <location filename="../assets/SettingsPage.qml" line="220"/>
         <source>Custom</source>
         <translation>Özel</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="248"/>
+        <location filename="../assets/SettingsPage.qml" line="251"/>
         <source>All Alerts Off</source>
         <translation>Tüm Uyarılar Kapalı</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="254"/>
+        <location filename="../assets/SettingsPage.qml" line="257"/>
         <source>Phone Only</source>
         <translation>Yalnızca Telefon Aramaları</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="260"/>
+        <location filename="../assets/SettingsPage.qml" line="263"/>
         <source>Vibrate</source>
         <translation>Titreşim</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="266"/>
+        <location filename="../assets/SettingsPage.qml" line="269"/>
         <source>Silent</source>
         <translation>Sessiz</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="272"/>
+        <location filename="../assets/SettingsPage.qml" line="275"/>
         <source>All Custom Profiles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="382"/>
+        <location filename="../assets/SettingsPage.qml" line="385"/>
         <source>Asr Ratio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="388"/>
+        <location filename="../assets/SettingsPage.qml" line="391"/>
         <source>Shafii, Maliki, Hanbali</source>
         <translation>Şafiî</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="389"/>
+        <location filename="../assets/SettingsPage.qml" line="392"/>
         <source>Asr begins when the height of an object is equal to the height of its shadow.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="395"/>
+        <location filename="../assets/SettingsPage.qml" line="398"/>
         <source>Hanafi</source>
         <translation>Hanefi</translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="396"/>
+        <location filename="../assets/SettingsPage.qml" line="399"/>
         <source>Asr begins when the height of the shadow of an object is twice the height of the object.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="419"/>
+        <location filename="../assets/SettingsPage.qml" line="422"/>
         <source>Play the athan in the following modes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="433"/>
+        <location filename="../assets/SettingsPage.qml" line="436"/>
         <source>Skip Athan on Jumuah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="443"/>
+        <location filename="../assets/SettingsPage.qml" line="446"/>
         <source>Athan Volume</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1062,114 +1156,114 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="56"/>
+        <location filename="../assets/main.qml" line="47"/>
         <source>You can tap on the author&apos;s name to find out more information about them (you need to have the Quran10 app installed).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="57"/>
+        <location filename="../assets/main.qml" line="48"/>
         <source>This is today&apos;s Hijri date.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="58"/>
+        <location filename="../assets/main.qml" line="49"/>
         <source>You can press-and-hold on this section to export the timings right to your calendar so that you can get prayer time reminders to show up directly on your device&apos;s calendar. This will also allow reminders to be shown even while the app is closed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="59"/>
+        <location filename="../assets/main.qml" line="50"/>
         <source>You can tap on this calendar icon to convert between Hijri and Gregorian calendar dates!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="60"/>
+        <location filename="../assets/main.qml" line="51"/>
         <source>You can tap on this edit icon to adjust the calculated hijri date as necessary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="61"/>
+        <location filename="../assets/main.qml" line="52"/>
         <source>You can locate the direction of the Qibla using this button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="62"/>
+        <location filename="../assets/main.qml" line="53"/>
         <source>This displays the current event that is already in progress.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="63"/>
+        <location filename="../assets/main.qml" line="54"/>
         <source>You can tap on this edit icon to adjust the current event as necessary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="64"/>
+        <location filename="../assets/main.qml" line="55"/>
         <source>Tapping on the icon will toggle the athan and notification settings for that specific event. So if you want to turn on or turn off the athan and notifications tap on the icon.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="65"/>
+        <location filename="../assets/main.qml" line="56"/>
         <source>This displays the next event that is coming up.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="66"/>
+        <location filename="../assets/main.qml" line="57"/>
         <source>Tapping on the icon will toggle the athan and notification settings for that next event. So if you want to turn on or turn off the athan and notifications tap on the icon.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="67"/>
+        <location filename="../assets/main.qml" line="58"/>
         <source>You can tap on this edit icon to adjust the next event&apos;s timing as necessary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="68"/>
+        <location filename="../assets/main.qml" line="59"/>
         <source>Tap anywhere on this strip to expand it and see the details for today.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="69"/>
+        <location filename="../assets/main.qml" line="60"/>
         <source>You can also expand this strip by swiping-up on it and see the details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="70"/>
+        <location filename="../assets/main.qml" line="61"/>
         <source>Swipe down from the top-bezel to display the Settings and Help and file bugs!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="73"/>
+        <location filename="../assets/main.qml" line="64"/>
         <source>Prayer Schedule Rulings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="73"/>
-        <location filename="../assets/main.qml" line="75"/>
+        <location filename="../assets/main.qml" line="64"/>
+        <location filename="../assets/main.qml" line="66"/>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="73"/>
-        <location filename="../assets/main.qml" line="75"/>
+        <location filename="../assets/main.qml" line="64"/>
+        <location filename="../assets/main.qml" line="66"/>
         <source>No</source>
         <translation>Hayır</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="73"/>
+        <location filename="../assets/main.qml" line="64"/>
         <source>Note that prayer schedule apps can sometimes give you incorrect timings! Would you like to learn more?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="75"/>
+        <location filename="../assets/main.qml" line="66"/>
         <source>Prayer Schedules</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="75"/>
+        <location filename="../assets/main.qml" line="66"/>
         <source>Would you like to learn what the scholars said about prayer schedules?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="177"/>
+        <location filename="../assets/main.qml" line="168"/>
         <source>To generate a monthly schedule with all the appropriate prayer times, tap on this icon.
 
 Once the schedule is generated you can save it as an HTML file and print it at your convenience.</source>
@@ -1179,12 +1273,12 @@ Once the schedule is generated you can save it as an HTML file and print it at y
 <context>
     <name>salat::ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="241"/>
+        <location filename="../src/applicationui.cpp" line="219"/>
         <source>Location successfully set to %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="243"/>
+        <location filename="../src/applicationui.cpp" line="221"/>
         <source>Location could not be detected %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1198,22 +1292,14 @@ Once the schedule is generated you can save it as an HTML file and print it at y
     </message>
 </context>
 <context>
-    <name>salat::NotificationThread</name>
-    <message>
-        <location filename="../src/NotificationThread.cpp" line="348"/>
-        <source>Database updated!</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>salat::Offloader</name>
     <message>
-        <location filename="../src/Offloader.cpp" line="117"/>
+        <location filename="../src/Offloader.cpp" line="116"/>
         <source>Scheduled events cleared!</source>
         <translation>Başarılı</translation>
     </message>
     <message>
-        <location filename="../src/Offloader.cpp" line="126"/>
+        <location filename="../src/Offloader.cpp" line="125"/>
         <source>Export complete!</source>
         <translation>Başarılı</translation>
     </message>

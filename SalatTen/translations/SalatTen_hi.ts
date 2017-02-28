@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="th_TH">
+<TS version="2.0" language="hi_IN">
 <context>
     <name>AdjustEventDialog</name>
     <message>
@@ -78,12 +78,12 @@
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="23"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वीकारें</translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="50"/>
         <source>Athan Successfully Set</source>
-        <translation type="unfinished"></translation>
+        <translation>सफल</translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="66"/>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="139"/>
         <source>Anonymous</source>
-        <translation type="unfinished"></translation>
+        <translation>अनाम</translation>
     </message>
     <message>
         <location filename="../assets/AthanPreviewSheet.qml" line="140"/>
@@ -116,7 +116,7 @@
     <message>
         <location filename="../assets/CalendarExport.qml" line="25"/>
         <source>Export Events</source>
-        <translation type="unfinished"></translation>
+        <translation>निर्यात करें</translation>
     </message>
     <message>
         <location filename="../assets/CalendarExport.qml" line="52"/>
@@ -161,12 +161,13 @@
     <message>
         <location filename="../assets/CalendarExport.qml" line="95"/>
         <source>Export</source>
-        <translation>เอ็กซ์ปอร์ต</translation>
+        <translation>निर्यात करें</translation>
     </message>
     <message numerus="yes">
         <location filename="../assets/CalendarExport.qml" line="153"/>
         <source>Export %n days</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -190,6 +191,7 @@
         <source>On Fridays a reminder will be scheduled %n minutes before Maghrib for you to make du&apos;aa.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -211,6 +213,7 @@
         <location filename="../assets/CalendarExport.qml" line="268"/>
         <source>%n events will be exported.</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -276,7 +279,7 @@
     <message>
         <location filename="../assets/EventListItem.qml" line="19"/>
         <source>Edit</source>
-        <translation>แก้ไข</translation>
+        <translation>संपादन</translation>
     </message>
     <message>
         <location filename="../assets/EventListItem.qml" line="29"/>
@@ -286,21 +289,11 @@
     <message>
         <location filename="../assets/EventListItem.qml" line="40"/>
         <source>Remove Iqamah</source>
-        <translation type="unfinished"></translation>
+        <translation>निकालें</translation>
     </message>
 </context>
 <context>
     <name>GlobalProperties</name>
-    <message>
-        <location filename="../assets/GlobalProperties.qml" line="48"/>
-        <source>Yes</source>
-        <translation>ใช่</translation>
-    </message>
-    <message>
-        <location filename="../assets/GlobalProperties.qml" line="48"/>
-        <source>No</source>
-        <translation>ไม่</translation>
-    </message>
     <message>
         <location filename="../assets/GlobalProperties.qml" line="32"/>
         <source>رضي الله عنها</source>
@@ -335,8 +328,18 @@ Would you like to launch the Location Services screen and enable the Location Se
     </message>
     <message>
         <location filename="../assets/GlobalProperties.qml" line="48"/>
+        <source>Yes</source>
+        <translation>हाँ</translation>
+    </message>
+    <message>
+        <location filename="../assets/GlobalProperties.qml" line="48"/>
+        <source>No</source>
+        <translation>नहीं</translation>
+    </message>
+    <message>
+        <location filename="../assets/GlobalProperties.qml" line="48"/>
         <source>Don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>दोबारा नहीं दिखाएं</translation>
     </message>
 </context>
 <context>
@@ -454,7 +457,7 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
     <message>
         <location filename="../assets/HijriConverterDialog.qml" line="38"/>
         <source>Copy</source>
-        <translation>คัดลอก</translation>
+        <translation>कॉपी करें</translation>
     </message>
     <message>
         <location filename="../assets/HijriConverterDialog.qml" line="88"/>
@@ -473,18 +476,18 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
     </message>
     <message>
         <location filename="../assets/HijriConverterDialog.qml" line="115"/>
-        <source>Convert</source>
+        <source>YYYY-MM-DD</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriConverterDialog.qml" line="115"/>
+        <source>Convert</source>
+        <translation>कनवर्टर</translation>
     </message>
     <message>
         <location filename="../assets/HijriConverterDialog.qml" line="115"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/HijriConverterDialog.qml" line="115"/>
-        <source>YYYY-MM-DD</source>
-        <translation type="unfinished"></translation>
+        <translation>रद्द करें</translation>
     </message>
 </context>
 <context>
@@ -517,6 +520,7 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
         <source>%n locations found</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -533,7 +537,7 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
         <location filename="../assets/LocationPane.qml" line="58"/>
         <location filename="../assets/LocationPane.qml" line="115"/>
         <source>Choose Location</source>
-        <translation>เลือกตำแหน่ง</translation>
+        <translation>स्थान का चयन करें</translation>
     </message>
     <message>
         <location filename="../assets/LocationPane.qml" line="67"/>
@@ -543,22 +547,22 @@ Simply use the dropdown to select the Julian date and you will see the Hijri dat
     <message>
         <location filename="../assets/LocationPane.qml" line="91"/>
         <source>GPS Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>ताज़ा करें</translation>
     </message>
     <message>
         <location filename="../assets/LocationPane.qml" line="137"/>
         <source>Location successfully set to %1!</source>
-        <translation type="unfinished"></translation>
+        <translation>सफल %1</translation>
     </message>
     <message>
         <location filename="../assets/LocationPane.qml" line="166"/>
         <source>Enter location to search...</source>
-        <translation type="unfinished"></translation>
+        <translation>खोजने के लिए शब्द भरें...</translation>
     </message>
     <message>
         <location filename="../assets/LocationPane.qml" line="186"/>
         <source>No Locations Found</source>
-        <translation>ไม่พบตำแหน่ง</translation>
+        <translation>कोई स्‍थान नहीं मिला</translation>
     </message>
     <message>
         <location filename="../assets/LocationPane.qml" line="203"/>
@@ -640,6 +644,7 @@ Try it now to close this screen.</source>
         <source>%1 Iqamah in %n minutes</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -652,12 +657,14 @@ Try it now to close this screen.</source>
         <source>%1 Iqamah in %n seconds</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../assets/PreviewEvent.qml" line="248"/>
         <source>%1 %n minutes</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -670,6 +677,7 @@ Try it now to close this screen.</source>
         <location filename="../assets/PreviewEvent.qml" line="254"/>
         <source>%1 %n seconds</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -684,22 +692,22 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="183"/>
         <source>Export</source>
-        <translation>เอ็กซ์ปอร์ต</translation>
+        <translation>निर्यात करें</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="208"/>
         <source>Share</source>
-        <translation>แบ่งปัน</translation>
+        <translation>साझा करें</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="241"/>
         <source>Copy Date</source>
-        <translation>คัดลอก</translation>
+        <translation>कॉपी करें</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="252"/>
         <source>Clear Exported Events</source>
-        <translation>ล้าง</translation>
+        <translation>साफ़ करें</translation>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="272"/>
@@ -712,7 +720,7 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../src/ThreadUtils.cpp" line="165"/>
         <source>Date</source>
-        <translation>วันที่</translation>
+        <translation>दिनांक</translation>
     </message>
 </context>
 <context>
@@ -736,33 +744,33 @@ Try it now to close this screen.</source>
         <location filename="../assets/ResultListUtil.qml" line="14"/>
         <location filename="../assets/ResultListUtil.qml" line="112"/>
         <source>No</source>
-        <translation>ไม่</translation>
+        <translation>नहीं</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="15"/>
         <location filename="../assets/ResultListUtil.qml" line="112"/>
         <source>Yes</source>
-        <translation>ใช่</translation>
+        <translation>हाँ</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="42"/>
         <source>Successfully reset athans to default sound</source>
-        <translation>สำเร็จ</translation>
+        <translation>सफल</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="98"/>
         <source>Successfully enabled alarms/athans.</source>
-        <translation>สำเร็จ</translation>
+        <translation>सफल</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="101"/>
         <source>Successfully muted alarms/athans.</source>
-        <translation>สำเร็จ</translation>
+        <translation>सफल</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="112"/>
         <source>Mute Athan</source>
-        <translation>ปิดเสียง</translation>
+        <translation>म्यूट करें</translation>
     </message>
     <message>
         <location filename="../assets/ResultListUtil.qml" line="112"/>
@@ -775,7 +783,7 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../assets/ResultListView.qml" line="59"/>
         <source>Iqamah time removed</source>
-        <translation>สำเร็จ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="68"/>
@@ -805,38 +813,39 @@ Try it now to close this screen.</source>
     <message>
         <location filename="../assets/ResultListView.qml" line="91"/>
         <source>Mute Alarms/Athans</source>
-        <translation>ปิดเสียง</translation>
+        <translation>म्यूट करें</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="105"/>
         <source>Copy</source>
-        <translation>คัดลอก</translation>
+        <translation>कॉपी करें</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="120"/>
         <source>Share</source>
-        <translation>แบ่งปัน</translation>
+        <translation>साझा करें</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="138"/>
         <source>Change Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>बदलें</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="156"/>
         <source>Reset Sound</source>
-        <translation>รีเซ็ต</translation>
+        <translation>रीसेट करें</translation>
     </message>
     <message>
         <location filename="../assets/ResultListView.qml" line="168"/>
         <source>None selected</source>
-        <translation>ไม่ได้เลือกไว้</translation>
+        <translation>कोई चयनित नहीं</translation>
     </message>
     <message numerus="yes">
         <location filename="../assets/ResultListView.qml" line="178"/>
         <source>+%n Events Selected</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n आइटम चयनित</numerusform>
+            <numerusform>%n आइटम चयनित</numerusform>
         </translation>
     </message>
     <message>
@@ -905,7 +914,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SalatHelp.qml" line="156"/>
         <source>No articles matched your search criteria. Please try a different search term.</source>
-        <translation>ไม่พบผลลัพธ์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SalatHelp.qml" line="209"/>
@@ -918,7 +927,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="31"/>
         <source>Set Location</source>
-        <translation>เลือกตำแหน่ง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="55"/>
@@ -963,26 +972,11 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="104"/>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>सामान्य सेटिंग्स</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="125"/>
         <source>Calculation Angles</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="155"/>
-        <source>To let the calculations use your device settings for daylight savings rules, choose &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="156"/>
-        <source>If the calculations seem to be 1 hour ahead of the actual time, choose &apos;%1&apos; to manually adjust the time to be an hour backward.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="157"/>
-        <source>If the calculations seem to be 1 hour before its actual time, choose &apos;%1&apos; to manually adjust the time to be an hour forward.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1001,6 +995,21 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/SettingsPage.qml" line="155"/>
+        <source>To let the calculations use your device settings for daylight savings rules, choose &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="156"/>
+        <source>If the calculations seem to be 1 hour ahead of the actual time, choose &apos;%1&apos; to manually adjust the time to be an hour backward.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="157"/>
+        <source>If the calculations seem to be 1 hour before its actual time, choose &apos;%1&apos; to manually adjust the time to be an hour forward.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/SettingsPage.qml" line="202"/>
         <source>Egyptian General Authority of Survey</source>
         <translation type="unfinished"></translation>
@@ -1008,7 +1017,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="203"/>
         <source>Africa, Iraq, Lebanon, Syria, Malaysia</source>
-        <translation>แอฟริกาอิรักเลบานอนซีเรียมาเลเซีย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="205"/>
@@ -1038,7 +1047,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="212"/>
         <source>Afghanistan, Bangladesh, India, Pakistan, Europe</source>
-        <translation>อัฟกานิสถานบังคลาเทศอินเดียปากีสถานยุโรป</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="214"/>
@@ -1063,7 +1072,7 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="220"/>
         <source>Custom</source>
-        <translation>กำหนดเอง</translation>
+        <translation>कस्टम</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="221"/>
@@ -1073,22 +1082,22 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
     <message>
         <location filename="../assets/SettingsPage.qml" line="251"/>
         <source>All Alerts Off</source>
-        <translation>ปิดการเตือนทั้งหมด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="257"/>
         <source>Phone Only</source>
-        <translation>สายโทรศัพท์เท่านั้น</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="263"/>
         <source>Vibrate</source>
-        <translation>สั่น</translation>
+        <translation>वायब्रेट</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="269"/>
         <source>Silent</source>
-        <translation>ไม่มีเสียง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="275"/>
@@ -1244,13 +1253,13 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <location filename="../assets/main.qml" line="64"/>
         <location filename="../assets/main.qml" line="66"/>
         <source>Yes</source>
-        <translation>ใช่</translation>
+        <translation>हाँ</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="64"/>
         <location filename="../assets/main.qml" line="66"/>
         <source>No</source>
-        <translation>ไม่</translation>
+        <translation>नहीं</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="66"/>
@@ -1275,7 +1284,7 @@ Once the schedule is generated you can save it as an HTML file and print it at y
     <message>
         <location filename="../src/applicationui.cpp" line="219"/>
         <source>Location successfully set to %1!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">सफल %1</translation>
     </message>
     <message>
         <location filename="../src/applicationui.cpp" line="221"/>
@@ -1296,12 +1305,12 @@ Once the schedule is generated you can save it as an HTML file and print it at y
     <message>
         <location filename="../src/Offloader.cpp" line="116"/>
         <source>Scheduled events cleared!</source>
-        <translation>สำเร็จ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Offloader.cpp" line="125"/>
         <source>Export complete!</source>
-        <translation>สำเร็จ</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

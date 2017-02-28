@@ -743,11 +743,6 @@ Try it now to close this screen.</source>
     </message>
     <message>
         <location filename="../assets/PreviewListItem.qml" line="272"/>
-        <source>Confirmation</source>
-        <translation>تأكيد</translation>
-    </message>
-    <message>
-        <location filename="../assets/PreviewListItem.qml" line="272"/>
         <source>Are you sure you want to clear all the calendar events?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -953,12 +948,12 @@ That&apos;s easy to fix, simply press-and-hold on the time that is off (ie: Magh
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SalatHelp.qml" line="161"/>
+        <location filename="../assets/SalatHelp.qml" line="156"/>
         <source>No articles matched your search criteria. Please try a different search term.</source>
         <translation>لم يتم العثور على أي نتائج</translation>
     </message>
     <message>
-        <location filename="../assets/SalatHelp.qml" line="214"/>
+        <location filename="../assets/SalatHelp.qml" line="209"/>
         <source>To switch back to the articles list, simply leave this search field empty and press Enter on it.</source>
         <translation type="unfinished"></translation>
     </message>

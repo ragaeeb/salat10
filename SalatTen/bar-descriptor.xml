@@ -37,7 +37,7 @@
 		can also be 1-part or 2-part. It is not necessary to have a 3-part value.
 		An updated version of application must have a versionNumber value higher
 		than the previous version. Required. -->
-	<versionNumber>4.4.1</versionNumber>
+	<versionNumber>4.4.2</versionNumber>
  <splashScreens>
     <image>splash_n.png</image>
  </splashScreens>
@@ -45,8 +45,7 @@
 
 	<!-- Fourth digit segment of the package version. First three segments are
 		taken from the <versionNumber> element. Must be an integer from 0 to 2^16-1 -->
-	<buildId>0</buildId>
- <packageLocale>ar,fr,id,ru,tr,es,de,th</packageLocale>
+ <packageLocale>ar,fr,id,ru,tr,es,de,th,hi</packageLocale>
 
 	<!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents
 		the version of the application, as it should be shown to users. Optional. -->
@@ -63,6 +62,7 @@
 	<!-- Name of author which is used for signing. Must match the developer
 		name of your development certificate. -->
 	<author>Canada Inc</author>
+ <buildId>0</buildId>
 	<configuration name="Device-Debug">
 		<platformArchitecture>armle-v7</platformArchitecture>
 		<entryPointType>Qnx/Elf</entryPointType>
